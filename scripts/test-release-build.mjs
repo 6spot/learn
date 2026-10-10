@@ -30,7 +30,20 @@ try {
     }
   }
   const app = JSON.parse(await readFile(join(directory, 'app.json'), 'utf8'));
-  assert.ok(app.pages.length >= 4);
+  const productPages = ['pages/templates/index', 'pages/editor/index', 'pages/preview/index', 'pages/me/index',
+    'pages/records/index', 'pages/records/detail', 'pages/admin/index', 'pages/privacy/index'];
+  assert.deepEqual([...app.pages].sort(), [...productPages].sort(), 'release contains exactly the eight product pages');
+  assert.equal(app.pages[0], 'pages/templates/index');
+  assert.deepEqual(app.tabBar.list.map(item => ({ pagePath: item.pagePath, text: item.text })), [
+    { pagePath: 'pages/templates/index', text: '纸张' }, { pagePath: 'pages/me/index', text: '我的' },
+  ]);
+  for (const item of app.tabBar.list) {
+    assert.ok(app.pages.includes(item.pagePath));
+    for (const icon of [item.iconPath, item.selectedIconPath]) {
+      assert.equal(typeof icon, 'string'); assert.ok(!icon.startsWith('/') && !icon.includes('..') && !icon.includes(':'));
+      assert.ok((await stat(join(directory, icon))).isFile(), 'tab icon exists inside the release package');
+    }
+  }
   for (const page of app.pages) {
     assert.ok(!/runtime|diagnostics/.test(page));
     for (const extension of ['js', 'json', 'wxml', 'wxss']) assert.ok((await stat(join(directory, `${page}.${extension}`))).isFile());
