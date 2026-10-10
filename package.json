@@ -8,19 +8,28 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "typecheck": "tsc -p tsconfig.json && npm --prefix packages/paper-core run build",
+    "typecheck": "npm --prefix packages/font-metrics run build && npm --prefix packages/canvas-renderer run build && tsc -p tsconfig.json",
     "test:core": "npm --prefix packages/paper-core test",
     "test:cloud": "npm --prefix packages/cloud-runtime test",
     "test:fonts": "npm --prefix packages/font-metrics test",
     "test:service": "npm --prefix packages/cloud-service test",
     "test:runtime": "npm run build && node --test packages/runtime-smoke/test/*.test.mjs",
-    "test": "npm run typecheck && npm run test:core && npm run test:runtime && npm run test:cloud",
+    "test": "npm run typecheck && npm run test:core && npm run test:runtime && npm run test:cloud && npm run test:service",
     "smoke": "npm run build && node scripts/runtime-report.mjs",
-    "test:devtools": "npm run build && node scripts/test-devtools.mjs --diagnostics"
+    "test:devtools": "npm run build && node scripts/test-devtools.mjs --diagnostics",
+    "setup": "node scripts/setup.mjs",
+    "test:canvas": "npm --prefix packages/font-metrics run build && npm --prefix packages/canvas-renderer test",
+    "test:canvas:devtools": "npm run build && node scripts/test-canvas-devtools.mjs --diagnostics",
+    "test:layout": "npm --prefix packages/paper-core run test:integration"
   },
   "devDependencies": {
     "esbuild": "0.25.10",
     "miniprogram-automator": "0.12.1",
     "typescript": "5.9.3"
+  },
+  "overrides": {
+    "miniprogram-automator": {
+      "jimp": "0.22.12"
+    }
   }
 }
