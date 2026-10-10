@@ -6,7 +6,7 @@
 
 ## 已确认背景与范围
 
-- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../10-10-learn-v1/prd.md)。
+- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../../../10-10-learn-v1/prd.md)。
 - 责任范围：packages/paper-core 的文档、布局与预设边界。目录名称表示职责，尚未存在的模块不得描述为已实现。
 - 已有四模板几何与基础方格文字布局可复用；本任务不能以历史测试或占位字体样张代替验收。
 - 最终集成验收依赖：[T01 建立开发与回归基线](../10-10-v1-baseline-runtime/prd.md)
@@ -31,7 +31,7 @@
 
 ## 权威依据
 
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [ARCHITECTURE](../../../docs/ARCHITECTURE.md)
-- [PAPER_PRESETS](../../../docs/PAPER_PRESETS.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [ARCHITECTURE](../../../../../docs/ARCHITECTURE.md)
+- [PAPER_PRESETS](../../../../../docs/PAPER_PRESETS.md)
+- [TESTING](../../../../../docs/TESTING.md)

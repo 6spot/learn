@@ -1,6 +1,6 @@
 # T01 开发验证证据
 
-日期：2026-10-10。环境：macOS，Node v26.3.0，npm 11.16.0；TypeScript 5.9.3、esbuild 0.25.10 固定版本。阶段 A 已实现；设备/云端平台实测移交 [最终验收清单](../../../docs/FINAL_ACCEPTANCE.md)，不计为通过。
+日期：2026-10-10。环境：macOS，Node v26.3.0，npm 11.16.0；TypeScript 5.9.3、esbuild 0.25.10 固定版本。阶段 A 已实现；设备/云端平台实测移交 [最终验收清单](../../../../../docs/FINAL_ACCEPTANCE.md)，不计为通过。
 
 ## 实际命令与结果
 
@@ -14,7 +14,7 @@
 
 运行时 12 项验证实际构建产物，不仅测试源代码：无 Node/wx 环境的导入、云侧真实 require、四模板完整几何及文字布局双端一致、段落/Unicode/多页/末格点号、缺 Array.at、缺 Intl 或 Segmenter、错误 Segmenter、缺 Unicode 属性正则、汇总不含正文、原生 App/Page 注册与重跑、工程路径有效。VM 禁止 eval/new Function 和 WebAssembly。
 
-合成样例/覆盖矩阵与接口说明维护在 [runtime-smoke README](../../../packages/runtime-smoke/README.md)，不收录历史用户作文。固定测试字宽不是正式字体。
+合成样例/覆盖矩阵与接口说明维护在 [runtime-smoke README](../../../../../packages/runtime-smoke/README.md)，不收录历史用户作文。固定测试字宽不是正式字体。
 
 ## 兼容改动
 
@@ -39,5 +39,5 @@ esbuild 将同一 core 源码输出为 ES2017/CommonJS（小程序）及 Node20/
 
 - T08/T18 使用 `miniprogram` 工程入口和同源 core；诊断页路径 `pages/runtime/index`，没有正式业务 UI。
 - T11 取得 Node20 语法目标的 core 构建；真实 CloudBase 部署/组件由对应任务负责。
-- [最终验收清单](../../../docs/FINAL_ACCEPTANCE.md) 的 T01/T19 条目接收正式 AppID、目标基础库、服务端口/开发者工具、iOS/Android Unicode/共享编译验收；字体/打印另归 T02/T10。D-044 允许移交外部验收后结束开发阶段，发布仍未通过。
+- [最终验收清单](../../../../../docs/FINAL_ACCEPTANCE.md) 的 T01/T19 条目接收正式 AppID、目标基础库、服务端口/开发者工具、iOS/Android Unicode/共享编译验收；字体/打印另归 T02/T10。D-044 允许移交外部验收后结束开发阶段，发布仍未通过。
 - 主会话负责独立检查、提交和归档；本实现子代理未提交或推送。

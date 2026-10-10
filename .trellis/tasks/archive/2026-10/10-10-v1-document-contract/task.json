@@ -3,7 +3,7 @@
   "name": "v1-document-contract",
   "title": "T03 完善通用文档与布局契约",
   "description": "用统一文档表达跨模板标题、正文和文字规则，使渲染器只消费布局。",
-  "status": "in_progress",
+  "status": "completed",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -11,7 +11,7 @@
   "creator": "me",
   "assignee": "me",
   "createdAt": "2026-10-10",
-  "completedAt": null,
+  "completedAt": "2026-10-10",
   "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
@@ -21,8 +21,10 @@
   "children": [],
   "parent": "10-10-learn-v1",
   "relatedFiles": [],
-  "notes": "",
+  "notes": "开发与独立检查完成，官方模拟器通过；真实设备和发布验收移交 T24。",
   "meta": {
-    "plan_id": "T03"
+    "plan_id": "T03",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
 }

@@ -41,9 +41,9 @@ packages/paper-core、构建配置、合成回归样例。
 
 ## 依据
 
-- [ARCHITECTURE](../../../docs/ARCHITECTURE.md)
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [TESTING](../../../docs/TESTING.md)
+- [ARCHITECTURE](../../../../../docs/ARCHITECTURE.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [TESTING](../../../../../docs/TESTING.md)
 
 ## 跨任务接口归属
 

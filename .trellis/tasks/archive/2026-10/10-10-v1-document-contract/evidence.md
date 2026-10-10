@@ -24,8 +24,8 @@
 
 ## 下游契约与限制
 
-具体 API、原文映射、单位和错误说明唯一维护在 [paper-core README](../../../packages/paper-core/README.md)。FontMetricsProvider 已与 T04 代理直接确认，导出在 `font-metrics.ts`；真实字体数据与 shaping 实现在 T04，不在这里造模拟生产 provider。
+具体 API、原文映射、单位和错误说明唯一维护在 [paper-core README](../../../../../packages/paper-core/README.md)。FontMetricsProvider 已与 T04 代理直接确认，导出在 `font-metrics.ts`；真实字体数据与 shaping 实现在 T04，不在这里造模拟生产 provider。
 
 `getDevelopmentPreset` 的候选字体/线条/拼音参数和版本详见本任务设计及源码；candidate 不能自动成为生产 active。`PaperLayout` 定义正式渲染输入，`positionShapedText` 是实际换算函数；T05/T06 才负责按这些输出契约生成完整方格/拼音页面。旧 layoutSquareDocument 为现有回归暂留，未把尾空行页面分配或复杂标点不足误标完成。
 
-按 D-044，真机、CloudBase 配置、字体许可/字形/墨迹/实体打印继续移交 [最终验收](../../../docs/FINAL_ACCEPTANCE.md)。主会话负责独立检查、提交及生命周期；实现代理没有提交或推送。
+按 D-044，真机、CloudBase 配置、字体许可/字形/墨迹/实体打印继续移交 [最终验收](../../../../../docs/FINAL_ACCEPTANCE.md)。主会话负责独立检查、提交及生命周期；实现代理没有提交或推送。

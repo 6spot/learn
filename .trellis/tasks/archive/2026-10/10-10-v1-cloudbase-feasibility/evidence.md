@@ -20,7 +20,7 @@
 
 测试使用 Node v26.3.0；目标 CloudBase Node 运行时尚需最终实测。首次故障测试将“将 fileID 冒充 jobID”的输入预期误设为 NOT_FOUND，实际按标识校验返回 INVALID_ARGUMENT；已修正测试为验证拒绝，不放宽鉴权。
 
-独立检查修复了 JSON 校验读取 getter、遗漏非枚举 `toJSON` 与数组额外字段的缺口。现先检查数据属性描述符，拒绝可能改变序列化结果的钩子或被静默遗漏的字段；回归验证钩子不执行、持久数据为空。完整独立检查见 [T01/T02/T11 检查记录](../../../10-10-v1-baseline-runtime/independent-check.md)。
+独立检查修复了 JSON 校验读取 getter、遗漏非枚举 `toJSON` 与数组额外字段的缺口。现先检查数据属性描述符，拒绝可能改变序列化结果的钩子或被静默遗漏的字段；回归验证钩子不执行、持久数据为空。完整独立检查见 [T01/T02/T11 检查记录](../10-10-v1-baseline-runtime/independent-check.md)。
 
 ## 故障证据映射
 

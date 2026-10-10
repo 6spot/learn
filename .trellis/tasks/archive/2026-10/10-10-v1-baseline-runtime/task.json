@@ -3,7 +3,7 @@
   "name": "v1-baseline-runtime",
   "title": "T01 建立开发与回归基线",
   "description": "让现有几何与基础布局有可重现的验证入口，并明确微信运行环境兼容缺口。",
-  "status": "in_progress",
+  "status": "completed",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -11,7 +11,7 @@
   "creator": "me",
   "assignee": "me",
   "createdAt": "2026-10-10",
-  "completedAt": null,
+  "completedAt": "2026-10-10",
   "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
@@ -21,8 +21,10 @@
   "children": [],
   "parent": "10-10-learn-v1",
   "relatedFiles": [],
-  "notes": "",
+  "notes": "开发与独立检查完成，官方模拟器通过；真实设备和发布验收移交 T24。",
   "meta": {
-    "plan_id": "T01"
+    "plan_id": "T01",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
 }

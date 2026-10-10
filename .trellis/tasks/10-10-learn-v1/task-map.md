@@ -6,9 +6,9 @@
 
 | 编号 | 子任务 | 最终集成验收依赖 | 责任范围 |
 |---|---|---|---|
-| T01 | [建立开发与回归基线](../10-10-v1-baseline-runtime/prd.md) | — | 核心回归、共享源码两端构建、最小原生验证宿主；不包办正式页面或云服务 |
+| T01 | [建立开发与回归基线](../archive/2026-10/10-10-v1-baseline-runtime/prd.md) | — | 核心回归、共享源码两端构建、最小原生验证宿主；不包办正式页面或云服务 |
 | T02 | [字体资源与授权验证](../archive/2026-10/10-10-v1-font-resources/prd.md) | — | assets/fonts、字体来源/许可/资源清单 |
-| T03 | [完善通用文档与布局契约](../10-10-v1-document-contract/prd.md) | T01 | packages/paper-core 的文档、布局与预设边界 |
+| T03 | [完善通用文档与布局契约](../archive/2026-10/10-10-v1-document-contract/prd.md) | T01 | packages/paper-core 的文档、布局与预设边界 |
 | T04 | [接入共享字体度量](../10-10-v1-font-metrics/prd.md) | T02、T03 | 共享字体度量模块、版本固定的度量数据 |
 | T05 | [补齐方格文字排版](../10-10-v1-square-layout/prd.md) | T03、T04 | packages/paper-core 方格布局与回归样例 |
 | T06 | [实现拼音行带排版](../10-10-v1-pinyin-layout/prd.md) | T03、T04 | packages/paper-core 拼音行带布局与基线参数 |

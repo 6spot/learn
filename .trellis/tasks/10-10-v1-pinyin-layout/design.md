@@ -6,7 +6,7 @@
 
 packages/paper-core 拼音行带布局与基线参数。
 
-前置交付：[T03 完善通用文档与布局契约](../10-10-v1-document-contract/prd.md)、[T04 接入共享字体度量](../10-10-v1-font-metrics/prd.md)
+前置交付：[T03 完善通用文档与布局契约](../archive/2026-10/10-10-v1-document-contract/prd.md)、[T04 接入共享字体度量](../10-10-v1-font-metrics/prd.md)
 
 ## 实现边界
 
