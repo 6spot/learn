@@ -1,5 +1,8 @@
 {
-  "pages": ["pages/runtime/index"],
+  "pages": [
+    "pages/runtime/index",
+    "pages/canvas-diagnostics/index"
+  ],
   "window": {
     "navigationBarTitleText": "Learn 开发验证",
     "navigationBarBackgroundColor": "#FFFFFF",

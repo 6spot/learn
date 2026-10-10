@@ -1,0 +1,10 @@
+page { background: #F5F6F8; color: #202329; }
+.diagnostics { padding: 16px; }
+.heading { display: block; font-size: 20px; font-weight: 600; }
+.note { display: block; margin: 8px 0; color: #5E6572; font-size: 12px; }
+.cases { display: flex; flex-wrap: wrap; gap: 4px; }
+.cases button { margin: 0; }
+.status { display: block; margin: 8px 0; font-size: 14px; }
+.reader { width: 100%; height: 56vh; }
+.paging { display: flex; align-items: center; gap: 8px; padding: 12px 0; }
+.paging button { margin: 0; }

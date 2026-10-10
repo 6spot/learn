@@ -1,6 +1,6 @@
 # T08 设计边界
 
-> 状态：任务拆解阶段的设计基线。具体库、接口字段或平台参数未在本文件中假定已定稿；执行前按实测补齐。
+> 状态：2026-10-11 本地执行设计；Canvas 2D 实例与截图由微信开发者工具模拟器实测，真机/打印保留最终清单。
 
 ## 责任与依赖
 
@@ -10,9 +10,16 @@ renderers/canvas（职责目录待落地）、小程序 Canvas 适配。
 
 ## 实现边界
 
-1. 选择微信原生 Canvas 适配并建立单位换算。
-2. 消费布局、可信线型和字体资源绘制页面。
-3. 验证字体加载、缩放与多页性能；与 PDF 对照。
+1. `packages/canvas-renderer` 消费 `PaperLayout` 的单页完整格线和 glyph placements，不测字、不换行、不分页。显示比例由 `widthPx / page.widthMm * zoom` 决定，DPR 只调整 backing bitmap；先预检全部资源/墨迹，再画白色 A4、线段和字形。
+2. 线段逐条按可信 width/gray/dash/cap/join 绘制，墨迹边界按实际方向/cap 计算，不把中心线框当裁剪框。字形从 T04 glyphOutline 读取，在核心已包含 offset 的 baseline 处用 `fontSizeMm / UPEM` 缩放并翻转 y；不得二次施加偏移或改变字号。实际 glyph ink 与核心输出核对。
+3. `miniprogram/components/paper-canvas` 封装原生 `type=2d` Canvas，通过方法接收 layout/provider，避免把大布局和正文放入 setData；仅传显示尺寸、状态与无正文计数。只绘制当前页，渲染请求有顺序标记，离页清空引用。
+4. `miniprogram/lib/font-loader` 只接受可信静态配置的资源 URL 或 `USER_DATA_PATH/learn-fonts/<sha>.ttf`，按模板需要加载字体，复用最近 provider 和同键在途请求。T04 校验全部原始字节；失败显示明确状态，不使用系统字体。生产 URL/域名/CloudBase 留最终配置。
+5. 开发诊断页独立于 P01-P08。官方 automator 工具通过本机已有原字体分块传输至模拟器内存，再一次写入私有文件（避免大文件重复 append 的模拟器存储限制），随后驱动四模板空白、真实方格/拼音文字与描红、缩放和错误恢复并截图；无公开资源服务，不提交字体或截图生成物。
+6. 根 build 由本任务适配为单份共享 font-metrics 运行时，按每个输出 entry 计算相对 require，避免假定微信支持绝对路径；保留已有双目标 runtime diagnostics。T04 已独立检查，本任务不修改其实现。
+
+## 改动边界
+
+新增 renderer、其测试、Canvas 业务组件/字体加载器及独立诊断页/脚本；根 scripts/build.mjs 已由主会话授权本任务维护。核心排版/T04 由并行任务负责；正式导航和编辑流程留 T18。模拟器证据与手机、真实字体分发许可及实体打印明确分开。
 
 ## 跨层约束
 

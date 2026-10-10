@@ -1,10 +1,14 @@
 import { build } from 'esbuild';
+import { execFileSync } from 'node:child_process';
 import { cp, mkdir, readdir, rm, writeFile } from 'node:fs/promises';
-import { join, relative } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const path = (...parts) => join(root, ...parts);
+// Generate declaration/runtime dependencies from source, including fresh clones.
+execFileSync(process.execPath, [path('packages/font-metrics/tools/build.mjs')], { stdio: 'inherit' });
+execFileSync(process.execPath, [path('node_modules/typescript/bin/tsc'), '-p', path('packages/canvas-renderer/tsconfig.json')], { stdio: 'inherit' });
 // Only own these output paths: other packages may build into dist too.
 await rm(path('dist/runtime'), { recursive: true, force: true });
 await rm(path('dist/miniprogram'), { recursive: true, force: true });
@@ -33,9 +37,20 @@ for (const target of targets) {
 
 const hostFiles = await sourceFiles(path('miniprogram'));
 const entries = hostFiles.filter(file => file.endsWith('.ts') && !file.endsWith('.d.ts'));
-await build({ ...options, platform: 'neutral', target: 'es2017',
-  entryPoints: entries, outbase: path('miniprogram'), outdir: path('dist/miniprogram') });
-for (const source of hostFiles.filter(file => /\.(?:json|wxml|wxss)$/.test(file))) {
+// The verified T04 browser bundle is shared by all native entry points. Resolve
+// the external require relative to each emitted file; native CommonJS does not
+// promise support for absolute /vendor imports.
+await mkdir(path('dist/miniprogram/vendor'), { recursive: true });
+await cp(path('packages/font-metrics/dist/miniapp.cjs'), path('dist/miniprogram/vendor/font-metrics.js'));
+for (const entry of entries) {
+  const destination = path('dist/miniprogram', relative(path('miniprogram'), entry).replace(/\.ts$/, '.js'));
+  const vendor = relative(dirname(destination), path('dist/miniprogram/vendor/font-metrics.js')).replaceAll('\\', '/');
+  await build({ ...options, platform: 'neutral', target: 'es2017', entryPoints: [entry], outfile: destination,
+    plugins: [{ name: 'shared-original-font-provider', setup(builder) {
+      builder.onResolve({ filter: /font-metrics\/dist\/index\.js$/ }, () => ({ path: vendor.startsWith('.') ? vendor : `./${vendor}`, external: true }));
+    } }] });
+}
+for (const source of hostFiles.filter(file => /\.(?:json|wxml|wxss|png)$/.test(file))) {
   const destination = path('dist/miniprogram', relative(path('miniprogram'), source));
   await mkdir(join(destination, '..'), { recursive: true });
   await cp(source, destination);

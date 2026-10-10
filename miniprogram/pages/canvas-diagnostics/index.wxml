@@ -1,0 +1,10 @@
+<view class="diagnostics">
+  <text class="heading">Canvas 开发诊断</text>
+  <text class="note">开发候选规格 · 固定样例 · 模拟器结果不代表真机或打印验收</text>
+  <view class="cases"><button wx:for="{{cases}}" wx:key="name" size="mini" data-name="{{item.name}}" bindtap="onCase">{{item.label}}</button></view>
+  <text class="status">{{message}}</text>
+  <scroll-view class="reader" scroll-x scroll-y enhanced>
+    <paper-canvas id="preview" />
+  </scroll-view>
+  <view class="paging"><button size="mini" disabled="{{pageIndex === 0 || status !== 'ready'}}" bindtap="onPrevious">上一页</button><text>{{pageIndex + 1}} / {{pageCount}}</text><button size="mini" disabled="{{pageIndex + 1 >= pageCount || status !== 'ready'}}" bindtap="onNext">下一页</button><button size="mini" disabled="{{status !== 'ready'}}" bindtap="onZoom">{{zoom === 1 ? '放大' : '还原'}}</button></view>
+</view>

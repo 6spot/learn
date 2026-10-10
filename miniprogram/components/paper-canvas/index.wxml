@@ -1,0 +1,4 @@
+<view class="paper-container" style="width:{{cssWidth}}px;height:{{cssHeight}}px">
+  <canvas id="paper" type="2d" style="width:{{cssWidth}}px;height:{{cssHeight}}px;visibility:{{status === 'ready' ? 'visible' : 'hidden'}}" />
+  <view wx:if="{{message}}" class="paper-status" role="status">{{message}}</view>
+</view>

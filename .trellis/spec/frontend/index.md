@@ -9,6 +9,7 @@ Read component and quality guidelines before frontend work. Unfilled entries bel
 | Guide | Description | Status |
 |-------|-------------|--------|
 | [Runtime Tooling](./runtime-tooling.md) | Source/output boundaries, shared builds and simulator checks | T01 implemented; actual-device acceptance pending |
+| [Native Paper Preview](./canvas-preview.md) | Exact drawing, original-font caching and cancellable Canvas lifecycle | T08 independently checked in official simulator; devices/printing pending |
 | [Directory Structure](./directory-structure.md) | Actual page/component file organization | To fill after UI skeleton |
 | [Component Guidelines](./component-guidelines.md) | Confirmed native component policy, behavior and reuse boundaries | D-039 policy captured; real implementation examples pending |
 | [Hook Guidelines](./hook-guidelines.md) | Platform lifecycle guidance when implemented | Generic scaffold; not a framework selection |
