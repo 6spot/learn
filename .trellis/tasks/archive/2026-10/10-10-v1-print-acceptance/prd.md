@@ -6,10 +6,10 @@
 
 ## 已确认背景与范围
 
-- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../10-10-learn-v1/prd.md)。
+- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../../../10-10-learn-v1/prd.md)。
 - 责任范围：正式样张、量测记录、docs/TESTING.md 与可信样式预设。目录名称表示职责，尚未存在的模块不得描述为已实现。
 - 已有四模板几何与基础方格文字布局可复用；本任务不能以历史测试或占位字体样张代替验收。
-- 最终集成验收依赖：[T08 实现 Canvas 预览](../archive/2026-10/10-10-v1-canvas-preview/prd.md)、[T09 实现 PDF 渲染](../archive/2026-10/10-10-v1-pdf-renderer/prd.md)
+- 最终集成验收依赖：[T08 实现 Canvas 预览](../10-10-v1-canvas-preview/prd.md)、[T09 实现 PDF 渲染](../10-10-v1-pdf-renderer/prd.md)
 
 ## 要求与验收
 
@@ -29,6 +29,6 @@
 
 ## 权威依据
 
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [PAPER_PRESETS](../../../docs/PAPER_PRESETS.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [PAPER_PRESETS](../../../../../docs/PAPER_PRESETS.md)
+- [TESTING](../../../../../docs/TESTING.md)

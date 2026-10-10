@@ -29,4 +29,4 @@ Owner 在指定设备以 A4、100% 实际大小黑白打印，填写纸张/驱�
 
 ## 权威依据
 
-[PAPER_PRESETS](../../../docs/PAPER_PRESETS.md)、[PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)、[TESTING](../../../docs/TESTING.md)、[最终清单](../../../docs/FINAL_ACCEPTANCE.md)。
+[PAPER_PRESETS](../../../../../docs/PAPER_PRESETS.md)、[PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)、[TESTING](../../../../../docs/TESTING.md)、[最终清单](../../../../../docs/FINAL_ACCEPTANCE.md)。

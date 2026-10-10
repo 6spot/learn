@@ -37,6 +37,6 @@ Poppler 26.10.0、Pillow 11.3.0，600 DPI；像素 0.042333 mm，灰度 < 250 �
 
 ## 最终移交
 
-详细表和命令见 [PRINT_ACCEPTANCE](../../../docs/PRINT_ACCEPTANCE.md)。Owner 最后填写打印机/驱动/纸张/100%设置、中心线和墨迹实测、可打印区域/公差、字形/灰度/多页、真机 Canvas/PDF 对照与用途许可。通过前不修改 stage，不使用本数字报告独立发布正式 active，不宣称霞鹜文楷为官方规范教学字体。
+详细表和命令见 [PRINT_ACCEPTANCE](../../../../../docs/PRINT_ACCEPTANCE.md)。Owner 最后填写打印机/驱动/纸张/100%设置、中心线和墨迹实测、可打印区域/公差、字形/灰度/多页、真机 Canvas/PDF 对照与用途许可。通过前不修改 stage，不使用本数字报告独立发布正式 active，不宣称霞鹜文楷为官方规范教学字体。
 
 本轮独立检查及复验见 [check](check.md)；等待主会话全局文档合并及提交/归档。reviewer 未提交或归档；T10-AC2/AC3 不因本地检查而标为通过。

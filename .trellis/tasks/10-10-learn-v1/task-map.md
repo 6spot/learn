@@ -15,7 +15,7 @@
 | T07 | [实现排版版本与摘要协议](../archive/2026-10/10-10-v1-layout-versions/prd.md) | T04、T05、T06 | 共享版本组合、布局序列化及摘要协议 |
 | T08 | [实现 Canvas 预览](../archive/2026-10/10-10-v1-canvas-preview/prd.md) | T01、T07 | renderers/canvas（职责目录待落地）、小程序 Canvas 适配 |
 | T09 | [实现 PDF 渲染](../archive/2026-10/10-10-v1-pdf-renderer/prd.md) | T07 | renderers/pdf（职责目录待落地）、PDF 样张 |
-| T10 | [完成正式字体与打印验收](../10-10-v1-print-acceptance/prd.md) | T08、T09 | 正式样张、量测记录、docs/TESTING.md 与可信样式预设 |
+| T10 | [完成正式字体与打印验收](../archive/2026-10/10-10-v1-print-acceptance/prd.md) | T08、T09 | 正式样张、量测记录、docs/TESTING.md 与可信样式预设 |
 | T11 | [CloudBase 环境与可靠执行验证](../archive/2026-10/10-10-v1-cloudbase-feasibility/prd.md) | — | 关联云开发环境、部署配置与能力验证记录 |
 | T12 | [实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md) | T07、T11 | CloudBase 预设配置、兼容查询及最小发布工具 |
 | T13 | [实现身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md) | T11 | 云端用户、额度账户与不可变流水 |

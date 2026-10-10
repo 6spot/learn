@@ -19,7 +19,7 @@
 
 ## Findings (not fixed)
 
-- 实体 A4/100% 打印、设备/驱动/纸张/可打印区域、公差、字体用途许可及教学字形适用性没有真实验收证据，按 D-044 保留到 T24 / [FINAL_ACCEPTANCE](../../../docs/FINAL_ACCEPTANCE.md)。不修改候选 stage，不将 T10-AC2/AC3 标为通过。
+- 实体 A4/100% 打印、设备/驱动/纸张/可打印区域、公差、字体用途许可及教学字形适用性没有真实验收证据，按 D-044 保留到 T24 / [FINAL_ACCEPTANCE](../../../../../docs/FINAL_ACCEPTANCE.md)。不修改候选 stage，不将 T10-AC2/AC3 标为通过。
 - Canvas 为实际 renderer 的调用记录而非实际屏幕像素；字形区域检查不执行 OCR，重叠区域的字形识读与描红教学适用性仍须人工检查。此限制在工具和文档中明确。
 
 ## Verification
