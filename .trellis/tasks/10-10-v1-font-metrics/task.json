@@ -1,0 +1,28 @@
+{
+  "id": "v1-font-metrics",
+  "name": "v1-font-metrics",
+  "title": "T04 接入共享字体度量",
+  "description": "让微信预览与云端复算使用同一真实字体测宽结果。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T04"
+  }
+}

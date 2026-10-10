@@ -1,0 +1,28 @@
+{
+  "id": "v1-privacy-retention",
+  "name": "v1-privacy-retention",
+  "title": "T23 实现隐私、保留与清理机制",
+  "description": "让数据保存、文件清理与请求幂等有一致的期限和隐私边界。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P2",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T23"
+  }
+}

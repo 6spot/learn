@@ -1,0 +1,7 @@
+{"file": "docs/DEVELOPMENT_HANDOFF.md", "reason": "V1 总计划范围、依赖与集成验收依据"}
+{"file": "docs/DECISIONS.md", "reason": "V1 总计划范围、依赖与集成验收依据"}
+{"file": "docs/ARCHITECTURE.md", "reason": "V1 总计划范围、依赖与集成验收依据"}
+{"file": "docs/TESTING.md", "reason": "V1 总计划范围、依赖与集成验收依据"}
+{"file": "docs/UI_DESIGN.md", "reason": "D-039 component policy and O-015 design review status"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}

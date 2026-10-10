@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>冷白 · 首版页面候选 — Learn</title>
+  <style>
+    :root{color-scheme:light;--ink:#22262d;--muted:#727984;--line:#e8ebef;--canvas:#f4f6f8;--blue:#2864dc;--ease:cubic-bezier(.23,1,.32,1)}
+    *{box-sizing:border-box}body{margin:0;background:#e9edf1;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+    button,input,textarea{font:inherit}button{color:inherit;cursor:pointer;border:0;background:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:disabled{cursor:default;color:#9ba2ac}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:4px}textarea:focus{outline:none}textarea:focus-visible{box-shadow:inset 2px 0 var(--blue)}[hidden]{display:none!important}svg{display:block}h1,h2,h3,p{margin:0}.icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}
+    .review{max-width:766px;margin:32px auto 20px;padding:0 20px}.review h1{font-size:17px;font-weight:600;letter-spacing:.02em}.review p{font-size:12px;color:#626b78;line-height:1.6;margin-top:6px}
+    .stage{display:flex;align-items:flex-start;gap:36px;max-width:726px;margin:0 auto 40px}.phone{position:relative;width:390px;flex:none;height:844px;display:flex;flex-direction:column;background:var(--canvas);border:1px solid #dce1e7;border-radius:24px;overflow:hidden;box-shadow:0 16px 48px #26354b0d}
+    .review-notes{width:240px;padding-top:96px;font-size:13px;line-height:1.8;color:#626b78}.review-notes strong{display:block;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:5px}.review-notes p{margin-bottom:24px}.review-controls{display:flex;flex-wrap:wrap;gap:8px}.review-controls button{padding:8px 10px;border:1px solid #cdd4de;border-radius:5px;background:#ffffff8c;font-size:12px}.review-foot{font-size:11px;line-height:1.7;margin-top:15px;color:#727984}
+    .statusbar{height:36px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:8px 25px 0;font-size:13px;font-weight:600;background:#fff}.status-icons{display:flex;align-items:center;gap:5px}.battery{height:10px;width:20px;border:1px solid currentColor;border-radius:3px;padding:1px;position:relative}.battery:after{content:"";position:absolute;right:-3px;top:2px;height:4px;width:2px;background:currentColor;border-radius:1px}.battery i{display:block;height:100%;width:85%;background:currentColor;border-radius:1px}.signal{width:15px;height:11px;fill:currentColor}
+    .navbar{height:52px;flex:none;position:relative;display:flex;align-items:center;justify-content:center;background:#fff}.navbar h2{font-size:17px;font-weight:600;max-width:48%;white-space:nowrap}.back{position:absolute;left:7px;top:4px;width:44px;height:44px;display:grid;place-items:center}.capsule{position:absolute;right:12px;display:flex;align-items:center;justify-content:space-evenly;width:82px;height:29px;border:1px solid #e3e5e8;border-radius:18px;font-size:18px;line-height:1;pointer-events:none}.capsule .divider{width:1px;height:16px;background:#e2e5e9}.capsule .close{width:13px;height:13px;border:1.8px solid #22262d;border-radius:50%;position:relative}.capsule .close:after{content:"";position:absolute;inset:3px;border-radius:50%;background:#22262d}
+    #screen{flex:1;min-height:0;display:flex;flex-direction:column}.home-content{flex:1;min-height:0;overflow:auto;padding:27px 24px 20px;background:#fff}.home-intro h3{font-size:23px;line-height:1.4;font-weight:600;letter-spacing:.015em}.home-intro p{font-size:13px;color:var(--muted);margin-top:7px}.paper-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;row-gap:28px;margin-top:27px}.template{min-width:0;padding:0;display:flex;flex-direction:column;align-items:center;text-align:center}.paper-svg{--paper-line:#8b98a8;--paper-guide:#b6bec9;width:100%;height:auto;background:#fff;border:1px solid #dbe0e6;box-shadow:0 3px 7px #24374b08;aspect-ratio:210/297}.template .paper-svg{width:min(100%,132px);--paper-line:#78838f;--paper-guide:#b7bec7}.template-name{font-size:15px;font-weight:600;line-height:1.5;margin-top:12px}.template-desc{font-size:.75rem;color:var(--muted);margin-top:3px;line-height:1.5}.home-note{text-align:center;font-size:11px;letter-spacing:.07em;color:var(--muted);margin-top:26px}.tabbar{display:grid;grid-template-columns:1fr 1fr;padding:9px 38px 19px;background:#fff;border-top:1px solid var(--line);flex:none}.tabbar button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;line-height:1.4;color:#89909a;min-height:38px}.tabbar .selected{color:var(--blue)}
+    .editor-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:flex;flex-direction:column}
+    .preview-area{display:flex;flex-direction:column;align-items:center;position:relative;flex:none}.preview-paper{display:block;position:relative;width:100%;height:120px;padding:0;flex:none;overflow:hidden;background:#fff}.preview-paper .paper-svg{width:100%;height:100%;aspect-ratio:auto;border:0;box-shadow:none;--paper-line:#c3c6ca;--paper-guide:#e1e3e6}
+    .operator{background:#fff;border-top:1px solid #e5e9ee;padding:0 24px 4px;flex:1 0 auto}.editor-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0 12px;min-height:48px}.editor-heading h3{font-size:1rem;font-weight:600;line-height:1.5}.editor-text{padding-bottom:8px}.editor-settings{border-top:1px solid var(--line)}
+    .title-row{display:flex;gap:16px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.field-label{font-size:.875rem;font-weight:500;line-height:1.7;flex:none}.input-hint{font-size:.75rem;line-height:1.6;color:var(--muted)}.title-input{width:100%;min-width:0;min-height:27px;max-height:80px;resize:vertical;border:0;border-radius:0;padding:0;background:transparent;font-size:1rem;line-height:1.7;color:var(--ink)}textarea::placeholder{color:#8a929d;opacity:1}
+    .body-label{display:flex;align-items:center;justify-content:space-between;margin:4px 0 2px;gap:12px}.text-link{padding:7px 0;min-height:44px;font-size:.75rem;line-height:1.5;color:var(--blue)}.body-input{display:block;width:100%;height:210px;border:0;border-radius:0;background:transparent;resize:vertical;min-height:200px;padding:2px 0;line-height:1.8;font-size:1rem;color:var(--ink)}.input-meta{display:flex;justify-content:space-between;align-items:center;min-height:24px;gap:12px;font-size:.75rem;line-height:1.5;color:var(--muted)}.input-meta span:last-child{margin-left:auto}
+    .setting-row{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:14px 0;gap:15px;cursor:pointer}.setting-row>span{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 12px;min-width:0}.setting-row strong,.advanced strong{font-size:.875rem;font-weight:500;line-height:1.5}.setting-row small{display:block;font-size:.75rem;color:var(--muted);margin-top:0;line-height:1.5}.switch{appearance:none;-webkit-appearance:none;width:42px;height:25px;border-radius:20px;background:#d9dde3;flex:none;margin:0;position:relative;cursor:pointer}.switch:before{content:"";position:absolute;left:2px;top:2px;height:21px;width:21px;background:#fff;border-radius:50%;box-shadow:0 1px 2px #0002}.switch:checked{background:var(--blue)}.switch:checked:before{left:19px}.switch:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+    .advanced{border-top:1px solid var(--line)}.advanced summary{list-style:none;padding:10px 0;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:12px}.advanced summary::-webkit-details-marker{display:none}.advanced summary small{display:block;color:var(--muted);font-size:.75rem;margin-top:4px;line-height:1.5}.advanced summary .icon{width:16px;height:16px;color:#9299a3}.advanced[open] summary .icon{transform:rotate(90deg)}fieldset{border:0;margin:4px 0 18px;padding:0;min-width:0}legend{font-size:.875rem;line-height:1.5;margin-bottom:9px;padding:0}.choices{display:flex;gap:0;background:#f3f5f7;padding:3px;border-radius:6px}.choice{position:relative;flex:1;min-width:0;cursor:pointer}.choice input{appearance:none;position:absolute;inset:0;width:100%;height:100%;margin:0;cursor:pointer;border-radius:4px}.choice span{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 4px;line-height:1.4;text-align:center;font-size:.8125rem;position:relative;pointer-events:none;color:#717986}.choice input:checked+span{background:#fff;color:var(--ink);border-radius:4px;box-shadow:0 1px 3px #22334b12;font-weight:500}.choice input:focus-visible{outline:2px solid var(--blue);outline-offset:2px;z-index:1}.reset{display:block;margin-left:auto}
+    .generate-bar{flex:none;background:#fff;padding:10px 24px 16px;border-top:1px solid var(--line)}.generate-button{width:100%;min-height:46px;border-radius:7px;background:var(--blue);color:#fff;font-size:15px;font-weight:500;letter-spacing:.04em}.generate-hint{text-align:center;color:var(--muted);font-size:.75rem;line-height:1.5;margin-top:8px}.toast{position:absolute;z-index:6;left:50%;bottom:118px;transform:translateX(-50%);max-width:calc(100% - 48px);width:max-content;background:#242b35ed;color:#fff;font-size:12px;line-height:1.6;padding:11px 16px;border-radius:7px;pointer-events:none;text-align:center}
+    dialog{width:min(358px,calc(100% - 28px));border:0;padding:0;border-radius:12px;max-height:calc(100dvh - 40px);color:var(--ink);box-shadow:0 24px 100px #0003}dialog::backdrop{background:#17223255}.dialog-head{padding:22px 20px 14px}.dialog-head h3{font-size:18px;font-weight:600}.dialog-head p{margin-top:7px;font-size:12px;line-height:1.6;color:var(--muted)}.comparison{padding:0 20px;max-height:42vh;overflow:auto}.comparison section{padding:14px 0;border-top:1px solid var(--line)}.comparison h4{font-size:12px;font-weight:500;margin:0 0 7px}.comparison pre{font-family:inherit;font-size:12px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;margin:0;color:#5e6875}.dialog-actions{display:flex;gap:10px;padding:17px 20px 20px}.dialog-actions button{flex:1;padding:11px 4px;background:#f0f3f6;border-radius:6px;font-size:13px;min-height:43px}.dialog-actions .primary{background:var(--blue);color:#fff}.dialog-actions .primary:disabled{background:#e8edf4;color:#9aa3b1}.pressed{transform:scale(.985);transition:transform 120ms var(--ease)}
+    @media (hover:hover) and (pointer:fine){.template:hover .paper-svg{border-color:#b8c4d4}.text-link:hover{color:#1446b1}.review-controls button:hover{background:#fff}}
+    @media (max-width:720px){.review{max-width:390px;margin:18px auto 13px;padding:0 16px}.review h1{font-size:14px}.review p{font-size:11px}.stage{width:100%;max-width:390px;display:block;margin:0 auto 22px}.phone{width:100%;border-radius:0;border-left:0;border-right:0;box-shadow:none}.review-notes{width:auto;padding:17px 16px 0}.review-notes>p{display:none}.review-foot{margin-top:11px}.review-controls{justify-content:center}.review-foot{text-align:center}}
+    @media (max-width:350px){.home-content{padding-left:20px;padding-right:20px}.paper-grid{column-gap:22px;row-gap:28px}.template .paper-svg{width:120px}.home-intro h3{font-size:21px}.template-name{font-size:14px}.phone{height:812px}.operator{padding-left:20px;padding-right:20px}.navbar h2{font-size:15px}.capsule{right:10px;width:72px}.generate-bar{padding-left:20px;padding-right:20px}}
+    @media (prefers-reduced-motion:reduce){.pressed{transform:none;transition:none}}
+  </style>
+  <link rel="stylesheet" href="./native-pages.css">
+</head>
+<body>
+  <header class="review"><h1>冷白 · 首版页面候选</h1><p>八个页面与记录状态 / D-043 开发基线</p></header>
+  <main class="stage">
+    <div class="phone" id="phone">
+      <div class="statusbar" aria-hidden="true"><span>9:41</span><div class="status-icons"><svg class="signal" viewBox="0 0 16 12"><path d="M0 8h2v4H0zm4-3h2v7H4zm4-2h2v9H8zm4-3h2v12h-2z"/></svg><span style="font-size:12px">◔</span><span class="battery"><i></i></span></div></div>
+      <header class="navbar"><button class="back" id="back" aria-label="返回纸张首页" hidden></button><h2 id="nav-title">纸张</h2><div class="capsule" aria-hidden="true"><span>•••</span><span class="divider"></span><span class="close"></span></div></header>
+      <div id="screen"></div>
+      <div class="toast" id="toast" role="status" hidden></div>
+    </div>
+    <aside class="review-notes" aria-label="设计评审说明">
+      <p><strong>纸张成为首页主体</strong>四种纸直接展示；纯白纸面，浅冷灰留白，没有外层卡片。</p>
+      <p><strong>文字优先，设置按需</strong>顶部点击看整页；正文后是描红，进阶选项默认收起。</p>
+      <p><strong>完整流程</strong>从选纸、编辑、预览到生成记录；以下按钮可直达各页面检查状态。</p>
+      <div class="review-controls"><button id="review-home">回到首页</button><button id="review-sample">载入示例</button><button id="review-empty">查看空白状态</button></div>
+      <nav class="review-pages" aria-label="评审页面直达">
+        <button data-review-page="home">纸张</button><button data-review-page="editor">编辑纸张</button><button data-review-page="preview">分页预览</button><button data-review-page="me">我的</button><button data-review-page="records">生成记录</button><button data-review-page="detail">记录详情</button><button data-review-page="privacy">隐私与数据</button><button data-review-page="admin">运营中心</button>
+      </nav>
+      <div class="review-states"><label for="review-detail-state">记录详情示例</label><select id="review-detail-state"><option value="success">成功 / 有效</option><option value="waiting">等待 / 生成中</option><option value="failed">失败 / 已释放</option><option value="expired">成功 / 文件过期</option><option value="query-error">查询失败 / 断网</option></select><label for="review-records-state">记录列表示例</label><select id="review-records-state"><option value="populated">有记录</option><option value="empty">空列表</option><option value="error">查询失败</option></select></div>
+      <div class="review-foot">离线交互稿，不生成文件、不保存输入。<br>格线与文字是 UI 示意，未接入正式排版。<br>整理仅演示固定样例；真实转换规则待确认。</div>
+    </aside>
+  </main>
+  <dialog id="cleanup-dialog" aria-labelledby="cleanup-title">
+    <div class="dialog-head"><h3 id="cleanup-title">整理换行</h3><p id="cleanup-note">确认变化后，再替换正文。</p></div>
+    <div class="comparison"><section><h4>整理前</h4><pre id="before-text"></pre></section><section><h4>整理后</h4><pre id="after-text"></pre></section></div>
+    <div class="dialog-actions"><button id="cancel-cleanup">保留原文</button><button id="apply-cleanup" class="primary">应用整理</button></div>
+  </dialog>
+  <script>
+    'use strict';
+    const templates=[{id:'essay',name:'作文方格',desc:'作文与日常书写'},{id:'tian',name:'田字格',desc:'汉字结构练习'},{id:'mi',name:'米字格',desc:'笔画位置练习'},{id:'pinyin',name:'拼音四线三格',desc:'拼音书写练习'}];
+    const SAMPLE_BEFORE='今天的天气很好，\n我和同学一起去公园。\n\n我们看到了盛开的花。';
+    const SAMPLE_AFTER='今天的天气很好，我和同学一起去公园。\n\n我们看到了盛开的花。';
+    const state={page:'home',template:0,title:'',body:'',tracing:false,align:'center',indent:'default',advanced:false,undo:null,pageNumber:1,detail:'success',lastKnownDetail:'success',detailFrom:'records',detailTemplate:1,records:'populated'};
+    const $=id=>document.getElementById(id);
+    const escapeText=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    const paths={back:'<path d="m14 5-7 7 7 7"/>',right:'<path d="m9 5 7 7-7 7"/>',paper:'<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/>',person:'<circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',expand:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>',check:'<path d="m5 12 4 4L19 6"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/>',alert:'<path d="M12 3 2 21h20L12 3Z"/><path d="M12 9v5m0 3h.01"/>'};
+    const icon=name=>`<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${paths[name]}</svg>`;
+    function paper(type,content=false,fragment=false){
+      let grid='';
+      const line=(x1,y1,x2,y2,guide=false)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${guide?'var(--paper-guide)':'var(--paper-line)'}" stroke-width="${guide?'.55':'.65'}" ${guide?'stroke-dasharray="1.4 1.4"':''}/>`;
+      if(type==='pinyin'){for(let g=0;g<14;g++)for(let k=0;k<4;k++)grid+=line(15,25.5+g*18+k*4,195,25.5+g*18+k*4);}
+      else{const essay=type==='essay',cols=essay?19:12,rows=essay?27:17,cell=essay?10:15,x=essay?10:15,y=essay?13.5:21;for(let c=0;c<=cols;c++)grid+=line(x+c*cell,y,x+c*cell,y+rows*cell);for(let r=0;r<=rows;r++)grid+=line(x,y+r*cell,x+cols*cell,y+r*cell);if(!essay)for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const a=x+c*cell,b=y+r*cell;grid+=line(a+cell/2,b,a+cell/2,b+cell,true)+line(a,b+cell/2,a+cell,b+cell/2,true);if(type==='mi')grid+=line(a,b,a+cell,b+cell,true)+line(a+cell,b,a,b+cell,true);}}
+      // Visual indication only. The shared layout engine will place production text.
+      let text='';
+      if(content){
+        const title=Array.from(state.title).slice(0,16).join('');
+        const titleX=state.align==='left'?17:state.align==='right'?193:105;
+        const anchor=state.align==='left'?'start':state.align==='right'?'end':'middle';
+        if(type==='pinyin'){
+          if(title)text+=`<text x="${titleX}" y="35" text-anchor="${anchor}" font-size="8">${escapeText(title)}</text>`;
+          let y=title?54:35;
+          for(const paragraph of state.body.split('\n')){
+            if(fragment&&y>62)break;
+            if(y>260)break;
+            if(paragraph)text+=`<text x="17" y="${y}" font-size="8">${escapeText(Array.from(paragraph).slice(0,30).join(''))}</text>`;
+            y+=18;
+          }
+        }else{
+          const essay=type==='essay',cols=essay?19:12,rows=essay?27:17,cell=essay?10:15,x0=essay?10:15,y0=essay?13.5:21;
+          const fontSize=cell*.72;
+          if(title){const titleRow=essay?1:0;text+=`<text x="${titleX}" y="${y0+(titleRow+.5)*cell}" text-anchor="${anchor}" dominant-baseline="middle" font-size="${fontSize}">${escapeText(title)}</text>`;}
+          let row=title?(essay?3:2):1;
+          const maxFragmentRow=essay?4:2;
+          outer:for(const paragraph of state.body.split('\n')){
+            if(!paragraph){row++;continue;}
+            const chars=Array.from(paragraph);
+            let first=true;
+            while(chars.length&&row<rows){
+              if(fragment&&row>maxFragmentRow)break outer;
+              const indent=first&&state.indent!=='none'?2:0;
+              const chunk=chars.splice(0,cols-indent);
+              chunk.forEach((char,index)=>{text+=`<text x="${x0+(indent+index+.5)*cell}" y="${y0+(row+.5)*cell}" text-anchor="middle" dominant-baseline="middle" font-size="${fontSize}">${escapeText(char)}</text>`;});
+              row++;first=false;
+            }
+          }
+        }
+      }
+      return `<svg class="paper-svg" viewBox="${fragment?(type==='essay'?'10 13.5 190 58.5':type==='pinyin'?'15 25.5 180 55.4':'15 21 180 55.4'):'0 0 210 297'}" preserveAspectRatio="${fragment?'xMidYMin slice':'xMidYMid meet'}" role="img" aria-label="${templates.find(t=>t.id===type).name}${fragment?'局部':'白纸'}示意"><rect width="210" height="297" fill="#fff"/>${grid}<g fill="${state.tracing?'#aab0b8':'#29313c'}">${text}</g></svg>`;
+    }
+    const previewMarkup=()=>paper(templates[state.template].id,true,true);
+    const alignment=()=>({left:'左对齐',center:'居中',right:'右对齐'}[state.align]);
+    const summary=()=>`标题${alignment()} · ${state.indent==='none'?'首行不缩进':'首行按模板'}`;
+    function radio(name,items){return `<div class="choices">${items.map(([value,label])=>`<label class="choice"><input type="radio" name="${name}" value="${value}" ${state[name]===value?'checked':''}><span>${label}</span></label>`).join('')}</div>`;}
+    function textPanel(){return `<p class="input-hint">不填文字即可生成空白纸</p><div class="title-row"><label class="field-label" for="title-input">标题</label><textarea id="title-input" class="title-input" rows="1" placeholder="输入标题">${escapeText(state.title)}</textarea></div><div class="body-label"><label class="field-label" for="body-input">${state.template===3?'拼音':'正文'}</label><button class="text-link" id="cleanup-trigger" ${state.body.trim()?'':'disabled'}>整理换行</button></div><textarea id="body-input" class="body-input" placeholder="${state.template===3?'直接输入拼音，如 nǐ hǎo':'粘贴或输入文字，保留原有换行'}">${escapeText(state.body)}</textarea><div class="input-meta"><button class="text-link" id="undo-cleanup" ${state.undo===null?'hidden':''}>撤销整理</button><span id="input-count">${Array.from(state.body).length} 字符</span></div>`;}
+    function settingsPanel(){return `<label class="setting-row" for="tracing"><span><strong>描红</strong><small>将文字变浅，方便临摹</small></span><input class="switch" type="checkbox" id="tracing" role="switch" ${state.tracing?'checked':''}></label><details class="advanced" id="advanced" ${state.advanced?'open':''}><summary><span><strong>进阶设置</strong><small id="advanced-summary">${summary()}</small></span>${icon('right')}</summary><fieldset><legend>标题对齐</legend>${radio('align',[['left','左对齐'],['center','居中'],['right','右对齐']])}</fieldset><fieldset><legend>正文首行缩进</legend>${radio('indent',[['default','按模板默认'],['none','不缩进']])}</fieldset><button class="text-link reset" id="reset-settings">恢复默认设置</button></details>`;}
+    function tabbar(active){return `<nav class="tabbar" aria-label="主导航"><button data-go="home" class="${active==='home'?'selected':''}" ${active==='home'?'aria-current="page"':''}>${icon('paper')}纸张</button><button data-go="me" class="${active==='me'?'selected':''}" ${active==='me'?'aria-current="page"':''}>${icon('person')}我的</button></nav>`;}
+    function go(page){state.page=page;if(page==='preview')state.pageNumber=1;render();}
+    function submitDemo(){state.detail='waiting';state.lastKnownDetail='waiting';state.detailFrom=state.page;state.detailTemplate=state.template;go('detail');}
+    function recordRow(template,time,status,mode){
+      const labels={waiting:'生成中',success:'已生成',failed:'生成失败',expired:'文件已过期'};
+      const notes={waiting:'可以离开，稍后查看',success:'2 页 · 文件有效',failed:'未消费次数',expired:'原任务已成功'};
+      return `<button class="record-row" data-record="${status}" data-record-template="${template}" aria-label="${templates[template].name}，${mode}，${labels[status]}"><span class="record-top"><strong>${templates[template].name}</strong><span class="record-state">${labels[status]}</span></span><span class="record-time">${time}</span><span class="record-note">${mode} · ${notes[status]}</span></button>`;
+    }
+    function detailView(){
+      const info={waiting:['clock','生成中','可以离开，稍后在生成记录查看。'],success:['check','PDF 已生成','文件有效期内可以重复领取，不再扣次。'],failed:['alert','生成失败','示例原因：文件生成未完成。本次未消费次数。需要时请重新提交。'],expired:['info','文件已过期','原任务已成功，文件不能继续领取。'],"query-error":['info','暂时无法查询','当前网络不可用，以下保留上次查看的状态。']};
+      const [symbol,title,baseDescription]=info[state.detail];
+      const lastKnown={waiting:'生成中',success:'PDF 已生成',failed:'生成失败',expired:'文件已过期'}[state.lastKnownDetail];
+      const description=state.detail==='query-error'?`上次状态：${lastKnown}。${baseDescription}`:baseDescription;
+      const action=state.detail==='success'?`<button class="page-primary" data-demo="本稿没有 PDF。正式打开前须由云端鉴权领取。">打开 PDF</button><button class="page-secondary" data-demo="保存与分享入口待微信真机验证。">保存 / 分享</button>`:state.detail==='failed'?`<button class="page-primary" data-go="${state.detailFrom==='records'?'home':'editor'}">${state.detailFrom==='records'?'去选纸张':'返回编辑'}</button><p class="secondary-copy">从记录进入时不恢复原文，请重新粘贴。</p>`:state.detail==='query-error'?`<button class="page-primary" data-demo="离线示例：保留上次状态，不把任务标为失败。">重试查询</button>`:state.detail==='expired'?`<button class="page-primary" data-go="home">去选纸张</button>`:'';
+      return `<div class="page-scroll detail-page"><section class="result-status"><span class="status-symbol ${state.detail}">${icon(symbol)}</span><h3>${title}</h3><p>${description}</p></section>${state.detail==='success'?`<section class="result-actions" aria-label="领取文件">${action}</section>`:''}<section class="detail-section"><h4>文件信息</h4><dl><div><dt>纸张模板</dt><dd>${templates[state.detailTemplate].name}</dd></div><div><dt>提交时间</dt><dd>示例时间 · 今天 10:12</dd></div>${state.detail==='success'||state.detail==='query-error'&&state.lastKnownDetail==='success'?'<div><dt>页数</dt><dd>上次查询：示例 2 页</dd></div><div><dt>文件状态</dt><dd>上次查询：有效期内</dd></div>':''}</dl></section>${state.detail==='success'?'<nav class="detail-navigation" aria-label="记录导航"><button class="text-link" data-go="records">查看生成记录</button></nav>':`<section class="detail-section action-section"><h4>后续操作</h4>${action}<button class="page-secondary" data-go="records">查看生成记录</button></section>`}<p class="demo-note">离线状态示例，未查询云端或生成文件。</p></div>`;
+    }
+    function renderOtherPage(){
+      if(state.page==='preview'){
+        const total=state.title||state.body?2:1;
+        state.pageNumber=Math.min(state.pageNumber,total);
+        $('screen').innerHTML=`<div class="reader-tools"><p id="reader-help">点击纸张可放大</p><button class="text-link reader-zoom-control" id="reader-zoom-toggle" aria-controls="reader-scroll" aria-pressed="false">放大${icon('expand')}</button></div><div class="reader-scroll" id="reader-scroll"><div class="reader-surface"><button class="reader-paper" id="reader-zoom" aria-label="放大纸张示意" aria-pressed="false">${paper(templates[state.template].id,Boolean(state.title||state.body))}</button></div><p class="reader-note">纸张与页数仅为界面示意。</p></div><div class="pager ${total===1?'single':''}">${total>1?`<button id="page-prev" ${state.pageNumber===1?'disabled':''}>上一页</button>`:''}<span>${state.pageNumber} / ${total}</span>${total>1?`<button id="page-next" ${state.pageNumber===total?'disabled':''}>下一页</button>`:''}</div><footer class="generate-bar"><button class="generate-button" id="generate">生成 PDF</button><p class="generate-hint">成功生成才扣次</p></footer>`;
+      }else if(state.page==='me'){
+        $('screen').innerHTML=`<div class="page-scroll me-page"><section class="balance"><p>可用生成次数</p><strong>8<span>次</span></strong><small>示例余额 · 预览不扣次，成功生成才扣次</small></section><nav class="menu-list" aria-label="我的菜单"><button data-go="records">生成记录${icon('right')}</button><button data-demo="微信反馈能力需真机验证；本稿不发送信息。">使用反馈${icon('right')}</button><button data-go="privacy">隐私与数据${icon('right')}</button></nav><nav class="menu-list admin-menu" aria-label="管理员示例"><small>管理员入口示例 · 正式显示需云端确认权限</small><button data-go="admin">运营中心${icon('right')}</button></nav></div>${tabbar('me')}`;
+      }else if(state.page==='records'){
+        $('screen').innerHTML=state.records==='empty'?`<div class="page-scroll records-page"><div class="empty-state">${icon('paper')}<h3>还没有生成记录</h3><p>选一张纸，开始第一次生成。</p><button class="page-primary" data-go="home">去选纸张</button></div></div>`:state.records==='error'?`<div class="page-scroll records-page"><div class="empty-state">${icon('info')}<h3>暂时无法加载</h3><p>首次加载失败示例。网络恢复后可重试；已有列表应保留。</p><button class="page-primary" data-demo="离线示例：没有连接云端。">重试</button></div></div>`:`<div class="page-scroll records-page"><p class="list-intro">按提交时间排列 · 不显示输入内容</p>${recordRow(0,'今天 14:30','waiting','填字')}${recordRow(1,'今天 10:12','success','描红')}${recordRow(3,'昨天 16:20','failed','填字')}${recordRow(2,'较早的记录','expired','空白纸')}</div>`;
+      }else if(state.page==='detail'){
+        $('screen').innerHTML=detailView();
+      }else if(state.page==='privacy'){
+        $('screen').innerHTML=`<div class="page-scroll prose-page"><h3>你的文字，只用于生成</h3><p>编辑时在本机预览。提交后由云端生成 PDF；生成记录不保存文章正文，也不用于恢复编辑内容。</p><h3>我们保存什么</h3><p>保留完成账户、次数结算和任务查询所需的信息。PDF 在交付期内可重复领取。</p><h3>保存与删除</h3><p>文件到期后按规则清理。数据范围、期限及申请流程仍待 O-007 确定。</p><h3>联系与反馈</h3><p>遇到问题可通过小程序反馈入口联系。</p><button class="page-primary" data-demo="删除范围与确认流程待 O-007 确定；本稿不会提交申请。">申请删除数据</button><button class="page-secondary" data-demo="微信反馈能力需真机验证。">使用反馈</button></div>`;
+      }else if(state.page==='admin'){
+        $('screen').innerHTML=`<div class="page-scroll admin-page"><p class="list-intro">仅管理员 · 以下数值为占位</p><section class="metrics"><div><small>新增用户</small><strong>—</strong></div><div><small>成功生成</small><strong>—</strong></div><div><small>失败率</small><strong>—</strong></div><div><small>额度消耗</small><strong>—</strong></div></section><section class="template-metrics"><h3>模板使用</h3>${templates.map(t=>`<div><span>${t.name}</span><strong>—</strong></div>`).join('')}</section><p class="admin-note">统计口径与更新频率待 O-009；正式数据由云端聚合并校验管理员权限。</p></div>`;
+      }
+    }
+    function render(){
+      const titles={home:'纸张',editor:templates[state.template].name,preview:'纸张预览',me:'我的',records:'生成记录',detail:'生成记录',privacy:'隐私与数据',admin:'运营中心'};
+      $('back').hidden=state.page==='home'||state.page==='me';$('back').setAttribute('aria-label',`返回${state.page==='detail'&&state.detailFrom==='records'?'生成记录':state.page==='editor'||state.page==='preview'?'编辑纸张':'我的'}`);$('nav-title').textContent=titles[state.page];
+      if(state.page==='home'){$('screen').innerHTML=`<section class="home-content"><div class="home-intro"><h3>选择纸张</h3><p>直接打印空白纸，或填入文字。</p></div><div class="paper-grid">${templates.map((template,index)=>`<button class="template" data-template="${index}" aria-label="编辑${template.name}">${paper(template.id)}<span class="template-name">${template.name}</span><span class="template-desc">${template.desc}</span></button>`).join('')}</div><p class="home-note">A4 竖版 · PDF</p></section>${tabbar('home')}`;return;}
+      if(state.page!=='editor'){renderOtherPage();return;}
+      $('screen').innerHTML=`<div class="editor-scroll">
+        <section class="preview-area" aria-label="当前纸张局部预览">
+          <button class="preview-paper" id="preview-paper" aria-label="查看完整 A4 预览">${previewMarkup()}</button>
+        </section>
+        <section class="operator" aria-label="编辑纸张">
+          <div class="editor-heading">
+            <h3 id="text-heading">文字内容</h3>
+            <button class="full-preview-link" id="open-full-preview">查看整页${icon('expand')}</button>
+          </div>
+          <div class="editor-text" aria-labelledby="text-heading">${textPanel()}</div>
+          <section class="editor-settings" aria-label="文字样式与进阶设置">${settingsPanel()}</section>
+        </section>
+      </div><footer class="generate-bar"><button class="generate-button" id="generate">生成 PDF</button><p class="generate-hint" id="generate-hint"></p></footer>`;
+      updatePreview();
+      $('advanced').addEventListener('toggle',event=>{if(event.currentTarget.isConnected)state.advanced=event.currentTarget.open;});
+    }
+    function updatePreview(){if(state.page!=='editor')return;$('preview-paper').innerHTML=previewMarkup();$('generate-hint').textContent='成功生成才扣次';$('advanced-summary').textContent=summary();}
+    let toastTimer;function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>{$('toast').hidden=true;},3000);}
+    let cleanupSnapshot=null;
+    function openCleanup(){cleanupSnapshot=state.body;const canChange=cleanupSnapshot===SAMPLE_BEFORE;$('before-text').textContent=cleanupSnapshot;$('after-text').textContent=canChange?SAMPLE_AFTER:cleanupSnapshot;$('apply-cleanup').disabled=!canChange;$('cleanup-note').textContent=canChange?'确认变化后，再替换正文。':'此稿仅演示固定样例；你的输入保持不变。';$('cleanup-dialog').showModal();}
+    function toggleReaderZoom(){
+      const reader=$('reader-scroll');
+      const enlarged=reader.classList.toggle('is-zoomed');
+      $('reader-zoom').setAttribute('aria-pressed',String(enlarged));
+      $('reader-zoom').setAttribute('aria-label',enlarged?'还原纸张示意':'放大纸张示意');
+      $('reader-zoom-toggle').setAttribute('aria-pressed',String(enlarged));
+      $('reader-zoom-toggle').innerHTML=`${enlarged?'还原':'放大'}${icon('expand')}`;
+      $('reader-help').textContent=enlarged?'滑动查看，点击纸张还原':'点击纸张可放大';
+      reader.scrollTop=0;reader.scrollLeft=0;
+    }
+    $('back').innerHTML=icon('back');$('back').onclick=()=>{const parent={editor:'home',preview:'editor',records:'me',detail:state.detailFrom,privacy:'me',admin:'me'};go(parent[state.page]||'home');};
+    $('screen').addEventListener('click',event=>{const button=event.target.closest('button');if(!button||button.disabled)return;
+      if(button.dataset.template!==undefined){state.template=Number(button.dataset.template);go('editor');return;}
+      if(button.dataset.go){go(button.dataset.go);return;}
+      if(button.dataset.record){state.detail=button.dataset.record;state.lastKnownDetail=state.detail;state.detailTemplate=Number(button.dataset.recordTemplate);state.detailFrom='records';go('detail');return;}
+      if(button.dataset.demo){toast(button.dataset.demo);return;}
+      switch(button.id){case'cleanup-trigger':openCleanup();break;case'undo-cleanup':if(state.undo!==null){state.body=state.undo;state.undo=null;render();$('body-input').focus();}break;case'reset-settings':state.align='center';state.indent='default';document.querySelector('input[name="align"][value="center"]').checked=true;document.querySelector('input[name="indent"][value="default"]').checked=true;updatePreview();break;case'preview-paper':case'open-full-preview':go('preview');break;case'reader-zoom':case'reader-zoom-toggle':toggleReaderZoom();break;case'generate':submitDemo();break;case'page-prev':state.pageNumber=Math.max(1,state.pageNumber-1);render();break;case'page-next':state.pageNumber+=1;render();break;}
+    });
+    $('screen').addEventListener('input',event=>{const target=event.target;if(target.id==='title-input'){state.title=target.value;updatePreview();}if(target.id==='body-input'){state.body=target.value;state.undo=null;$('undo-cleanup').hidden=true;$('cleanup-trigger').disabled=!state.body.trim();$('input-count').textContent=`${Array.from(state.body).length} 字符`;updatePreview();}});
+    $('screen').addEventListener('change',event=>{const target=event.target;if(target.id==='tracing')state.tracing=target.checked;else if(target.name==='align'||target.name==='indent')state[target.name]=target.value;else return;updatePreview();});
+    $('cancel-cleanup').onclick=()=>{$('cleanup-dialog').close();};
+    $('apply-cleanup').onclick=()=>{if(state.body!==cleanupSnapshot||cleanupSnapshot!==SAMPLE_BEFORE)return;state.undo=state.body;state.body=SAMPLE_AFTER;$('cleanup-dialog').close();render();$('undo-cleanup').focus();};
+    $('review-home').onclick=()=>{state.page='home';render();};
+    $('review-sample').onclick=()=>{state.title=state.template===3?'chūn tiān':'春日小记';state.body=state.template===3?'nǐ hǎo\nchūn tiān':SAMPLE_BEFORE;state.undo=null;state.page='editor';render();};
+    $('review-empty').onclick=()=>{state.title='';state.body='';state.undo=null;state.page='editor';render();};
+    document.querySelector('.review-pages').addEventListener('click',event=>{const page=event.target.closest('button')?.dataset.reviewPage;if(page)go(page);});
+    $('review-detail-state').addEventListener('change',event=>{state.detail=event.target.value;if(state.detail!=='query-error')state.lastKnownDetail=state.detail;state.detailFrom='records';go('detail');});
+    $('review-records-state').addEventListener('change',event=>{state.records=event.target.value;go('records');});
+    document.addEventListener('pointerdown',event=>{const button=event.target.closest('button');if(button&&!button.disabled)button.classList.add('pressed');});
+    for(const type of ['pointerup','pointercancel','blur'])window.addEventListener(type,()=>document.querySelectorAll('.pressed').forEach(button=>button.classList.remove('pressed')));
+    render();
+  </script>
+</body>
+</html>

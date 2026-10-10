@@ -1,0 +1,28 @@
+{
+  "id": "v1-preset-publishing",
+  "name": "v1-preset-publishing",
+  "title": "T12 实现可信预设发布与兼容查询",
+  "description": "让用户始终使用唯一当前规格，同时保护已锁定的受支持旧组合。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T12"
+  }
+}

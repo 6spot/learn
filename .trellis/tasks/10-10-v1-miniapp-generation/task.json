@@ -1,0 +1,28 @@
+{
+  "id": "v1-miniapp-generation",
+  "name": "v1-miniapp-generation",
+  "title": "T20 接通生成提交与结果流程",
+  "description": "把预览提交为可信云端任务，并正确处理双击、断网和响应丢失。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T20"
+  }
+}

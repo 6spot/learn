@@ -1,0 +1,28 @@
+{
+  "id": "v1-identity-credits",
+  "name": "v1-identity-credits",
+  "title": "T13 实现身份与免费额度",
+  "description": "为首版用户提供可信身份与可审计的免费次数。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T13"
+  }
+}

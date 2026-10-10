@@ -1,0 +1,28 @@
+{
+  "id": "v1-miniapp-update",
+  "name": "v1-miniapp-update",
+  "title": "T19 实现应用级兼容与更新流程",
+  "description": "统一处理版本兼容并避免更新丢失已有输入。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T19"
+  }
+}

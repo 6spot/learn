@@ -1,0 +1,29 @@
+{
+  "id": "v1-ui-design",
+  "name": "v1-ui-design",
+  "title": "T25 首版页面、导航与视觉规范",
+  "description": "落实已确认原生组件策略，设计页面清单、菜单导航、逐页布局及统一样式，形成可评审预览与前端执行规范。",
+  "status": "in_progress",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": "main",
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "当前设计稿已由 Owner 接受为功能开发基线，UI 交互复核通过；本会话继续核对父任务拆分，尚未归档。",
+  "meta": {
+    "plan_id": "T25",
+    "design_baseline": "accepted-D-043"
+  }
+}

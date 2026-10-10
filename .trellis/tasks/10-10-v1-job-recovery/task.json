@@ -1,0 +1,28 @@
+{
+  "id": "v1-job-recovery",
+  "name": "v1-job-recovery",
+  "title": "T16 实现超时对账与恢复",
+  "description": "让中断和结算失败收敛，避免永久预留或迟到结果误交付。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T16"
+  }
+}

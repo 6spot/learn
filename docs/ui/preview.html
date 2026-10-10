@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Learn · 首版页面设计评审</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header class="viewer-head">
+    <div><div class="eyebrow">LEARN / UI 04</div><h1>纸张工具 · 页面设计</h1><p>第四稿 · 纸本文具，暖白与墨黑</p></div>
+    <span class="badge">纸本文具 · 待评审</span>
+  </header>
+  <main class="workbench">
+    <nav class="rail" aria-label="评审页面列表" id="rail"></nav>
+    <section class="device" aria-label="手机页面示意"><div class="screen" id="screen"></div></section>
+    <aside class="inspector" id="inspector"></aside>
+  </main>
+  <script>
+    const pages = [
+      ['templates','P01','纸张首页','四模板直达，底部保留纸张 / 我的。','2×2 四象限以留白组织；116px 纸张直接展示，宋体名称与细字说明分层，四种格线清楚可辨。'],
+      ['editor','P02','编辑纸张','默认即可用，文字输入和描红是主要编辑内容。','暖色预览区突出纸张，纸白文字区承载输入，排版设置为较轻的辅助区。标题与尺度建立主次；进阶选项仍默认收起。'],
+      ['preview','P03','分页预览','完整查看纸张后生成，也能返回继续编辑。','页码、翻页和缩放不改变物理尺寸。此稿格线/文字仅示意。'],
+      ['me','P04','我的','余额与生成记录优先，无须建立个人资料。','管理员入口仅在云端确认权限后出现；此稿显示其位置。'],
+      ['records','P05','生成记录','从记录找回进行中任务与已生成 PDF。','列表仅显示模板和任务元数据，不含用户输入标题/正文。'],
+      ['detail','P06','生成记录详情','生成结果和历史详情共用一个页面。','状态、文件信息、后续操作分区呈现。状态来自云端；页面等待超时不等于任务失败。'],
+      ['privacy','P07','隐私与数据','说清处理范围、保留与删除方式。','期限和删除范围待 O-007 定稿，示意不承诺具体天数。'],
+      ['admin','P08','运营中心','管理员查看必要聚合指标。','指标定义与更新频率待 O-009；显示数字均为示例。']
+    ];
+    const templates = [ ['essay','作文方格','写作文，练表达'],['tian','田字格','看结构，练汉字'],['mi','米字格','对位置，练笔画'],['pinyin','拼音四线三格','输入拼音，练书写'] ];
+    const SAMPLE_BEFORE='今天的天气很好，\n我和同学一起去公园。\n\n我们看到了盛开的花。';
+    const SAMPLE_AFTER='今天的天气很好，我和同学一起去公园。\n\n我们看到了盛开的花。';
+    const state={page:'templates',template:0,title:'',body:'',tracing:false,align:'center',indent:'default',advanced:false,detail:'success',detailFrom:'records',detailTemplate:1,detailDate:'今天 10:12',records:'populated',pageNumber:1,cleanup:null,undo:null};
+    const icons={paper:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/>',person:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',back:'<path d="m15 5-7 7 7 7"/>',right:'<path d="m9 5 7 7-7 7"/>',check:'<path d="m5 12 4 4L19 6"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/>',error:'<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/>'};
+    const icon=name=>`<svg viewBox="0 0 24 24" class="icon" aria-hidden="true">${icons[name]}</svg>`;
+    icons.settings='<path d="M4 6h7m5 0h4M4 12h2m5 0h9M4 18h9m5 0h2"/><circle cx="13.5" cy="6" r="2.5"/><circle cx="8.5" cy="12" r="2.5"/><circle cx="15.5" cy="18" r="2.5"/>';
+    const escapeText=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function paper(type='essay',filled=false){
+      let lines=''; const line=(x1,y1,x2,y2,guide=false)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${guide?'#d1d8d1':'#aab9af'}" stroke-width=".45" ${guide?'stroke-dasharray="1.2 1.2"':''}/>`;
+      if(type==='pinyin'){for(let g=0;g<14;g++)for(let k=0;k<4;k++)lines+=line(15,25.5+g*18+k*4,195,25.5+g*18+k*4);}
+      else { const essay=type==='essay',n=essay?19:12,rows=essay?27:17,cell=essay?10:15,x=essay?10:15,y=essay?13.5:21;
+        for(let c=0;c<=n;c++)lines+=line(x+c*cell,y,x+c*cell,y+rows*cell);
+        for(let r=0;r<=rows;r++)lines+=line(x,y+r*cell,x+n*cell,y+r*cell);
+        if(!essay)for(let r=0;r<rows;r++)for(let c=0;c<n;c++){const a=x+c*cell,b=y+r*cell;lines+=line(a+cell/2,b,a+cell/2,b+cell,true)+line(a,b+cell/2,a+cell,b+cell/2,true);if(type==='mi')lines+=line(a,b,a+cell,b+cell,true)+line(a+cell,b,a,b+cell,true);}
+      }
+      let sample=''; if(filled){const tx=state.align==='left'?15:state.align==='right'?195:105,anchor=state.align==='left'?'start':state.align==='right'?'end':'middle',bx=state.indent==='none'?15:35;sample=type==='pinyin'?'<text x="26" y="50" font-size="9">nǐ hǎo   chūn tiān</text>':`<text x="${tx}" y="42" text-anchor="${anchor}" font-size="8" letter-spacing="2">春日小记</text><text x="${bx}" y="63" font-size="8" letter-spacing="2">春天来了，花儿开了。</text><text x="15" y="73" font-size="8" letter-spacing="2">我们一起去寻找春天。</text>`;}
+      return `<svg class="paper" data-paper="${type}" viewBox="0 0 210 297" role="img" aria-label="A4 纸张布局示意"><rect width="210" height="297" fill="white"/>${lines}<g fill="${state.tracing?'#a19b90':'#292723'}">${sample}</g></svg>`;
+    }
+    function tabbar(){return `<div class="tabbar"><button data-to="templates" class="${state.page==='templates'?'active':''}">${icon('paper')}纸张</button><button data-to="me" class="${state.page==='me'?'active':''}">${icon('person')}我的</button></div>`;}
+    const btn=(label,to,primary=false)=>`<button class="btn ${primary?'primary':''}" data-to="${to}">${label}</button>`;
+    function record(label,date,kind){const names={success:'已生成',waiting:'生成中',failed:'生成失败',expired:'已过期'};return `<button class="record" data-detail="${kind}" data-record-template="${templates.findIndex(t=>t[1]===label)}" data-record-date="${escapeText(date)}"><div class="row"><strong>${label}</strong><span class="state ${kind}">${names[kind]}</span></div><p class="muted">${date}</p><p class="muted">${kind==='success'?'2 页 · 有效期内可重复领取':kind==='waiting'?'可以离开，稍后查看':kind==='failed'?'生成失败，未消费次数':'原任务已成功，文件不可继续领取'}</p></button>`;}
+    const settingsSummary=()=>`标题${{left:'左对齐',center:'居中',right:'右对齐'}[state.align]} · ${state.indent==='none'?'正文不缩进':'段首按模板'}`;
+    function radioGroup(name,choices){return `<div class="segments">${choices.map(([value,label])=>`<label><input type="radio" name="${name}" value="${value}" ${state[name]===value?'checked':''}><span>${label}</span></label>`).join('')}</div>`;}
+    function cleanupSheet(){if(!state.cleanup)return '';return `<div class="overlay" id="cleanup-overlay"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="cleanup-heading"><div class="sheet-head"><h3 id="cleanup-heading">整理换行</h3><p>先看一下变化，再决定是否替换正文。</p></div><div class="sheet-body"><div class="compare"><strong>整理前</strong><pre>${escapeText(state.cleanup.before)}</pre></div><div class="compare after"><strong>整理后</strong><pre>${escapeText(state.cleanup.after)}</pre></div></div><div class="actions"><button class="btn" data-action="cancel-cleanup">保留原文</button><button class="btn primary" data-action="apply-cleanup" ${state.cleanup.before===state.cleanup.after?'disabled':''}>应用整理</button></div></section></div>`;}
+    function view(){
+      const type=templates[state.template][0];
+      if(state.page==='templates')return `<div class="content templates-content"><div class="intro"><h2>选一种纸张</h2><p class="muted">空白打印，或填入文字。</p></div><div class="template-list">${templates.map((t,i)=>`<button class="template" data-template="${i}">${paper(t[0])}<span class="template-copy"><strong>${t[1]}</strong><small>${t[2]}</small></span></button>`).join('')}</div><p class="page-note">A4 竖版 · 导出 PDF</p></div>${tabbar()}`;
+      if(state.page==='editor')return `<div class="content editor-content">
+        <section class="editor-section preview-section" aria-labelledby="preview-heading"><div class="section-heading"><h3 id="preview-heading">纸张预览</h3><span class="muted">A4 竖版</span></div><button class="editor-preview" data-to="preview"><span id="editor-paper">${paper(type,Boolean(state.body||state.title))}</span><span class="preview-copy"><strong>${templates[state.template][1]}</strong><span class="mode-label" id="mode-label">${state.body||state.title?'文字预览':'空白纸'}</span><span class="link">查看完整预览 ${icon('right')}</span></span></button></section>
+        <section class="editor-section writing-section" aria-labelledby="writing-heading"><div class="section-heading"><h3 id="writing-heading">文字内容</h3><span class="muted">留空可生成空白纸</span></div><div class="writing-area"><div class="title-field"><label class="field" for="title">标题<span class="optional">选填</span></label><textarea id="title" class="title-input" placeholder="输入标题">${escapeText(state.title)}</textarea></div><div class="writing-divider"></div><div class="field-toolbar"><label class="field" for="body">${type==='pinyin'?'拼音':'正文'}<span class="optional">选填</span></label><button class="text-action" id="cleanup-trigger" data-action="open-cleanup" ${!state.body.trim()?'disabled':''}>整理换行</button></div><textarea id="body" placeholder="${type==='pinyin'?'直接输入拼音，例如 nǐ hǎo':'粘贴或输入文字\n会保留你原来的换行和空行'}">${escapeText(state.body)}</textarea><div class="input-foot"><button class="text-action" id="undo-cleanup" data-action="undo-cleanup" ${state.undo===null?'hidden':''}>撤销整理</button><span class="input-count" id="input-count">${Array.from(state.body).length} 个字符</span></div></div></section>
+        <section class="editor-section settings-section" aria-labelledby="settings-heading"><div class="section-heading"><h3 id="settings-heading">排版设置</h3></div><div class="mode-row"><label for="tracing"><strong>描红</strong><p class="muted">浅色参考字，方便临摹</p></label><input id="tracing" class="toggle" type="checkbox" role="switch" ${state.tracing?'checked':''}></div>
+        <details class="advanced" id="advanced" ${state.advanced?'open':''}><summary><span><strong>进阶设置</strong><small id="settings-summary">${settingsSummary()}</small></span><span class="chevron">${icon('right')}</span></summary><div class="advanced-content"><fieldset><legend>标题对齐</legend>${radioGroup('align',[['left','左对齐'],['center','居中'],['right','右对齐']])}<p class="setting-note">填写标题后生效</p></fieldset><fieldset><legend>正文首行缩进</legend>${radioGroup('indent',[['default','按模板默认'],['none','不缩进']])}<p class="setting-note">只影响每段首行，自动换行不重复缩进</p></fieldset><div class="advanced-footer"><button class="text-action" data-action="reset-settings">恢复默认设置</button></div></div></details></section>
+        <p class="action-note">预览不扣次，成功生成才扣次。</p>
+        </div><div class="actions">${btn('预览','preview')}${btn('生成 PDF','submit',true)}</div>`;
+      if(state.page==='preview'){const total=state.body||state.title?2:1;state.pageNumber=Math.min(state.pageNumber,total);return `<div class="content reader">${paper(type,Boolean(state.body||state.title))}<p class="muted">双指缩放查看</p></div><div class="pager">${total>1?`<button data-page="prev" ${state.pageNumber===1?'disabled':''}>上一页</button>`:''}<span>${state.pageNumber} / ${total}</span>${total>1?`<button data-page="next" ${state.pageNumber===total?'disabled':''}>下一页</button>`:''}</div><div class="actions">${btn('返回编辑','editor')}${btn('生成 PDF','submit',true)}</div>`;}
+      if(state.page==='me')return `<div class="content"><div class="balance"><p class="muted">可用生成次数</p><strong>8<span>次</span></strong><p class="muted">预览不扣次，成功生成才扣次。</p></div><div class="menu"><button data-to="records">生成记录${icon('right')}</button><button data-demo="微信反馈入口需在真机接入，此处仅展示菜单位置。">使用反馈${icon('right')}</button><button data-to="privacy">隐私与数据${icon('right')}</button></div><div class="menu"><button data-to="admin">运营中心${icon('right')}</button></div></div>${tabbar()}`;
+      if(state.page==='records')return state.records==='empty'?`<div class="content"><div class="empty">${icon('paper')}<h3>还没有生成记录</h3><p class="muted">选一张纸，开始第一次生成。</p><button class="btn primary full" data-to="templates">去选纸张</button></div></div>`:`<div class="content">${record('作文方格','今天 14:30','waiting')}${record('田字格','今天 10:12','success')}${record('拼音四线三格','昨天 16:20','failed')}${record('米字格','较早的记录','expired')}</div>`;
+      if(state.page==='detail'){
+        const map={success:['check','PDF 已生成','有效期内，可以重复领取这份文件。'],waiting:['clock','正在生成纸张','可以离开，稍后在生成记录查看。'],failed:['error','这次没有生成成功','生成服务暂时不可用，预留次数已释放。'],expired:['clock','文件已过期','原任务已成功，文件现已无法继续领取。']}; const [symbol,title,copy]=map[state.detail];
+        return `<div class="content detail-content"><section class="status-panel" aria-labelledby="status-heading"><div class="status-symbol ${state.detail}">${icon(symbol)}</div><h3 id="status-heading">${title}</h3><p class="muted">${copy}</p></section><section class="metadata" aria-labelledby="file-heading"><h3 id="file-heading">文件信息</h3><dl><div><dt>纸张模板</dt><dd>${templates[state.detailTemplate][1]}</dd></div><div><dt>提交时间</dt><dd>${escapeText(state.detailDate)}</dd></div>${state.detail==='success'?'<div><dt>页数</dt><dd>2 页</dd></div><div><dt>文件状态</dt><dd>有效期内</dd></div>':''}</dl></section><section class="detail-actions" aria-labelledby="next-heading"><h3 id="next-heading">后续操作</h3>${state.detail==='success'?'<button class="btn primary full" data-demo="这是设计预览，没有生成实际 PDF。正式打开前须鉴权领取。">打开 PDF</button><button class="secondary-link" data-demo="正式保存或分享能力需微信真机验证。">保存 / 分享</button>':state.detail==='failed'?(state.detailFrom!=='records'&&(state.body||state.title)?'<button class="btn primary full" data-to="editor">返回编辑</button>':'<button class="btn primary full" data-to="templates">去选纸张</button><p class="muted">重新生成时，请再次提供文字内容。</p>'):state.detail==='expired'?'<button class="btn full" data-to="templates">去选纸张</button>':''}<button class="secondary-link" data-to="records">查看生成记录</button></section></div>`;
+      }
+      if(state.page==='privacy')return `<div class="content"><div class="prose"><h3>你的文字，只用于生成</h3><p>编辑时在本机预览，提交生成后由云端处理。生成记录不保存文章正文，也不用于恢复编辑内容。</p><h3>保存哪些信息</h3><p>必要的账户、次数流水和任务信息。PDF 用于短期交付，有效期内可以重复领取。</p><h3>文件与数据删除</h3><p>PDF 到期后清理。你可以申请删除相关数据，具体处理范围会在申请前说明。</p><h3>使用字体</h3><p>纸张使用 MiSans、MiSans Latin 和霞鹜文楷 GB。字体由模板决定，无须自行选择。</p></div><button class="btn full" data-demo="数据期限、删除范围及确认流程待 O-007 定稿；此处不提交任何申请。">申请删除数据</button><button class="secondary-link" data-demo="微信联系与反馈能力需在真机接入；此处不发送任何信息。">联系与反馈</button></div>`;
+      return `<div class="content"><h2>运营概览</h2><p class="muted">今日 · 云端汇总</p><div class="metrics">${[['新增用户','12'],['成功生成','36'],['失败率','2.7%'],['额度消耗','36']].map(x=>`<div class="metric"><p class="muted">${x[0]}</p><strong>${x[1]}</strong></div>`).join('')}</div><div class="usage"><h3>模板使用</h3>${[['作文方格','16'],['田字格','10'],['米字格','6'],['拼音四线三格','4']].map(x=>`<div class="row"><span>${x[0]}</span><span class="muted">${x[1]} 次</span></div>`).join('')}</div></div>`;
+    }
+    function render(preserveScroll=false){
+      const scrollTop=preserveScroll?(document.querySelector('#screen>.content')?.scrollTop||0):0;
+      const item=pages.find(p=>p[0]===state.page);const backs={editor:'templates',preview:'editor',records:'me',detail:state.detailFrom,privacy:'me',admin:'me'};
+      document.getElementById('rail').innerHTML=pages.map(p=>`<button data-to="${p[0]}" ${state.page===p[0]?'aria-current="page"':''}><small>${p[1]}</small>${p[2]}</button>`).join('')+'<p>可点击手机中的模板条目、菜单和按钮，检查页面间的关系。</p>';
+      document.getElementById('screen').innerHTML=`<div class="statusbar"><span>9:41</span><span aria-hidden="true">▂▄▆　▰</span></div><div class="nativebar">${backs[state.page]?`<button class="back" data-to="${backs[state.page]}" aria-label="返回">${icon('back')}</button>`:''}<strong>${state.page==='templates'?'纸张':state.page==='editor'?templates[state.template][1]:item[2]}</strong><span class="capsule" aria-hidden="true">···│◉</span></div>${view()}${cleanupSheet()}`;
+      document.getElementById('inspector').innerHTML=`<div class="eyebrow">${item[1]} / PAGE SPEC</div><h2>${item[2]}</h2><p>${item[3]}</p><h3>布局与行为</h3><p>${item[4]}</p>${state.page==='detail'?`<h3>查看状态</h3><label class="muted" for="detail-state">任务结果示例</label><select id="detail-state">${[['success','成功 / 文件有效'],['waiting','等待 / 生成中'],['failed','失败 / 已释放'],['expired','成功 / 文件过期']].map(x=>`<option value="${x[0]}" ${x[0]===state.detail?'selected':''}>${x[1]}</option>`).join('')}</select>`:''}${state.page==='records'?`<h3>查看状态</h3><label class="muted" for="records-state">列表数据示例</label><select id="records-state"><option value="populated" ${state.records==='populated'?'selected':''}>有记录</option><option value="empty" ${state.records==='empty'?'selected':''}>空列表</option></select>`:''}<h3>统一样式</h3><p>暖白页面、纸白内容、墨黑文字与主按钮，少量朱砂强调。标题和模板名使用本机宋体候选；纸张直接呈现，保留四象限与清楚分区。</p><div class="swatches"><span style="background:#f5f2eb"></span><span style="background:#fffefa"></span><span style="background:#292723"></span><span style="background:#b75036"></span></div><div class="notice"><p>这是离线界面评审稿。页数、余额、指标及文字是示例；不会上传、持久保存输入或生成文件。纸张图不用于排版/打印验收。正式小程序使用原生控件，其实际外观以真机为准。</p></div><h3>本稿评审</h3><ul><li>两个底部菜单和八个页面</li><li>各页面主操作与返回路径</li><li>纸本文具的字体、纸张与区块层级</li></ul><a href="../UI_DESIGN.md">查看完整设计规范 →</a>`;
+      if(state.page==='editor'){
+        document.getElementById('inspector').insertAdjacentHTML('afterbegin','<div class="demo-controls"><button class="btn" data-action="load-sample">载入文字示例，体验设置与整理</button><button class="btn" data-action="empty-sample">查看空白纸默认状态</button></div>');
+        document.getElementById('inspector').insertAdjacentHTML('beforeend','<div class="notice"><p>进阶范围已按 D-040 确认。标题对齐和缩进的候选取值仍随 O-015 评审。整理仅以固定示例演示“预览 → 应用 → 撤销”，不对任意输入执行转换算法；转换与撤销边界仍待 O-014。</p></div>');
+      }
+      const content=document.querySelector('#screen>.content');if(content)content.scrollTop=scrollTop;
+      if(state.cleanup){
+        document.querySelectorAll('#screen> :not(.overlay)').forEach(el=>el.inert=true);
+        document.querySelector('[data-action="cancel-cleanup"]')?.focus({preventScroll:true});
+      }
+    }
+    function refreshEditor(){
+      const p=document.getElementById('editor-paper');if(p)p.innerHTML=paper(templates[state.template][0],Boolean(state.body||state.title));
+      const mode=document.getElementById('mode-label');if(mode)mode.textContent=state.body||state.title?'文字预览':'空白纸';
+      const s=document.getElementById('settings-summary');if(s)s.textContent=settingsSummary();
+      const count=document.getElementById('input-count');if(count)count.textContent=Array.from(state.body).length+' 个字符';
+      const trigger=document.getElementById('cleanup-trigger');if(trigger)trigger.disabled=!state.body.trim();
+      const undo=document.getElementById('undo-cleanup');if(undo)undo.hidden=state.undo===null;
+    }
+    function closeCleanup(){state.cleanup=null;render(true);document.getElementById('cleanup-trigger')?.focus({preventScroll:true});}
+    document.addEventListener('pointerdown',()=>document.body.dataset.input='pointer');
+    document.addEventListener('keydown',e=>{
+      document.body.dataset.input='keyboard';
+      if(!state.cleanup)return;
+      if(e.key==='Escape'){e.preventDefault();closeCleanup();return;}
+      if(e.key==='Tab'){
+        const focusable=[...document.querySelectorAll('.sheet button:not(:disabled)')],first=focusable[0],last=focusable.at(-1);
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      }
+    });
+    document.addEventListener('toggle',e=>{if(e.target.id==='advanced')state.advanced=e.target.open;},true);
+    document.addEventListener('input',e=>{if(['title','body'].includes(e.target.id)){state[e.target.id]=e.target.value;if(e.target.id==='body')state.undo=null;refreshEditor();}});
+    document.addEventListener('change',e=>{
+      if(e.target.id==='tracing'){state.tracing=e.target.checked;refreshEditor();}
+      if(['align','indent'].includes(e.target.name)){state[e.target.name]=e.target.value;refreshEditor();}
+      if(e.target.id==='detail-state'){state.detail=e.target.value;render();}
+      if(e.target.id==='records-state'){state.records=e.target.value;render();}
+    });
+    document.addEventListener('click',e=>{
+      if(e.target.id==='cleanup-overlay'){closeCleanup();return;}
+      const b=e.target.closest('button');if(!b||b.disabled)return;
+      if(b.dataset.action){
+        const a=b.dataset.action;
+        if(a==='load-sample'){state.title='春日小记';state.body=SAMPLE_BEFORE;state.undo=null;state.advanced=false;render();}
+        if(a==='empty-sample'){state.title='';state.body='';state.undo=null;state.advanced=false;render();}
+        if(a==='reset-settings'){state.align='center';state.indent='default';render(true);document.querySelector('[data-action="reset-settings"]')?.focus({preventScroll:true});}
+        if(a==='open-cleanup'&&state.body.trim()){state.cleanup={before:state.body,after:state.body===SAMPLE_BEFORE?SAMPLE_AFTER:state.body};render(true);}
+        if(a==='cancel-cleanup')closeCleanup();
+        if(a==='apply-cleanup'&&state.cleanup){state.undo=state.cleanup.before;state.body=state.cleanup.after;closeCleanup();}
+        if(a==='undo-cleanup'&&state.undo!==null){state.body=state.undo;state.undo=null;render(true);document.getElementById('body')?.focus({preventScroll:true});}
+        return;
+      }
+      if(b.dataset.to){
+        const target=b.dataset.to;
+        if(target==='submit'){state.detailFrom=state.page;state.detailTemplate=state.template;state.detailDate='刚刚';state.detail='waiting';state.page='detail';}
+        else state.page=target;
+        state.cleanup=null;render();
+      }else if(b.dataset.template!==undefined){state.template=Number(b.dataset.template);state.page='editor';render();}
+      else if(b.dataset.detail){state.detail=b.dataset.detail;state.detailTemplate=Number(b.dataset.recordTemplate);state.detailDate=b.dataset.recordDate;state.detailFrom='records';state.page='detail';render();}
+      else if(b.dataset.page){state.pageNumber=b.dataset.page==='next'?2:1;render();}
+      else if(b.dataset.demo){document.querySelector('.mock-toast')?.remove();const t=document.createElement('div');t.className='mock-toast';t.setAttribute('role','status');t.textContent=b.dataset.demo;document.getElementById('screen').append(t);setTimeout(()=>t.remove(),4500);}
+    });
+    render();
+  </script>
+</body>
+</html>

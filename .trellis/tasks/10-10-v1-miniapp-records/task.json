@@ -1,0 +1,28 @@
+{
+  "id": "v1-miniapp-records",
+  "name": "v1-miniapp-records",
+  "title": "T21 实现我的与生成记录页面",
+  "description": "用户关闭页面后仍能找到进度、结果与剩余次数。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T21"
+  }
+}

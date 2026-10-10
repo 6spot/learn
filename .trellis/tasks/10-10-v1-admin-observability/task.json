@@ -1,0 +1,28 @@
+{
+  "id": "v1-admin-observability",
+  "name": "v1-admin-observability",
+  "title": "T22 实现最小运营中心",
+  "description": "Owner 能查看必要使用量、失败与额度消耗，且普通用户无法越权。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P2",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T22"
+  }
+}

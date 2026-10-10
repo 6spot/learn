@@ -1,0 +1,28 @@
+{
+  "id": "v1-canvas-preview",
+  "name": "v1-canvas-preview",
+  "title": "T08 实现 Canvas 预览",
+  "description": "在手机上忠实绘制同源布局的四模板分页预览。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T08"
+  }
+}

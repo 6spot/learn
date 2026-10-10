@@ -1,0 +1,28 @@
+{
+  "id": "v1-layout-versions",
+  "name": "v1-layout-versions",
+  "title": "T07 实现排版版本与摘要协议",
+  "description": "确保预览与云端只在同一受支持版本组合、相同布局下导出。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T07"
+  }
+}

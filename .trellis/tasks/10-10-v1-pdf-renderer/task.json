@@ -1,0 +1,28 @@
+{
+  "id": "v1-pdf-renderer",
+  "name": "v1-pdf-renderer",
+  "title": "T09 实现 PDF 渲染",
+  "description": "将共享布局输出为真正 A4、可稳定打印的多页 PDF。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T09"
+  }
+}

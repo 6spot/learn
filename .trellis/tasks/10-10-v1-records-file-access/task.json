@@ -1,0 +1,28 @@
+{
+  "id": "v1-records-file-access",
+  "name": "v1-records-file-access",
+  "title": "T17 实现记录查询与私有文件领取",
+  "description": "让用户离页后仍能查询本人任务并重复领取有效 PDF。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T17"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "v1-document-contract",
+  "name": "v1-document-contract",
+  "title": "T03 完善通用文档与布局契约",
+  "description": "用统一文档表达跨模板标题、正文和文字规则，使渲染器只消费布局。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T03"
+  }
+}

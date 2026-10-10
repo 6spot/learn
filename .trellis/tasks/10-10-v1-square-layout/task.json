@@ -1,0 +1,28 @@
+{
+  "id": "v1-square-layout",
+  "name": "v1-square-layout",
+  "title": "T05 补齐方格文字排版",
+  "description": "补足三种方格模板在真实度量及复杂输入下的内容完整性。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T05"
+  }
+}

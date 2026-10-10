@@ -1,0 +1,28 @@
+{
+  "id": "v1-print-acceptance",
+  "name": "v1-print-acceptance",
+  "title": "T10 完成正式字体与打印验收",
+  "description": "用实体打印证据确定四模板可发布的默认文字与线条样式。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {
+    "plan_id": "T10"
+  }
+}

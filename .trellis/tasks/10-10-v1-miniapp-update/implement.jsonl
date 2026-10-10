@@ -1,0 +1,7 @@
+{"file": "docs/ARCHITECTURE.md", "reason": "T19 的权威业务规则与验收依据"}
+{"file": "docs/PRODUCT.md", "reason": "T19 的权威业务规则与验收依据"}
+{"file": "docs/TESTING.md", "reason": "T19 的权威业务规则与验收依据"}
+{"file": "docs/UI_DESIGN.md", "reason": "D-039 component policy and O-015 design review status"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
+{"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
