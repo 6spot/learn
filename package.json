@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "typecheck": "npm --prefix packages/font-metrics run build && npm --prefix packages/canvas-renderer run build && tsc -p tsconfig.json",
+    "typecheck": "npm --prefix packages/cloud-service run build && npm --prefix packages/font-metrics run build && npm --prefix packages/canvas-renderer run build && tsc -p tsconfig.json",
     "test:core": "npm --prefix packages/paper-core test",
     "test:cloud": "npm --prefix packages/cloud-runtime test",
     "test:fonts": "npm --prefix packages/font-metrics test",

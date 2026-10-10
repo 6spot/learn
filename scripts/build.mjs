@@ -17,6 +17,10 @@ const publicConfig = production ? await readPublicBuildConfig(args[2]) : null;
 const nativeRoot = production ? 'dist/release/miniprogram' : 'dist/miniprogram';
 const diagnostics = ['pages/runtime/', 'pages/canvas-diagnostics/'];
 // Generate declaration/runtime dependencies from source, including fresh clones.
+// Native generation imports createRequestId at runtime from cloud-service/dist.
+for (const name of ['cloud-runtime', 'paper-core', 'cloud-service']) {
+  execFileSync(process.execPath, [path('node_modules/typescript/bin/tsc'), '-p', path('packages', name, 'tsconfig.json')], { stdio: 'inherit' });
+}
 execFileSync(process.execPath, [path('packages/font-metrics/tools/build.mjs')], { stdio: 'inherit' });
 execFileSync(process.execPath, [path('node_modules/typescript/bin/tsc'), '-p', path('packages/canvas-renderer/tsconfig.json')], { stdio: 'inherit' });
 // Only own these output paths: other packages may build into dist too.
