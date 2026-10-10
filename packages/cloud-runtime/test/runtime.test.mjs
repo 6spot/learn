@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   MemoryMetadataStore, MemoryPrivateStorage, ManualClock, AwaitedExecutionBridge,
   CloudBaseIdentityProvider, StaticIdentityProvider, selectCloudEnvironment,
+  cloneDocument,
 } from '../dist/index.js';
 
 test('concurrent reservations serialize and never overdraw a single credit', async () => {
@@ -98,6 +99,22 @@ test('metadata rejects serialization hooks and hidden array fields without invok
   }
   assert.equal(invoked, false);
   assert.deepEqual(store.snapshot(), {});
+});
+
+test('exported JSON snapshots and metadata reject inherited array serialization hooks without invocation', async () => {
+  let invoked = false;
+  const items = ['original'];
+  Object.setPrototypeOf(items, { toJSON() { invoked = true; return 'rewritten'; } });
+  const input = { items };
+  assert.throws(() => cloneDocument(input), { code: 'INVALID_ARGUMENT' });
+  const store = new MemoryMetadataStore();
+  await assert.rejects(store.transaction(tx => tx.set('jobs', 'job', input)), { code: 'INVALID_ARGUMENT' });
+  assert.equal(invoked, false);
+  assert.deepEqual(store.snapshot(), {});
+  const valid = { items: ['original', { nested: [1, null] }] };
+  const copied = cloneDocument(valid);
+  assert.deepEqual(copied, valid);
+  assert.notEqual(copied.items, valid.items);
 });
 
 test('private storage copies buffers and validates candidate paths', async () => {

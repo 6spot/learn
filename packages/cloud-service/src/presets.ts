@@ -1,5 +1,5 @@
 import type { JsonObject, MetadataReader, MetadataTransaction } from '@learn/cloud-runtime';
-import { DEFAULT_PRESETS, validateTrustedPreset, type LayoutVersionTuple, type TrustedPaperPreset } from '@learn/paper-core';
+import { DEFAULT_PRESETS, validateLayoutVersions, validateTrustedPreset, type LayoutVersionTuple, type TrustedPaperPreset } from '@learn/paper-core';
 import { ServiceError, type CompatibilityRequest, type CompatibilityResponse, type FontBundleDescriptor,
   type PresetAvailability, type PublishedPreset, type ReleaseAcceptance, type ServiceConfig, type ServiceDependencies } from './contracts.js';
 
@@ -14,15 +14,7 @@ function validId(value: unknown): value is string {
   return typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/.test(value);
 }
 export function validateVersions(raw: unknown): asserts raw is LayoutVersionTuple {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw) ||
-      ![Object.prototype, null].includes(Object.getPrototypeOf(raw)) || Object.getOwnPropertySymbols(raw).length ||
-      Object.values(Object.getOwnPropertyDescriptors(raw)).some(d => !('value' in d) || !d.enumerable)) {
-    throw new ServiceError('INVALID_ARGUMENT');
-  }
-  const versions = raw as Record<string, unknown>;
-  const keys = ['engineVersion', 'templateId', 'templateVersion', 'fontBundleVersion'];
-  if (Object.keys(versions).length !== keys.length || keys.some(key => !validId(versions[key])) ||
-      !Object.hasOwn(DEFAULT_PRESETS, versions.templateId as string)) throw new ServiceError('INVALID_ARGUMENT');
+  try { validateLayoutVersions(raw); } catch { throw new ServiceError('INVALID_ARGUMENT'); }
 }
 
 export async function presetRegistryId(crypto: ServiceDependencies['crypto'], versions: LayoutVersionTuple): Promise<string> {

@@ -1,10 +1,13 @@
 import { RuntimeError } from '@learn/cloud-runtime';
 import type { LayoutVersionTuple } from '@learn/paper-core';
 import { ServiceError, type AccountResponse, type ServiceConfig, type ServiceDependencies,
-  type CompatibilityRequest, type CompatibilityResponse, type PublishedPreset, type ReleaseAcceptance } from './contracts.js';
+  type CompatibilityRequest, type CompatibilityResponse, type PublishedPreset, type ReleaseAcceptance,
+  type JobSummary, type SubmissionWindow, type SubmitGenerationResponse } from './contracts.js';
 import { validateConfig } from './config.js';
 import { ensureAccountInTransaction } from './credits.js';
 import { PresetRegistry } from './presets.js';
+import { JobAdmission } from './admission.js';
+import { snapshotGenerationRequest } from './requests.js';
 
 export class CloudService {
   readonly config: ServiceConfig;
@@ -75,6 +78,28 @@ export class CloudService {
     return this.safe(async () => {
       const userId = await this.adminId();
       return new PresetRegistry(this.dependencies, this.config).retire(userId, versions, true);
+    });
+  }
+
+  async getSubmissionWindow(): Promise<SubmissionWindow> {
+    return this.safe(async () => {
+      const account = await this.getAccount();
+      return new JobAdmission(this.dependencies, this.config).window(account.userId);
+    });
+  }
+
+  async submitGeneration(request: unknown): Promise<SubmitGenerationResponse> {
+    return this.safe(async () => {
+      const snapshot = snapshotGenerationRequest(request);
+      const account = await this.getAccount();
+      return new JobAdmission(this.dependencies, this.config).submit(account.userId, snapshot);
+    });
+  }
+
+  async findJobByRequest(requestId: string): Promise<JobSummary | null> {
+    return this.safe(async () => {
+      const account = await this.getAccount();
+      return new JobAdmission(this.dependencies, this.config).find(account.userId, requestId);
     });
   }
 

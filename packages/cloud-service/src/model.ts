@@ -47,3 +47,22 @@ export type CreditLedgerEntry = {
   deltaExpired: number;
   createdAt: number;
 };
+import type { LayoutVersionTuple, TitleAlignment } from '@learn/paper-core';
+import type { GenerationFailureCode, JobStatus } from './contracts.js';
+
+
+export type GenerationJob = {
+  jobId: string; userId: string; requestId: string; requestKey: string;
+  toolId: 'paper'; usageType: 'pdf'; registryId: string; versions: LayoutVersionTuple;
+  batchId: string; status: JobStatus; createdAt: number; deadline: number;
+  startedAt: number | null; finishedAt: number | null; pageCount: number | null;
+  errorCode: GenerationFailureCode | null; candidatePath: string | null; fileId: string | null;
+  fileExpiresAt: number | null; fileBytes: number | null; fileSha256: string | null;
+  recordExpiresAt: number;
+};
+export type GenerationRequestRecord = {
+  userId: string; requestId: string; jobId: string; fingerprint: string;
+  fingerprintKeyId: string; fingerprintVersion: string; defaultTitleAlign: TitleAlignment;
+  windowExpiresAt: number; createdAt: number; retainUntil: number; deleted: boolean;
+  inputLimits: { maxInputCodeUnits: number; maxGraphemes: number; maxPages: number };
+};

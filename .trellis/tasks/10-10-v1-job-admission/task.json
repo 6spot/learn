@@ -3,7 +3,7 @@
   "name": "v1-job-admission",
   "title": "T14 实现请求幂等与任务受理",
   "description": "一次生成操作只受理一次，并能在响应丢失后找回原任务。",
-  "status": "planning",
+  "status": "in_progress",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -12,7 +12,7 @@
   "assignee": "me",
   "createdAt": "2026-10-10",
   "completedAt": null,
-  "branch": null,
+  "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
   "commit": null,
@@ -21,8 +21,10 @@
   "children": [],
   "parent": "10-10-learn-v1",
   "relatedFiles": [],
-  "notes": "",
+  "notes": "T14 本地独立检查通过，service53/runtime26。真实PDF执行、恢复、清理分别由T15/T16/T23集成；真实CloudBase及配置按D044交T24。",
   "meta": {
-    "plan_id": "T14"
+    "plan_id": "T14",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
 }

@@ -3,3 +3,13 @@
 {"file": "docs/CLOUDBASE.md", "reason": "T14 的权威业务规则与验收依据"}
 {"file": "docs/TESTING.md", "reason": "T14 的权威业务规则与验收依据"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/backend/runtime-contracts.md", "reason": "T11 事务、私有产物与 awaited execution 边界"}
+{"file": ".trellis/spec/backend/account-presets.md", "reason": "T12/T13 可信身份、账户与不可变预设事务"}
+{"file": ".trellis/spec/backend/paper-contracts.md", "reason": "共享原文、输入与版本契约"}
+{"file": "packages/cloud-service/README.md", "reason": "实际 API、显式配置及模拟/集成边界"}
+{"file": "packages/cloud-service/src/admission.ts", "reason": "原子受理和创建者等待执行"}
+{"file": "packages/cloud-service/src/requests.ts", "reason": "签名窗口、全参数 HMAC 与输入快照"}
+{"file": "packages/cloud-service/src/jobs.ts", "reason": "安全任务投影、失败事务与日活去重"}
+{"file": "packages/cloud-service/src/paper-preparer.ts", "reason": "实际共享核心排版/摘要集成"}
+{"file": "packages/cloud-service/test/admission.test.mjs", "reason": "本轮 25 项行为回归，含独立检查新增的快照和旧宿主 API 回归"}
+{"file": ".trellis/tasks/10-10-v1-job-admission/evidence.md", "reason": "实际验证与最终外部验收界线"}

@@ -21,7 +21,9 @@ function validateJson(value: unknown, ancestors: Set<object>): asserts value is 
   // never execute between validation and persistence or silently change data.
   const descriptors = Object.getOwnPropertyDescriptors(value);
   if (Array.isArray(value)) {
-    if (Object.keys(descriptors).length !== value.length + 1) throw new RuntimeError("INVALID_ARGUMENT");
+    if (Object.getPrototypeOf(value) !== Array.prototype || Object.keys(descriptors).length !== value.length + 1) {
+      throw new RuntimeError("INVALID_ARGUMENT");
+    }
     for (let index = 0; index < value.length; index++) {
       const descriptor = descriptors[String(index)];
       if (!descriptor || !("value" in descriptor) || !descriptor.enumerable) throw new RuntimeError("INVALID_ARGUMENT");
