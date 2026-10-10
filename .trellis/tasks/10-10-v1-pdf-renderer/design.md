@@ -6,7 +6,7 @@
 
 renderers/pdf（职责目录待落地）、PDF 样张。
 
-前置交付：[T07 实现排版版本与摘要协议](../10-10-v1-layout-versions/prd.md)
+前置交付：[T07 实现排版版本与摘要协议](../archive/2026-10/10-10-v1-layout-versions/prd.md)
 
 ## 实现边界
 

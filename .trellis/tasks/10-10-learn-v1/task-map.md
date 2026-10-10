@@ -10,10 +10,10 @@
 | T02 | [字体资源与授权验证](../archive/2026-10/10-10-v1-font-resources/prd.md) | — | assets/fonts、字体来源/许可/资源清单 |
 | T03 | [完善通用文档与布局契约](../archive/2026-10/10-10-v1-document-contract/prd.md) | T01 | packages/paper-core 的文档、布局与预设边界 |
 | T04 | [接入共享字体度量](../archive/2026-10/10-10-v1-font-metrics/prd.md) | T02、T03 | 共享字体度量模块、版本固定的度量数据 |
-| T05 | [补齐方格文字排版](../10-10-v1-square-layout/prd.md) | T03、T04 | packages/paper-core 方格布局与回归样例 |
-| T06 | [实现拼音行带排版](../10-10-v1-pinyin-layout/prd.md) | T03、T04 | packages/paper-core 拼音行带布局与基线参数 |
-| T07 | [实现排版版本与摘要协议](../10-10-v1-layout-versions/prd.md) | T04、T05、T06 | 共享版本组合、布局序列化及摘要协议 |
-| T08 | [实现 Canvas 预览](../10-10-v1-canvas-preview/prd.md) | T01、T07 | renderers/canvas（职责目录待落地）、小程序 Canvas 适配 |
+| T05 | [补齐方格文字排版](../archive/2026-10/10-10-v1-square-layout/prd.md) | T03、T04 | packages/paper-core 方格布局与回归样例 |
+| T06 | [实现拼音行带排版](../archive/2026-10/10-10-v1-pinyin-layout/prd.md) | T03、T04 | packages/paper-core 拼音行带布局与基线参数 |
+| T07 | [实现排版版本与摘要协议](../archive/2026-10/10-10-v1-layout-versions/prd.md) | T04、T05、T06 | 共享版本组合、布局序列化及摘要协议 |
+| T08 | [实现 Canvas 预览](../archive/2026-10/10-10-v1-canvas-preview/prd.md) | T01、T07 | renderers/canvas（职责目录待落地）、小程序 Canvas 适配 |
 | T09 | [实现 PDF 渲染](../10-10-v1-pdf-renderer/prd.md) | T07 | renderers/pdf（职责目录待落地）、PDF 样张 |
 | T10 | [完成正式字体与打印验收](../10-10-v1-print-acceptance/prd.md) | T08、T09 | 正式样张、量测记录、docs/TESTING.md 与可信样式预设 |
 | T11 | [CloudBase 环境与可靠执行验证](../archive/2026-10/10-10-v1-cloudbase-feasibility/prd.md) | — | 关联云开发环境、部署配置与能力验证记录 |

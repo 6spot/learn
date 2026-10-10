@@ -37,7 +37,7 @@ renderers/canvas（职责目录待落地）、小程序 Canvas 适配。
 
 ## 依据
 
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [ARCHITECTURE](../../../docs/ARCHITECTURE.md)
-- [PAPER_PRESETS](../../../docs/PAPER_PRESETS.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [ARCHITECTURE](../../../../../docs/ARCHITECTURE.md)
+- [PAPER_PRESETS](../../../../../docs/PAPER_PRESETS.md)
+- [TESTING](../../../../../docs/TESTING.md)

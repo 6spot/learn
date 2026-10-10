@@ -16,7 +16,7 @@
 
 ## 实测垂直定位
 
-固定几何唯一来源仍是 [PAPER_PRESETS](../../../docs/PAPER_PRESETS.md)：四线行带使用其 `lineGapMm/groupGapMm/groupCount/lineLengthMm`，没有 cell/column 概念。
+固定几何唯一来源仍是 [PAPER_PRESETS](../../../../../docs/PAPER_PRESETS.md)：四线行带使用其 `lineGapMm/groupGapMm/groupCount/lineLengthMm`，没有 cell/column 概念。
 
 MiSans Latin Regular (1000 units/em) 抽样覆盖字母 a-z、所有拼音预组调号、大小写和 ê/m/n 组合调号：x-height 530，升部上界754，降部下界-224，带调上界1070。旧字号8mm会让最大调号越过顶线0.56mm。因此候选字号改7.4mm，基线仍是第三线(top+8mm)，实际墨迹范围 top+0.082 至 top+9.6576mm；x-height 3.922mm，接近中格4mm。这是版本化的字体适配，不修改格线，也不对单字动态缩放/平移基线。
 

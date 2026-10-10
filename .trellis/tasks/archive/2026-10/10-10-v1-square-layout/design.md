@@ -6,7 +6,7 @@
 
 packages/paper-core 方格布局与回归样例。
 
-前置交付：[T03 完善通用文档与布局契约](../archive/2026-10/10-10-v1-document-contract/prd.md)、[T04 接入共享字体度量](../archive/2026-10/10-10-v1-font-metrics/prd.md)
+前置交付：[T03 完善通用文档与布局契约](../10-10-v1-document-contract/prd.md)、[T04 接入共享字体度量](../10-10-v1-font-metrics/prd.md)
 
 ## 实现边界
 
@@ -41,6 +41,6 @@ O-003 中尚无明确答案的复杂标点行为需要样例与决策；已确�
 
 ## 依据
 
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [PAPER_PRESETS](../../../docs/PAPER_PRESETS.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [PAPER_PRESETS](../../../../../docs/PAPER_PRESETS.md)
+- [TESTING](../../../../../docs/TESTING.md)

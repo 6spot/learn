@@ -33,6 +33,6 @@
 
 ## 接口和后续
 
-API 与命令说明见 [paper-core README](../../../packages/paper-core/README.md)。根 package manifest 增加标准 main/types/exports，供云端包直接消费；核心依旧只依赖纯 JS 分词库，原字体/文件系统只出现在 integration 测试中。
+API 与命令说明见 [paper-core README](../../../../../packages/paper-core/README.md)。根 package manifest 增加标准 main/types/exports，供云端包直接消费；核心依旧只依赖纯 JS 分词库，原字体/文件系统只出现在 integration 测试中。
 
-T06 继续实现独立拼音行带算法；T07 对新 PaperLayout 做版本和摘要。旧 layoutSquareDocument 保留给 T01 历史回归，不是正式渲染入口。Canvas/PDF 尚未由本任务验证，完整字形目视/真机/物理打印留至 [最终验收](../../../docs/FINAL_ACCEPTANCE.md)。主会话负责独立检查、提交和归档。
+T06 继续实现独立拼音行带算法；T07 对新 PaperLayout 做版本和摘要。旧 layoutSquareDocument 保留给 T01 历史回归，不是正式渲染入口。Canvas/PDF 尚未由本任务验证，完整字形目视/真机/物理打印留至 [最终验收](../../../../../docs/FINAL_ACCEPTANCE.md)。主会话负责独立检查、提交和归档。

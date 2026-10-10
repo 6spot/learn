@@ -6,4 +6,4 @@
 {"file": ".trellis/spec/frontend/runtime-tooling.md", "reason": "原生构建、诊断宿主与模拟器边界"}
 {"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "原生业务组件、隐私与资源错误状态"}
 {"file": "packages/canvas-renderer/README.md", "reason": "本任务API、绘制边界、可执行检查和最终验收限制"}
-{"file": ".trellis/tasks/10-10-v1-canvas-preview/evidence.md", "reason": "当前实现证据、模拟器实际结果和已知边界"}
+{"file": ".trellis/tasks/archive/2026-10/10-10-v1-canvas-preview/evidence.md", "reason": "当前实现证据、模拟器实际结果和已知边界"}

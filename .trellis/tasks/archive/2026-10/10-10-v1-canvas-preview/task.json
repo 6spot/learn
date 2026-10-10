@@ -1,9 +1,9 @@
 {
-  "id": "v1-square-layout",
-  "name": "v1-square-layout",
-  "title": "T05 补齐方格文字排版",
-  "description": "补足三种方格模板在真实度量及复杂输入下的内容完整性。",
-  "status": "in_progress",
+  "id": "v1-canvas-preview",
+  "name": "v1-canvas-preview",
+  "title": "T08 实现 Canvas 预览",
+  "description": "在手机上忠实绘制同源布局的四模板分页预览。",
+  "status": "completed",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -11,7 +11,7 @@
   "creator": "me",
   "assignee": "me",
   "createdAt": "2026-10-10",
-  "completedAt": null,
+  "completedAt": "2026-10-11",
   "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
@@ -23,7 +23,7 @@
   "relatedFiles": [],
   "notes": "实现与独立检查完成；核心 80、真实字体 12、Canvas 16、运行时 20 项联合验证通过。正式配置、字体许可、真机及打印按 D-044 转交 T24。",
   "meta": {
-    "plan_id": "T05",
+    "plan_id": "T08",
     "development_complete": true,
     "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
