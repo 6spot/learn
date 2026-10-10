@@ -3,7 +3,7 @@
 ## 启动条件
 
 - [x] 核对 [PRD](prd.md)、[设计](design.md)、权威文档及本次工作区变更。
-- [ ] 核对最终集成验收依赖（阶段入口见下文）：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
+- [ ] 核对最终集成验收依赖（阶段入口见下文）：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../archive/2026-10/10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
 - [x] 将技术未知项落实为可验证方案；安全随机 API 依据见 [研究](research/random-source.md)，本阶段接口/边界已由 root 评审。
 - [ ] 细化设计后完成执行前评审；按 Trellis 流程启动本子任务，不以父任务代替实现任务。
 

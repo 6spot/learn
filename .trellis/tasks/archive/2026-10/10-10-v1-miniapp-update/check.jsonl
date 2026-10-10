@@ -31,4 +31,4 @@
 {"file": "miniprogram/pages/preview/index.wxml", "reason": "T19 native integration or actual validation evidence"}
 {"file": "miniprogram/pages/me/index.json", "reason": "T19 native integration or actual validation evidence"}
 {"file": "miniprogram/pages/me/index.wxml", "reason": "T19 native integration or actual validation evidence"}
-{"file": ".trellis/tasks/10-10-v1-miniapp-update/evidence.md", "reason": "T19 native integration or actual validation evidence"}
+{"file": ".trellis/tasks/archive/2026-10/10-10-v1-miniapp-update/evidence.md", "reason": "T19 native integration or actual validation evidence"}
