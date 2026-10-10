@@ -1,0 +1,46 @@
+<view class="privacy-page">
+  <view class="privacy-section">
+    <text class="section-title">我们处理哪些数据</text>
+    <text class="paragraph">使用微信提供的身份信息识别你的账户，记录可用次数、任务状态和必要的操作事实，用于生成、领取 PDF 及核对次数。</text>
+    <text class="paragraph">标题和正文只在编辑、预览与生成过程中使用，不作为文章原文或可恢复草稿持久保存，也不写入日志或统计。生成的 PDF 含有你输入的内容，会作为私有文件短期保存。</text>
+  </view>
+  <view class="privacy-section">
+    <text class="section-title">保存与清理</text>
+    <text class="paragraph">下列时长来自当前服务配置。已有任务以受理时的规则和实际到期时间为准，到期后分批清理；任务结算和必要保护未结束时，相关最少资料仍需暂时保留。</text>
+    <text wx:if="{{!policy}}" class="secondary">{{phase === 'loading' ? '正在读取保留期限…' : '暂时无法读取保留期限，请刷新重试。'}}</text>
+    <block wx:if="{{policy}}">
+      <text class="secondary policy-time">配置读取时间：{{policy.loadedAt}}（上海）</text>
+      <view wx:for="{{policy.rows}}" wx:key="id" class="retention-row">
+        <view class="retention-heading"><text>{{item.label}}</text><text class="duration">{{item.duration}}</text></view>
+        <text class="secondary">{{item.note}}</text>
+      </view>
+    </block>
+    <button class="button-plain text-action" loading="{{phase === 'loading'}}" disabled="{{phase === 'loading' || phase === 'confirming' || phase === 'submitting'}}" bindtap="onRefresh">刷新说明与状态</button>
+  </view>
+  <view class="privacy-section deletion-section">
+    <text class="section-title">删除我的数据</text>
+    <text class="paragraph">确认后清空本机输入、预览、暂存的生成内容和临时 PDF。云端受理后停止新生成、次数领取、记录及 PDF 访问；已受理任务仍会按原规则结算。</text>
+    <text class="paragraph">删除分批进行。为防止重复赠送次数或重复消费，需要等待当月额度周期和必要保护结束，期间不能提前恢复账户。不永久保留用于识别你的删除标记。</text>
+    <text class="paragraph">你已经另存或分享的 PDF 不在此删除范围内，需要你自行处理。</text>
+    <view wx:if="{{deletion}}" class="deletion-state">
+      <block wx:if="{{deletion.state === 'deleting'}}">
+        <text class="state-title">删除处理中</text>
+        <text class="paragraph">新生成、次数领取、记录与 PDF 访问已关闭，正在等待结算、保护期及分批清理完成。</text>
+        <text class="secondary">删除申请：{{deletion.requestedAt}}（上海）</text>
+        <text class="protection-label">已知最早保护截止</text><text class="protection-time">{{deletion.earliestReuseAt}}（上海）</text>
+        <text class="paragraph">这不是完成时间。任务结算、清理重试或更晚的保护边界可能延后处理；到时请查询状态，不能承诺到点即可重新使用。</text>
+      </block>
+      <block wx:elif="{{deletion.state === 'disabled'}}"><text class="state-title">账户已停用</text><text class="paragraph">当前账户不能生成或领取文件，仍可申请删除资料。</text></block>
+      <block wx:elif="{{deletion.state === 'none'}}"><text class="state-title">当前没有云端账户资料</text><text class="paragraph">尚未建立账户或已经清理时均显示此状态；你仍可清理本机输入和临时文件。</text></block>
+      <block wx:else><text class="state-title">账户正常</text><text class="paragraph">可以申请删除资料。删除需要明确确认，无法撤销。</text></block>
+      <text class="secondary status-time">状态查询时间：{{deletion.checkedAt}}（上海）</text>
+    </view>
+    <text wx:if="{{phase === 'submitting'}}" class="status-message">正在提交删除申请…</text>
+    <text wx:if="{{uncertain && phase !== 'submitting'}}" class="status-message">删除结果待确认。先前请求仍可能完成，请查询状态；不要仅凭断网或暂未查到就判断删除失败。</text>
+    <text wx:if="{{message}}" class="status-message">{{message}}{{deletion ? '，以上为上次查询的状态。' : ''}}</text>
+    <view wx:if="{{localClearFailed}}" class="local-error"><text>本机临时数据未能全部清理，请重试本机清理。</text><button class="button-secondary" bindtap="onRetryLocalClear">重试本机清理</button></view>
+    <button id="privacy-status" class="button-secondary" disabled="{{phase === 'loading' || phase === 'confirming' || phase === 'submitting'}}" bindtap="onCheckStatus">查询删除状态</button>
+    <button wx:if="{{!deletion || deletion.state !== 'deleting'}}" id="privacy-delete" class="button-secondary delete-action" loading="{{phase === 'submitting'}}" disabled="{{!canDelete}}" bindtap="onDelete">{{uncertain ? '重新确认删除' : '删除我的数据'}}</button>
+  </view>
+  <view class="privacy-section feedback-section"><text class="section-title">联系与反馈</text><text class="paragraph">如需帮助，可通过微信反馈联系开发者。</text><button class="button-secondary" open-type="feedback">使用反馈</button></view>
+</view>

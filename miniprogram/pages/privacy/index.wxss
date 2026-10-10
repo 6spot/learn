@@ -1,0 +1,18 @@
+page { background: #FFFFFF; }
+.privacy-page { padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+.privacy-section { padding: 24px 20px; border-bottom: 12px solid var(--background); }
+.paragraph { display: block; font-size: 14px; line-height: 1.75; margin-top: 12px; }
+.policy-time { display: block; margin: 14px 0 6px; }
+.retention-row { padding: 15px 0; border-bottom: 1px solid var(--divider); }
+.retention-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 6px; font-size: 14px; }
+.duration { font-weight: 600; overflow-wrap: anywhere; }
+.deletion-state { margin: 22px 0 18px; padding-top: 20px; border-top: 1px solid var(--divider); }
+.state-title { display: block; font-weight: 600; }
+.protection-label { display: block; margin-top: 16px; font-size: 14px; }
+.protection-time { display: block; margin-top: 6px; line-height: 1.6; }
+.deletion-state .secondary, .status-time { display: block; margin-top: 12px; }
+.status-message { display: block; font-size: 14px; line-height: 1.6; margin: 16px 0; }
+.deletion-section button, .local-error button, .feedback-section button { margin-top: 12px; }
+.local-error { margin: 18px 0; font-size: 14px; line-height: 1.6; }
+.delete-action { font-weight: 600; }
+.feedback-section { border-bottom: 0; }

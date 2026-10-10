@@ -1,0 +1,42 @@
+<view class="admin-page">
+  <view class="admin-section date-section">
+    <text class="secondary">上海自然日 · 00:00 至次日 00:00</text>
+    <view class="date-actions">
+      <picker wx:if="{{today && status !== 'denied'}}" mode="date" value="{{selectedDate || today}}" start="2000-01-01" end="{{today}}" disabled="{{status === 'loading'}}" bindchange="onDateChange">
+        <view class="date-picker"><text>{{selectedDate || '今天'}}</text><text class="date-hint">选择日期</text></view>
+      </picker>
+      <text wx:else class="date-label">{{selectedDate || '今天'}}</text>
+      <button wx:if="{{historical && status !== 'denied'}}" class="button-plain text-action" disabled="{{status === 'loading'}}" bindtap="onToday">今天</button>
+      <button wx:if="{{status !== 'denied'}}" id="admin-refresh" class="button-plain text-action" loading="{{status === 'loading'}}" disabled="{{status === 'loading'}}" bindtap="onRefresh">刷新</button>
+    </view>
+  </view>
+  <view wx:if="{{status === 'idle' || status === 'loading'}}" class="admin-section state-section"><text>正在查询统计…</text><text wx:if="{{summary}}" class="secondary">以下为 {{summary.date}} 的上次统计</text></view>
+  <view wx:if="{{status === 'error' || status === 'denied'}}" class="admin-section state-section" id="admin-error">
+    <text>{{message}}</text>
+    <text wx:if="{{summary}}" class="secondary">本次未更新，以下为 {{summary.date}} 的上次统计</text>
+    <button wx:if="{{status === 'denied'}}" class="button-secondary" bindtap="onBackToMe">返回我的</button>
+  </view>
+  <block wx:if="{{summary}}">
+    <view class="admin-section summary-section">
+      <text class="secondary">统计日期：{{summary.date}}</text>
+      <view class="metrics">
+        <view wx:for="{{summary.metrics}}" wx:key="id" class="metric">
+          <text class="metric-label">{{item.label}}</text><text class="metric-value">{{item.value}}</text><text class="secondary">{{item.note}}</text>
+        </view>
+      </view>
+      <text class="secondary generated-at">统计时间：{{summary.generatedAt}}（上海）</text>
+      <text class="secondary">进入页面或主动刷新时更新，新完成的任务可能在下次刷新时显示。</text>
+    </view>
+    <view class="admin-section">
+      <text class="section-title">模板使用</text><text class="secondary section-note">{{summary.date}} 成功完成的任务</text>
+      <view wx:for="{{summary.templates}}" wx:key="id" class="template-row"><text>{{item.label}}</text><text class="template-count">{{item.value}}</text></view>
+    </view>
+    <view class="admin-section coverage-section">
+      <text class="section-title">数据覆盖</text><text class="secondary section-note">{{summary.date}} · {{summary.complete ? '各项数据完整' : '部分数据不可用，不能按 0 计算'}}</text>
+      <view wx:for="{{summary.coverage}}" wx:key="id" class="coverage-row">
+        <text>{{item.label}}</text><text class="secondary">覆盖起点：{{item.starts}}</text><text class="secondary">{{item.note}}</text>
+      </view>
+      <text class="secondary coverage-note">有效活跃仅统计新生成受理或有效 PDF 开始领取的去重用户；预览、轮询与查询不计入。</text>
+    </view>
+  </block>
+</view>
