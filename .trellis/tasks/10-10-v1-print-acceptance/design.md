@@ -6,7 +6,7 @@
 
 正式样张、量测记录、docs/TESTING.md 与可信样式预设。
 
-前置交付：[T08 实现 Canvas 预览](../archive/2026-10/10-10-v1-canvas-preview/prd.md)、[T09 实现 PDF 渲染](../10-10-v1-pdf-renderer/prd.md)
+前置交付：[T08 实现 Canvas 预览](../archive/2026-10/10-10-v1-canvas-preview/prd.md)、[T09 实现 PDF 渲染](../archive/2026-10/10-10-v1-pdf-renderer/prd.md)
 
 ## 实现边界
 

@@ -6,10 +6,10 @@
 
 ## 已确认背景与范围
 
-- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../10-10-learn-v1/prd.md)。
+- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../../../10-10-learn-v1/prd.md)。
 - 责任范围：已落地的 `packages/pdf-renderer` 与 PDF 样张，不扩展共享布局规则。
 - 已有四模板几何与基础方格文字布局可复用；本任务不能以历史测试或占位字体样张代替验收。
-- 最终集成验收依赖：[T07 实现排版版本与摘要协议](../archive/2026-10/10-10-v1-layout-versions/prd.md)
+- 最终集成验收依赖：[T07 实现排版版本与摘要协议](../10-10-v1-layout-versions/prd.md)
 
 ## 要求与验收
 
@@ -29,7 +29,7 @@ PDF 可打开不代表授权、字形和实体打印已验收。
 
 ## 权威依据
 
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [PAPER_PRESETS](../../../docs/PAPER_PRESETS.md)
-- [CLOUDBASE](../../../docs/CLOUDBASE.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [PAPER_PRESETS](../../../../../docs/PAPER_PRESETS.md)
+- [CLOUDBASE](../../../../../docs/CLOUDBASE.md)
+- [TESTING](../../../../../docs/TESTING.md)

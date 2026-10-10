@@ -11,4 +11,4 @@
 {"file":"packages/pdf-renderer/tools/build.mjs","reason":"许可证验证与双目标共享构建"}
 {"file":"packages/pdf-renderer/test/pdf.test.mjs","reason":"真实字体/附件hash、坐标和异步字节所有权回归"}
 {"file":"packages/pdf-renderer/test/portable.test.mjs","reason":"miniapp/cloud无宿主API执行"}
-{"file":".trellis/tasks/10-10-v1-pdf-renderer/evidence.md","reason":"实际模块/样张验证与最终验收边界"}
+{"file":".trellis/tasks/archive/2026-10/10-10-v1-pdf-renderer/evidence.md","reason":"实际模块/样张验证与最终验收边界"}

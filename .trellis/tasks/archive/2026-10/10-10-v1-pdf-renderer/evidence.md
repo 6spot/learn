@@ -12,7 +12,7 @@
 - MiSans原许可证PDF与LXGW OFL文本按实际字体作为附件保存，字节与原件完全一致，不增加打印页。元数据仅Learn及实际字体名称，无用户标题/正文。
 - 默认/硬上限64MiB；服务可降低maxBytes但不可提高。50页/100000glyph及已固定原始字体pins限制中间工作量；字体流检查和精确writer大小检查在最终输出buffer分配前进行，失败无partial bytes。
 
-接口及运行说明见 [package README](../../../packages/pdf-renderer/README.md)。不生成虚假ToUnicode；可见/打印内容完整，复制/文本提取不保证，主会话已确认该首版边界。
+接口及运行说明见 [package README](../../../../../packages/pdf-renderer/README.md)。不生成虚假ToUnicode；可见/打印内容完整，复制/文本提取不保证，主会话已确认该首版边界。
 
 ## 本轮实际验证
 
@@ -45,4 +45,4 @@
 
 - 主会话委派的独立检查已完成，见 [check](check.md)；本worker未提交或归档。
 - T10：完整四模板/文字/描红光栅公差、实际墨迹量测、打印样张包；最终Owner完成实体打印和字体许可确认。
-- 真实CloudBase部署包体、字体加载/缓存、内存/执行时限、私有上传交付及微信真机打开仍按[最终验收](../../../docs/FINAL_ACCEPTANCE.md)执行；本地便携性测试不冒充平台验收。
+- 真实CloudBase部署包体、字体加载/缓存、内存/执行时限、私有上传交付及微信真机打开仍按[最终验收](../../../../../docs/FINAL_ACCEPTANCE.md)执行；本地便携性测试不冒充平台验收。
