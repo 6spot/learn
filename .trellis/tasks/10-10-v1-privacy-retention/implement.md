@@ -3,7 +3,7 @@
 ## 启动条件
 
 - [ ] 核对 [PRD](prd.md)、[设计](design.md)、权威文档及本次工作区变更。
-- [ ] 核对最终集成验收依赖（阶段入口见下文）：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T16 实现超时对账与恢复](../10-10-v1-job-recovery/prd.md)、[T17 实现记录查询与私有文件领取](../10-10-v1-records-file-access/prd.md)；T25 界面基线已满足。
+- [ ] 核对最终集成验收依赖（阶段入口见下文）：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T16 实现超时对账与恢复](../archive/2026-10/10-10-v1-job-recovery/prd.md)、[T17 实现记录查询与私有文件领取](../10-10-v1-records-file-access/prd.md)；T25 界面基线已满足。
 - [ ] 将技术未知项落实为可验证方案；涉及新产品取舍先按 DECISIONS 流程确认。
 - [ ] 细化设计后完成执行前评审；按 Trellis 流程启动本子任务，不以父任务代替实现任务。
 

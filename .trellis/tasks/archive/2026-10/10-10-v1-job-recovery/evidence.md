@@ -14,7 +14,7 @@
 
 ## 行为覆盖
 
-[21 项恢复测试](../../../packages/cloud-service/test/recovery.test.mjs) 验证：
+[21 项恢复测试](../../../../../packages/cloud-service/test/recovery.test.mjs) 验证：
 
 - 已保存且未提交成功的候选，按 path/resolveId/hash/bytes/pageCount/batch 核验后原子补成功，重复扫描不增加渲染/上传/消费。
 - 无候选 RESERVED/GENERATING 等期限；缺失、损坏、暂时不可读和单文件预算不足均不提前释放；已到期完整 PDF 也不复活任务。
@@ -28,7 +28,7 @@
 
 ## 真实 PDF 补结算
 
-[真实恢复集成](../../../packages/cloud-service/integration/recovery-pdf.test.mjs) 使用真实 MiSans Latin 原 TTF、shared core 与 T09 生成 40 段拼音，得到 **165,300 字节 / 3 个 A4 页面**。注入上传后成功事务中断，确认 GENERATING/pending 候选与原预留保留；移除故障后仅给恢复器 metadata/storage/clock/crypto，runSweep 补成功并一次消费。回读哈希相同，PDFDocument.load 页数为3，原 PDF 保留期沿用；反复恢复/同号重试均未增加 prepare/render/upload。所有持久元数据均不含正文或裸布局摘要。
+[真实恢复集成](../../../../../packages/cloud-service/integration/recovery-pdf.test.mjs) 使用真实 MiSans Latin 原 TTF、shared core 与 T09 生成 40 段拼音，得到 **165,300 字节 / 3 个 A4 页面**。注入上传后成功事务中断，确认 GENERATING/pending 候选与原预留保留；移除故障后仅给恢复器 metadata/storage/clock/crypto，runSweep 补成功并一次消费。回读哈希相同，PDFDocument.load 页数为3，原 PDF 保留期沿用；反复恢复/同号重试均未增加 prepare/render/upload。所有持久元数据均不含正文或裸布局摘要。
 
 ## 边界与后续
 

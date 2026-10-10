@@ -11,4 +11,4 @@
 {"file": "packages/cloud-service/src/artifacts.ts", "reason": "共享候选关联/核验/清理原语"}
 {"file": "packages/cloud-service/test/recovery.test.mjs", "reason": "21项恢复故障矩阵，含损坏状态的安全投影和记录边界软预算"}
 {"file": "packages/cloud-service/integration/recovery-pdf.test.mjs", "reason": "真实3页PDF补结算"}
-{"file": ".trellis/tasks/10-10-v1-job-recovery/evidence.md", "reason": "本轮证据与平台边界"}
+{"file": ".trellis/tasks/archive/2026-10/10-10-v1-job-recovery/evidence.md", "reason": "本轮证据与平台边界"}
