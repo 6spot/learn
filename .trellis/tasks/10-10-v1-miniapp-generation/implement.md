@@ -2,12 +2,12 @@
 
 ## 启动条件
 
-- [ ] 核对 [PRD](prd.md)、[设计](design.md)、权威文档及本次工作区变更。
+- [x] 核对 [PRD](prd.md)、[设计](design.md)、权威文档及本次工作区变更。
 - [ ] 核对最终集成验收依赖（阶段入口见下文）：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
-- [ ] 将技术未知项落实为可验证方案；涉及新产品取舍先按 DECISIONS 流程确认。
+- [x] 将技术未知项落实为可验证方案；安全随机 API 依据见 [研究](research/random-source.md)，本阶段接口/边界已由 root 评审。
 - [ ] 细化设计后完成执行前评审；按 Trellis 流程启动本子任务，不以父任务代替实现任务。
 
-- [ ] 界面按 D-043 已接受的 T25 基线实施，读取 UI_DESIGN 及前端组件/质量规范；不因后续样式微调阻塞功能。
+- [x] 已读取 D-043 已接受的 T25 基线、UI_DESIGN 及前端组件/质量规范；本阶段不改页面。
 
 ## 分阶段交付
 
@@ -17,7 +17,7 @@ A：在 T14/T15 受理与 T19/T21 客户端接口明确后实现请求号、快�
 
 ## 交付步骤
 
-- [ ] 验证随机源并建立一次操作的内存快照。
+- [x] 验证随机源回调契约并建立一次操作的内存快照；实际 wx API 调用待原生集成。
 - [ ] 接入受理/查询及兼容错误交互。
 - [ ] 覆盖双击、参数变化、断网、重进及受理结果丢失。
 
@@ -40,3 +40,17 @@ A：在 T14/T15 受理与 T19/T21 客户端接口明确后实现请求号、快�
 ## 当前验收限制
 
 云端请求/任务号只是查询线索，所有查询仍须鉴权。
+
+### 阶段 A 交付（2026-10-11）
+
+- [x] 新增 portable generation-session 与 secure-random 及其测试，保留其他任务的修改。
+- [x] 真实预览完成前校验 revision，完成后冻结输入/选项/版本/摘要；双击合并，固定整号重试，明确新生成才换号。
+- [x] 未知响应先查原号；本地超时不判失败；晚到提交/查询可恢复 known；clear 阻止旧回调发送、回写和导航。
+- [x] 核对任务与请求/模板/状态配对；安全 view 不暴露正文、布局或请求号。
+- [x] `node --test miniprogram/test/secure-random.test.mjs miniprogram/test/generation-session.test.mjs` 24/24；`./node_modules/.bin/tsc -p tsconfig.json` 通过。
+- [x] 阶段 A 独立检查修复随机值品牌校验与 API 属性异常边界，修复后 25/25、模块严格类型检查通过；[session-check.md](session-check.md) 记录后续共享 T21 类型接入和阶段 B 边界。
+- [x] 实际 CloudClient + CloudService 响应丢失验证原任务一次渲染、一次扣费；详细来源及限制见 [证据](evidence.md)。
+- [ ] 阶段 B：App 注册会话/清理，编辑与预览原生按钮区分 retry/startNew，导航至 T21 唯一 `/pages/records/detail?jobId=...`。
+- [ ] 阶段 B：原生模拟器覆盖双击、离页、重进、响应丢失与文件交付，再完成独立检查及整项验收。
+
+T20-AC1/2/3 的会话机制已本地验证，仍待原生调用与页面交互；AC4 目前仅有 onJobKnown(jobId) 回调契约，实际路由待 T21 集成。阶段 A 不等于整项完成；任务启动指针、后续集成和归档由 root 协调，真机/CloudBase/组件配置留最终 Owner 验收。
