@@ -18,7 +18,7 @@
 - [PRODUCT](docs/PRODUCT.md)：使用者、用户流程、V1 范围
 - [ARCHITECTURE](docs/ARCHITECTURE.md)：运行时组件、依赖与代码边界
 - [PAPER_ENGINE](docs/PAPER_ENGINE.md)：文档模型、布局、渲染及技术预研
-- [PAPER_PRESETS](docs/PAPER_PRESETS.md)：常见纸张调研、单一默认规格与试印候选
+- [PAPER_PRESETS](docs/PAPER_PRESETS.md)：首版四种已确认物理规格（格宽、行列/行带、定位、边距）；实现时不得随意更改
 - [CLOUDBASE](docs/CLOUDBASE.md)：环境、身份、部署及安全
 - [DATA_AND_CREDITS](docs/DATA_AND_CREDITS.md)：数据、额度、订单与一致性
 - [TESTING](docs/TESTING.md)：验收标准和测试样本
