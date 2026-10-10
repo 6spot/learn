@@ -6,7 +6,9 @@
 
 ## 当前状态
 
-处于设计与技术验证前阶段。仓库当前以文档沉淀为主；下列文件是开发讨论基线，未经过实际实现的内容均应视为待验证。
+**产品设计基线已经确认，开发已开始。** 当前仓库包含四种 A4 格线的纯 TypeScript 几何实现及作文/田字/米字方格的基础文字占位与分页代码；微信小程序页面、云函数、拼音字形排版、Canvas/PDF 正式渲染尚未完成。已有测试不等于真实打印或端到端验收通过。
+
+**交给开发者时，先阅读 [开发交接说明](docs/DEVELOPMENT_HANDOFF.md) 与 [AGENTS.md](AGENTS.md)**，再进入下列权威文档：
 
 - [产品范围与交互](docs/PRODUCT.md)
 - [系统架构与模块边界](docs/ARCHITECTURE.md)
@@ -16,7 +18,8 @@
 - [数据、生成任务与次数](docs/DATA_AND_CREDITS.md)
 - [测试与验收](docs/TESTING.md)
 - [已确定和待讨论决策](docs/DECISIONS.md)
-- [讨论顺序](docs/ROADMAP.md)
+- [实施计划](docs/ROADMAP.md)
+- [开发交接与待验收项](docs/DEVELOPMENT_HANDOFF.md)
 
 ## 技术方向
 
