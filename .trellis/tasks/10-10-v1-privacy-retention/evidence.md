@@ -1,4 +1,4 @@
-# T23 后端验证（2026-10-11）
+# T23 后端与云函数组合验证（2026-10-11）
 
 - `npm --prefix packages/cloud-service test`：166 项全部通过，T23 新增27项；独立检查增加2项先失败后通过的回归。
 - `npm --prefix packages/cloud-service run test:pdf`：15 项全部通过，T23 新增2项。
@@ -26,6 +26,14 @@
 - 拼音40段：**165,148 字节，3 A4页**。
 - 两者用真实共享字体度量和PDF编码器生成，独立解析页数；删除立即禁止领取，首轮remove后测试私有存储NOT_FOUND，终态/扣次不反转；有限保护后账户及全部个人关联清理完成。
 - 清理阶段没有新增 prepare/render/upload/read PDF 调用；没有原文重排或自动重试。
+
+## 云函数组合独立复核
+
+- 后端修复后，使用当前包构建产物运行 `node --test cloudfunctions/learn-service/test/*.test.mjs`，**22/22** 通过（原19项，独立检查新增3项）。未运行小程序构建、全局 typecheck、release 或开发者工具；未重建云函数 bundle，现有 bundle 的验证不冒充本轮重新打包证据。
+- 原生 CloudClient 经实际 RPC、共享排版及真实字体生成超过18MB田字格 PDF，经过70余次分块进度回调完成哈希验证与本地打开；删除后 API 拒绝、正式 fileId 撤销、私有测试存储读取 NOT_FOUND。推进显式测试时钟后元数据快照不含旧 userId，正常重新建账只授予一次额度，旧请求仍 REQUEST_EXPIRED。
+- SDK 形状的内存适配器实际运行 recovery → lifecycle。新增用例验证恢复检查点 await 完成后才继续、恢复失败跳过清理、清理失败不返回部分成功；两种异常均仅输出 MAINTENANCE_UNAVAILABLE。
+- 生产配置完整正例可组合；stats/lifecycle 每个字段缺失或 null 均 INVALID_CONFIG，缺整个段在部署校验拒绝。示例仍保留空值及 false 验证标记，生产值未被测试值替换。
+- 变更 MJS 语法及差异检查通过。报告 [composition-check.md](composition-check.md)，日志 `/tmp/learn-t23-composition-check.log`。
 
 ## 仍需外部验收
 

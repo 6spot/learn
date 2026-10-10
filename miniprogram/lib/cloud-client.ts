@@ -1,6 +1,7 @@
 import type { AccountResponse, AdminStatsRequest, AdminStatsResponse, CompatibilityRequest, CompatibilityResponse, GenerationRequest,
   JobSummary, JobDetail, ListJobsRequest, ListJobsResponse, PdfInfo, PdfChunk, PdfChunkRequest,
-  PublishedPreset, ReleaseAcceptance, SubmissionWindow, SubmitGenerationResponse } from '../../packages/cloud-service/dist/index.js';
+  PublishedPreset, ReleaseAcceptance, SubmissionWindow, SubmitGenerationResponse,
+  PrivacyInfo, DeletionStatus } from '../../packages/cloud-service/dist/index.js';
 import type { LayoutVersionTuple, TrustedPaperPreset } from '../../packages/paper-core/src/index.js';
 
 export class CloudClientError extends Error {
@@ -51,6 +52,9 @@ export class CloudClient {
   }
   getAccount(): Promise<AccountResponse> { return this.call('getAccount', {}); }
   getAdminStats(params: AdminStatsRequest = {}): Promise<AdminStatsResponse> { return this.call('getAdminStats', params); }
+  getPrivacyInfo(): Promise<PrivacyInfo> { return this.call('getPrivacyInfo', {}); }
+  getDeletionStatus(): Promise<DeletionStatus> { return this.call('getDeletionStatus', {}); }
+  deleteMyData(params: { confirm: true }): Promise<DeletionStatus> { return this.call('deleteMyData', params); }
   getCompatibility(params: CompatibilityRequest): Promise<CompatibilityResponse> { return this.call('getCompatibility', params); }
   getSubmissionWindow(): Promise<SubmissionWindow> { return this.call('getSubmissionWindow', {}); }
   submitGeneration(params: GenerationRequest): Promise<SubmitGenerationResponse> { return this.call('submitGeneration', params); }
@@ -74,7 +78,8 @@ export class CloudClient {
 /** Missing deployment configuration is a recoverable unavailable state. */
 export function createCloudClient(platform: CloudPlatform, config: CloudClientConfig | null): CloudClient {
   const unavailable: RpcTransport = async () => { throw new CloudClientError('SERVICE_UNAVAILABLE'); };
-  if (!config || !platform.cloud || !/^[A-Za-z0-9_-]{1,128}$/.test(config.environmentId) ||
+  if (!config || !platform.cloud || typeof config.environmentId !== 'string' || typeof config.functionName !== 'string' ||
+      !/^[A-Za-z0-9_-]{1,128}$/.test(config.environmentId) ||
       !/^[A-Za-z][A-Za-z0-9_-]{0,59}$/.test(config.functionName)) return new CloudClient(unavailable);
   const cloud = platform.cloud;
   try { cloud.init({ env: config.environmentId, traceUser: false }); }

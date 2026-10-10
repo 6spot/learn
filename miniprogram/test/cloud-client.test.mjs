@@ -25,6 +25,16 @@ test('absent config, network loss and unsafe error payloads become safe states',
   await assert.rejects(new CloudClient(async () => { throw new Error('private body'); }).getAccount(), { code: 'NETWORK_UNAVAILABLE' });
 });
 
+test('invalid public config never coerces missing or non-string values into a cloud environment', async () => {
+  let initialized = 0;
+  const platform = { cloud: { init() { initialized++; }, callFunction() { throw new Error('must not call'); } } };
+  for (const config of [{}, { functionName: 'learn-service' }, { environmentId: 'test-env' },
+    { environmentId: null, functionName: 'learn-service' }, { environmentId: 'test-env', functionName: 123 }]) {
+    await assert.rejects(createCloudClient(platform, config).getAccount(), { code: 'SERVICE_UNAVAILABLE' });
+  }
+  assert.equal(initialized, 0);
+});
+
 test('in-memory transport injection uses the same API and preserves exact request data', async () => {
   let seen;
   const client = createCloudClient({}, null);

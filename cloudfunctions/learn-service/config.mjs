@@ -23,6 +23,7 @@ export function readDeployment(environment) {
         !config.runtime.missingDocumentCodes.every(code => typeof code === 'string' && code.length > 0 || Number.isSafeInteger(code))) throw new DeploymentError();
     if (config.service.stage !== config.runtime.stage ||
         (config.runtime.stage === 'production' && config.runtime.platformVerified !== true)) throw new DeploymentError();
+    if (config.runtime.stage === 'production' && (!config.service.stats || !config.service.lifecycle)) throw new DeploymentError();
     if (!Number.isSafeInteger(config.fontFetchTimeoutMs) || config.fontFetchTimeoutMs < 1000 ||
         config.fontFetchTimeoutMs > 120000) throw new DeploymentError();
     const registry = config.service.registry;

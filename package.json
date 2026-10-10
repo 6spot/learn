@@ -15,6 +15,8 @@
     "test:service": "npm --prefix packages/cloud-service test",
     "test:runtime": "npm run build && node --test packages/runtime-smoke/test/*.test.mjs",
     "test": "npm run typecheck && npm run test:core && npm run test:runtime && npm run test:cloud && npm run test:service",
+    "test:all": "npm test && npm run test:fonts && npm run test:layout && npm run test:canvas && npm run test:pdf && npm run test:service:pdf && npm run test:editor && npm run test:tools && npm run test:composition && npm run test:release",
+    "test:tools": "python3 -m unittest discover -s assets/fonts/tools -p 'test_*.py' && python3 -m unittest discover -s scripts/print-acceptance -p 'test_*.py'",
     "smoke": "npm run build && node scripts/runtime-report.mjs",
     "test:devtools": "npm run build && node scripts/test-devtools.mjs --diagnostics",
     "setup": "node scripts/setup.mjs",

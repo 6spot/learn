@@ -18,6 +18,9 @@ export function createRpcHandler(service) {
       switch (request.method) {
         case 'getAccount': fields(p, []); data = await service.getAccount(); break;
         case 'getAdminStats': fields(p, [], ['date']); data = await service.getAdminStats(p); break;
+        case 'getPrivacyInfo': fields(p, []); data = await service.getPrivacyInfo(); break;
+        case 'getDeletionStatus': fields(p, []); data = await service.getDeletionStatus(); break;
+        case 'deleteMyData': fields(p, ['confirm']); data = await service.deleteMyData(p); break;
         case 'getSubmissionWindow': fields(p, []); data = await service.getSubmissionWindow(); break;
         case 'getCompatibility': fields(p, ['engineVersion'], ['lockedVersions']); data = await service.getCompatibility(p); break;
         case 'submitGeneration': fields(p, ['requestId', 'input', 'versions', 'layoutDigest']); data = await service.submitGeneration(p); break;

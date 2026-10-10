@@ -58,7 +58,37 @@ test('privacy cache clearing cancels an in-flight download before it can write o
   const f = fixture(); let release;
   f.client.getPdfInfo = () => new Promise(resolve => { release = () => resolve(f.info); });
   const downloader = createPdfDownloader(f.client, f.platform), pending = downloader.open('j_test');
-  downloader.clearLocalFiles(); release();
+  assert.throws(() => downloader.clearLocalFiles(), { code: 'LOCAL_CLEAR_PENDING' }); release();
   await assert.rejects(pending, { code: 'DOWNLOAD_CANCELLED' });
+  downloader.clearLocalFiles();
   assert.equal(f.files.size, 0); assert.deepEqual(f.events, []);
+});
+
+test('privacy clearing reports busy files or unreadable directories and permits an honest retry', async () => {
+  const f = fixture(), downloader = createPdfDownloader(f.client, f.platform);
+  await downloader.open('j_test');
+  f.fs.unlinkSync = () => { throw new Error('private path / busy'); };
+  assert.throws(() => downloader.clearLocalFiles(), { code: 'LOCAL_CLEAR_FAILED', message: 'LOCAL_CLEAR_FAILED' });
+  assert.equal(f.files.size, 1);
+  f.fs.unlinkSync = path => f.files.delete(path);
+  downloader.clearLocalFiles(); assert.equal(f.files.size, 0);
+  f.fs.readdirSync = () => { throw new Error('private path / read denied'); };
+  assert.throws(() => downloader.clearLocalFiles(), { code: 'LOCAL_CLEAR_FAILED' });
+  f.fs.readdirSync = path => { if (path === '/test') return []; throw new Error('missing directory'); };
+  downloader.clearLocalFiles(); // Parent listing proves the app directory absent.
+});
+
+test('privacy clearing cannot report completion while a late platform write may still create a file', async () => {
+  const f = fixture(); let finishWrite;
+  f.fs.writeFile = options => { finishWrite = () => { f.files.set(options.filePath, new Uint8Array(options.data)); options.success(); }; };
+  const downloader = createPdfDownloader(f.client, f.platform), pending = downloader.open('j_test');
+  while (!finishWrite) await new Promise(resolve => setTimeout(resolve, 0));
+  assert.throws(() => downloader.clearLocalFiles(), { code: 'LOCAL_CLEAR_PENDING' });
+  f.fs.unlinkSync = () => { throw new Error('busy'); };
+  finishWrite();
+  await assert.rejects(pending, { code: 'DOWNLOAD_CANCELLED' });
+  assert.throws(() => downloader.clearLocalFiles(), { code: 'LOCAL_CLEAR_FAILED' });
+  assert.ok(!f.events.some(event => event[0] === 'open'));
+  f.fs.unlinkSync = path => f.files.delete(path);
+  downloader.clearLocalFiles(); assert.equal(f.files.size, 0);
 });

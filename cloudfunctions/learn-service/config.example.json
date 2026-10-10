@@ -20,6 +20,18 @@
       "maxScanRecords": null,
       "maxRunMs": null
     },
+    "lifecycle": {
+      "pageSize": null,
+      "maxRecordsPerRun": null,
+      "maxRunMs": null,
+      "maxWindowTtlMs": null,
+      "lateIoProtectionMs": null,
+      "deletionProtectionMs": null,
+      "ledgerRetentionMs": null,
+      "activityRetentionMs": null,
+      "auditRetentionMs": null,
+      "inactiveUserRetentionMs": null
+    },
     "registry": {
       "cloudEngineVersions": [
         "learn-engine-dev.4"

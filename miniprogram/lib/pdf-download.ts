@@ -27,12 +27,27 @@ export function createPdfDownloader(client: PdfDownloadClient, platform: PdfPlat
   let pending: { jobId: string; promise: Promise<void> } | null = null;
   let revision = 0;
   const remove = (path: string) => { try { fs.unlinkSync(path); } catch { /* missing or platform-busy temporary file */ } };
-  const purgeFiles = () => {
-    try { for (const file of fs.readdirSync(directory)) if (/^learn-[A-Za-z0-9_-]{1,128}\.pdf$/.test(file)) remove(`${directory}/${file}`); }
-    catch { /* directory may not exist */ }
+  const ownedFiles = (strict: boolean): string[] => {
+    try { return fs.readdirSync(directory).filter(file => /^learn-[A-Za-z0-9_-]{1,128}\.pdf$/.test(file)); }
+    catch {
+      if (!strict) return [];
+      // Confirm an absent directory through its parent instead of treating every
+      // platform read failure as absence or matching provider error messages.
+      try { if (!fs.readdirSync(platform.env.USER_DATA_PATH).includes('learn-pdf')) return []; } catch { /* unverified */ }
+      return fail('LOCAL_CLEAR_FAILED');
+    }
   };
-  const clearLocalFiles = () => { revision++; purgeFiles(); };
-  clearLocalFiles();
+  const purgeFiles = (strict = false) => {
+    for (const file of ownedFiles(strict)) remove(`${directory}/${file}`);
+    if (strict && ownedFiles(true).length) fail('LOCAL_CLEAR_FAILED');
+  };
+  const clearLocalFiles = () => {
+    revision++; purgeFiles(true);
+    // A platform write already in progress may finish later. Its cancelled
+    // callback cleans up, but privacy must require a retry before claiming done.
+    if (pending) fail('LOCAL_CLEAR_PENDING');
+  };
+  purgeFiles();
   return {
     clearLocalFiles,
     open(jobId: string, progress?: (received: number, total: number) => void): Promise<void> {

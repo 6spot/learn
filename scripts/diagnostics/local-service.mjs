@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { createHash, createHmac, randomBytes, randomUUID } from 'node:crypto';
 import { MemoryMetadataStore, MemoryPrivateStorage, AwaitedExecutionBridge, SystemClock } from '../../packages/cloud-runtime/dist/index.js';
-import { CloudService, createGenerationExecutor, createPaperPreparer } from '../../packages/cloud-service/dist/index.js';
+import { CloudService, createGenerationExecutor, createPaperPreparer, createLifecycleService } from '../../packages/cloud-service/dist/index.js';
 import { getDevelopmentPreset, DEVELOPMENT_ENGINE_VERSION } from '../../packages/paper-core/dist/index.js';
 import { FONT_RESOURCES, FONT_BUNDLE_VERSION, createFontMetricsProvider } from '../../packages/font-metrics/dist/index.js';
 import { renderPdf } from '../../packages/pdf-renderer/dist/index.js';
@@ -33,6 +33,9 @@ export async function createLocalService() {
   const config = {
     stage: 'development', monthlyFreeCredits: 20, quotaTimeZone: 'Asia/Shanghai', identityKeyId: 'identity', adminUserIds: [await userId(adminSubject)],
     stats: { coverageStartDate: new Date(clock.now() + 8 * 3600000).toISOString().slice(0, 10), pageSize: 50, maxScanRecords: 10000, maxRunMs: 5000 },
+    lifecycle: { pageSize: 50, maxRecordsPerRun: 1000, maxRunMs: 5000, maxWindowTtlMs: 3600000,
+      lateIoProtectionMs: 300000, deletionProtectionMs: day, ledgerRetentionMs: 90 * day,
+      activityRetentionMs: 30 * day, auditRetentionMs: 90 * day, inactiveUserRetentionMs: 90 * day },
     fileAccess: { maxFileBytes: 32 * 1024 * 1024, maxCacheBytes: 32 * 1024 * 1024, cacheTtlMs: 60000, maxListScanRecords: 100 },
     registry: { cloudEngineVersions: [DEVELOPMENT_ENGINE_VERSION], clientReadyEngineVersions: [DEVELOPMENT_ENGINE_VERSION] },
     generation: { windowKeyId: 'window', retainedWindowKeyIds: ['window'], fingerprintKeyId: 'fingerprint', retainedFingerprintKeyIds: ['fingerprint'],
@@ -53,5 +56,6 @@ export async function createLocalService() {
   for (const template of ['essay-grid', 'tian-grid', 'mi-grid', 'pinyin-lines']) {
     const preset = getDevelopmentPreset(template); await admin.publishPreset(preset); await admin.activatePreset(preset.versions);
   }
-  return { serviceFor, rpcFor: subject => createRpcHandler(serviceFor(subject)), provider, preparer, config, store, storage, clock, crypto };
+  const lifecycle = createLifecycleService({ store, storage, clock, crypto }, config);
+  return { serviceFor, rpcFor: subject => createRpcHandler(serviceFor(subject)), provider, preparer, config, store, storage, clock, crypto, lifecycle };
 }

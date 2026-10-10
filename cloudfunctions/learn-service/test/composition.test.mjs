@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { createHash, createHmac } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { FONT_RESOURCES, FONT_BUNDLE_VERSION } from '../../../packages/font-metrics/dist/index.js';
-import { DEVELOPMENT_ENGINE_VERSION } from '../../../packages/paper-core/dist/index.js';
 import { ServiceError } from '../../../packages/cloud-service/dist/index.js';
 import { RuntimeError } from '../../../packages/cloud-runtime/dist/index.js';
 import { readDeployment } from '../config.mjs';
@@ -11,25 +10,8 @@ import { createHostedFonts } from '../resources.mjs';
 import { createProductionService } from '../service.mjs';
 import { createRpcHandler } from '../rpc.mjs';
 
-// All numbers and keys here are explicit local test values, never deployment defaults.
-function fixture() {
-  const day = 86400000;
-  const config = {
-    runtime: { stage: 'development', developmentEnvironmentId: 'test-dev', productionEnvironmentId: 'test-prod', appId: 'test-app',
-      fileIdPrefix: 'cloud://test-dev.bucket/', missingDocumentCodes: ['TEST_MISSING'], platformVerified: false },
-    service: { stage: 'development', monthlyFreeCredits: 20, quotaTimeZone: 'Asia/Shanghai', identityKeyId: 'identity', adminUserIds: [],
-      fileAccess: { maxFileBytes: 32000000, maxCacheBytes: 32000000, cacheTtlMs: 60000, maxListScanRecords: 100 },
-      registry: { cloudEngineVersions: [DEVELOPMENT_ENGINE_VERSION], clientReadyEngineVersions: [DEVELOPMENT_ENGINE_VERSION] },
-      generation: { windowKeyId: 'window', retainedWindowKeyIds: ['window'], fingerprintKeyId: 'fingerprint', retainedFingerprintKeyIds: ['fingerprint'],
-        fingerprintVersion: 'learn-request-v1', windowTtlMs: 3600000, requestRetentionMs: 90 * day, recordRetentionMs: 30 * day,
-        pdfRetentionMs: 7 * day, jobTimeoutMs: 60000, maxInputCodeUnits: 10000, maxGraphemes: 10000, maxPages: 5,
-        maxPdfBytes: 32000000, maxConcurrentJobs: 4, rateWindowMs: 60000, maxStartsPerWindow: 10 } },
-    fontUrls: Object.fromEntries(FONT_RESOURCES.map(font => [font.id, `https://fonts.example.invalid/${font.id}.ttf`])), fontFetchTimeoutMs: 1000,
-  };
-  const keys = Object.fromEntries(['identity', 'window', 'fingerprint'].map((key, index) => [key, Buffer.alloc(32, index + 1).toString('base64')]));
-  const environment = () => ({ LEARN_DEPLOYMENT_CONFIG: JSON.stringify(config), LEARN_SECRET_KEYS: JSON.stringify(keys) });
-  return { config, keys, environment };
-}
+import { fixture } from './fixtures.mjs';
+
 const safeConfigError = { code: 'INVALID_DEPLOYMENT_CONFIG', message: 'INVALID_DEPLOYMENT_CONFIG' };
 
 test('deployment selects explicit environment and retains actual cryptographic keys privately', async () => {
@@ -51,6 +33,8 @@ test('malformed, mixed, unverified, unsupported or incomplete deployments fail s
     f => { f.config.runtime.missingDocumentCodes = []; },
     f => { f.config.service.stage = 'production'; },
     f => { f.config.runtime.stage = f.config.service.stage = 'production'; },
+    f => { f.config.runtime.stage = f.config.service.stage = 'production'; f.config.runtime.platformVerified = true; delete f.config.service.lifecycle; },
+    f => { f.config.runtime.stage = f.config.service.stage = 'production'; f.config.runtime.platformVerified = true; delete f.config.service.stats; },
     f => { f.config.service.registry.cloudEngineVersions.push('not-implemented'); },
     f => { f.config.fontFetchTimeoutMs = 0; },
     f => { f.config.fontUrls['misans-regular'] = 'http://example.invalid/font'; },
@@ -77,6 +61,27 @@ test('actual production composition constructs SDK adapters and validates servic
   await assert.rejects(composition.service.getAccount(), { code: 'UNAUTHENTICATED' });
   f.config.service.monthlyFreeCredits = -1;
   assert.throws(() => createProductionService(sdk, f.environment()), { code: 'INVALID_CONFIG' });
+});
+
+test('production composition rejects incomplete privacy and statistics values after section presence checks', () => {
+  const sdk = { init() {}, database: () => ({}), getWXContext: () => ({}) };
+  const production = () => {
+    const f = fixture();
+    f.config.runtime.stage = f.config.service.stage = 'production';
+    f.config.runtime.platformVerified = true;
+    f.config.runtime.fileIdPrefix = 'cloud://test-prod.bucket/';
+    return f;
+  };
+  assert.doesNotThrow(() => createProductionService(sdk, production().environment()));
+  for (const section of ['stats', 'lifecycle']) {
+    for (const key of Object.keys(production().config.service[section])) {
+      for (const value of [undefined, null]) {
+        const f = production();
+        f.config.service[section][key] = value;
+        assert.throws(() => createProductionService(sdk, f.environment()), { code: 'INVALID_CONFIG' }, `${section}.${key}`);
+      }
+    }
+  }
 });
 
 test('RPC uses an explicit allowlist and rejects injected identity or inherited dispatch', async () => {
@@ -110,6 +115,21 @@ test('statistics RPC forwards only the requested date and cannot assert administ
     assert.deepEqual(await handler({ method: 'getAdminStats', params: extra }), { ok: false, error: { code: 'INVALID_ARGUMENT' } });
   }
   assert.equal(seen.length, 1);
+});
+
+test('privacy RPC uses trusted service identity and requires the explicit confirmation field', async () => {
+  const seen = [];
+  const handler = createRpcHandler({ getPrivacyInfo: async () => ({ policyVersion: 'learn-privacy-v1' }),
+    getDeletionStatus: async () => ({ state: 'none' }),
+    deleteMyData: async request => { seen.push(request); return { state: 'deleting' }; } });
+  assert.equal((await handler({ method: 'getPrivacyInfo', params: {} })).data.policyVersion, 'learn-privacy-v1');
+  assert.equal((await handler({ method: 'getDeletionStatus', params: {} })).data.state, 'none');
+  for (const method of ['getPrivacyInfo', 'getDeletionStatus', 'deleteMyData']) {
+    assert.equal((await handler({ method, params: { confirm: true, userId: 'victim' } })).ok, false);
+  }
+  assert.equal((await handler({ method: 'deleteMyData', params: {} })).ok, false);
+  assert.deepEqual(await handler({ method: 'deleteMyData', params: { confirm: true } }), { ok: true, data: { state: 'deleting' } });
+  assert.deepEqual(seen, [{ confirm: true }]);
 });
 
 test('RPC projects only trusted safe error codes and null for void', async () => {

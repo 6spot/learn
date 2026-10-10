@@ -26,6 +26,7 @@ test('actual shared layout -> RPC/PDF -> JSON base64 chunks -> native downloader
   const listing = await client.listJobs({ limit: 10 }); assert.equal(listing.items[0].jobId, accepted.job.jobId);
   assert.equal((await client.getJob(accepted.job.jobId)).delivery, 'ready');
   const info = await client.getPdfInfo(accepted.job.jobId); assert.ok(info.bytes > 18_000_000);
+  const candidate = (await local.store.list('pdf_candidates')).find(row => row.value.jobId === accepted.job.jobId).value;
   const files = new Map(); let opened = 0, progress = 0;
   const fs = { mkdirSync() {}, readdirSync: () => [], unlinkSync: path => files.delete(path),
     writeFile(options) { files.set(options.filePath, new Uint8Array(options.data)); options.success(); } };
@@ -51,4 +52,36 @@ test('actual shared layout -> RPC/PDF -> JSON base64 chunks -> native downloader
   for (const collection of ['generation_jobs', 'generation_requests', 'generation_history']) {
     const records = JSON.stringify(await local.store.list(collection)); assert.ok(!records.includes(input.body)); assert.ok(!records.includes(input.title));
   }
+  const privacy = await client.getPrivacyInfo();
+  assert.equal(privacy.deletion.state, 'active');
+  assert.equal(privacy.retention.pdfMs, local.config.generation.pdfRetentionMs);
+  await assert.rejects(client.deleteMyData({ confirm: false }), { code: 'INVALID_ARGUMENT' });
+  const deleting = await client.deleteMyData({ confirm: true });
+  assert.equal(deleting.state, 'deleting');
+  assert.ok(deleting.earliestReuseAt > observedAt);
+  assert.equal((await client.deleteMyData({ confirm: true })).requestedAt, deleting.requestedAt);
+  for (const operation of [() => client.getAccount(), () => client.listJobs(), () => client.getPdfInfo(accepted.job.jobId),
+    () => client.readPdfChunk({ jobId: accepted.job.jobId, offset: 0 }), () => client.getSubmissionWindow()]) {
+    await assert.rejects(operation(), { code: 'ACCOUNT_DELETING' });
+  }
+  const sweep = await local.lifecycle.runSweep();
+  assert.equal(sweep.recordErrors, 0);
+  assert.equal((await local.store.get('generation_jobs', accepted.job.jobId)).fileId, null);
+  await assert.rejects(local.storage.read(candidate.fileId), { code: 'NOT_FOUND' });
+  const afterDeletionStats = await admin.getAdminStats();
+  assert.equal(afterDeletionStats.coverage.complete, false);
+  assert.equal(afterDeletionStats.metrics.dau, null);
+  assert.equal(afterDeletionStats.metrics.succeeded, 1); // Task stays protected until late-I/O fencing expires.
+  // Advance explicit local-test retention policies, never alter production time.
+  local.clock.now = () => observedAt + 100 * 86400000;
+  for (let attempt = 0; attempt < 4 && (await client.getDeletionStatus()).state === 'deleting'; attempt++) {
+    assert.equal((await local.lifecycle.runSweep()).recordErrors, 0);
+  }
+  assert.equal((await client.getDeletionStatus()).state, 'none');
+  assert.equal(await local.store.get('users', before.userId), null);
+  assert.equal(await local.store.get('account_deletions', before.userId), null);
+  assert.ok(!JSON.stringify(local.store.snapshot()).includes(before.userId));
+  const recreated = await client.getAccount();
+  assert.equal(recreated.available, local.config.monthlyFreeCredits);
+  await assert.rejects(client.submitGeneration(request), { code: 'REQUEST_EXPIRED' });
 });

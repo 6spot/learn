@@ -10,6 +10,8 @@ Root commands: `npm run setup`, `npm test`, `npm run build`, `npm run smoke`. Se
 
 `npm run build:cloud` produces standalone `dist/cloudfunctions/learn-service` and `learn-maintenance` packages with the pinned SDK and lockfile. `npm run test:composition` verifies their configuration, transport, artifacts and actual PDF/client flow. `npm run build:release -- --config <public-json>` produces a separate `dist/release` project; `npm run test:release` checks that project using explicit test configuration. Public configuration contains only AppID, environment/function names and the exact pinned HTTPS font URLs. Secrets and service limits belong to server configuration. Example files are deliberately incomplete and must not silently become production defaults.
 
+`npm run test:all` is the complete local release regression entry: baseline, real font/layout/Canvas/PDF, service/PDF, native sessions, Python resource/print-tool regressions, cloud composition and isolated release artifacts. Restore pinned original fonts and the Python dependencies documented by the font/print tools first. Official DevTools suites run separately and serially; this command does not claim device or print acceptance.
+
 ## 3. Contracts
 
 `scripts/build.mjs` bundles the same paper source for ES2017 CommonJS miniapp and Node20 CommonJS cloud diagnostics. Native WXML/WXSS/JSON is copied, not transformed into a web app. Generate font-provider and renderer declarations before native type checking; never rely on a previous developer's ignored `dist` output. Generated output and private DevTools configuration stay ignored. SDK declarations only model used APIs; they do not establish target compatibility.
@@ -19,6 +21,8 @@ Release builds do not rewrite `dist/miniprogram` or `dist/runtime`, and exclude 
 Generated validation reports must be invalidated before loading optional fonts/tools/build dependencies that can fail, and rewritten as passing only after all checks complete. A failed rerun must not leave an earlier success report appearing current. Relative links copied into generated handoff files must be rebased for the output directory.
 
 `CloudClient` owns the JSON RPC boundary and maps safe error codes; initialize it once at App composition. Client arguments never provide trusted identity. PDF chunks are bounded canonical base64 and decoded without Node/host codecs. `createPdfDownloader` validates immutable metadata, offset/length sequence and complete SHA-256 before writing/opening a file, shares duplicate taps, and allows one active download. The App-owned temporary directory is cleaned at construction and before the next write; privacy clearing also invalidates in-flight work. Native viewer save/share is explicit user action. Do not persist partial downloads or use file identifiers as authorization.
+
+Explicit privacy clearing must verify owned PDF files are gone and report a safe retryable error for unreadable directories, busy files or still-pending writes. Confirm a missing app directory via its parent's listing; never interpret every filesystem exception as absence. Startup housekeeping may remain best effort. App clearing attempts every registered owner, then reports any failure without leaking the underlying message; the privacy page must not falsely report all local data cleared.
 
 ## 4. Validation & Error Matrix
 

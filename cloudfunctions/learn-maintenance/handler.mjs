@@ -1,4 +1,4 @@
-import { createRecoveryService } from '../../packages/cloud-service/dist/index.js';
+import { createRecoveryService, createLifecycleService } from '../../packages/cloud-service/dist/index.js';
 import { cloneDocument } from '../../packages/cloud-runtime/dist/index.js';
 import { createCloudRuntime } from '../runtime-example/index.mjs';
 import { readDeployment, DeploymentError } from '../learn-service/config.mjs';
@@ -32,5 +32,10 @@ export function createMaintenanceHandler(sdk, environment) {
   const { config, crypto } = readDeployment(environment);
   const runtime = createCloudRuntime(sdk, config.runtime);
   const recovery = createRecoveryService({ store: runtime.store, storage: runtime.storage, clock: runtime.clock, crypto }, maintenance.recovery);
-  return createMaintenanceInvocation(() => sdk.getWXContext(), () => recovery.runSweep());
+  const lifecycle = createLifecycleService({ store: runtime.store, storage: runtime.storage, clock: runtime.clock, crypto }, config.service);
+  return createMaintenanceInvocation(() => sdk.getWXContext(), async () => {
+    const recoveryResult = await recovery.runSweep();
+    const lifecycleResult = await lifecycle.runSweep();
+    return { recovery: recoveryResult, lifecycle: lifecycleResult };
+  });
 }
