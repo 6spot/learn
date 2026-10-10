@@ -24,7 +24,7 @@
 
 ## 3. 当前真实进度与优先顺序
 
-仓库现有 `packages/paper-core` 的几何、基础方格文字占位/分页代码与 Node 测试。**不要将这些当作可运行的小程序或 PDF 服务**，也不要用此前采用占位字体的试验 PDF 证明真实字体已验收。接手先运行 `cd packages/paper-core && npm install && npm test`，再检查尚未覆盖的字形边界；历史测试结果不能替代本机/CI 验证。
+当前已交付原生诊断宿主、共享两端构建、文档与字形定位契约、字体资源工具及 CloudBase 运行端口。真实字体度量和账户/预设机制已通过本地独立检查，方格布局检查完成；拼音、Canvas 和任务受理正在集成，详见 [当前开发检查点](ROADMAP.md#当前开发检查点2026-10-11)。**诊断宿主不是完整产品，模拟云端也不是已部署的 PDF 服务**；此前占位字体试验 PDF 不能证明正式字体验收。接手执行根目录 `npm test`，修改核心另执行 `cd packages/paper-core && npm test`；缺依赖先在对应目录 `npm install`，历史结果不能替代本轮检查。
 
 按 [ROADMAP](ROADMAP.md) 及 [Trellis 任务总表](../.trellis/tasks/10-10-learn-v1/task-map.md) 的阶段入口继续。T25 当前稿已按 D-043 接受，页面开发前读取 [UI_DESIGN](UI_DESIGN.md)，不再等待样式精修。先由 T01 提供最小原生宿主和两端构建，T08/T09 可利用现有几何提前产出真实空白预览/PDF，再按以下能力逐步集成：
 

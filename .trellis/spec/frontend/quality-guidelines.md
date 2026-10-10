@@ -2,7 +2,7 @@
 
 ## Status
 
-UI policy is confirmed by D-039; D-043 accepts current navigation and styling in [UI_DESIGN](../../../docs/UI_DESIGN.md). The repository has no implemented mini-program UI or UI test command yet. Do not invent passing checks or framework conventions.
+UI policy is confirmed by D-039; D-043 accepts current navigation and styling in [UI_DESIGN](../../../docs/UI_DESIGN.md). T01 implements a native diagnostics host and `npm run test:devtools`; product pages remain separate work. Check [runtime tooling](runtime-tooling.md) before changing build or automation.
 
 ## Review gates
 
@@ -12,7 +12,7 @@ UI policy is confirmed by D-039; D-043 accepts current navigation and styling in
 - Use native input/button/switch semantics; pending and disabled behavior must be functional, not merely visual.
 - Cover loading, empty, success and error/retry states relevant to each page. Network timeout is not a cloud task failure.
 - Keep input out of logs, analytics, route query strings and default persistent storage. History must not become a draft archive.
-- Verify D-040 collapsed settings, summary/reset, and cleanup preview/apply/undo. Cancel leaves input intact; mock sample transformations do not define the production O-014 algorithm.
+- Verify D-040 collapsed settings, summary/reset, and D-046 cleanup preview/apply/undo. Cancel leaves input intact; test real input, stale previews and undo invalidation rather than fixed mock-only transformations.
 - Verify D-042 same-page editing: body remains the main editing area, tracing has a visible separate row, and advanced options/reset are hidden by default. Check section hierarchy as well as reachability at narrow and short viewport sizes; do not shrink body input to force every option above the fold. Expansion must not recreate the focused text controls.
 - Check screen-only grid contrast independently from paper geometry. In successful valid-file detail, put Open PDF before metadata; query-error and expired states must not inherit the success action.
 - Trace preview navigation through both crop and full-preview entry points: one preview page owns zoom/reset and paging. Verify all enlarged paper edges remain reachable inside its scrolling reader; a single back returns to the editor without an extra preview dialog.
