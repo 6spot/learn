@@ -2,3 +2,7 @@
 {"file": "docs/PAPER_PRESETS.md", "reason": "T10 的权威业务规则与验收依据"}
 {"file": "docs/TESTING.md", "reason": "T10 的权威业务规则与验收依据"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/backend/pdf-rendering.md", "reason": "T09 完整字体嵌入、既定字形坐标及独立打印验收边界"}
+{"file": ".trellis/spec/frontend/canvas-preview.md", "reason": "Canvas 只能绘制共享布局，DPR/缩放不改变物理坐标"}
+{"file": "assets/fonts/manifest.json", "reason": "打印包正式原文件、版本和哈希可追溯；许可不自动通过"}
+{"file": "docs/PRINT_ACCEPTANCE.md", "reason": "T10 本地量测方法与未通过的 Owner 实印/许可检查表"}
