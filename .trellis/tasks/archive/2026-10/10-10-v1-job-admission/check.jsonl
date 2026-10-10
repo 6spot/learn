@@ -12,4 +12,4 @@
 {"file": "packages/cloud-service/src/jobs.ts", "reason": "安全任务投影、失败事务与日活去重"}
 {"file": "packages/cloud-service/src/paper-preparer.ts", "reason": "实际共享核心排版/摘要集成"}
 {"file": "packages/cloud-service/test/admission.test.mjs", "reason": "本轮 25 项行为回归，含独立检查新增的快照和旧宿主 API 回归"}
-{"file": ".trellis/tasks/10-10-v1-job-admission/evidence.md", "reason": "实际验证与最终外部验收界线"}
+{"file": ".trellis/tasks/archive/2026-10/10-10-v1-job-admission/evidence.md", "reason": "实际验证与最终外部验收界线"}

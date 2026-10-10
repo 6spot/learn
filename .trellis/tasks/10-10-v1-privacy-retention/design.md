@@ -6,7 +6,7 @@
 
 云端生命周期清理、隐私/删除入口、监控告警。
 
-前置交付：[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)、[T16 实现超时对账与恢复](../10-10-v1-job-recovery/prd.md)、[T17 实现记录查询与私有文件领取](../10-10-v1-records-file-access/prd.md)
+前置交付：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T16 实现超时对账与恢复](../10-10-v1-job-recovery/prd.md)、[T17 实现记录查询与私有文件领取](../10-10-v1-records-file-access/prd.md)
 
 ## 实现边界
 

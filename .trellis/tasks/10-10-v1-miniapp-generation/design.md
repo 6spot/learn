@@ -6,7 +6,7 @@
 
 miniprogram 请求号、提交快照、生成状态与重试。
 
-前置交付：[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)
+前置交付：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)
 
 ## 实现边界
 

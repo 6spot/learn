@@ -26,7 +26,7 @@
 11. 全部 generation 配置及期限关系校验；真实 `createPaperPreparer` 对四模板空白调用共享 core 排版/摘要。
 12. 宿主没有 `Object.hasOwn` 和 `String.replaceAll` 时，受理、日活写入、查询与重放仍正常；只复算和执行一次。
 
-测试源：[admission.test.mjs](../../../packages/cloud-service/test/admission.test.mjs)。
+测试源：[admission.test.mjs](../../../../../packages/cloud-service/test/admission.test.mjs)。
 
 ## 信任与隐私检查
 
