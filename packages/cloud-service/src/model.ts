@@ -65,6 +65,8 @@ export type PdfCandidate = {
   candidateId: string; jobId: string; userId: string; batchId: string;
   path: string; fileId: string; bytes: number; sha256: string; pageCount: number;
   createdAt: number; pdfRetentionMs: number; state: 'pending' | 'committed' | 'deleting' | 'deleted';
+  cleanupAfter?: number;
+  deletionCounted?: boolean;
 };
 export type GenerationRequestRecord = {
   userId: string; requestId: string; jobId: string; fingerprint: string;
@@ -72,3 +74,8 @@ export type GenerationRequestRecord = {
   windowExpiresAt: number; createdAt: number; retainUntil: number; deleted: boolean;
   inputLimits: { maxInputCodeUnits: number; maxGraphemes: number; maxPages: number };
 };
+export type GenerationRequestTombstone = {
+  userId: string; requestId: string; jobId: string; windowExpiresAt: number; createdAt: number; retainUntil: number; deleted: true;
+};
+export type StoredGenerationRequest = GenerationRequestRecord | GenerationRequestTombstone;
+export type AccountDeletion = { userId: string; requestedAt: number; earliestReuseAt: number };

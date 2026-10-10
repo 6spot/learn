@@ -1,7 +1,7 @@
 import { cloneDocument, type JsonObject, type MetadataReader, type MetadataTransaction } from '@learn/cloud-runtime';
 import { PDF_CHUNK_BYTES, ServiceError, type FileAccessConfig, type JobDetail, type ListJobsRequest, type ListJobsResponse,
   type PdfChunk, type PdfChunkRequest, type PdfInfo, type ServiceDependencies } from './contracts.js';
-import type { GenerationJob, GenerationRequestRecord, PdfCandidate, UserRecord } from './model.js';
+import type { GenerationJob, StoredGenerationRequest, PdfCandidate, UserRecord } from './model.js';
 import { isTerminal, jobSummary, recordDailyActivity } from './jobs.js';
 import { assertCandidateLocation, candidateId, isPdfEnvelope } from './artifacts.js';
 import { historyId, type HistoryEntry } from './history.js';
@@ -49,7 +49,7 @@ export class RecordAccess {
     jobSummary(job);
     if (!Number.isSafeInteger(job.recordExpiresAt) || job.recordExpiresAt < 0) throw new ServiceError('INVARIANT_VIOLATION');
     if (isTerminal(job) && this.deps.clock.now() >= job.recordExpiresAt) throw new ServiceError('RECORD_EXPIRED');
-    const binding = await reader.get<GenerationRequestRecord>('generation_requests', job.requestKey);
+    const binding = await reader.get<StoredGenerationRequest>('generation_requests', job.requestKey);
     if (!binding || binding.userId !== userId || binding.jobId !== id || binding.requestId !== job.requestId) throw new ServiceError('NOT_FOUND');
     if (binding.deleted !== false) throw new ServiceError('RECORD_EXPIRED');
     return job;

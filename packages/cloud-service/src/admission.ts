@@ -1,8 +1,9 @@
 import { assertLayoutDigestMatches, assertLayoutVersionsMatch, PaperError, validatePaperInput, type PaperLayout } from '@learn/paper-core';
+import type { MetadataTransaction } from '@learn/cloud-runtime';
 import { ServiceError, type GenerationConfig, type GenerationFailureCode, type JobSummary,
   type PublishedPreset, type ServiceConfig, type ServiceDependencies, type SubmissionWindow, type SubmitGenerationResponse } from './contracts.js';
 import { ensureAccountInTransaction, reserveCreditInTransaction } from './credits.js';
-import type { GenerationJob, GenerationRequestRecord } from './model.js';
+import type { GenerationJob, GenerationRequestRecord, StoredGenerationRequest, UserRecord } from './model.js';
 import { PresetRegistry, retainPresetInTransaction } from './presets.js';
 import { assertSameRequest, assertWindowCurrent, generationFingerprint, issueWindow, parseRequestId,
   requestIdFromEnvelope, requestRecordId, validateGenerationRequest, verifyWindowSignature, type ValidatedGenerationRequest } from './requests.js';
@@ -20,25 +21,39 @@ export class JobAdmission {
     this.policy = config.generation;
   }
 
-  window(userId: string): Promise<SubmissionWindow> {
-    return issueWindow(this.dependencies.crypto, userId, this.policy, this.dependencies.clock.now());
+  async window(userId: string): Promise<SubmissionWindow> {
+    const window = await issueWindow(this.dependencies.crypto, userId, this.policy, this.dependencies.clock.now());
+    await this.dependencies.store.transaction(tx => this.active(tx, userId));
+    return window;
   }
 
-  private async record(userId: string, requestId: string): Promise<{ key: string; value: GenerationRequestRecord | null }> {
+  private async active(tx: MetadataTransaction, userId: string): Promise<void> {
+    if (await tx.get('account_deletions', userId)) throw new ServiceError('ACCOUNT_DELETING');
+    const user = await tx.get<UserRecord>('users', userId);
+    if (!user || user.userId !== userId || user.status !== 'active') throw new ServiceError('ACCOUNT_DISABLED');
+  }
+
+  private async record(userId: string, requestId: string): Promise<{ key: string; value: StoredGenerationRequest | null }> {
     const key = await requestRecordId(this.dependencies.crypto, userId, requestId);
-    const value = await this.dependencies.store.get<GenerationRequestRecord>('generation_requests', key);
+    const value = await this.dependencies.store.get<StoredGenerationRequest>('generation_requests', key);
     return { key, value };
   }
 
-  private async loadJob(userId: string, record: GenerationRequestRecord): Promise<GenerationJob> {
+  private async loadJob(userId: string, record: StoredGenerationRequest): Promise<GenerationJob> {
     if (record.userId !== userId) throw new ServiceError('NOT_FOUND');
-    const job = await this.dependencies.store.get<GenerationJob>('generation_jobs', record.jobId);
-    if (record.deleted || !job || (isTerminal(job) && job.recordExpiresAt <= this.dependencies.clock.now())) throw new ServiceError('RECORD_EXPIRED');
-    if (job.userId !== userId || job.requestId !== record.requestId) throw new ServiceError('INVARIANT_VIOLATION');
-    return job;
+    return this.dependencies.store.transaction(async tx => {
+      await this.active(tx, userId);
+      const job = await tx.get<GenerationJob>('generation_jobs', record.jobId);
+      if (record.deleted || !job || (isTerminal(job) && job.recordExpiresAt <= this.dependencies.clock.now())) throw new ServiceError('RECORD_EXPIRED');
+      const current = await tx.get<StoredGenerationRequest>('generation_requests', job.requestKey);
+      if (!current || current.deleted) throw new ServiceError('RECORD_EXPIRED');
+      if (job.userId !== userId || job.requestId !== record.requestId || current.userId !== userId || current.jobId !== job.jobId) throw new ServiceError('INVARIANT_VIOLATION');
+      return job;
+    });
   }
 
-  private async replay(userId: string, raw: unknown, record: GenerationRequestRecord): Promise<SubmitGenerationResponse> {
+  private async replay(userId: string, raw: unknown, record: StoredGenerationRequest): Promise<SubmitGenerationResponse> {
+    if (record.deleted) throw new ServiceError('RECORD_EXPIRED');
     const request = validateGenerationRequest(raw, { ...this.policy, ...record.inputLimits });
     await assertSameRequest(this.dependencies.crypto, this.policy, userId, request, record);
     return submissionResponse(await this.loadJob(userId, record));
@@ -49,8 +64,11 @@ export class JobAdmission {
     const { value } = await this.record(userId, requestId);
     if (value) return jobSummary(await this.loadJob(userId, value));
     await verifyWindowSignature(this.dependencies.crypto, userId, this.policy, parsed);
-    assertWindowCurrent(parsed, this.dependencies.clock.now());
-    return null;
+    return this.dependencies.store.transaction(async tx => {
+      await this.active(tx, userId);
+      assertWindowCurrent(parsed, this.dependencies.clock.now());
+      return null;
+    });
   }
 
   async submit(userId: string, raw: unknown): Promise<SubmitGenerationResponse> {
@@ -94,7 +112,7 @@ export class JobAdmission {
     const jobId = `j_${this.dependencies.crypto.randomId()}`;
     const batchId = `x_${this.dependencies.crypto.randomId()}`;
     const result = await this.dependencies.store.transaction(async tx => {
-      const existing = await tx.get<GenerationRequestRecord>('generation_requests', found.key);
+      const existing = await tx.get<StoredGenerationRequest>('generation_requests', found.key);
       if (existing) return { created: false as const, record: existing };
       const now = this.dependencies.clock.now();
       assertWindowCurrent(parsed, now);

@@ -3,7 +3,7 @@ import type { LayoutVersionTuple } from '@learn/paper-core';
 import { ServiceError, type AccountResponse, type ServiceConfig, type ServiceDependencies,
   type CompatibilityRequest, type CompatibilityResponse, type PublishedPreset, type ReleaseAcceptance,
   type JobSummary, type SubmissionWindow, type SubmitGenerationResponse, type JobDetail,
-  type ListJobsResponse, type PdfInfo, type PdfChunk, type AdminStatsResponse } from './contracts.js';
+  type ListJobsResponse, type PdfInfo, type PdfChunk, type AdminStatsResponse, type PrivacyInfo, type DeletionStatus } from './contracts.js';
 import { validateConfig } from './config.js';
 import { ensureAccountInTransaction } from './credits.js';
 import { PresetRegistry } from './presets.js';
@@ -11,6 +11,7 @@ import { JobAdmission } from './admission.js';
 import { snapshotGenerationRequest } from './requests.js';
 import { RecordAccess, snapshotListJobs, snapshotPdfChunk, validateJobId } from './records.js';
 import { aggregateAdminStats, snapshotStatsRequest } from './stats.js';
+import { assertDeleteConfirmation, deletionStatus, privacyInfo, startDeletionInTransaction } from './privacy.js';
 
 export class CloudService {
   readonly config: ServiceConfig;
@@ -55,6 +56,26 @@ export class CloudService {
       const input = snapshotStatsRequest(request);
       const userId = await this.adminId();
       return aggregateAdminStats(this.dependencies, this.config, userId, input);
+    });
+  }
+
+  async getPrivacyInfo(): Promise<PrivacyInfo> {
+    return this.safe(async () => privacyInfo(this.dependencies, this.config, await this.userId()));
+  }
+
+  async getDeletionStatus(): Promise<DeletionStatus> {
+    return this.safe(async () => deletionStatus(this.dependencies, await this.userId()));
+  }
+
+  async deleteMyData(request: unknown): Promise<DeletionStatus> {
+    return this.safe(async () => {
+      assertDeleteConfirmation(request);
+      const userId = await this.userId();
+      if (!this.config.lifecycle) throw new ServiceError('PRIVACY_UNAVAILABLE');
+      const policy = this.config.lifecycle;
+      await this.dependencies.store.transaction(tx => startDeletionInTransaction(tx, userId, this.dependencies.clock.now(), policy));
+      this.recordAccess = undefined;
+      return deletionStatus(this.dependencies, userId);
     });
   }
 

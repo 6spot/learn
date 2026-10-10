@@ -91,8 +91,8 @@ const executor = createGenerationExecutor({
 候选清理先在事务 claim deleting：同批未终态和成功引用受到保护，只有失败/旧批/缺任务可删；删除后保留 deleted 墓碑。迟到上传完成会再次安全删除，删除失败留下可重试状态。T16 恢复会重扫 deleting/deleted 候选，避免删除后仍有迟到上传的窗口；不能立即丢掉墓碑，也不能调用 renderer 自动重排。内部 `verifyCandidate/settleCandidate/cleanupCandidate` 供可信恢复服务组合，不是客户端命令。
 
 ```sh
-npm test       # 139 项服务行为测试，含 T15 22、T16 21、T17 23、T22 20 项
-npm run test:pdf # 构建共享原字体/PDF，13 项真实 PDF 与内存存储/事务集成
+npm test       # 166 项服务行为测试，含 T22 20、T23 27 项
+npm run test:pdf # 构建共享原字体/PDF，15 项真实 PDF 与内存存储/事务集成
 ```
 
 真实四模板 blank/text、三页拼音和超限不保存 partial bytes 均通过。当前测试文字 PDF：作文约 5.5 MB，含标题和中文描红的田/米约 18.4 MB，拼音约 162 KB；完整原 TTF 嵌入会显著影响资源上限。64 MiB 为集成测试上限，1 MB 为故障 fixture，均不作为生产配置承诺。正式存储、函数内存/超时、私有权限和断连生命周期由 T24 最终实测。
@@ -172,4 +172,52 @@ generatedAt 是本次聚合开始时间，也是事件筛选上限；period.ends
 
 内部 `stats-coverage.ts` 供 T23 维护事务调用，不导出为用户 RPC。`markStatsCoverageGapInTransaction(tx,source,date,reason,now)` 必须与相关原始记录删除在同一事务；`advanceStatsCoverageFloorInTransaction(tx,source,date)` 在保留清理前单调推进来源起点。`stats_coverage/state` 仅存 revision/floors，`stats_coverage_gaps/<source>_<YYYYMMDD>` 仅存 source/date/reason/markedAt，无用户标识、正文或永久个人事实。floor 以下 gap 可清除；查询期间 revision 变化返回 `STATS_CHANGED`，刷新后按新覆盖返回。删除不得绕开此机制，否则不能声称统计完整。
 
-本轮独立检查后 `npm test` 139 项通过，其中 T22 20 项；覆盖实际服务生成/消费/文件领取、550 条记录分页、权限、扫描限制、缺口与删除并发，以及准备跨午夜/失败、受理回滚和重试的 DAU 归属。原生页面由 T22 前端接入；真实 CloudBase 扫描成本、索引、运行预算、权限、告警和生产保留配置仍需 T24 验收。
+T22 独立检查时 `npm test` 139 项通过，其中 T22 20 项；覆盖实际服务生成/消费/文件领取、550 条记录分页、权限、扫描限制、缺口与删除并发，以及准备跨午夜/失败、受理回滚和重试的 DAU 归属。原生页面由 T22 前端接入；真实 CloudBase 扫描成本、索引、运行预算、权限、告警和生产保留配置仍需 T24 验收。
+
+## T23 隐私、删除与有限保留
+
+按 [D-051](../../docs/DATA_AND_CREDITS.md#71-删除与重新使用d-051)，新增可信接口：
+
+| 方法 | 行为 |
+|---|---|
+| `getPrivacyInfo()` | 返回当前明确配置的保留时长、`policyVersion=learn-privacy-v1`、上海时区、服务端时间和删除状态；不自动建账 |
+| `getDeletionStatus()` | 返回 `{state,requestedAt,earliestReuseAt,serverTime}`，state 为 none/active/disabled/deleting；不自动建账 |
+| `deleteMyData({confirm:true})` | 只操作可信当前用户，事务撤销新生成/额度/记录/PDF权限并登记删除；可幂等重试，拒绝 false 确认、客户端 userId 与额外字段 |
+
+状态 `none` 表示当前没有该账户资料；完成后不保留永久完成凭证，因此不区分从未创建和已经彻底清理。删除后普通业务接口返回 `ACCOUNT_DELETING`；已进入的领取/请求查询在返回前再次检查状态。窗口先完成签名，再事务复查 active 与删除标记，迟到签名不能在删除后被返回。管理员变更也在最终写事务复查，不能留下删除后的新发布者/审计关联。客户端按 D-051 清空自己的内存输入、请求和临时 PDF；云端不能删除用户已经另存/分享的文件。
+
+启用 `ServiceConfig.lifecycle` 必须显式提供以下正安全整数，均不超过 10,000,000,000，没有生产默认：
+
+```ts
+{
+  pageSize, maxRecordsPerRun, maxRunMs,
+  maxWindowTtlMs, lateIoProtectionMs, deletionProtectionMs,
+  ledgerRetentionMs, activityRetentionMs, auditRetentionMs, inactiveUserRetentionMs,
+}
+```
+
+pageSize 为 1–100，maxRecordsPerRun 为 1–1,000；generation 必须启用，maxWindowTtlMs 至少覆盖当前 generation.windowTtlMs **及所有仍可能有效的历史部署窗口寿命**。历史最大值由部署验收确认，不从当前值猜测。`getPrivacyInfo().retention` 将 generation 的 pdf/record/request 时长和 lifecycle 对应时长投影为 pdfMs/recordMs/requestMs/ledgerMs/activityMs/auditMs/inactiveUserMs/lateIoProtectionMs/deletionProtectionMs，前端据实际配置说明。
+
+删除立即将用户置 deleted 并记录 `account_deletions`，其 earliestReuseAt 初始不早于删除所在上海月末、删除时刻+maxWindowTtlMs 和+deletionProtectionMs。维护发现旧任务截止/迟到保护、保留审计等更晚边界时只延后。**这是最早下界，不是完成承诺**：未终态任务、未知存储删除、错误或未扫到的记录仍会阻止完成；不提供提前恢复接口，不自动重新激活。已受理任务继续依 D-034 原子结算，pending 预留及所需桶/账户保持可用。
+
+自然 request 保护沿用其创建时 retainUntil；提前隐藏记录或删除用户会清除指纹、密钥/规范化信息及输入限制，只留 `userId/requestId/jobId/windowExpiresAt/createdAt/retainUntil/deleted` 的最小墓碑。删除流程可按显式 deletionProtectionMs 缩短剩余自然保留，但不早于原签名窗口与任务截止；未终态任务不会丢去重绑定。已擦除指纹的墓碑重试直接 `RECORD_EXPIRED`；墓碑最终清除后的过期签名号仍 `REQUEST_EXPIRED`，不会重新消费。
+
+维护入口仅用于可信组合：
+
+```ts
+const lifecycle = createLifecycleService({ store, storage, clock, crypto }, serviceConfig);
+await recovery.runSweep();  // 先让原任务按原截止收敛
+const report = await lifecycle.runSweep();
+```
+
+每轮依次扫描用户、候选文件、任务、请求、预留、账本、桶、活动、审计、发布者关联、历史索引、速率、删除任务与覆盖缺口。users 超过 inactiveUserRetentionMs 后进入相同有限删除流程；审计单独保留至 createdAt+auditRetentionMs。删除用户的已结算账本/预留保留至自然 ledger 期限与删除保护期限中较早者，但先等待相关 job 消失；新近结算的保护从实际 settled/created 时间计算。旧桶须没有预留，活动账户的当前桶始终保留。最终清理必须没有上述个人依赖且 reserved=0，然后在一个事务删除用户、额度账户和删除标记；不会保留永久 HMAC 墓碑，同月不能领取第二次免费额度。
+
+到期/删除 PDF 先在事务核对候选主键、归属和确定路径，撤销成功任务的正式 fileId，再完整 await 私有 remove。成功状态和消费不反转。删除未知结果保留 deleting；成功后保留 deleted 候选到 job.deadline+lateIoProtectionMs，重复清除迟到上传，到保护结束才删候选。孤儿候选从首次清理观察再保留同一显式窗口。实际平台执行/存储调用最长寿命必须被该保护覆盖，T24 真实验证不能以本地时间跳转代替。任务与 history 同事务清理，已释放 preset_uses 同步清理；仍有效的旧任务若缺 history 则幂等补索引，孤儿索引删除。
+
+源数据删除与 T22 日期/来源 coverage gap 同事务执行；自然保留推进单调 source floors，清除 floor 以下 gap。活跃用户即使一直存在，较早注册日也可能在保守的 users 覆盖下界之外，界面仍报告不可用，不推断完整旧统计。预设业务内容可保留，但被删除账户的 publishedBy 置 null；有限审计到期后删除，不永久保留个人发布者关联。
+
+`maintenance_cursors/lifecycle_v1` 的 revision/phase/afterId 使用 CAS 保存；并发或提交响应丢失只允许安全重扫，完整周期从头开始覆盖插到旧游标前的记录。maxRecordsPerRun 约束本轮主扫描处理条数，删除最终检查另有最多10个 `limit:1` 依赖探测及固定点读；pagesRead 只计主扫描 list。maxRunMs 是页/记录边界软预算，当前 I/O 完整 await，部署应预留单条处理和检查点时间。周期完整不表示所有受保护/失败记录已删除。扫描或检查点错误安全失败；逐条失败计入告警并由后续周期重试。
+
+报告只含 `LifecycleSweepResult` 的计数、耗时、cycleComplete/checkpointSaved/budgetExhausted 与安全 alerts，不输出用户、文章、文件能力或实际游标。removedFiles/removedFileBytes 只计本轮成功观察到的候选首次逻辑移除：有限 deletionCounted 标记防止重扫/并发重复计数，丢失报告可能少报，**不能作为物理存储费用或精确删除对象总量**。oldestDeletionAgeMs 只代表本轮遇到的删除任务，未扫描部分不作推断。CLEANUP_RETRY/CLEANUP_ERROR/BUDGET_EXHAUSTED 供受控监控接入；真实阈值、资源/费用告警、调度和权限仍交 T24/Owner 配置。
+
+本轮服务测试与真实 PDF 清理证据见 [T23 evidence](../../.trellis/tasks/10-10-v1-privacy-retention/evidence.md)。生产期限、平台上限和手机本地清理仍分别验收。

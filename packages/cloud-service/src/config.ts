@@ -1,5 +1,15 @@
-import { ServiceError, type FileAccessConfig, type GenerationConfig, type RecoveryConfig, type ServiceConfig, type StatsConfig } from './contracts.js';
+import { ServiceError, type FileAccessConfig, type GenerationConfig, type RecoveryConfig, type ServiceConfig, type StatsConfig, type LifecycleConfig } from './contracts.js';
 import { isStatsDate } from './stats-date.js';
+
+function validateLifecycle(config: LifecycleConfig, generation: GenerationConfig | undefined): LifecycleConfig {
+  const fields = ['pageSize', 'maxRecordsPerRun', 'maxRunMs', 'maxWindowTtlMs', 'lateIoProtectionMs', 'deletionProtectionMs',
+    'ledgerRetentionMs', 'activityRetentionMs', 'auditRetentionMs', 'inactiveUserRetentionMs'] as const;
+  if (!config || !generation || !fields.every(field => Number.isSafeInteger(config[field]) && config[field] > 0 && config[field] <= 10_000_000_000) ||
+      config.pageSize > 100 || config.maxRecordsPerRun > 1000 || config.maxWindowTtlMs < generation.windowTtlMs) {
+    throw new ServiceError('INVALID_CONFIG');
+  }
+  return Object.freeze(Object.fromEntries(fields.map(field => [field, config[field]]))) as LifecycleConfig;
+}
 
 function validateStats(config: StatsConfig): StatsConfig {
   if (!config || !isStatsDate(config.coverageStartDate) ||
@@ -72,7 +82,8 @@ export function validateConfig(config: ServiceConfig): ServiceConfig {
       clientReadyEngineVersions: Object.freeze([...new Set(config.registry.clientReadyEngineVersions)]),
     }) } : {}), ...(config.generation ? { generation: validateGeneration(config.generation) } : {}),
     ...(config.fileAccess ? { fileAccess: validateFileAccess(config.fileAccess) } : {}),
-    ...(config.stats ? { stats: validateStats(config.stats) } : {}) });
+    ...(config.stats ? { stats: validateStats(config.stats) } : {}),
+    ...(config.lifecycle ? { lifecycle: validateLifecycle(config.lifecycle, config.generation) } : {}) });
 }
 
 /** China standard time has no DST; fixed +08:00 avoids depending on Intl in WeChat. */

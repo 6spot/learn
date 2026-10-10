@@ -4,3 +4,4 @@ export { createRequestId } from './requests.js';
 export { createPaperPreparer } from './paper-preparer.js';
 export { createGenerationExecutor } from './execution.js';
 export { createRecoveryService } from './recovery.js';
+export { createLifecycleService } from './lifecycle.js';

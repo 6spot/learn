@@ -2,10 +2,11 @@ import type { JsonObject, MetadataReader, MetadataTransaction } from '@learn/clo
 import { DEFAULT_PRESETS, validateLayoutVersions, validateTrustedPreset, type LayoutVersionTuple, type TrustedPaperPreset } from '@learn/paper-core';
 import { ServiceError, type CompatibilityRequest, type CompatibilityResponse, type FontBundleDescriptor,
   type PresetAvailability, type PublishedPreset, type ReleaseAcceptance, type ServiceConfig, type ServiceDependencies } from './contracts.js';
+import type { UserRecord } from './model.js';
 
 type VersionState = { state: 'supported' | 'retired' | 'removed'; references: number };
 type StoredVersion = { registryId: string; preset: JsonObject; resources: JsonObject;
-  publishedBy: string; publishedAt: number; acceptance: JsonObject | null };
+  publishedBy: string | null; publishedAt: number; acceptance: JsonObject | null };
 type ActiveVersion = { registryId: string; versions: JsonObject };
 type VersionUse = { registryId: string; state: 'held' | 'released' };
 
@@ -89,6 +90,12 @@ export class PresetRegistry {
     if (!config.registry || !dependencies.resources) throw new ServiceError('REGISTRY_UNAVAILABLE');
   }
 
+  private async activeAdmin(tx: MetadataTransaction, userId: string): Promise<void> {
+    const user = await tx.get<UserRecord>('users', userId);
+    if (!user || user.userId !== userId || user.status !== 'active') throw new ServiceError('ACCOUNT_DISABLED');
+    if (!this.config.adminUserIds.includes(userId)) throw new ServiceError('FORBIDDEN');
+  }
+
   private engineSupported(version: string): boolean { return this.config.registry!.cloudEngineVersions.includes(version); }
 
   private async bundle(version: string, requiredIds: readonly string[] = []): Promise<FontBundleDescriptor> {
@@ -140,6 +147,7 @@ export class PresetRegistry {
     const resources = await this.bundle(preset.versions.fontBundleVersion, needed);
     const auditId = this.auditId();
     await this.dependencies.store.transaction(async tx => {
+      await this.activeAdmin(tx, userId);
       if (await tx.get('preset_states', id)) throw new ServiceError('VERSION_EXISTS');
       const now = this.dependencies.clock.now();
       await tx.create('preset_versions', id, { registryId: id, preset: json(preset), resources: json(resources),
@@ -178,6 +186,7 @@ export class PresetRegistry {
     }
     const auditId = this.auditId();
     await this.dependencies.store.transaction(async tx => {
+      await this.activeAdmin(tx, userId);
       const state = await tx.get<VersionState>('preset_states', record.registryId);
       assertState(state);
       if (state.state !== 'supported') throw new ServiceError('VERSION_RETIRED');
@@ -191,6 +200,7 @@ export class PresetRegistry {
     const id = await presetRegistryId(this.dependencies.crypto, versions);
     const auditId = this.auditId();
     await this.dependencies.store.transaction(async tx => {
+      await this.activeAdmin(tx, userId);
       const state = await tx.get<VersionState>('preset_states', id);
       if (!state || state.state === 'removed') throw new ServiceError('NOT_FOUND');
       assertState(state);

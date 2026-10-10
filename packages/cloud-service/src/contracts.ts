@@ -130,6 +130,29 @@ export interface RecoveryService {
   runSweep(): Promise<RecoverySweepResult>;
 }
 
+export type LifecycleConfig = Readonly<{
+  pageSize: number; maxRecordsPerRun: number; maxRunMs: number;
+  /** Must cover the longest still-valid window issued by any retained deployment. */
+  maxWindowTtlMs: number; lateIoProtectionMs: number; deletionProtectionMs: number;
+  ledgerRetentionMs: number; activityRetentionMs: number; auditRetentionMs: number; inactiveUserRetentionMs: number;
+}>;
+export type DeletionStatus = Readonly<{ state: 'none' | 'active' | 'disabled' | 'deleting'; requestedAt: number | null;
+  /** Lower bound only: pending settlement or failed cleanup can delay completion. */
+  earliestReuseAt: number | null; serverTime: number }>;
+export type PrivacyInfo = Readonly<{ policyVersion: 'learn-privacy-v1'; timeZone: 'Asia/Shanghai'; serverTime: number;
+  retention: Readonly<{ pdfMs: number; recordMs: number; requestMs: number; ledgerMs: number; activityMs: number;
+    auditMs: number; inactiveUserMs: number; lateIoProtectionMs: number; deletionProtectionMs: number }>;
+  deletion: DeletionStatus }>;
+export type LifecycleSweepResult = Readonly<{
+  visitedRecords: number; deletedRecords: number; scrubbedRequests: number; removedFiles: number; removedFileBytes: number;
+  deletedCandidates: number; indexedJobs: number; startedDeletions: number; completedDeletions: number;
+  protectedRecords: number; retryableRecords: number; recordErrors: number; pagesRead: number;
+  startedAt: number; finishedAt: number; cycleComplete: boolean; checkpointSaved: boolean;
+  budgetExhausted: boolean; oldestDeletionAgeMs: number;
+  alerts: readonly ('CLEANUP_RETRY' | 'CLEANUP_ERROR' | 'BUDGET_EXHAUSTED')[];
+}>;
+export interface LifecycleService { runSweep(): Promise<LifecycleSweepResult> }
+
 export type ServiceConfig = Readonly<{
   stage: 'development' | 'production';
   monthlyFreeCredits: number;
@@ -141,6 +164,7 @@ export type ServiceConfig = Readonly<{
   generation?: GenerationConfig;
   fileAccess?: FileAccessConfig;
   stats?: StatsConfig;
+  lifecycle?: LifecycleConfig;
 }>;
 
 export type ServiceDependencies = Readonly<{
@@ -176,7 +200,7 @@ export type ServiceErrorCode = 'UNAUTHENTICATED' | 'ACCOUNT_DISABLED' | 'FORBIDD
   'IDEMPOTENCY_CONFLICT' | 'KEY_UNAVAILABLE' | 'FINGERPRINT_UNSUPPORTED' | 'RATE_LIMITED' |
   'CONCURRENCY_LIMITED' | 'EXECUTION_UNAVAILABLE' | 'EXECUTION_OUTCOME_UNKNOWN' |
   'FILE_ACCESS_UNAVAILABLE' | 'FILE_NOT_READY' | 'FILE_EXPIRED' | 'FILE_UNAVAILABLE' | 'FILE_LIMIT_EXCEEDED' |
-  'STATS_UNAVAILABLE' | 'STATS_LIMIT_EXCEEDED' | 'STATS_CHANGED';
+  'STATS_UNAVAILABLE' | 'STATS_LIMIT_EXCEEDED' | 'STATS_CHANGED' | 'PRIVACY_UNAVAILABLE' | 'ACCOUNT_DELETING';
 
 export class ServiceError extends Error {
   constructor(readonly code: ServiceErrorCode) {

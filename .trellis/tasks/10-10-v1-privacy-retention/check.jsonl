@@ -6,3 +6,13 @@
 {"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
 {"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/backend/account-presets.md", "reason": "Trusted identity, monthly quota and active-account boundaries"}
+{"file": ".trellis/spec/backend/job-admission.md", "reason": "Signed window, tombstone and admission transaction contracts"}
+{"file": ".trellis/spec/backend/job-execution.md", "reason": "Terminal settlement and candidate binding"}
+{"file": ".trellis/spec/backend/job-recovery.md", "reason": "Bounded maintenance and late I/O re-scan"}
+{"file": ".trellis/spec/backend/file-delivery.md", "reason": "Private file authorization and history GC"}
+{"file": ".trellis/spec/backend/admin-statistics.md", "reason": "Source deletion coverage and no individual statistics tombstone"}
+{"file": "packages/cloud-service/README.md", "reason": "T23 implemented API, config, finite protection and telemetry"}
+{"file": "packages/cloud-service/src/lifecycle-records.ts", "reason": "Finite records GC and atomic source coverage"}
+{"file": "packages/cloud-service/src/lifecycle-files.ts", "reason": "Reference revocation, I/O outcome and finite candidate fences"}
+{"file": "packages/cloud-service/test/lifecycle.test.mjs", "reason": "Backend privacy/deletion/retention regression evidence"}

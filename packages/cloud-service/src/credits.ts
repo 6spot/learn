@@ -27,6 +27,7 @@ async function ledger(tx: MetadataTransaction, id: string, value: CreditLedgerEn
 export async function ensureAccountInTransaction(tx: MetadataTransaction, userId: string, now: number,
   config: ServiceConfig): Promise<CreditAccount> {
   const period = quotaPeriod(now);
+  if (await tx.get('account_deletions', userId)) throw new ServiceError('ACCOUNT_DELETING');
   const user = await tx.get<UserRecord>('users', userId);
   if (user && user.status !== 'active') throw new ServiceError('ACCOUNT_DISABLED');
   if (user) await tx.set('users', userId, { ...user, lastActiveAt: now });
