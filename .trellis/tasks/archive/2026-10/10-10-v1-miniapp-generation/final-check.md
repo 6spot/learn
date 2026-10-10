@@ -10,7 +10,7 @@
 - 文件：`miniprogram/test/generation-native.test.mjs`。
   问题：测试读取共享 `dist/miniprogram`，检查期间源码变化可能未进入该构建，不能证明当前修改。
   修复：使用与原生构建相同的 neutral/es2017/CJS 目标在内存构建当前 App/两个 Page；原字体 provider 保留已构建的专用 miniapp bundle。WXML 从源码读取，不写共享 DevTools 产物。新增 App hide、Page hide 保留路由、旧页面 token、旧 Canvas completion 四项回归。
-- 文档：新增前端 [generation-session spec](../../spec/frontend/generation-session.md)，同步索引/质量检查及本任务设计、证据，修正已过期的 generation 清理接线描述。
+- 文档：新增前端 [generation-session spec](../../../../spec/frontend/generation-session.md)，同步索引/质量检查及本任务设计、证据，修正已过期的 generation 清理接线描述。
 
 ## Findings (not fixed)
 

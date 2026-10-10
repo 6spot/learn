@@ -25,10 +25,10 @@
 | T17 | [实现记录查询与私有文件领取](../archive/2026-10/10-10-v1-records-file-access/prd.md) | T15 | 云端生成记录 API、私有 PDF 授权领取 |
 | T18 | [实现模板、编辑与预览页面](../archive/2026-10/10-10-v1-miniapp-editor/prd.md) | T08、T25 | miniprogram 模板首页、统一编辑与分页预览 |
 | T19 | [实现应用级兼容与更新流程](../archive/2026-10/10-10-v1-miniapp-update/prd.md) | T12、T18 | miniprogram 应用入口、共享兼容状态与更新交互 |
-| T20 | [接通生成提交与结果流程](../10-10-v1-miniapp-generation/prd.md) | T14、T15、T19、T21 | 请求号、提交快照、重试与受理后进入 T21 共用详情；不另建结果页 |
-| T21 | [实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md) | T13、T17、T19；界面基线 T25 已满足 | P04/P05/P06 的唯一界面所有者，含余额、详情状态、刷新和文件打开 |
-| T22 | [实现最小运营中心](../10-10-v1-admin-observability/prd.md) | T13、T15；界面另需 T25 | 小程序管理员页面、云端聚合统计与审计 |
-| T23 | [实现隐私、保留与清理机制](../10-10-v1-privacy-retention/prd.md) | T14、T16、T17；界面另需 T25 | 云端生命周期清理、隐私/删除入口、监控告警 |
+| T20 | [接通生成提交与结果流程](../archive/2026-10/10-10-v1-miniapp-generation/prd.md) | T14、T15、T19、T21 | 请求号、提交快照、重试与受理后进入 T21 共用详情；不另建结果页 |
+| T21 | [实现我的与生成记录页面](../archive/2026-10/10-10-v1-miniapp-records/prd.md) | T13、T17、T19；界面基线 T25 已满足 | P04/P05/P06 的唯一界面所有者，含余额、详情状态、刷新和文件打开 |
+| T22 | [实现最小运营中心](../archive/2026-10/10-10-v1-admin-observability/prd.md) | T13、T15；界面另需 T25 | 小程序管理员页面、云端聚合统计与审计 |
+| T23 | [实现隐私、保留与清理机制](../archive/2026-10/10-10-v1-privacy-retention/prd.md) | T14、T16、T17；界面另需 T25 | 云端生命周期清理、隐私/删除入口、监控告警 |
 | T24 | [完成端到端及发布验收](../10-10-v1-release-acceptance/prd.md) | T10、T12、T13、T14、T15、T16、T17、T18、T19、T20、T21、T22、T23 | docs/TESTING.md、发布验收记录与部署操作说明 |
 | T25 | [首版页面、导航与视觉规范](../archive/2026-10/10-10-v1-ui-design/prd.md) | — | 页面/菜单/布局/视觉设计，前端规范与可视化评审 |
 

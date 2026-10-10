@@ -36,4 +36,4 @@
 
 - T23 删除/GC 必须调用 coverage 原语；自然保留 floor 与配置值、真实告警交 T24。
 - generatedAt 不是跨集合数据库快照；并发写入需刷新，响应不承诺强一致时间点统计。
-- 小程序运营中心 UI、RPC 接口已完成；生产扫描索引/成本与真实权限告警继续由 Owner 验收。最终组合见 [官方产品证据](../10-10-v1-release-acceptance/product-integration-evidence.md)。
+- 小程序运营中心 UI、RPC 接口已完成；生产扫描索引/成本与真实权限告警继续由 Owner 验收。最终组合见 [官方产品证据](../../../10-10-v1-release-acceptance/product-integration-evidence.md)。

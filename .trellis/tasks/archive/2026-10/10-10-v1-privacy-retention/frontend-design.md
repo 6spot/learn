@@ -1,6 +1,6 @@
 # T23 原生隐私与数据页面
 
-2026-10-11：按 P07、D-051 及 [DATA_AND_CREDITS §7.1](../../../docs/DATA_AND_CREDITS.md#71-删除与重新使用d-051) 实施。后端契约见 [design.md](design.md)，期限不自行填入默认数值。
+2026-10-11：按 P07、D-051 及 [DATA_AND_CREDITS §7.1](../../../../../docs/DATA_AND_CREDITS.md#71-删除与重新使用d-051) 实施。后端契约见 [design.md](design.md)，期限不自行填入默认数值。
 
 - 页面使用 `getLearnApp().client.getPrivacyInfo/getDeletionStatus/deleteMyData`，不调用自动建号的账户 API。初次进入读取真实配置与当前删除状态；主动查询状态不触发删除，不轮询。
 - 分节说明处理数据、用途、正文不持久化与私有 PDF 的区别、当前服务端配置的保留期限、删除状态和微信反馈。九项期限按真实毫秒精确转换，说明到期与分批实际删除、未终态结算保护不同；旧记录可能使用受理时期限，不承诺新的配置追溯改写已有记录。

@@ -82,4 +82,4 @@ App 创建 `GenerationSession({client,editor,canGenerate,secureUuid,onJobKnown,w
 | `./node_modules/.bin/tsc -p tsconfig.json` | 通过 |
 | `node --check miniprogram/test/generation-native.test.mjs`、`git diff --check` | 通过；仓库没有独立 lint 脚本 |
 
-本 checker 未运行共享 build 或 DevTools；baseline 确认统一重建包含本次修改后，本 checker 补跑 emitted editor/compatibility/runtime 并通过。全部专项合计 **119/119**；旧 fontkit axisIndex 重复键构建警告未变。官方模拟器由 baseline 继续整合。本轮同步 [generation submission spec](../../spec/frontend/generation-session.md)，没有把真实平台、云配置和打印验收标为通过。
+本 checker 未运行共享 build 或 DevTools；baseline 确认统一重建包含本次修改后，本 checker 补跑 emitted editor/compatibility/runtime 并通过。全部专项合计 **119/119**；旧 fontkit axisIndex 重复键构建警告未变。官方模拟器由 baseline 继续整合。本轮同步 [generation submission spec](../../../../spec/frontend/generation-session.md)，没有把真实平台、云配置和打印验收标为通过。

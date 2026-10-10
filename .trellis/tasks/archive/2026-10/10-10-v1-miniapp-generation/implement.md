@@ -3,7 +3,7 @@
 ## 启动条件
 
 - [x] 核对 [PRD](prd.md)、[设计](design.md)、权威文档及本次工作区变更。
-- [x] 核对最终集成验收依赖（阶段入口见下文）：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../archive/2026-10/10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
+- [x] 核对最终集成验收依赖（阶段入口见下文）：[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
 - [x] 将技术未知项落实为可验证方案；安全随机 API 依据见 [研究](research/random-source.md)，本阶段接口/边界已由 root 评审。
 - [x] 阶段 A 完成独立检查；root 在 T19 归档后启动阶段 B 并明确 App/T21、原生生成入口及 DevTools 分工。
 
@@ -13,13 +13,13 @@
 
 A：在 T14/T15 受理与 T19/T21 客户端接口明确后实现请求号、快照、重试；B：接真实服务并进入 T21 唯一的 P06。T21 提供详情视图/状态与查询，T20 不另建生成结果页；本任务最终验收依赖 T21 集成完成。
 
-阶段输入与整项验收依赖以 [父任务总表](../10-10-learn-v1/task-map.md) 为准；只完成阶段不能将整项标记完成。
+阶段输入与整项验收依赖以 [父任务总表](../../../10-10-learn-v1/task-map.md) 为准；只完成阶段不能将整项标记完成。
 
 ## 交付步骤
 
 - [x] 验证随机源回调契约并建立一次操作的内存快照；官方模拟器实际 wx.getRandomValues 调用已通过。
 - [x] 接入受理/查询及兼容错误交互；实际原生 Page/App 的 VM 测试通过。
-- [x] 本地与官方模拟器覆盖双击、参数变化、断网、跨编辑/预览重进及受理结果丢失，见 [最终产品证据](../10-10-v1-release-acceptance/product-integration-evidence.md)。
+- [x] 本地与官方模拟器覆盖双击、参数变化、断网、跨编辑/预览重进及受理结果丢失，见 [最终产品证据](../../../10-10-v1-release-acceptance/product-integration-evidence.md)。
 
 ## 验收映射
 
@@ -31,7 +31,7 @@ A：在 T14/T15 受理与 T19/T21 客户端接口明确后实现请求号、快�
 
 ## 验证与收尾
 
-- [x] 本地模块、真实组合与官方模拟器检查通过；真实环境按 D-044 明确转移 [最终验收](../../../docs/FINAL_ACCEPTANCE.md)。
+- [x] 本地模块、真实组合与官方模拟器检查通过；真实环境按 D-044 明确转移 [最终验收](../../../../../docs/FINAL_ACCEPTANCE.md)。
 - [x] 检查文档差异、相对引用及与 DECISIONS/PAPER_PRESETS 的一致性。
 - [x] 本轮结果与失败修复已记录，TESTING/ROADMAP 已同步。
 - [x] 检查无正文、敏感凭据或未授权字体分发进入日志/提交。

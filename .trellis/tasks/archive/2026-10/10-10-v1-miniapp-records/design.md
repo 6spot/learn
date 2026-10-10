@@ -6,7 +6,7 @@
 
 miniprogram 我的、记录列表/详情和文件打开。
 
-前置交付：[T13 身份与额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)、[T17 记录与私有文件](../archive/2026-10/10-10-v1-records-file-access/prd.md)、[T19 应用兼容](../archive/2026-10/10-10-v1-miniapp-update/prd.md)。T20 消费本任务提供的详情入口，不是启动前置。
+前置交付：[T13 身份与额度](../10-10-v1-identity-credits/prd.md)、[T17 记录与私有文件](../10-10-v1-records-file-access/prd.md)、[T19 应用兼容](../10-10-v1-miniapp-update/prd.md)。T20 消费本任务提供的详情入口，不是启动前置。
 
 ## 实现边界
 
@@ -34,9 +34,9 @@ miniprogram 我的、记录列表/详情和文件打开。
 
 ## 依据
 
-- [PRODUCT](../../../docs/PRODUCT.md)
-- [DATA_AND_CREDITS](../../../docs/DATA_AND_CREDITS.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PRODUCT](../../../../../docs/PRODUCT.md)
+- [DATA_AND_CREDITS](../../../../../docs/DATA_AND_CREDITS.md)
+- [TESTING](../../../../../docs/TESTING.md)
 
 ## 跨任务接口归属
 

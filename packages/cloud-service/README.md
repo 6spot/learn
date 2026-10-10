@@ -220,4 +220,4 @@ const report = await lifecycle.runSweep();
 
 报告只含 `LifecycleSweepResult` 的计数、耗时、cycleComplete/checkpointSaved/budgetExhausted 与安全 alerts，不输出用户、文章、文件能力或实际游标。removedFiles/removedFileBytes 只计本轮成功观察到的候选首次逻辑移除：有限 deletionCounted 标记防止重扫/并发重复计数，丢失报告可能少报，**不能作为物理存储费用或精确删除对象总量**。oldestDeletionAgeMs 只代表本轮遇到的删除任务，未扫描部分不作推断。CLEANUP_RETRY/CLEANUP_ERROR/BUDGET_EXHAUSTED 供受控监控接入；真实阈值、资源/费用告警、调度和权限仍交 T24/Owner 配置。
 
-本轮服务测试与真实 PDF 清理证据见 [T23 evidence](../../.trellis/tasks/10-10-v1-privacy-retention/evidence.md)。生产期限、平台上限和手机本地清理仍分别验收。
+本轮服务测试与真实 PDF 清理证据见 [T23 evidence](../../.trellis/tasks/archive/2026-10/10-10-v1-privacy-retention/evidence.md)。生产期限、平台上限和手机本地清理仍分别验收。

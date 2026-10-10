@@ -28,4 +28,4 @@ generatedAt 是本次聚合开始时间；筛选事件时间不晚于它且在�
 
 单元/模拟集成覆盖时区边界、重试与分块幂等、零分母、成功模板、超过100项分页、扫描/时间预算、管理员禁用、坏元数据、覆盖缺口与并发 revision。真实 CloudBase 权限、索引、扫描成本、配置及告警留 T24；UI 未完成前不将 T22 整项归档。
 
-业务权威：[DATA_AND_CREDITS](../../../docs/DATA_AND_CREDITS.md#6-统计口径)、[PRODUCT](../../../docs/PRODUCT.md)、[UI_DESIGN](../../../docs/UI_DESIGN.md)、[CLOUDBASE](../../../docs/CLOUDBASE.md)、[TESTING](../../../docs/TESTING.md)。
+业务权威：[DATA_AND_CREDITS](../../../../../docs/DATA_AND_CREDITS.md#6-统计口径)、[PRODUCT](../../../../../docs/PRODUCT.md)、[UI_DESIGN](../../../../../docs/UI_DESIGN.md)、[CLOUDBASE](../../../../../docs/CLOUDBASE.md)、[TESTING](../../../../../docs/TESTING.md)。

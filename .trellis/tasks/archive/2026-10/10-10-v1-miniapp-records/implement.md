@@ -3,7 +3,7 @@
 ## 启动条件
 
 - [x] 核对 [PRD](prd.md)、[设计](design.md)、权威文档及本次工作区变更。
-- [x] 核对最终集成验收依赖（阶段入口见下文）：[T13 身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)、[T17 记录与私有文件](../archive/2026-10/10-10-v1-records-file-access/prd.md)、[T19 应用兼容](../archive/2026-10/10-10-v1-miniapp-update/prd.md)；T25 界面基线已满足。
+- [x] 核对最终集成验收依赖（阶段入口见下文）：[T13 身份与免费额度](../10-10-v1-identity-credits/prd.md)、[T17 记录与私有文件](../10-10-v1-records-file-access/prd.md)、[T19 应用兼容](../10-10-v1-miniapp-update/prd.md)；T25 界面基线已满足。
 - [x] 将技术未知项落实为可验证方案；使用现有 PDF 下载器、原生控件与明确的有限分页，不新增产品功能。
 - [x] root 已接受 App 单例、前后台生命周期、分页预算、去重与清理方案。
 
@@ -13,7 +13,7 @@
 
 A：T01/T25 具备后先实现我的/记录/唯一 P06 的状态与导航契约，支持 T20 传入已受理任务号；B：接 T13 余额、T17 查询/文件与 T19 应用状态，验离页刷新、真实领取。可以独立用合成任务和真实查询接口验收，不以 T20 完工为启动条件。
 
-阶段输入与整项验收依赖以 [父任务总表](../10-10-learn-v1/task-map.md) 为准；只完成阶段不能将整项标记完成。
+阶段输入与整项验收依赖以 [父任务总表](../../../10-10-learn-v1/task-map.md) 为准；只完成阶段不能将整项标记完成。
 
 ## 交付步骤
 
@@ -31,7 +31,7 @@ A：T01/T25 具备后先实现我的/记录/唯一 P06 的状态与导航契约�
 
 ## 验证与收尾
 
-- [x] 模块、组合及 [官方产品流程](../10-10-v1-release-acceptance/product-integration-evidence.md) 通过；外部环境验收明确转移 [最终清单](../../../docs/FINAL_ACCEPTANCE.md)，本地开发交付可按 D-044 归档。
+- [x] 模块、组合及 [官方产品流程](../../../10-10-v1-release-acceptance/product-integration-evidence.md) 通过；外部环境验收明确转移 [最终清单](../../../../../docs/FINAL_ACCEPTANCE.md)，本地开发交付可按 D-044 归档。
 - [x] 检查文档差异、相对引用及与 DECISIONS/PAPER_PRESETS 的一致性。
 - [x] 将本轮实际验证、失败原因与剩余项目记录到 [evidence](evidence.md)。
 - [x] 检查无正文、敏感凭据或未授权字体分发进入日志/提交。

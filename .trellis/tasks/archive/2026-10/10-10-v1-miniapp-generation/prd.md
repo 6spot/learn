@@ -6,10 +6,10 @@
 
 ## 已确认背景与范围
 
-- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../10-10-learn-v1/prd.md)。
+- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../../../10-10-learn-v1/prd.md)。
 - 责任范围：miniprogram 请求号、提交快照、生成状态与重试。目录名称表示职责，尚未存在的模块不得描述为已实现。
 - 已有四模板几何与基础方格文字布局可复用；本任务不能以历史测试或占位字体样张代替验收。
-- 最终集成验收依赖：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../archive/2026-10/10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
+- 最终集成验收依赖：[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
 
 ## 要求与验收
 
@@ -21,7 +21,7 @@
 
 ## UI 设计依赖
 
-D-043 已接受 [T25](../archive/2026-10/10-10-v1-ui-design/prd.md) 当前稿为功能开发基线，O-015 本轮看稿关闭。页面按 [UI_DESIGN](../../../docs/UI_DESIGN.md) 与前端规范实现，样式细节后续迭代；O-014/O-007/O-009 等独立决策不因 UI 确认而关闭。
+D-043 已接受 [T25](../10-10-v1-ui-design/prd.md) 当前稿为功能开发基线，O-015 本轮看稿关闭。页面按 [UI_DESIGN](../../../../../docs/UI_DESIGN.md) 与前端规范实现，样式细节后续迭代；O-014/O-007/O-009 等独立决策不因 UI 确认而关闭。
 
 ## 验收条件与待验证事项
 
@@ -35,7 +35,7 @@ D-043 已接受 [T25](../archive/2026-10/10-10-v1-ui-design/prd.md) 当前稿为
 
 ## 权威依据
 
-- [PRODUCT](../../../docs/PRODUCT.md)
-- [DATA_AND_CREDITS](../../../docs/DATA_AND_CREDITS.md)
-- [ARCHITECTURE](../../../docs/ARCHITECTURE.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PRODUCT](../../../../../docs/PRODUCT.md)
+- [DATA_AND_CREDITS](../../../../../docs/DATA_AND_CREDITS.md)
+- [ARCHITECTURE](../../../../../docs/ARCHITECTURE.md)
+- [TESTING](../../../../../docs/TESTING.md)

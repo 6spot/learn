@@ -1,17 +1,17 @@
 {
-  "id": "v1-admin-observability",
-  "name": "v1-admin-observability",
-  "title": "T22 实现最小运营中心",
-  "description": "Owner 能查看必要使用量、失败与额度消耗，且普通用户无法越权。",
-  "status": "in_progress",
+  "id": "v1-miniapp-generation",
+  "name": "v1-miniapp-generation",
+  "title": "T20 接通生成提交与结果流程",
+  "description": "把预览提交为可信云端任务，并正确处理双击、断网和响应丢失。",
+  "status": "completed",
   "dev_type": null,
   "scope": null,
   "package": null,
-  "priority": "P2",
+  "priority": "P1",
   "creator": "me",
   "assignee": "me",
   "createdAt": "2026-10-10",
-  "completedAt": null,
+  "completedAt": "2026-10-11",
   "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
@@ -23,7 +23,7 @@
   "relatedFiles": [],
   "notes": "",
   "meta": {
-    "plan_id": "T22",
+    "plan_id": "T20",
     "development_complete": true,
     "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }

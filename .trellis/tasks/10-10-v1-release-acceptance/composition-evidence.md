@@ -11,6 +11,6 @@
 - `npm run setup`范围增加PDF包与部署SDK锁文件。根`@noble/hashes@1.8.0`供原生下载hash；云SDK 4.0.2，Axios明确override0.34.0；实际本地HTTP测试通过。SDK realtime watcher的lodash.set/unset上游advisories未消除（4high/1moderate含父包传播），Learn未使用watch，详情见云函数README。
 - 额外检查：公开配置拒绝测试 **1/1**；原生严格 TypeScript、21 个相关 JavaScript 文件语法、根/云直接依赖的 manifest/lock/安装版本一致性、配置示例 JSON 与 `git diff --check` 通过。仓库没有独立 lint 命令，未将语法检查冒充完整 lint。fontkit 生成代码的重复 `axisIndex` warning 仍存在，未修改第三方依赖。
 
-T22/T23 后续组合已补齐：统计、隐私和删除 RPC、显式生产策略、维护 recovery/lifecycle 顺序及真实 PDF 删除后有限期清理/重建；22 项组合复核见 [T23 组合检查](../10-10-v1-privacy-retention/composition-check.md)。原生显式隐私清理现会报告忙文件/目录读取失败和在途写入，实际 App/PDF/隐私链检查见 [T23 前端检查](../10-10-v1-privacy-retention/frontend-check.md)。以上阶段计数各对应其当时源码，最终还须重新打包与完整回归。
+T22/T23 后续组合已补齐：统计、隐私和删除 RPC、显式生产策略、维护 recovery/lifecycle 顺序及真实 PDF 删除后有限期清理/重建；22 项组合复核见 [T23 组合检查](../archive/2026-10/10-10-v1-privacy-retention/composition-check.md)。原生显式隐私清理现会报告忙文件/目录读取失败和在途写入，实际 App/PDF/隐私链检查见 [T23 前端检查](../archive/2026-10/10-10-v1-privacy-retention/frontend-check.md)。以上阶段计数各对应其当时源码，最终还须重新打包与完整回归。
 
 尚需：T19/T20/T21/T22/T23 页面与 App 完整接线；官方自动化真实服务桥/多账号/故障/完整下载；最终全量与干净安装/产物测试。真实云配置、权限、设备、许可、打印由 Owner 最后验收。
