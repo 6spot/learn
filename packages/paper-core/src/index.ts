@@ -20,3 +20,8 @@ export { validatePaperInput, validateTrustedPreset, parseTextBlock, createPaperD
 export { getDevelopmentPreset, DEVELOPMENT_ENGINE_VERSION, DEVELOPMENT_FONT_BUNDLE_VERSION } from './development-presets.js';
 export { graphemeSegments, GRAPHEME_IMPLEMENTATION, isWhitespace } from './unicode.js';
 export { positionShapedText, containsInk, roundMm } from './glyph-placement.js';
+export { layoutSquarePaperDocument } from './square-layout.js';
+export { layoutPinyinPaperDocument } from './pinyin-layout.js';
+export { layoutPaperDocument, validateLayoutVersions, assertLayoutVersionsMatch, assertLayoutVersionsSupported } from './layout-versions.js';
+export { serializePaperLayout, createLayoutDigest, validateLayoutDigest, assertLayoutDigestMatches, LAYOUT_PROTOCOL_VERSION, LAYOUT_DIGEST_PREFIX, LAYOUT_PRECISION_MM } from './layout-digest.js';
+export { PAPER_ENGINE_VERSION } from './engine.js';

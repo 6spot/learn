@@ -1,35 +1,35 @@
-# T07 设计边界
+# T07 确定性布局协议
 
-> 状态：任务拆解阶段的设计基线。具体库、接口字段或平台参数未在本文件中假定已定稿；执行前按实测补齐。
+> 2026-10-11执行设计。T05/T06及真实字体可用；主会话已授权继续，旧内核代码不由新算法冒充执行。
 
-## 责任与依赖
+## 边界与职责
 
-共享版本组合、布局序列化及摘要协议。
+新增core统一四模板入口、版本组合验证、布局精确序列化及同步SHA-256摘要；新增合成协议/真实字体双构建测试。只修改core与所属runtime测试，不改CloudBase账本、Canvas或页面。T12支持名单/版本引用计数仍是云端权威；T14请求HMAC指纹仍独立保护输入参数及幂等。本任务不保留正文/布局/摘要。
 
-前置交付：[T04 接入共享字体度量](../archive/2026-10/10-10-v1-font-metrics/prd.md)、[T05 补齐方格文字排版](../10-10-v1-square-layout/prd.md)、[T06 实现拼音行带排版](../10-10-v1-pinyin-layout/prd.md)
+## API
 
-## 实现边界
+- `layoutPaperDocument(document, metrics): PaperLayout`：核对锁定文档、可信预设、当前编译引擎及字体bundle，分派唯一方格或拼音布局。
+- `validateLayoutVersions(value): LayoutVersionTuple`：只接受四个稳定JSON字段并返回不可变副本。
+- `assertLayoutVersionsMatch(expected, actual): void`：完整组合比较，不能只看templateVersion。
+- `assertLayoutVersionsSupported(versions, supported): void`：显式可信支持列表精确匹配，另要求当前包实际实现此engine；不能用当前代码执行旧engine并挂旧标签。旧版本部署保留其实际包，实现多引擎调度由云端组合完成，不在core建立通用插件框架。
+- `serializePaperLayout(layout): string` / `createLayoutDigest(layout): string` / `validateLayoutDigest(value): string` / `assertLayoutDigestMatches(layout, expected): void`。
 
-1. 定义跨端协议及确定性序列化样例。
-2. 实现共享校验/摘要并验证多页与临界换行。
-3. 确定兼容错误契约及旧组合过渡测试输入。
+摘要字符串为 `learn-layout-v1:sha256:<64位小写十六进制>`；T14注入端口 `prepare(input,trustedPreset)->{layout,digest}` 可直接消费，不保存返回布局。
 
-## 跨层约束
+## 序列化
 
-- 纯 TS 排版拥有文字占位、换行、分页；Canvas/PDF 仅绘制；云端编排拥有鉴权、额度和任务结算。
-- 物理规格取自 PAPER_PRESETS，文字/字体取自 PAPER_ENGINE，兼容性取自 ARCHITECTURE，任务信任规则取自 DATA_AND_CREDITS；本任务不另建权威副本。
-- 平台实际能力、资源版本与生成交付须有证据；Mock、配置草案和预备字体不得标为上线验收通过。
+使用显式完整布局schema验证及固定序列化：对象key按ASCII词典序，数组顺序保留，所有nullable值保持，禁止未知/缺少字段、访问器、符号属性、隐藏属性、toJSON、稀疏数组、非JSON原型、NaN/Infinity/数值溢出。字段包括版本、mode、页序、整页几何/线段、行源范围/段落/断行、slot源范围/行/边界/共格、每个glyph的font/style/ID/字号/源范围/位置/advance/实际墨迹、完整文字及线条样式。
 
-## 兼容、发布与回退
+坐标仍以core提供的1e-6mm为精度；序列化不二次移动或缩放，有限数值按ECMAScript JSON最短十进制编码，-0规范为0；字号/灰度等不丢弃精度。所有允许字符串均为ASCII标识或固定枚举，因此规范串是UTF-8的ASCII子集，直接编码字节，不依赖系统TextEncoder或Node Buffer。摘要输入带独立protocol字段，未来schema/摘要规则变化必须升级协议及engine。
 
-只在责任模块内推进，保留已有行为及基准。涉及排版时发布新的受支持组合，保留在途任务所需旧资源；涉及云端状态时不得以代码回退反转成功/失败终态或直接改写账本。具体部署/回退步骤随选定方案补充后再执行。
+选用已被字体模块使用的固定 `@noble/hashes@1.8.0` SHA-256；只传Uint8Array，不调用其字符串编码/随机源。双目标产物必须在没有Node/Buffer/TextEncoder/Intl/动态求值的VM中加载并给出一致串与摘要；根构建若意外带入Node crypto，修正为共享浏览器解析依赖。
 
-## 待验证
+## 错误与版本
 
-需与 T14 的参数指纹明确分工，不因此保存长期布局快照。
+新增 `INVALID_LAYOUT`、`UNSUPPORTED_VERSION`、`LAYOUT_DIGEST_INVALID`、`LAYOUT_DIGEST_MISMATCH`；均仅固定code/field，不泄漏原文、hash、布局或原始异常。字体资源缺失/损坏沿用已有错误，和版本/摘要失配区分。引擎升级development.4：新增协议属于引擎绑定；既有候选模板样式无需为纯协议变化另升号。
 
-## 依据
+## 验证
 
-- [ARCHITECTURE](../../../docs/ARCHITECTURE.md)
-- [DATA_AND_CREDITS](../../../docs/DATA_AND_CREDITS.md)
-- [TESTING](../../../docs/TESTING.md)
+合成固定摘要向量与独立Node crypto比对；对象插入顺序/-0一致，数组页/字形顺序敏感，逐字段变更影响摘要；有限数据边界/访问器/toJSON拒绝。统一入口覆盖四模板及不支持engine、跨bundle、伪造锁定版本、active切换不改变已锁定模板（同engine不同可信templateVersion）。原始空格/CRLF/NFC/NFD不做输入变换；布局相同的空白输入可同摘要，异参判定由T14 HMAC负责。
+
+真实双目标检验所有四模板填字/描红、多页、临界字宽、Unicode组合调号：同源miniapp/cloud构建在隔离VM中输出完全一致的规范串/摘要，字体代码使用现有浏览器解析资源。最后core/字体/root回归，独立检查由主会话安排；真机与正式发布保留最终验收。

@@ -2,6 +2,7 @@ export type PaperErrorCode =
   | 'INVALID_INPUT' | 'UNKNOWN_FIELD' | 'INPUT_LIMIT_EXCEEDED' | 'INVALID_UNICODE'
   | 'UNSUPPORTED_CONTROL' | 'INVALID_PRESET' | 'VERSION_MISMATCH' | 'FONT_RESOURCE_MISSING'
   | 'FONT_INTEGRITY_FAILED' | 'MISSING_GLYPH' | 'INVALID_FONT_METRICS'
+  | 'INVALID_LAYOUT' | 'UNSUPPORTED_VERSION' | 'LAYOUT_DIGEST_INVALID' | 'LAYOUT_DIGEST_MISMATCH'
   | 'GLYPH_OUT_OF_BOUNDS' | 'PAGE_LIMIT_EXCEEDED' | 'UNSUPPORTED_TEXT' | 'INTERNAL_LAYOUT_ERROR';
 export type PaperErrorDetails = Readonly<{
   field?: 'input' | 'templateId' | 'title' | 'body' | 'tracing' | 'options' | 'titleAlign' | 'bodyIndent' | 'preset' | 'versions' | 'font' | 'layout';

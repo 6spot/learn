@@ -40,7 +40,38 @@ const document = createPaperDocument({
 
 `PaperLayout` 给 T05/T06 提供唯一正式输出形状：版本组合、完整每页几何、行/段落映射、逻辑 slots、glyphs、同版文字/线条样式。填字和描红必须用 canonical filled 字体做同一次逻辑布局；田字格/米字格的中文绘制才使用相应 tracing 字体。真实 provider 由 `packages/font-metrics` 实现；渲染器不能提供自己的分页测宽。
 
-目前保留旧 `layoutSquareDocument` 给既有基准和 T01 smoke 使用。它不是新 `PaperLayout` 的替代实现；完整的新方格/拼音布局由 T05/T06 接入，不能拿类型定义宣称排版已完成。
+`layoutSquarePaperDocument(document, metrics)` 已将三种方格接入真实 `PaperLayout`：标题对齐、段首缩进、真实英数字宽、长词续行、点号共格、括号/引号绑定及完整尾空行分页。D-025 仅允许末格共享点号使用三分之一字号和右下角格位，其他文字不自动缩放；D-047 的无法安全容纳边界返回明确错误。`metrics` 由 T04 已加载原字体资源的 provider 提供，核心不读取字体文件。
+
+`layoutPinyinPaperDocument(document, metrics)` 独立实现四线行带：第三线固定基线、真实宽度及左右 overhang、连续非空格片段优先换行、超长片段按完整字符簇续行、标题/缩进/原始空白和自动续页。填字/描红使用相同 MiSans Latin 字形定位。候选字号7.4mm支持已量测大小写调号；重复调号、错误 ü/ê 修饰、汉字或其他不可表示字符明确拒绝，不转换或修剪输入。
+
+目前保留旧 `layoutSquareDocument` 给既有基准和 T01 smoke 使用，它不是新渲染入口。
+
+实际字体验证与合成基准：
+
+```sh
+npm run test:integration
+npm run baseline:square
+npm run baseline:pinyin
+```
+
+`test:integration` 先构建相邻 font-metrics 包，需要该包依赖和 assets/fonts 原字体资源已经安装/恢复；通过原字体 glyphOutline 验证四模板填字/描红、拼音NFC/NFD等价、升降部/调号与墨迹。`baseline:square` / `baseline:pinyin` 只在主动接受版式变更时执行，更新后审查对应 `test/fixtures/*-layout.json` 差异；日常 `npm test` 比较已存基准，不自动覆盖。
+
+## 版本与布局摘要
+
+新预览/云端入口使用 `layoutPaperDocument(document, metrics)`，按模板选择同一版本的方格/拼音布局。`PAPER_ENGINE_VERSION` 是当前包实际实现的算法版本；旧内核必须保留其真实构建包，不能给当前代码挂旧版本标签。`validateLayoutVersions` 返回四字段不可变副本，`assertLayoutVersionsMatch` 检查完整组合，`assertLayoutVersionsSupported` 额外检查可信支持列表和当前可执行内核。云端T12仍拥有发布/retire/引用保护的权限与状态，核心列表不是授权。
+
+```ts
+const layout = layoutPaperDocument(document, metrics);
+const digest = createLayoutDigest(layout);
+// 云端从可信预设和原始参数重新计算后：
+assertLayoutDigestMatches(recomputedLayout, digest);
+```
+
+`serializePaperLayout` 用显式完整schema生成ASCII规范JSON（按key排序、数组顺序保留、-0为0、拒绝非法/缺少/未知字段和非有限数值）。标题/正文style ID必须唯一，每个glyph必须引用其source.block对应的style；未知或错块引用不能生成有效摘要。`createLayoutDigest` 使用固定SHA-256，返回 `learn-layout-v1:sha256:<64位小写hex>`；`validateLayoutDigest` 拒绝未知协议和额外空白。坐标采用已有1e-6mm精度，序列化不二次舍入/缩放，完整字号/灰度精度保持。版本、每页几何/线段、源范围、占位、字形、坐标/advance/墨迹及全部绘制样式均参与。
+
+这些函数不依赖Node、系统编码器、原生crypto或渲染器。摘要区分 `LAYOUT_DIGEST_INVALID` / `LAYOUT_DIGEST_MISMATCH`，版本不可执行为 `UNSUPPORTED_VERSION`，资源失配和加载失败继续使用已有错误。摘要用于预览一致性，不能代替鉴权、云端复算或T14参数HMAC；空白输入可生成相同布局摘要，但参数指纹仍须区分原始输入。规范布局虽无原文字符串，仍含敏感字形/源映射，不能写日志或长期保存。
+
+根目录 `npm run test:runtime` 用实际两端构建和真实字体在无Node/编码器/Intl的隔离VM中比较四模板完整规范串/摘要；协议固定向量在 `test/layout-protocol.test.mjs`，引擎/协议变更需主动评审更新，不能静默重写金样。
 
 ## 错误与验证
 

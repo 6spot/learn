@@ -3,17 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Runtime-independent A4 paper geometry for Learn",
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "npm run build && node --test test/*.test.mjs"
-  },
-  "devDependencies": {
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "unicode-segmenter": "0.17.3"
-  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -21,5 +10,20 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "description": "Runtime-independent A4 paper geometry for Learn",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "test:integration": "npm --prefix ../font-metrics run build && node --test integration/*.test.mjs",
+    "baseline:square": "npm run build && node test/update-square-baseline.mjs",
+    "baseline:pinyin": "npm run build && node test/update-pinyin-baseline.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@noble/hashes": "1.8.0",
+    "unicode-segmenter": "0.17.3"
   }
 }

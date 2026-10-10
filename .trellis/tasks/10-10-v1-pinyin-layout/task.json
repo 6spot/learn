@@ -3,7 +3,7 @@
   "name": "v1-pinyin-layout",
   "title": "T06 实现拼音行带排版",
   "description": "将用户直接输入的拼音完整排到固定四线三格。",
-  "status": "planning",
+  "status": "in_progress",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -12,7 +12,7 @@
   "assignee": "me",
   "createdAt": "2026-10-10",
   "completedAt": null,
-  "branch": null,
+  "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
   "commit": null,
@@ -21,8 +21,10 @@
   "children": [],
   "parent": "10-10-learn-v1",
   "relatedFiles": [],
-  "notes": "",
+  "notes": "实现与独立检查完成；核心 80、真实字体 12、Canvas 16、运行时 20 项联合验证通过。正式配置、字体许可、真机及打印按 D-044 转交 T24。",
   "meta": {
-    "plan_id": "T06"
+    "plan_id": "T06",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
 }

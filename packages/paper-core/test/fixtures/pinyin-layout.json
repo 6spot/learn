@@ -1,0 +1,2128 @@
+[
+  {
+    "id": "empty",
+    "input": {
+      "body": " \n",
+      "tracing": true
+    },
+    "pages": [
+      {
+        "lines": [],
+        "slots": [],
+        "glyphs": []
+      }
+    ]
+  },
+  {
+    "id": "title-and-exact-source",
+    "input": {
+      "title": "Pīn yīn",
+      "body": "nǐ  hǎo\r\nǖ xi'an\n",
+      "options": {
+        "titleAlign": "right",
+        "bodyIndent": "none"
+      }
+    },
+    "pages": [
+      {
+        "lines": [
+          {
+            "block": "title",
+            "paragraphIndex": 0,
+            "row": 0,
+            "source": {
+              "block": "title",
+              "start": 0,
+              "end": 7
+            },
+            "breakAfter": "end",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 2,
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 7
+            },
+            "breakAfter": "explicit",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 1,
+            "row": 3,
+            "source": {
+              "block": "body",
+              "start": 9,
+              "end": 18
+            },
+            "breakAfter": "explicit",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 2,
+            "row": 4,
+            "source": {
+              "block": "body",
+              "start": 19,
+              "end": 19
+            },
+            "breakAfter": "end",
+            "empty": true
+          }
+        ],
+        "slots": [
+          {
+            "source": {
+              "block": "title",
+              "start": 0,
+              "end": 3
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 166.14,
+              "y": 25.5,
+              "width": 13.32,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 3,
+              "end": 4
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 179.46,
+              "y": 25.5,
+              "width": 2.22,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 4,
+              "end": 7
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 181.68,
+              "y": 25.5,
+              "width": 13.32,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 2
+            },
+            "row": 2,
+            "boundsMm": {
+              "x": 15,
+              "y": 61.5,
+              "width": 8.88,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 3
+            },
+            "row": 2,
+            "boundsMm": {
+              "x": 23.88,
+              "y": 61.5,
+              "width": 2.22,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "row": 2,
+            "boundsMm": {
+              "x": 26.1,
+              "y": 61.5,
+              "width": 2.22,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 7
+            },
+            "row": 2,
+            "boundsMm": {
+              "x": 28.32,
+              "y": 61.5,
+              "width": 13.32,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 9,
+              "end": 12
+            },
+            "row": 3,
+            "boundsMm": {
+              "x": 15,
+              "y": 79.5,
+              "width": 4.44,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 12,
+              "end": 13
+            },
+            "row": 3,
+            "boundsMm": {
+              "x": 19.44,
+              "y": 79.5,
+              "width": 2.22,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 13,
+              "end": 18
+            },
+            "row": 3,
+            "boundsMm": {
+              "x": 21.66,
+              "y": 79.5,
+              "width": 19.61,
+              "height": 12
+            },
+            "sharesCell": false
+          }
+        ],
+        "glyphs": [
+          {
+            "source": {
+              "block": "title",
+              "start": 0,
+              "end": 1
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 81,
+            "styleId": "pinyin-lines-title-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 166.14,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 166.14,
+              "y": 27.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 1,
+              "end": 2
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 300,
+            "styleId": "pinyin-lines-title-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 170.58,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 170.58,
+              "y": 27.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 2,
+              "end": 3
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 111,
+            "styleId": "pinyin-lines-title-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 175.02,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 175.02,
+              "y": 27.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 3,
+              "end": 4
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 33,
+            "styleId": "pinyin-lines-title-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 179.46,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 2.22,
+              "y": 0
+            },
+            "inkBoundsMm": null
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 4,
+              "end": 5
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 122,
+            "styleId": "pinyin-lines-title-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 181.68,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 181.68,
+              "y": 27.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 5,
+              "end": 6
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 300,
+            "styleId": "pinyin-lines-title-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 186.12,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 186.12,
+              "y": 27.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 6,
+              "end": 7
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 111,
+            "styleId": "pinyin-lines-title-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 190.56,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 190.56,
+              "y": 27.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 111,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 15,
+              "y": 69.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 15,
+              "y": 63.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 2
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 465,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 19.44,
+              "y": 69.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 19.44,
+              "y": 63.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 3
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 33,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 23.88,
+              "y": 69.5
+            },
+            "advanceMm": {
+              "x": 2.22,
+              "y": 0
+            },
+            "inkBoundsMm": null
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 33,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 26.1,
+              "y": 69.5
+            },
+            "advanceMm": {
+              "x": 2.22,
+              "y": 0
+            },
+            "inkBoundsMm": null
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 5
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 105,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 28.32,
+              "y": 69.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 28.32,
+              "y": 63.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 6
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 463,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 32.76,
+              "y": 69.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 32.76,
+              "y": 63.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 6,
+              "end": 7
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 112,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 37.2,
+              "y": 69.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 37.2,
+              "y": 63.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 9,
+              "end": 12
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 15,
+              "y": 87.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 15,
+              "y": 80.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 12,
+              "end": 13
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 33,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 19.44,
+              "y": 87.5
+            },
+            "advanceMm": {
+              "x": 2.22,
+              "y": 0
+            },
+            "inkBoundsMm": null
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 13,
+              "end": 14
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 121,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 21.66,
+              "y": 87.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 21.66,
+              "y": 81.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 14,
+              "end": 15
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 106,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 26.1,
+              "y": 87.5
+            },
+            "advanceMm": {
+              "x": 1.85,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 26.1,
+              "y": 81.58,
+              "width": 1.85,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 15,
+              "end": 16
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 40,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 27.95,
+              "y": 87.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 27.95,
+              "y": 81.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 16,
+              "end": 17
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 98,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 32.39,
+              "y": 87.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 32.39,
+              "y": 81.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 17,
+              "end": 18
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 111,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 36.83,
+              "y": 87.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 36.83,
+              "y": 81.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "long-graphemes-tracing",
+    "input": {
+      "body": "ǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖǖ",
+      "tracing": true
+    },
+    "pages": [
+      {
+        "lines": [
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 0,
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 114
+            },
+            "breakAfter": "wrap",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 1,
+            "source": {
+              "block": "body",
+              "start": 114,
+              "end": 129
+            },
+            "breakAfter": "end",
+            "empty": false
+          }
+        ],
+        "slots": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 114
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 23,
+              "y": 25.5,
+              "width": 168.72,
+              "height": 12
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 114,
+              "end": 129
+            },
+            "row": 1,
+            "boundsMm": {
+              "x": 15,
+              "y": 43.5,
+              "width": 22.2,
+              "height": 12
+            },
+            "sharesCell": false
+          }
+        ],
+        "glyphs": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 3
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 23,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 23,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 6
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 27.44,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 27.44,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 6,
+              "end": 9
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 31.88,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 31.88,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 9,
+              "end": 12
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 36.32,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 36.32,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 12,
+              "end": 15
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 40.76,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 40.76,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 15,
+              "end": 18
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 45.2,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 45.2,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 18,
+              "end": 21
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 49.64,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 49.64,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 21,
+              "end": 24
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 54.08,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 54.08,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 24,
+              "end": 27
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 58.52,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 58.52,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 27,
+              "end": 30
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 62.96,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 62.96,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 30,
+              "end": 33
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 67.4,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 67.4,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 33,
+              "end": 36
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 71.84,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 71.84,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 36,
+              "end": 39
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 76.28,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 76.28,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 39,
+              "end": 42
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 80.72,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 80.72,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 42,
+              "end": 45
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 85.16,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 85.16,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 45,
+              "end": 48
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 89.6,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 89.6,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 48,
+              "end": 51
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 94.04,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 94.04,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 51,
+              "end": 54
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 98.48,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 98.48,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 54,
+              "end": 57
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 102.92,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 102.92,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 57,
+              "end": 60
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 107.36,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 107.36,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 60,
+              "end": 63
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 111.8,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 111.8,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 63,
+              "end": 66
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 116.24,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 116.24,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 66,
+              "end": 69
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 120.68,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 120.68,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 69,
+              "end": 72
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 125.12,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 125.12,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 72,
+              "end": 75
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 129.56,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 129.56,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 75,
+              "end": 78
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 134,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 134,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 78,
+              "end": 81
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 138.44,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 138.44,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 81,
+              "end": 84
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 142.88,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 142.88,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 84,
+              "end": 87
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 147.32,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 147.32,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 87,
+              "end": 90
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 151.76,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 151.76,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 90,
+              "end": 93
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 156.2,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 156.2,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 93,
+              "end": 96
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 160.64,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 160.64,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 96,
+              "end": 99
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 165.08,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 165.08,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 99,
+              "end": 102
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 169.52,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 169.52,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 102,
+              "end": 105
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 173.96,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 173.96,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 105,
+              "end": 108
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 178.4,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 178.4,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 108,
+              "end": 111
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 182.84,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 182.84,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 111,
+              "end": 114
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 187.28,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 187.28,
+              "y": 26.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 114,
+              "end": 117
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 15,
+              "y": 51.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 15,
+              "y": 44.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 117,
+              "end": 120
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 19.44,
+              "y": 51.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 19.44,
+              "y": 44.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 120,
+              "end": 123
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 23.88,
+              "y": 51.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 23.88,
+              "y": 44.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 123,
+              "end": 126
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 28.32,
+              "y": 51.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 28.32,
+              "y": 44.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 126,
+              "end": 129
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 118,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 32.76,
+              "y": 51.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 32.76,
+              "y": 44.84,
+              "width": 4.44,
+              "height": 6.66
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "trailing-empty-page",
+    "input": {
+      "body": "a\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    },
+    "pages": [
+      {
+        "lines": [
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 0,
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "breakAfter": "explicit",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 1,
+            "row": 1,
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 2
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 2,
+            "row": 2,
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 3
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 3,
+            "row": 3,
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 4
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 4,
+            "row": 4,
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 5
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 5,
+            "row": 5,
+            "source": {
+              "block": "body",
+              "start": 6,
+              "end": 6
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 6,
+            "row": 6,
+            "source": {
+              "block": "body",
+              "start": 7,
+              "end": 7
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 7,
+            "row": 7,
+            "source": {
+              "block": "body",
+              "start": 8,
+              "end": 8
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 8,
+            "row": 8,
+            "source": {
+              "block": "body",
+              "start": 9,
+              "end": 9
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 9,
+            "row": 9,
+            "source": {
+              "block": "body",
+              "start": 10,
+              "end": 10
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 10,
+            "row": 10,
+            "source": {
+              "block": "body",
+              "start": 11,
+              "end": 11
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 11,
+            "row": 11,
+            "source": {
+              "block": "body",
+              "start": 12,
+              "end": 12
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 12,
+            "row": 12,
+            "source": {
+              "block": "body",
+              "start": 13,
+              "end": 13
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 13,
+            "row": 13,
+            "source": {
+              "block": "body",
+              "start": 14,
+              "end": 14
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          }
+        ],
+        "slots": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 23,
+              "y": 25.5,
+              "width": 4.44,
+              "height": 12
+            },
+            "sharesCell": false
+          }
+        ],
+        "glyphs": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "fontId": "misans-latin-regular",
+            "glyphId": 98,
+            "styleId": "pinyin-lines-body-dev.2",
+            "fontSizeMm": 7.4,
+            "originMm": {
+              "x": 23,
+              "y": 33.5
+            },
+            "advanceMm": {
+              "x": 4.44,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 23,
+              "y": 27.58,
+              "width": 4.44,
+              "height": 5.92
+            }
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "block": "body",
+            "paragraphIndex": 14,
+            "row": 0,
+            "source": {
+              "block": "body",
+              "start": 15,
+              "end": 15
+            },
+            "breakAfter": "end",
+            "empty": true
+          }
+        ],
+        "slots": [],
+        "glyphs": []
+      }
+    ]
+  }
+]

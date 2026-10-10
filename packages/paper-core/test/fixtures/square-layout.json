@@ -1,0 +1,1796 @@
+[
+  {
+    "id": "essay-options-and-sources",
+    "templateId": "essay-grid",
+    "input": {
+      "title": "春夏",
+      "body": "秋é 3.14\r\n\n冬\n",
+      "options": {
+        "titleAlign": "right",
+        "bodyIndent": "none"
+      }
+    },
+    "pages": [
+      {
+        "lines": [
+          {
+            "block": "title",
+            "paragraphIndex": 0,
+            "row": 0,
+            "source": {
+              "block": "title",
+              "start": 0,
+              "end": 2
+            },
+            "breakAfter": "end",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 2,
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 8
+            },
+            "breakAfter": "explicit",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 1,
+            "row": 3,
+            "source": {
+              "block": "body",
+              "start": 10,
+              "end": 10
+            },
+            "breakAfter": "explicit",
+            "empty": true
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 2,
+            "row": 4,
+            "source": {
+              "block": "body",
+              "start": 11,
+              "end": 12
+            },
+            "breakAfter": "explicit",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 3,
+            "row": 5,
+            "source": {
+              "block": "body",
+              "start": 13,
+              "end": 13
+            },
+            "breakAfter": "end",
+            "empty": true
+          }
+        ],
+        "slots": [
+          {
+            "source": {
+              "block": "title",
+              "start": 0,
+              "end": 1
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 180,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 1,
+              "end": 2
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 190,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "row": 2,
+            "boundsMm": {
+              "x": 10,
+              "y": 33.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 3
+            },
+            "row": 2,
+            "boundsMm": {
+              "x": 20,
+              "y": 33.5,
+              "width": 4.2,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "row": 2,
+            "boundsMm": {
+              "x": 24.2,
+              "y": 33.5,
+              "width": 2.1,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 8
+            },
+            "row": 2,
+            "boundsMm": {
+              "x": 26.3,
+              "y": 33.5,
+              "width": 16.8,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 11,
+              "end": 12
+            },
+            "row": 4,
+            "boundsMm": {
+              "x": 10,
+              "y": 53.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          }
+        ],
+        "glyphs": [
+          {
+            "source": {
+              "block": "title",
+              "start": 0,
+              "end": 1
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-title-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 181.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 181.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "title",
+              "start": 1,
+              "end": 2
+            },
+            "fontId": "misans-regular",
+            "glyphId": 22800,
+            "styleId": "essay-grid-title-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 191.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 191.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "fontId": "misans-regular",
+            "glyphId": 31180,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 11.5,
+              "y": 41.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 11.5,
+              "y": 35.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 3
+            },
+            "fontId": "misans-regular",
+            "glyphId": 102,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 20,
+              "y": 41.65
+            },
+            "advanceMm": {
+              "x": 4.2,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 20,
+              "y": 35.35,
+              "width": 4.2,
+              "height": 6.3
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "fontId": "misans-regular",
+            "glyphId": 33,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 24.2,
+              "y": 41.65
+            },
+            "advanceMm": {
+              "x": 2.1,
+              "y": 0
+            },
+            "inkBoundsMm": null
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 5
+            },
+            "fontId": "misans-regular",
+            "glyphId": 52,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 26.3,
+              "y": 41.65
+            },
+            "advanceMm": {
+              "x": 4.2,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 26.3,
+              "y": 36.05,
+              "width": 4.2,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 6
+            },
+            "fontId": "misans-regular",
+            "glyphId": 47,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 30.5,
+              "y": 41.65
+            },
+            "advanceMm": {
+              "x": 4.2,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 30.5,
+              "y": 36.05,
+              "width": 4.2,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 6,
+              "end": 7
+            },
+            "fontId": "misans-regular",
+            "glyphId": 50,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 34.7,
+              "y": 41.65
+            },
+            "advanceMm": {
+              "x": 4.2,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 34.7,
+              "y": 36.05,
+              "width": 4.2,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 7,
+              "end": 8
+            },
+            "fontId": "misans-regular",
+            "glyphId": 53,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 38.9,
+              "y": 41.65
+            },
+            "advanceMm": {
+              "x": 4.2,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 38.9,
+              "y": 36.05,
+              "width": 4.2,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 11,
+              "end": 12
+            },
+            "fontId": "misans-regular",
+            "glyphId": 20909,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 11.5,
+              "y": 61.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 11.5,
+              "y": 55.7,
+              "width": 7,
+              "height": 5.6
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "essay-last-stop",
+    "templateId": "essay-grid",
+    "input": {
+      "body": "春春春春春春春春春春春春春春春春春。夏"
+    },
+    "pages": [
+      {
+        "lines": [
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 0,
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 18
+            },
+            "breakAfter": "wrap",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 1,
+            "source": {
+              "block": "body",
+              "start": 18,
+              "end": 19
+            },
+            "breakAfter": "end",
+            "empty": false
+          }
+        ],
+        "slots": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 30,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 2
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 40,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 3
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 50,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 60,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 5
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 70,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 6
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 80,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 6,
+              "end": 7
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 90,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 7,
+              "end": 8
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 100,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 8,
+              "end": 9
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 110,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 9,
+              "end": 10
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 120,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 10,
+              "end": 11
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 130,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 11,
+              "end": 12
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 140,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 12,
+              "end": 13
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 150,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 13,
+              "end": 14
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 160,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 14,
+              "end": 15
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 170,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 15,
+              "end": 16
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 180,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 16,
+              "end": 17
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 190,
+              "y": 13.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 17,
+              "end": 18
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 196.666667,
+              "y": 20.166667,
+              "width": 3.333333,
+              "height": 3.333333
+            },
+            "sharesCell": true
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 18,
+              "end": 19
+            },
+            "row": 1,
+            "boundsMm": {
+              "x": 10,
+              "y": 23.5,
+              "width": 10,
+              "height": 10
+            },
+            "sharesCell": false
+          }
+        ],
+        "glyphs": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 31.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 31.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 2
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 41.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 41.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 3
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 51.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 51.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 61.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 61.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 5
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 71.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 71.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 6
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 81.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 81.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 6,
+              "end": 7
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 91.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 91.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 7,
+              "end": 8
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 101.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 101.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 8,
+              "end": 9
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 111.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 111.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 9,
+              "end": 10
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 121.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 121.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 10,
+              "end": 11
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 131.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 131.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 11,
+              "end": 12
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 141.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 141.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 12,
+              "end": 13
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 151.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 151.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 13,
+              "end": 14
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 161.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 161.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 14,
+              "end": 15
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 171.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 171.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 15,
+              "end": 16
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 181.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 181.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 16,
+              "end": 17
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 191.5,
+              "y": 21.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 191.5,
+              "y": 15.7,
+              "width": 7,
+              "height": 5.6
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 17,
+              "end": 18
+            },
+            "fontId": "misans-regular",
+            "glyphId": 12291,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 2.3333333333333335,
+            "originMm": {
+              "x": 197.633334,
+              "y": 22.766667
+            },
+            "advanceMm": {
+              "x": 1.4,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 197.633334,
+              "y": 20.9,
+              "width": 1.4,
+              "height": 1.866667
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 18,
+              "end": 19
+            },
+            "fontId": "misans-regular",
+            "glyphId": 22800,
+            "styleId": "essay-grid-body-dev.1",
+            "fontSizeMm": 7,
+            "originMm": {
+              "x": 11.5,
+              "y": 31.3
+            },
+            "advanceMm": {
+              "x": 7,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 11.5,
+              "y": 25.7,
+              "width": 7,
+              "height": 5.6
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tian-tracing",
+    "templateId": "tian-grid",
+    "input": {
+      "body": "春夏Wi\n秋",
+      "tracing": true
+    },
+    "pages": [
+      {
+        "lines": [
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 0,
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 4
+            },
+            "breakAfter": "explicit",
+            "empty": false
+          },
+          {
+            "block": "body",
+            "paragraphIndex": 1,
+            "row": 1,
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 6
+            },
+            "breakAfter": "end",
+            "empty": false
+          }
+        ],
+        "slots": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 45,
+              "y": 21,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 2
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 60,
+              "y": 21,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 4
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 75,
+              "y": 21,
+              "width": 12.075,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 6
+            },
+            "row": 1,
+            "boundsMm": {
+              "x": 45,
+              "y": 36,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          }
+        ],
+        "glyphs": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "fontId": "lxgw-wenkai-gb-regular",
+            "glyphId": 26150,
+            "styleId": "tian-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 46.2,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 12.6,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 46.2,
+              "y": 24.3,
+              "width": 12.6,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 2
+            },
+            "fontId": "lxgw-wenkai-gb-regular",
+            "glyphId": 22800,
+            "styleId": "tian-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 61.2,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 12.6,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 61.2,
+              "y": 24.3,
+              "width": 12.6,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 3
+            },
+            "fontId": "misans-regular",
+            "glyphId": 88,
+            "styleId": "tian-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 75,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 9.45,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 75,
+              "y": 24.3,
+              "width": 9.45,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "fontId": "misans-regular",
+            "glyphId": 106,
+            "styleId": "tian-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 84.45,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 2.625,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 84.45,
+              "y": 24.3,
+              "width": 2.625,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 6
+            },
+            "fontId": "lxgw-wenkai-gb-regular",
+            "glyphId": 31180,
+            "styleId": "tian-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 46.2,
+              "y": 47.7
+            },
+            "advanceMm": {
+              "x": 12.6,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 46.2,
+              "y": 39.3,
+              "width": 12.6,
+              "height": 8.4
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mi-brackets",
+    "templateId": "mi-grid",
+    "input": {
+      "body": "（春夏）秋……冬"
+    },
+    "pages": [
+      {
+        "lines": [
+          {
+            "block": "body",
+            "paragraphIndex": 0,
+            "row": 0,
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 8
+            },
+            "breakAfter": "end",
+            "empty": false
+          }
+        ],
+        "slots": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 45,
+              "y": 21,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 2
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 60,
+              "y": 21,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 3
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 75,
+              "y": 21,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 90,
+              "y": 21,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 5
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 105,
+              "y": 21,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 7
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 120,
+              "y": 21,
+              "width": 30,
+              "height": 15
+            },
+            "sharesCell": false
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 7,
+              "end": 8
+            },
+            "row": 0,
+            "boundsMm": {
+              "x": 150,
+              "y": 21,
+              "width": 15,
+              "height": 15
+            },
+            "sharesCell": false
+          }
+        ],
+        "glyphs": [
+          {
+            "source": {
+              "block": "body",
+              "start": 0,
+              "end": 1
+            },
+            "fontId": "misans-regular",
+            "glyphId": 65289,
+            "styleId": "mi-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 47.25,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 10.5,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 47.25,
+              "y": 24.3,
+              "width": 10.5,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 1,
+              "end": 2
+            },
+            "fontId": "misans-regular",
+            "glyphId": 26150,
+            "styleId": "mi-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 62.25,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 10.5,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 62.25,
+              "y": 24.3,
+              "width": 10.5,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 2,
+              "end": 3
+            },
+            "fontId": "misans-regular",
+            "glyphId": 22800,
+            "styleId": "mi-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 77.25,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 10.5,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 77.25,
+              "y": 24.3,
+              "width": 10.5,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 3,
+              "end": 4
+            },
+            "fontId": "misans-regular",
+            "glyphId": 65290,
+            "styleId": "mi-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 92.25,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 10.5,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 92.25,
+              "y": 24.3,
+              "width": 10.5,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 4,
+              "end": 5
+            },
+            "fontId": "misans-regular",
+            "glyphId": 31180,
+            "styleId": "mi-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 107.25,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 10.5,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 107.25,
+              "y": 24.3,
+              "width": 10.5,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 5,
+              "end": 6
+            },
+            "fontId": "misans-regular",
+            "glyphId": 8231,
+            "styleId": "mi-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 128.7,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 6.3,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 128.7,
+              "y": 24.3,
+              "width": 6.3,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 6,
+              "end": 7
+            },
+            "fontId": "misans-regular",
+            "glyphId": 8231,
+            "styleId": "mi-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 135,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 6.3,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 135,
+              "y": 24.3,
+              "width": 6.3,
+              "height": 8.4
+            }
+          },
+          {
+            "source": {
+              "block": "body",
+              "start": 7,
+              "end": 8
+            },
+            "fontId": "misans-regular",
+            "glyphId": 20909,
+            "styleId": "mi-grid-body-dev.1",
+            "fontSizeMm": 10.5,
+            "originMm": {
+              "x": 152.25,
+              "y": 32.7
+            },
+            "advanceMm": {
+              "x": 10.5,
+              "y": 0
+            },
+            "inkBoundsMm": {
+              "x": 152.25,
+              "y": 24.3,
+              "width": 10.5,
+              "height": 8.4
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

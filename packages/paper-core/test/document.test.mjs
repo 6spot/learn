@@ -86,6 +86,7 @@ test('trusted configuration rejects even plausible geometry changes, invalid sty
     p => { p.carrier = { kind: 'pinyin-lines', baselineOffsetMm: 8, indentUnitMm: 4 }; },
     p => { p.textStyles.body.fontSizeMm = 0; },
     p => { p.textStyles.body.tracingGray = 2; },
+    p => { p.textStyles.body.id = p.textStyles.title.id; },
     p => { p.textStyles.body.tracingHanFontId = 'lxgw-wenkai-gb-regular'; },
     p => { p.strokes.grid.widthMm = Infinity; },
     p => { p.strokes.guide.dashMm = [2]; },

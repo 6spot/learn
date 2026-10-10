@@ -156,11 +156,14 @@ export function validateTrustedPreset(raw: unknown): asserts raw is TrustedPaper
   presetKeys(textStyles, ['title', 'body']);
   const canonicalFont = expected.kind === 'pinyin-lines' ? 'misans-latin-regular' : 'misans-regular';
   const tracingFont = expected.id === 'tian-grid' || expected.id === 'mi-grid' ? 'lxgw-wenkai-gb-regular' : canonicalFont;
+  const styleIds = new Set<string>();
   for (const kind of ['title', 'body']) {
     const style = record(textStyles[kind], 'preset');
     presetKeys(style, ['id', 'canonicalFontId', 'tracingHanFontId', 'fontSizeMm', 'gray', 'tracingGray']);
     if (!id(style.id) || style.canonicalFontId !== canonicalFont || style.tracingHanFontId !== tracingFont ||
       !positive(style.fontSizeMm) || !gray(style.gray) || !gray(style.tracingGray)) invalid();
+    if (styleIds.has(style.id as string)) invalid();
+    styleIds.add(style.id as string);
   }
   const strokes = record(preset.strokes, 'preset');
   presetKeys(strokes, ['grid', 'guide', 'writing-line']);
