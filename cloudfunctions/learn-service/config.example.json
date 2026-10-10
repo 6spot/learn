@@ -1,0 +1,61 @@
+{
+  "runtime": {
+    "stage": "production",
+    "developmentEnvironmentId": "",
+    "productionEnvironmentId": "",
+    "appId": "",
+    "fileIdPrefix": "",
+    "missingDocumentCodes": [],
+    "platformVerified": false
+  },
+  "service": {
+    "stage": "production",
+    "monthlyFreeCredits": null,
+    "quotaTimeZone": "Asia/Shanghai",
+    "identityKeyId": "identity-v1",
+    "adminUserIds": [],
+    "registry": {
+      "cloudEngineVersions": [
+        "learn-engine-dev.4"
+      ],
+      "clientReadyEngineVersions": [
+        "learn-engine-dev.4"
+      ]
+    },
+    "generation": {
+      "windowTtlMs": null,
+      "requestRetentionMs": null,
+      "recordRetentionMs": null,
+      "pdfRetentionMs": null,
+      "jobTimeoutMs": null,
+      "maxInputCodeUnits": null,
+      "maxGraphemes": null,
+      "maxPages": null,
+      "maxPdfBytes": null,
+      "maxConcurrentJobs": null,
+      "rateWindowMs": null,
+      "maxStartsPerWindow": null,
+      "windowKeyId": "window-v1",
+      "retainedWindowKeyIds": [
+        "window-v1"
+      ],
+      "fingerprintKeyId": "fingerprint-v1",
+      "retainedFingerprintKeyIds": [
+        "fingerprint-v1"
+      ],
+      "fingerprintVersion": "learn-request-v1"
+    },
+    "fileAccess": {
+      "maxFileBytes": null,
+      "maxCacheBytes": null,
+      "cacheTtlMs": null,
+      "maxListScanRecords": null
+    }
+  },
+  "fontUrls": {
+    "misans-regular": "",
+    "misans-latin-regular": "",
+    "lxgw-wenkai-gb-regular": ""
+  },
+  "fontFetchTimeoutMs": null
+}

@@ -1,0 +1,11 @@
+{
+  "clientInvocationDenied": false,
+  "platformVerified": false,
+  "recovery": {
+    "pageSize": null,
+    "maxRecordsPerRun": null,
+    "maxRunMs": null,
+    "maxCandidateBytes": null,
+    "maxReadBytesPerRun": null
+  }
+}

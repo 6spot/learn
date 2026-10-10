@@ -15,7 +15,7 @@ const packages = [root, ...readdirSync(join(root, 'packages'), { withFileTypes: 
   .filter(entry => entry.isDirectory())
   .map(entry => join(root, 'packages', entry.name))
   .filter(directory => existsSync(join(directory, 'package.json')))
-  .sort()];
+  .sort(), join(root, 'cloudfunctions', 'learn-service')];
 
 // Root-only npm install does not install the independently locked packages.
 // Validate all package roots before installing anything.

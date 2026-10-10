@@ -1,0 +1,11 @@
+# Trusted maintenance function
+
+`npm run build:cloud` builds `dist/cloudfunctions/learn-maintenance`. It shares the exact locked runtime SDK with `learn-service`, but its only entry runs a bounded recovery sweep. It accepts no method, job ID, identity or rendering input from the event. There is no renderer/preparer capability in the recovery service.
+
+Supply `LEARN_DEPLOYMENT_CONFIG` and `LEARN_SECRET_KEYS` as described in [service deployment](../learn-service/README.md). Separately supply `LEARN_MAINTENANCE_CONFIG` from this directory's incomplete example. All recovery values are explicit; `maxRunMs` is a soft limit checked before starting another record. Set the function's hard execution timeout with sufficient margin for one in-progress record. Aborted/uncertain operations are safely revisited by the next run.
+
+Before enabling this function, apply [function-permissions.example.json](../function-permissions.example.json) with client invocation denied for maintenance, and verify this on the actual associated miniapp. Do not expose maintenance through an HTTP access service. Only management-authorized invocation and a configured timer may reach it. The two verification flags must remain false until these checks have passed. The handler additionally rejects trusted contexts containing a client identity; client-supplied `Type: Timer` never grants permission.
+
+The official [function security rules](https://docs.cloudbase.net/cloud-function/security-rules) apply to client calls and exclude management APIs and timer triggers. Configure a single [timer trigger](https://docs.cloudbase.net/cloud-function/timer-trigger) at a measured interval, then verify repeated calls finish scan cycles and recover pending tasks. There is no default schedule. [Runtime documentation](https://docs.cloudbase.net/cli-v1/functions/configs) lists Nodejs20.19; select and verify it in the actual environment. These references were checked on 2026-10-11; actual configuration and acceptance remain the owner's final tasks.
+
+The permission JSON belongs to the environment's function permission settings, not the timer `config.json`. Deny direct client database and private PDF access separately. A production flag cannot enforce a control-plane permission by itself: retain the failed-client-invocation evidence before enabling the function.

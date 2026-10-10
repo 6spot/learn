@@ -1,0 +1,5 @@
+{
+  "*": { "invoke": false },
+  "learn-service": { "invoke": "auth != null" },
+  "learn-maintenance": { "invoke": false }
+}

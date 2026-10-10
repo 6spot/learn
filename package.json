@@ -20,7 +20,15 @@
     "setup": "node scripts/setup.mjs",
     "test:canvas": "npm --prefix packages/font-metrics run build && npm --prefix packages/canvas-renderer test",
     "test:canvas:devtools": "npm run build && node scripts/test-canvas-devtools.mjs --diagnostics",
-    "test:layout": "npm --prefix packages/paper-core run test:integration"
+    "test:layout": "npm --prefix packages/paper-core run test:integration",
+    "build:cloud": "node scripts/build-cloud.mjs",
+    "test:composition": "npm run build:cloud && node --test cloudfunctions/learn-service/test/*.test.mjs",
+    "test:pdf": "npm --prefix packages/pdf-renderer test",
+    "test:service:pdf": "npm --prefix packages/cloud-service run test:pdf",
+    "test:editor": "node --test miniprogram/test/*.test.mjs",
+    "test:editor:devtools": "npm run build && node scripts/test-editor-devtools.mjs --diagnostics",
+    "test:release": "node scripts/test-release-build.mjs",
+    "build:release": "node scripts/build.mjs --production"
   },
   "devDependencies": {
     "esbuild": "0.25.10",
@@ -31,5 +39,8 @@
     "miniprogram-automator": {
       "jimp": "0.22.12"
     }
+  },
+  "dependencies": {
+    "@noble/hashes": "1.8.0"
   }
 }
