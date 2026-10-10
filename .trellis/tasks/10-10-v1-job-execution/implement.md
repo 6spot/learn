@@ -3,7 +3,7 @@
 ## 启动条件
 
 - [ ] 核对 [PRD](prd.md)、[设计](design.md)、权威文档及本次工作区变更。
-- [ ] 核对最终集成验收依赖（不等同于全部启动条件，分阶段输入见下文及父任务总表）：[T09 实现 PDF 渲染](../10-10-v1-pdf-renderer/prd.md)、[T11 CloudBase 环境与可靠执行验证](../10-10-v1-cloudbase-feasibility/prd.md)、[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)
+- [ ] 核对最终集成验收依赖（不等同于全部启动条件，分阶段输入见下文及父任务总表）：[T09 实现 PDF 渲染](../10-10-v1-pdf-renderer/prd.md)、[T11 CloudBase 环境与可靠执行验证](../archive/2026-10/10-10-v1-cloudbase-feasibility/prd.md)、[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)
 - [ ] 将技术未知项落实为可验证方案；涉及新产品取舍先按 DECISIONS 流程确认。
 - [ ] 细化设计后完成执行前评审；按 Trellis 流程启动本子任务，不以父任务代替实现任务。
 

@@ -28,4 +28,4 @@
 | T11-AC2 | 全程 await；任务/预留先提交；临时输入不持久化；模拟在途查询和故障收敛 | 真实客户端离页/断网/硬超时后的生命周期与定时恢复 |
 | T11-AC3 | 24 项离线单元/适配/故障测试，明确模拟边界 | 真实 SDK 事务冲突/限额、包体/内存/时长、载荷保留与私有文件映射 |
 
-完整结果见 [evidence.md](evidence.md)，最终配置入口见 [cloudfunctions/README](../../../cloudfunctions/README.md)。不将本轮开发完成写成 CloudBase 实测通过。T13～T17 使用此处端口继续实现正式业务；测试夹具不作为另一套生产服务。
+完整结果见 [evidence.md](evidence.md)，最终配置入口见 [cloudfunctions/README](../../../../../cloudfunctions/README.md)。不将本轮开发完成写成 CloudBase 实测通过。T13～T17 使用此处端口继续实现正式业务；测试夹具不作为另一套生产服务。

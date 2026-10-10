@@ -6,7 +6,7 @@
 
 CloudBase 预设配置、兼容查询及最小发布工具。
 
-前置交付：[T07 实现排版版本与摘要协议](../10-10-v1-layout-versions/prd.md)、[T11 CloudBase 环境与可靠执行验证](../10-10-v1-cloudbase-feasibility/prd.md)
+前置交付：[T07 实现排版版本与摘要协议](../10-10-v1-layout-versions/prd.md)、[T11 CloudBase 环境与可靠执行验证](../archive/2026-10/10-10-v1-cloudbase-feasibility/prd.md)
 
 ## 实现边界
 

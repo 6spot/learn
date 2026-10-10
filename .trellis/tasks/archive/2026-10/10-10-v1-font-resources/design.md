@@ -39,5 +39,5 @@ assets/fonts、字体来源/许可/资源清单。
 
 ## 依据
 
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [TESTING](../../../../../docs/TESTING.md)

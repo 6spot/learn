@@ -5,4 +5,4 @@
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
 {"file": "packages/cloud-runtime/README.md", "reason": "实际运行端口、模拟与 SDK 适配边界"}
 {"file": "cloudfunctions/README.md", "reason": "部署组合、无凭据配置与最终 Owner 平台验收清单"}
-{"file": ".trellis/tasks/10-10-v1-cloudbase-feasibility/evidence.md", "reason": "本次 24 项测试和未验证平台条件"}
+{"file": ".trellis/tasks/archive/2026-10/10-10-v1-cloudbase-feasibility/evidence.md", "reason": "本次 24 项测试和未验证平台条件"}

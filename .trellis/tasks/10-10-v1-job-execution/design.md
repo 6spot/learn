@@ -6,7 +6,7 @@
 
 云端生成执行、上传、任务终态与账本结算。
 
-前置交付：[T09 实现 PDF 渲染](../10-10-v1-pdf-renderer/prd.md)、[T11 CloudBase 环境与可靠执行验证](../10-10-v1-cloudbase-feasibility/prd.md)、[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)
+前置交付：[T09 实现 PDF 渲染](../10-10-v1-pdf-renderer/prd.md)、[T11 CloudBase 环境与可靠执行验证](../archive/2026-10/10-10-v1-cloudbase-feasibility/prd.md)、[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)
 
 ## 实现边界
 

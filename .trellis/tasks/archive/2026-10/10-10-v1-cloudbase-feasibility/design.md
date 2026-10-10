@@ -36,4 +36,4 @@ SDK 的真实返回格式/异常码、事务冲突重试、云端时钟/期限�
 
 ## 依据
 
-[CLOUDBASE](../../../docs/CLOUDBASE.md)、[DATA_AND_CREDITS](../../../docs/DATA_AND_CREDITS.md)、[ARCHITECTURE](../../../docs/ARCHITECTURE.md)、[TESTING](../../../docs/TESTING.md)。
+[CLOUDBASE](../../../../../docs/CLOUDBASE.md)、[DATA_AND_CREDITS](../../../../../docs/DATA_AND_CREDITS.md)、[ARCHITECTURE](../../../../../docs/ARCHITECTURE.md)、[TESTING](../../../../../docs/TESTING.md)。

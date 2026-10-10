@@ -11,7 +11,7 @@
 - [x] 校验父子关联、依赖无环、文件引用与任务上下文。
 - [x] 保存字体获取结果及验证证据，给出本地资源入口。
 
-初次拆分检查（历史证据）：父任务及 25 子任务共 26 个目录的 `task.py validate` 全部通过；任务表 25 个节点依赖无环，必需文件及父子关联完整，589 处本地链接解析通过；`git diff --check` 通过。字体证据见 [T02](../10-10-v1-font-resources/research/resource-acquisition.md)，设计预览证据见 [T25](../archive/2026-10/10-10-v1-ui-design/research/validation.md)。本轮未修改核心源码，未重复运行纸张内核测试；既有源码修改保留。
+初次拆分检查（历史证据）：父任务及 25 子任务共 26 个目录的 `task.py validate` 全部通过；任务表 25 个节点依赖无环，必需文件及父子关联完整，589 处本地链接解析通过；`git diff --check` 通过。字体证据见 [T02](../archive/2026-10/10-10-v1-font-resources/research/resource-acquisition.md)，设计预览证据见 [T25](../archive/2026-10/10-10-v1-ui-design/research/validation.md)。本轮未修改核心源码，未重复运行纸张内核测试；既有源码修改保留。
 
 ## 本次拆分复核
 

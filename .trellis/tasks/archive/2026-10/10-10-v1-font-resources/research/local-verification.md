@@ -2,13 +2,13 @@
 
 ## 实际完成
 
-- 三个字体、两个许可证、两个 ZIP 的原始大小与 SHA-256 重新核对，两个 ZIP 全包 CRC 通过。原始来源与散列只在 [manifest](../../../../assets/fonts/manifest.json) 维护。
+- 三个字体、两个许可证、两个 ZIP 的原始大小与 SHA-256 重新核对，两个 ZIP 全包 CRC 通过。原始来源与散列只在 [manifest](../../../../../../assets/fonts/manifest.json) 维护。
 - 新增恢复工具：默认离线；显式 `--download` 只补缺失文件；校验临时文件后原子写入，既有文件不覆盖；上游版本变化明确失败。对真实原始 ZIP 在临时资源根目录执行离线提取恢复，再验全部资源，通过；没有重新联网下载，也不改原始字体。
 - Python 标准库工具测试 **13/13 通过**：缺失/损坏文件、禁止默认联网、错误/中断下载、原子写入竞态、ZIP 指定成员/路径、散列绑定、明确覆盖失败，以及完整合成字符集。
-- `fonttools==4.60.1` 实际读取三份字体的表目录、版本、cmap、advance/纵向度量；确定性报告位于 [coverage.json](../../../../assets/fonts/verification/coverage.json)。严格 `verify` 返回 1，正确保留两份 MiSans 缺 `U+01F8` 的覆盖失败；`--allow-coverage-gaps` 返回 0 且明确输出“gaps recorded (not passed)”。
+- `fonttools==4.60.1` 实际读取三份字体的表目录、版本、cmap、advance/纵向度量；确定性报告位于 [coverage.json](../../../../../../assets/fonts/verification/coverage.json)。严格 `verify` 返回 1，正确保留两份 MiSans 缺 `U+01F8` 的覆盖失败；`--allow-coverage-gaps` 返回 0 且明确输出“gaps recorded (not passed)”。
 - 完整 GB2312 汉字两份中文字体均覆盖 6,763 / 6,763。额外基本 CJK 检查发现 MiSans 缺 `U+9FF0–U+9FFF`；NFC 拼音集合两份 MiSans 80 / 81，NFD 全部 20 / 20，组合标记 advance 均为 0。详见资源说明，不把 GB2312 当作所有小学教材用字集。
-- 可选本机 **HarfBuzz 14.6.0** 对每份字体各 90 个拼音簇的 NFC/NFD 形式检查：字形编号、偏移/advance 相同且无 `.notdef`，**270 / 270 簇通过**。它能将 `Ǹ` 规范分解为基础字母与组合重音；[探针报告](../../../../assets/fonts/verification/shaping-probe.json) 不代表最终 TS/Canvas/PDF 路径已完成。
-- 重新从本地 MiSans 协议 PDF 提取并读取条款，逐用途核对 [许可研究](../../../../assets/fonts/licenses/review.md)。OFL 明文允许的方式与 MiSans 尚待解释的具体交付方式分别记录；不以 fsType 替代授权。
+- 可选本机 **HarfBuzz 14.6.0** 对每份字体各 90 个拼音簇的 NFC/NFD 形式检查：字形编号、偏移/advance 相同且无 `.notdef`，**270 / 270 簇通过**。它能将 `Ǹ` 规范分解为基础字母与组合重音；[探针报告](../../../../../../assets/fonts/verification/shaping-probe.json) 不代表最终 TS/Canvas/PDF 路径已完成。
+- 重新从本地 MiSans 协议 PDF 提取并读取条款，逐用途核对 [许可研究](../../../../../../assets/fonts/licenses/review.md)。OFL 明文允许的方式与 MiSans 尚待解释的具体交付方式分别记录；不以 fsType 替代授权。
 
 ## 重跑
 
@@ -19,7 +19,7 @@ assets/fonts/.venv/bin/python assets/fonts/tools/font_resources.py verify --arch
 python3 assets/fonts/tools/shaping_probe.py --report assets/fonts/verification/shaping-probe.json
 ```
 
-`.venv` 安装步骤及新 checkout 恢复见 [README](../../../../assets/fonts/README.md)。工具不要求用户上传字体；上游发生变化时保留原始 pin，先核对版本。
+`.venv` 安装步骤及新 checkout 恢复见 [README](../../../../../../assets/fonts/README.md)。工具不要求用户上传字体；上游发生变化时保留原始 pin，先核对版本。
 
 ## 下游与最终门槛
 
