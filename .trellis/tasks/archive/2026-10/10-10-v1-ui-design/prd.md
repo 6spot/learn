@@ -45,4 +45,4 @@ Owner 已按 D-043 接受当前稿作为功能开发基线，O-015 本轮看稿�
 
 ## 依据
 
-[UI_DESIGN](../../../docs/UI_DESIGN.md)、[PRODUCT](../../../docs/PRODUCT.md)、[DECISIONS](../../../docs/DECISIONS.md)、[TESTING](../../../docs/TESTING.md)。
+[UI_DESIGN](../../../../../docs/UI_DESIGN.md)、[PRODUCT](../../../../../docs/PRODUCT.md)、[DECISIONS](../../../../../docs/DECISIONS.md)、[TESTING](../../../../../docs/TESTING.md)。

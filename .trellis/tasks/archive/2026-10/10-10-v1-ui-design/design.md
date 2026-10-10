@@ -1,6 +1,6 @@
 # T25 设计方案
 
-设计权威内容集中在 [UI_DESIGN](../../../docs/UI_DESIGN.md)，当前八页面候选在 [native-preview.html](../../../docs/ui/native-preview.html)（新增页面样式见 `docs/ui/native-pages.css`），旧完整稿 [preview.html](../../../docs/ui/preview.html) 仅保留参考。此处不复制另一套样式数值。
+设计权威内容集中在 [UI_DESIGN](../../../../../docs/UI_DESIGN.md)，当前八页面候选在 [native-preview.html](../../../../../docs/ui/native-preview.html)（新增页面样式见 `docs/ui/native-pages.css`），旧完整稿 [preview.html](../../../../../docs/ui/preview.html) 仅保留参考。此处不复制另一套样式数值。
 
 - 原生基础控件负责输入、点击等语义；模板条目、预览和记录等按业务复用。
 - 候选信息架构为两个 tabBar 入口、八个页面，生成结果与记录详情复用。
