@@ -13,4 +13,4 @@
 {"file": "packages/cloud-service/src/model.ts", "reason": "持久任务与候选安全元数据"}
 {"file": "packages/cloud-service/test/execution.test.mjs", "reason": "22项故障/结算验证，含独立检查新增的执行claim响应丢失回归"}
 {"file": "packages/cloud-service/integration/execution-pdf.test.mjs", "reason": "10项真实PDF/字体集成"}
-{"file": ".trellis/tasks/10-10-v1-job-execution/evidence.md", "reason": "本轮验证记录与外部验收界线"}
+{"file": ".trellis/tasks/archive/2026-10/10-10-v1-job-execution/evidence.md", "reason": "本轮验证记录与外部验收界线"}

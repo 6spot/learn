@@ -26,7 +26,7 @@
 
 另有真实 PDF 1 MB 上限失败回归，结果 PDF_RESOURCE_LIMIT、FAILED、额度释放、零上传，无 partial bytes。此处字节为本次固定测试样例，不是产品固定大小；64 MiB 为测试显式上限，生产值由最终配置提供。
 
-测试：[真实 PDF 集成](../../../packages/cloud-service/integration/execution-pdf.test.mjs)。
+测试：[真实 PDF 集成](../../../../../packages/cloud-service/integration/execution-pdf.test.mjs)。
 
 ## 22 项服务故障测试
 
@@ -41,7 +41,7 @@
 - render/upload 中 deadline 到达、旧 batch、竞争失败、成功/失败双顺序竞态只允许一次终态。
 - 同批有效候选和成功引用禁止清理；失败后先清理再迟到上传会重复安全删除；删除失败保留 deleting 供重试。
 
-测试：[执行故障矩阵](../../../packages/cloud-service/test/execution.test.mjs)。合成 PDF fixture 仅用于故障调度，真实 PDF 验证独立执行。
+测试：[执行故障矩阵](../../../../../packages/cloud-service/test/execution.test.mjs)。合成 PDF fixture 仅用于故障调度，真实 PDF 验证独立执行。
 
 ## 剩余边界
 

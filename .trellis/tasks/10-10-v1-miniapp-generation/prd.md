@@ -9,7 +9,7 @@
 - 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../10-10-learn-v1/prd.md)。
 - 责任范围：miniprogram 请求号、提交快照、生成状态与重试。目录名称表示职责，尚未存在的模块不得描述为已实现。
 - 已有四模板几何与基础方格文字布局可复用；本任务不能以历史测试或占位字体样张代替验收。
-- 最终集成验收依赖：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
+- 最终集成验收依赖：[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)
 
 ## 要求与验收
 

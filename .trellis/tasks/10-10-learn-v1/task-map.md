@@ -20,7 +20,7 @@
 | T12 | [实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md) | T07、T11 | CloudBase 预设配置、兼容查询及最小发布工具 |
 | T13 | [实现身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md) | T11 | 云端用户、额度账户与不可变流水 |
 | T14 | [实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md) | T12、T13 | 云端请求校验、参数指纹、任务与额度预留 |
-| T15 | [实现生成执行与事务结算](../10-10-v1-job-execution/prd.md) | T09、T11、T14 | 云端生成执行、上传、任务终态与账本结算 |
+| T15 | [实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md) | T09、T11、T14 | 云端生成执行、上传、任务终态与账本结算 |
 | T16 | [实现超时对账与恢复](../10-10-v1-job-recovery/prd.md) | T15 | 云端恢复器、超时结算、候选产物清理 |
 | T17 | [实现记录查询与私有文件领取](../10-10-v1-records-file-access/prd.md) | T15 | 云端生成记录 API、私有 PDF 授权领取 |
 | T18 | [实现模板、编辑与预览页面](../10-10-v1-miniapp-editor/prd.md) | T08、T25 | miniprogram 模板首页、统一编辑与分页预览 |

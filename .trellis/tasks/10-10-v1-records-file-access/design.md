@@ -6,7 +6,7 @@
 
 云端生成记录 API、私有 PDF 授权领取。
 
-前置交付：[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)
+前置交付：[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)
 
 ## 实现边界
 
