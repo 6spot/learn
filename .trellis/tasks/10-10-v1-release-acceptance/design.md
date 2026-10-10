@@ -6,7 +6,7 @@
 
 docs/TESTING.md、发布验收记录与部署操作说明。
 
-前置交付：[T10 完成正式字体与打印验收](../archive/2026-10/10-10-v1-print-acceptance/prd.md)、[T12 实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md)、[T13 实现身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)、[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)、[T16 实现超时对账与恢复](../archive/2026-10/10-10-v1-job-recovery/prd.md)、[T17 实现记录查询与私有文件领取](../archive/2026-10/10-10-v1-records-file-access/prd.md)、[T18 实现模板、编辑与预览页面](../10-10-v1-miniapp-editor/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T20 接通生成提交与结果流程](../10-10-v1-miniapp-generation/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)、[T22 实现最小运营中心](../10-10-v1-admin-observability/prd.md)、[T23 实现隐私、保留与清理机制](../10-10-v1-privacy-retention/prd.md)
+前置交付：[T10 完成正式字体与打印验收](../archive/2026-10/10-10-v1-print-acceptance/prd.md)、[T12 实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md)、[T13 实现身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)、[T14 实现请求幂等与任务受理](../archive/2026-10/10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)、[T16 实现超时对账与恢复](../archive/2026-10/10-10-v1-job-recovery/prd.md)、[T17 实现记录查询与私有文件领取](../archive/2026-10/10-10-v1-records-file-access/prd.md)、[T18 实现模板、编辑与预览页面](../archive/2026-10/10-10-v1-miniapp-editor/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T20 接通生成提交与结果流程](../10-10-v1-miniapp-generation/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)、[T22 实现最小运营中心](../10-10-v1-admin-observability/prd.md)、[T23 实现隐私、保留与清理机制](../10-10-v1-privacy-retention/prd.md)
 
 ## 实现边界
 

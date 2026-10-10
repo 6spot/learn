@@ -37,4 +37,4 @@
 
 本检查额外修改：`miniprogram/pages/editor/index.ts`、`miniprogram/test/editor-native.test.mjs`、`scripts/test-editor-devtools.mjs`、四份 frontend spec、本任务 design/evidence/implement/check。未提交或归档。
 
-T19 接唯一 App.client 和兼容/更新会话，T21 接账户/生成记录/文件，T20 接真实提交。当前 My 壳/生成禁用提示属于明确阶段边界，不能写成全链路完成。Owner 最终真机与配置项目仍见 [最终验收清单](../../../docs/FINAL_ACCEPTANCE.md)。
+T19 接唯一 App.client 和兼容/更新会话，T21 接账户/生成记录/文件，T20 接真实提交。当前 My 壳/生成禁用提示属于明确阶段边界，不能写成全链路完成。Owner 最终真机与配置项目仍见 [最终验收清单](../../../../../docs/FINAL_ACCEPTANCE.md)。

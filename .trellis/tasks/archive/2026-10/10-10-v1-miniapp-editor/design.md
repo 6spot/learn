@@ -6,7 +6,7 @@
 
 miniprogram 模板首页、统一编辑与分页预览。
 
-前置交付：[T08 实现 Canvas 预览](../archive/2026-10/10-10-v1-canvas-preview/prd.md)
+前置交付：[T08 实现 Canvas 预览](../10-10-v1-canvas-preview/prd.md)
 
 ## 实现边界
 
@@ -37,10 +37,10 @@ D-040 已确认标题对齐、正文首行缩进默认收起，以及正文旁�
 
 ## 依据
 
-- [PRODUCT](../../../docs/PRODUCT.md)
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [ARCHITECTURE](../../../docs/ARCHITECTURE.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PRODUCT](../../../../../docs/PRODUCT.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [ARCHITECTURE](../../../../../docs/ARCHITECTURE.md)
+- [TESTING](../../../../../docs/TESTING.md)
 
 ## 跨任务接口归属
 

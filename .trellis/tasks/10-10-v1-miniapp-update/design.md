@@ -6,7 +6,7 @@
 
 miniprogram 应用入口、共享兼容状态与更新交互。
 
-前置交付：[T12 实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md)、[T18 实现模板、编辑与预览页面](../10-10-v1-miniapp-editor/prd.md)
+前置交付：[T12 实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md)、[T18 实现模板、编辑与预览页面](../archive/2026-10/10-10-v1-miniapp-editor/prd.md)
 
 ## 实现边界
 
