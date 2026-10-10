@@ -6,7 +6,7 @@
 
 ## Overview
 
-This directory contains guidelines for backend development. Fill in each file with your project's specific conventions.
+Learn uses provider-neutral TypeScript business services and CloudBase adapters. Read the runtime contract and authority documents before cloud work. Existing scaffold entries below are not implemented conventions.
 
 ---
 
@@ -14,6 +14,7 @@ This directory contains guidelines for backend development. Fill in each file wi
 
 | Guide | Description | Status |
 |-------|-------------|--------|
+| [Runtime Contracts](./runtime-contracts.md) | Metadata transactions, private storage, trusted identity and awaited execution | Implemented T11 ports; real CloudBase verification pending |
 | [Directory Structure](./directory-structure.md) | Module organization and file layout | To fill |
 | [Database Guidelines](./database-guidelines.md) | ORM patterns, queries, migrations | To fill |
 | [Error Handling](./error-handling.md) | Error types, handling strategies | To fill |
