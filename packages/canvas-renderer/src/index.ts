@@ -16,7 +16,9 @@ export interface CanvasContext2D {
 }
 export interface CanvasSurface { width: number; height: number; getContext(type: '2d'): CanvasContext2D | null }
 export type OutlineProvider = Pick<OriginalFontMetricsProvider, 'fontBundleVersion' | 'glyphOutline'>;
-export type CanvasView = Readonly<{ widthPx: number; pixelRatio: number; zoom?: number }>;
+/** Screen viewport only; layout coordinates and physical paper size remain unchanged. */
+export type CanvasViewport = Readonly<{ topMm: number; heightMm: number }>;
+export type CanvasView = Readonly<{ widthPx: number; pixelRatio: number; zoom?: number; viewport?: CanvasViewport }>;
 export type CanvasRenderResult = Readonly<{
   cssWidth: number; cssHeight: number; bitmapWidth: number; bitmapHeight: number;
   pageIndex: number; segmentCount: number; glyphCount: number; inkBoundsMm: BoundsMm | null;
@@ -56,7 +58,9 @@ export function segmentInkBounds(segment: SegmentMm, style: StrokeStylePreset): 
 export function canvasDimensions(widthMm: number, heightMm: number, view: CanvasView) {
   const zoom = view.zoom ?? 1;
   if (![widthMm, heightMm, view.widthPx, view.pixelRatio, zoom].every(n => finite(n) && n > 0)) return invalid();
-  const cssWidth = view.widthPx * zoom, cssHeight = cssWidth * heightMm / widthMm;
+  const topMm = view.viewport?.topMm ?? 0, visibleHeightMm = view.viewport?.heightMm ?? heightMm;
+  if (!finite(topMm) || topMm < 0 || !finite(visibleHeightMm) || visibleHeightMm <= 0 || topMm + visibleHeightMm > heightMm) return invalid();
+  const cssWidth = view.widthPx * zoom, cssHeight = cssWidth * visibleHeightMm / widthMm;
   const bitmapWidth = Math.ceil(cssWidth * view.pixelRatio), bitmapHeight = Math.ceil(cssHeight * view.pixelRatio);
   // One current page; constrain backing allocation rather than silently lowering
   // user-requested scale or creating every page's bitmap at once.
@@ -116,7 +120,7 @@ export function renderPaperPage(canvas: CanvasSurface, layout: PaperLayout, page
   context.fillStyle = '#FFFFFF'; context.fillRect(0, 0, size.bitmapWidth, size.bitmapHeight);
   context.save();
   try {
-    context.setTransform(size.pixelsPerMm, 0, 0, size.pixelsPerMm, 0, 0);
+    context.setTransform(size.pixelsPerMm, 0, 0, size.pixelsPerMm, 0, -(view.viewport?.topMm ?? 0) * size.pixelsPerMm || 0);
     for (const segment of page.geometry.segments) {
       const style = layout.strokes[segment.role];
       context.strokeStyle = gray(style.gray); context.lineWidth = style.widthMm;

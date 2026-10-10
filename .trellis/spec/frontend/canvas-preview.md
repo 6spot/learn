@@ -6,11 +6,13 @@ Read when changing preview rendering, original-font loading or native Canvas lif
 
 ## 2. Signatures
 
-`renderPaperPage(canvas, layout, pageIndex, fonts, {widthPx,pixelRatio,zoom})` draws one existing page and returns safe counts and ink bounds. Native `PaperCanvasHandle.display(request)` resolves to the report or `null` on cancellation/error; `clear()` releases its backing bitmap. `createNativeFontLoader(platform, trustedUrls)` loads selected original-font IDs.
+`renderPaperPage(canvas, layout, pageIndex, fonts, {widthPx,pixelRatio,zoom})` draws one existing page and returns safe counts and ink bounds. Native `PaperCanvasHandle.display(request)` resolves to the report or `null` on cancellation/error; `clear()` releases its backing bitmap and image. Optional `viewport: {topMm,heightMm}` allocates only the screen slice; `snapshot: true` displays an in-memory PNG for native scroll/overlay composition. `createNativeFontLoader(platform, trustedUrls)` loads selected original-font IDs.
 
 ## 3. Contracts
 
 - CSS width/zoom affect the view; DPR affects backing pixels. Neither changes page millimetres, glyph origins, physical font size or pagination.
+- Editor slices use the renderer viewport, not ancestor CSS clipping of a full native Canvas. Preflight still checks the entire page, including offscreen glyphs; cropping changes only the bitmap height and display transform.
+- T18 editor/preview use `snapshot: true`: render a hidden Canvas with the same layout, encode `toDataURL('image/png')`, reject data URLs over 900,000 characters before `setData`, then release the bitmap to 1×1. Wait for the matching native image load before reporting ready; error/clear/new revision/detach cancels pending decoding and stale callbacks. Images remain in memory; do not use temporary-file exports or write input-bearing snapshots to disk.
 - Draw core glyph IDs through exact T04 outlines. Convert the font y-up axis once; glyph origins already include offsets. Never call Canvas text measurement/shaping to choose positions.
 - Validate all required Canvas APIs, page/resource/style data, line caps, complete ink bounds and bitmap limits before resizing or drawing. Failure must not leave a partially painted page presented as valid.
 - Layout/provider objects stay in JS memory, outside `setData`. The bridge carries dimensions, status and safe counts only. Editor text needed by native inputs is distinct from a text-bearing layout snapshot.
@@ -35,7 +37,7 @@ Good: zoom page two of a three-page document and assert unchanged glyph count/mm
 
 ## 6. Tests Required
 
-`npm run test:canvas` covers exact transforms, caps, bounds, limits, real font outlines, failure preflight and native lifetime/cache races. After native behavior changes, `npm run test:canvas:devtools` exercises actual DevTools and writes reproducible evidence under ignored `dist/canvas-evidence`. Coordinate tool ownership before rebuilding or re-launching the shared project. These results do not replace real devices or printing.
+`npm run test:canvas` covers exact transforms, caps, bounds, limits, real font outlines, viewport preflight, snapshot API/size/decoding failures and native lifetime/cache races. T18 uses `npm run test:editor:devtools` for actual input, cleanup overlays, PNG decoding, paging/zoom/scroll edges and safe sharing. After native behavior changes, `npm run test:canvas:devtools` exercises actual DevTools and writes reproducible evidence under ignored `dist/canvas-evidence`. Coordinate tool ownership before rebuilding or re-launching the shared project. These results do not replace real devices or printing.
 
 ## 7. Wrong vs Correct
 

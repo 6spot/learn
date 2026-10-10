@@ -46,6 +46,24 @@ test('DPR and zoom change transforms and backing dimensions, never millimetre pa
   assert.deepEqual(a.calls.filter(c => c.name === 'setTransform')[1].args, [3, 0, 0, 3, 0, 0]);
   assert.deepEqual(b.calls.filter(c => c.name === 'setTransform')[1].args, [6.75, 0, 0, 6.75, 0, 0]);
 });
+test('editor viewport allocates only visible rows without changing paths, ink or layout', () => {
+  const layout = blank('mi-grid'), before = JSON.stringify(layout), full = surface(), crop = surface();
+  const original = renderPaperPage(full, layout, 0, null, view);
+  const result = renderPaperPage(crop, layout, 0, null, { ...view, viewport: { topMm: 20, heightMm: 50 } });
+  assert.equal(result.cssHeight, 75);
+  assert.deepEqual([crop.width, crop.height], [630, 150]);
+  assert.deepEqual(crop.calls.filter(c => c.name === 'setTransform')[1].args, [3, 0, 0, 3, 0, -60]);
+  const paths = canvas => canvas.calls.filter(c => ['moveTo', 'lineTo'].includes(c.name));
+  assert.deepEqual(paths(crop), paths(full));
+  assert.deepEqual(result.inkBoundsMm, original.inkBoundsMm);
+  assert.equal(JSON.stringify(layout), before);
+  for (const viewport of [{ topMm: -1, heightMm: 10 }, { topMm: 280, heightMm: 20 },
+    { topMm: NaN, heightMm: 10 }, { topMm: 0, heightMm: 0 }]) {
+    const bad = surface();
+    assert.throws(() => renderPaperPage(bad, layout, 0, null, { ...view, viewport }), { code: 'CANVAS_INVALID_LAYOUT' });
+    assert.equal(bad.calls.length, 0); assert.equal(bad.height, 1);
+  }
+});
 test('cap-aware ink accounts for diagonal, round and square ends and does not crop dashed lines', () => {
   const style = { widthMm: 2, gray: 0, dashMm: [2, 2], lineCap: 'butt', lineJoin: 'miter', miterLimit: 10 };
   const horizontal = { from: { x: 10, y: 10 }, to: { x: 20, y: 10 }, role: 'grid' };
@@ -113,6 +131,13 @@ test('missing/mismatched fonts and inconsistent actual ink fail before touching 
   const badOutline = { ...provider, glyphOutline(id, glyph) { return { ...provider.glyphOutline(id, glyph), commands: [{ command: 'lineTo', args: [NaN, 1] }] }; } };
   assert.throws(() => renderPaperPage(canvas, layout, 0, badOutline, view), { code: 'CANVAS_INVALID_LAYOUT' });
   assert.equal(canvas.calls.length, 0); assert.equal(canvas.width, 1);
+});
+test('cropped view still validates offscreen glyphs and never hides resource or ink errors', () => {
+  const layout = filled(), canvas = surface(), cropped = { ...view, viewport: { topMm: 250, heightMm: 10 } };
+  assert.throws(() => renderPaperPage(canvas, layout, 0, null, cropped), { code: 'CANVAS_RESOURCE_MISSING' });
+  const bad = structuredClone(layout); bad.pages[0].glyphs[0].originMm.x += 1;
+  assert.throws(() => renderPaperPage(canvas, bad, 0, provider, cropped), { code: 'CANVAS_INVALID_LAYOUT' });
+  assert.equal(canvas.calls.length, 0); assert.equal(canvas.height, 1);
 });
 test('multi-page renderer uses only the requested page', () => {
   const layout = filled(false, '春天来了，万物生长。'.repeat(80));

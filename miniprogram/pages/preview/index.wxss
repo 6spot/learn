@@ -1,0 +1,8 @@
+.paper-reader { width: 100%; position: relative; background: var(--background); }
+.reading-content { min-width: 100%; box-sizing: border-box; padding: 16px; }
+.preview-controls { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 2px 16px; background: #FFFFFF; }
+.page-count { color: var(--secondary); font-size: 14px; min-width: 42px; text-align: center; }
+.preview-actions { padding: 8px 20px 12px; background: #FFFFFF; }
+.preview-error { padding: 28px 24px; text-align: center; color: var(--secondary); }
+.preview-error button { margin-top: 16px; }
+.preview-pending { display: block; padding: 20px; color: var(--secondary); text-align: center; font-size: 14px; }

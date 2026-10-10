@@ -1,4 +1,5 @@
 <view class="paper-container" style="width:{{cssWidth}}px;height:{{cssHeight}}px">
-  <canvas id="paper" type="2d" style="width:{{cssWidth}}px;height:{{cssHeight}}px;visibility:{{status === 'ready' ? 'visible' : 'hidden'}}" />
+  <canvas id="paper" type="2d" style="width:{{snapshot ? 1 : cssWidth}}px;height:{{snapshot ? 1 : cssHeight}}px;position:{{snapshot ? 'absolute' : 'static'}};visibility:{{status === 'ready' && !snapshot ? 'visible' : 'hidden'}}" />
+  <image wx:if="{{snapshot && imageSource}}" class="paper-image" src="{{imageSource}}" mode="scaleToFill" style="width:{{cssWidth}}px;height:{{cssHeight}}px;visibility:{{status === 'ready' ? 'visible' : 'hidden'}}" data-revision="{{imageRevision}}" bindload="onImageLoad" binderror="onImageError" aria-hidden="true" />
   <view wx:if="{{message}}" class="paper-status" role="status">{{message}}</view>
 </view>

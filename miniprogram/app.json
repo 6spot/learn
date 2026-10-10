@@ -1,13 +1,17 @@
 {
-  "pages": [
-    "pages/runtime/index",
-    "pages/canvas-diagnostics/index"
-  ],
+  "pages": ["pages/templates/index", "pages/editor/index", "pages/preview/index", "pages/me/index", "pages/runtime/index", "pages/canvas-diagnostics/index"],
   "window": {
-    "navigationBarTitleText": "Learn 开发验证",
+    "navigationBarTitleText": "学习纸张",
     "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#F5F6F8"
   },
-  "style": "v2"
+  "style": "v2",
+  "tabBar": {
+    "color": "#626B78", "selectedColor": "#3578E5", "backgroundColor": "#FFFFFF", "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/templates/index", "text": "纸张", "iconPath": "assets/paper.png", "selectedIconPath": "assets/paper-active.png" },
+      { "pagePath": "pages/me/index", "text": "我的", "iconPath": "assets/person.png", "selectedIconPath": "assets/person-active.png" }
+    ]
+  }
 }

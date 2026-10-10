@@ -1,0 +1,30 @@
+page { background: #FFFFFF; }
+.paper-crop { overflow: hidden; position: relative; background: #FFFFFF; }
+.crop-message { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--secondary); background: #FFFFFF; }
+.editor-content { padding: 8px 20px 0; }
+.section-heading, .field-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.empty-hint { display: block; margin-bottom: 18px; }
+.field { margin-bottom: 18px; }
+.field-label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.title-input, .body-input { box-sizing: border-box; width: 100%; font-size: 16px; line-height: 1.65; padding: 10px 12px; background: #F7F8FA; border-radius: 6px; color: var(--text); }
+.title-input { min-height: 46px; }
+.body-input { height: 220px; }
+.body-tools { display: flex; gap: 4px; }
+.field-heading .field-label { margin: 0; }
+.tracing-row { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-top: 1px solid var(--divider); }
+.row-title { font-size: 16px; font-weight: 500; }
+.row-description { display: block; margin-top: 5px; }
+.advanced-section { border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+button.settings-toggle { display: flex; width: 100%; box-sizing: border-box; justify-content: space-between; align-items: center; padding: 16px 0; text-align: left; line-height: 1.5; }
+.advanced-options { padding: 8px 0 14px; }
+.option-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 4px 0 18px; }
+.option-row label { display: flex; align-items: center; min-height: 44px; font-size: 14px; }
+.option-row radio { transform: scale(.8); margin-left: -4px; }
+.reset-settings { text-align: left; padding-left: 0; }
+.cleanup-overlay { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; padding: 24px; background: rgba(20,25,35,.42); }
+.cleanup-dialog { width: 100%; box-sizing: border-box; max-height: 85vh; padding: 20px; background: #FFFFFF; border-radius: 12px; }
+.cleanup-explanation { display: block; margin: 8px 0 16px; }
+.cleanup-comparison { height: 42vh; }
+.cleanup-text { display: block; white-space: pre-wrap; word-break: break-word; padding: 10px; margin-bottom: 18px; background: #F7F8FA; line-height: 1.65; font-size: 14px; }
+.dialog-actions { display: flex; gap: 12px; margin-top: 16px; }
+.dialog-actions button { flex: 1; margin: 0; padding: 0 8px; }

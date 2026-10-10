@@ -2,7 +2,7 @@
 
 ## Status
 
-UI policy is confirmed by D-039; D-043 accepts current navigation and styling in [UI_DESIGN](../../../docs/UI_DESIGN.md). T01 implements a native diagnostics host and `npm run test:devtools`; product pages remain separate work. Check [runtime tooling](runtime-tooling.md) before changing build or automation.
+UI policy is confirmed by D-039; D-043 accepts current navigation and styling in [UI_DESIGN](../../../docs/UI_DESIGN.md). T01 implements the diagnostics host; T18 implements native templates/editor/preview pages, with separate generation/account integration tasks. Check [runtime tooling](runtime-tooling.md) before changing build or automation.
 
 ## Review gates
 
@@ -23,6 +23,6 @@ UI policy is confirmed by D-039; D-043 accepts current navigation and styling in
 
 Use [TESTING](../../../docs/TESTING.md) for the authority on acceptance. Verify small screens, large type, keyboard visibility, bottom safe area, repeat taps, back navigation, foreground/background refresh and file handling in actual WeChat environments where applicable.
 
-A design HTML preview may be inspected for navigation, overflow, contrast and sample states. This does not prove native component/API support, account security, font metrics, PDF correctness or printing. Add actual UI lint/build/test commands when T18 creates the implementation; do not invent them now.
+A design HTML preview may be inspected for navigation, overflow, contrast and sample states. This does not prove native component/API support, account security, font metrics, PDF correctness or printing. Run `npm run typecheck`, `npm run build`, `npm run test:canvas` and `npm run test:editor`. `npm run test:editor:devtools` exercises actual native controls and fixed synthetic text; serialize use of the shared DevTools project and inspect its screenshots. A failed run must not leave an earlier passing report presented as current evidence.
 
 Core changes must also run `npm test` in `packages/paper-core`. Documentation-only work checks diffs, links and rule consistency. Record what was actually run and what remains unverified.

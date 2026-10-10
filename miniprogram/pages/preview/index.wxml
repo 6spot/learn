@@ -1,0 +1,9 @@
+<view class="preview-page">
+  <scroll-view id="paper-reader" class="paper-reader" scroll-x scroll-y enhanced show-scrollbar scroll-top="{{scrollTop}}" scroll-left="{{scrollLeft}}" style="height:{{readerHeight}}px">
+    <view class="reading-content" style="width:{{contentWidth}}px" bindtap="onZoom"><paper-canvas id="full-paper" /></view>
+    <view wx:if="{{status === 'error'}}" class="preview-error"><text>{{message}}</text><button id="preview-retry" class="button-secondary" bindtap="onRetry">重试预览</button></view>
+    <text wx:elif="{{status === 'idle' || status === 'loading'}}" class="preview-pending">正在准备预览</text>
+  </scroll-view>
+  <view class="preview-controls"><button wx:if="{{pageCount > 1}}" id="previous-page" class="button-plain text-action" disabled="{{pageIndex === 0 || status !== 'ready'}}" bindtap="onPrevious">上一页</button><text class="page-count">{{pageIndex + 1}} / {{pageCount}}</text><button wx:if="{{pageCount > 1}}" id="next-page" class="button-plain text-action" disabled="{{pageIndex + 1 >= pageCount || status !== 'ready'}}" bindtap="onNext">下一页</button><button id="zoom-paper" class="button-plain text-action" disabled="{{status !== 'ready'}}" bindtap="onZoom">{{zoom === 1 ? '放大' : '还原'}}</button></view>
+  <view class="page-actions preview-actions"><button id="generate-pdf" class="button-primary" disabled="{{!canGenerate}}" bindtap="onGenerate">生成 PDF</button><text class="action-note">成功生成才扣次</text><text wx:if="{{generationMessage}}" class="action-note">{{generationMessage}}</text></view>
+</view>

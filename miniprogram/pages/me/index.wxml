@@ -1,0 +1,2 @@
+<view class="account-section"><text class="section-title">可用生成次数</text><text class="balance">—</text><text class="secondary">账户服务暂不可用</text><text class="secondary account-note">预览不扣次，成功生成才扣次</text></view>
+<view class="account-section"><button class="button-secondary" bindtap="onChoosePaper">去选纸张</button></view>

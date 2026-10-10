@@ -1,0 +1,9 @@
+page { background: #FFFFFF; }
+.templates-page { padding: 24px 20px 28px; }
+.page-intro .secondary { display: block; margin-top: 6px; }
+.template-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: 30px; margin-top: 28px; }
+.template-entry { display: flex; flex-direction: column; align-items: center; min-width: 0; width: 100%; box-sizing: border-box; padding: 0; line-height: 1.5; text-align: center; font-weight: 400; }
+.thumbnail { display: inline-block; border: 1px solid #E2E5EA; background: #FFFFFF; }
+.template-name { margin-top: 10px; font-size: 16px; font-weight: 600; }
+.template-description { margin-top: 3px; color: var(--secondary); font-size: 12px; white-space: normal; }
+.page-note { display: block; margin-top: 28px; text-align: center; color: var(--secondary); font-size: 12px; }

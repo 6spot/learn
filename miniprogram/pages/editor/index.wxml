@@ -1,0 +1,34 @@
+<view class="editor-page">
+  <view class="paper-crop" style="height:{{cropHeight}}px" bindtap="onPreview" role="button" aria-label="查看整页预览">
+    <paper-canvas id="crop-paper" />
+    <view wx:if="{{previewStatus === 'error'}}" class="crop-message"><text>{{previewMessage}}</text><button size="mini" class="button-plain text-action" catchtap="onRetryPreview">重试</button></view>
+    <text wx:elif="{{previewStatus === 'loading'}}" class="crop-message">正在更新预览</text>
+  </view>
+  <view class="editor-content">
+    <view class="section-heading"><text class="section-title">文字内容</text><button id="open-preview" class="button-plain text-action" bindtap="onPreview">查看整页</button></view>
+    <text class="secondary empty-hint">不填文字即可生成空白纸</text>
+    <view class="field"><text class="field-label">标题</text><textarea id="title-input" class="title-input" value="{{title}}" placeholder="输入标题" maxlength="-1" auto-height cursor-spacing="24" bindinput="onTitleInput" /></view>
+    <view class="field body-field">
+      <view class="field-heading"><text class="field-label">{{bodyLabel}}</text><view class="body-tools"><button id="cleanup-open" class="button-plain text-action" disabled="{{!canCleanup}}" bindtap="onCleanup">整理换行</button><button wx:if="{{canUndo}}" id="cleanup-undo" class="button-plain text-action" bindtap="onUndoCleanup">撤销</button></view></view>
+      <textarea id="body-input" class="body-input" value="{{body}}" placeholder="{{bodyPlaceholder}}" maxlength="-1" cursor-spacing="28" show-confirm-bar="false" bindinput="onBodyInput" />
+    </view>
+    <view class="tracing-row"><view><text class="row-title">描红</text><text class="secondary row-description">用浅色文字辅助练习</text></view><switch id="tracing-switch" checked="{{tracing}}" color="#3578E5" bindchange="onTracing" aria-label="开启描红" /></view>
+    <view class="advanced-section">
+      <button id="settings-toggle" class="button-plain settings-toggle" bindtap="onToggleSettings" aria-expanded="{{expanded}}"><view><text class="row-title">进阶设置</text><text class="secondary row-description">{{settingsSummary}}</text></view><text class="secondary">{{expanded ? '收起' : '展开'}}</text></button>
+      <view wx:if="{{expanded}}" class="advanced-options">
+        <text class="field-label">标题对齐</text><radio-group id="alignment-options" bindchange="onAlignment" class="option-row"><label><radio value="left" checked="{{alignment === 'left'}}" color="#3578E5" />左对齐</label><label><radio value="center" checked="{{alignment === 'center'}}" color="#3578E5" />居中</label><label><radio value="right" checked="{{alignment === 'right'}}" color="#3578E5" />右对齐</label></radio-group>
+        <text class="field-label">正文首行缩进</text><radio-group id="indent-options" bindchange="onIndent" class="option-row"><label><radio value="default" checked="{{indent === 'default'}}" color="#3578E5" />按模板默认</label><label><radio value="none" checked="{{indent === 'none'}}" color="#3578E5" />不缩进</label></radio-group>
+        <button id="settings-reset" class="button-plain text-action reset-settings" bindtap="onResetSettings">恢复默认设置</button>
+      </view>
+    </view>
+    <view class="page-actions"><button id="generate-pdf" class="button-primary" disabled="{{!canGenerate}}" bindtap="onGenerate">生成 PDF</button><text class="action-note">成功生成才扣次</text><text wx:if="{{generationMessage}}" class="action-note">{{generationMessage}}</text></view>
+  </view>
+</view>
+<view wx:if="{{cleanup}}" class="cleanup-overlay" catchtouchmove="onBlockTouch">
+  <view class="cleanup-dialog" role="dialog" aria-modal="true" aria-label="整理换行预览">
+    <text class="section-title">整理换行预览</text><text class="secondary cleanup-explanation">只整理正文；确认前不会修改内容</text>
+    <scroll-view scroll-y class="cleanup-comparison"><text class="field-label">整理前</text><text id="cleanup-before" class="cleanup-text" selectable>{{cleanup.before}}</text><text class="field-label">整理后</text><text id="cleanup-after" class="cleanup-text" selectable>{{cleanup.after}}</text></scroll-view>
+    <text wx:if="{{!cleanup.changed}}" class="secondary">没有需要整理的换行</text>
+    <view class="dialog-actions"><button id="cleanup-cancel" class="button-secondary" bindtap="onCancelCleanup">取消</button><button id="cleanup-apply" class="button-primary" disabled="{{!cleanup.changed}}" bindtap="onApplyCleanup">应用修改</button></view>
+  </view>
+</view>

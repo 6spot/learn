@@ -1,3 +1,4 @@
 :host { display: block; }
 .paper-container { position: relative; background: #FFFFFF; }
+.paper-image { display: block; }
 .paper-status { position: absolute; top: 20px; left: 12px; right: 12px; color: #5E6572; font-size: 14px; }

@@ -3,7 +3,7 @@
   "name": "v1-miniapp-editor",
   "title": "T18 实现模板、编辑与预览页面",
   "description": "让用户选择四模板后默认即可预览，无须理解排版参数。",
-  "status": "planning",
+  "status": "in_progress",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -12,7 +12,7 @@
   "assignee": "me",
   "createdAt": "2026-10-10",
   "completedAt": null,
-  "branch": null,
+  "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
   "commit": null,
@@ -23,6 +23,8 @@
   "relatedFiles": [],
   "notes": "",
   "meta": {
-    "plan_id": "T18"
+    "plan_id": "T18",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
 }

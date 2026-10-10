@@ -98,6 +98,14 @@ const preset = getDevelopmentPreset('mi-grid');
 const layout = { versions: preset.versions, mode: 'blank', textStyles: preset.textStyles, strokes: preset.strokes,
   pages: [{ geometry: buildPageGeometry(preset.geometry), glyphs: [], lines: [], slots: [] }] };
 const request = { layout, fonts: null, pageIndex: 0, widthPx: 320 };
+test('native component uses cropped CSS and bitmap heights, not ancestor overflow clipping', async () => {
+  const c = component(), cropped = c.display({ ...request, viewport: { topMm: 20, heightMm: 42 } });
+  c.callbacks.splice(0).forEach(callback => callback());
+  assert.equal((await cropped).cssHeight, 64);
+  assert.equal(c.instance.data.cssHeight, 64);
+  assert.equal(c.canvas.height, 128);
+  assert.equal(c.instance.data.status, 'ready');
+});
 test('native component suppresses stale asynchronous canvas queries and keeps layout off setData', async () => {
   const c = component();
   const stale = c.display(request), latest = c.display({ ...request, zoom: 1.5 });
@@ -122,4 +130,43 @@ test('native component detachment cancels pending render, and failures cannot di
   assert.doesNotThrow(() => unsupported.callbacks.splice(0).forEach(callback => callback()));
   assert.equal(await unavailable, null);
   assert.equal(unsupported.instance.data.status, 'error');
+});
+const png = 'data:image/png;base64,iVBORw0KGgo=';
+async function queryCanvas(c) { c.callbacks.splice(0).forEach(callback => callback()); await Promise.resolve(); }
+function imageEvent(c, name = 'onImageLoad', revision = c.instance.data.imageRevision) {
+  c.definition.methods[name].call(c.instance, { currentTarget: { dataset: { revision } } });
+}
+test('snapshot waits for native image decoding, bounds the bridge and releases the backing bitmap', async () => {
+  const c = component(); let capturedSize;
+  c.canvas.toDataURL = type => { assert.equal(type, 'image/png'); capturedSize = [c.canvas.width, c.canvas.height]; return png; };
+  const pending = c.display({ ...request, snapshot: true }); await queryCanvas(c);
+  assert.equal(c.instance.data.status, 'loading'); assert.equal(c.instance.data.imageSource, png);
+  assert.equal(c.events.length, 0); assert.deepEqual(capturedSize, [640, 906]);
+  assert.deepEqual([c.canvas.width, c.canvas.height], [1, 1]);
+  imageEvent(c); assert.equal((await pending).cssWidth, 320); assert.equal(c.instance.data.status, 'ready');
+  assert.ok(c.bridge.every(update => JSON.stringify(update).length < 1_048_576 && !('layout' in update) && !('fonts' in update)));
+  c.definition.methods.clear.call(c.instance); assert.equal(c.instance.data.imageSource, '');
+});
+test('snapshot API failures, oversized data and decode failure expose safe error and discard images', async () => {
+  for (const toDataURL of [undefined, () => { throw new Error('unavailable'); }, () => 'bad', () => png + 'A'.repeat(900_000)]) {
+    const c = component(); c.canvas.toDataURL = toDataURL;
+    const pending = c.display({ ...request, snapshot: true }); await queryCanvas(c);
+    assert.equal(await pending, null); assert.equal(c.instance.data.status, 'error');
+    assert.equal(c.instance.data.imageSource, ''); assert.equal(c.canvas.width, 1);
+    assert.ok(c.bridge.every(update => JSON.stringify(update).length < 1_048_576));
+  }
+  const c = component(); c.canvas.toDataURL = () => png;
+  const pending = c.display({ ...request, snapshot: true }); await queryCanvas(c); imageEvent(c, 'onImageError');
+  assert.equal(await pending, null); assert.equal(c.instance.data.status, 'error'); assert.equal(c.instance.data.imageSource, '');
+});
+test('snapshot stale image events cannot finish newer requests and detach cancels undecoded images', async () => {
+  const c = component(); c.canvas.toDataURL = () => png;
+  const old = c.display({ ...request, snapshot: true }); await queryCanvas(c);
+  const oldRevision = c.instance.data.imageRevision;
+  const latest = c.display({ ...request, snapshot: true, zoom: 1.5 }); await queryCanvas(c);
+  assert.equal(await old, null); imageEvent(c, 'onImageLoad', oldRevision);
+  assert.equal(c.instance.data.status, 'loading'); assert.equal(c.events.length, 0);
+  imageEvent(c); assert.equal((await latest).cssWidth, 480);
+  const last = c.display({ ...request, snapshot: true }); await queryCanvas(c); c.detach();
+  assert.equal(await last, null); imageEvent(c); assert.equal(c.events.length, 1);
 });

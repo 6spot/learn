@@ -1,0 +1,10 @@
+<view class="templates-page">
+  <view class="page-intro"><text class="section-title">选一种纸张</text><text class="secondary">留空打印，也可以填入文字练习</text></view>
+  <view class="template-grid">
+    <button wx:for="{{templates}}" wx:key="id" class="template-entry button-plain" data-template="{{item.id}}" bindtap="onSelect" aria-label="{{item.name}}">
+      <view class="thumbnail"><paper-canvas id="paper-{{item.id}}" /></view>
+      <text class="template-name">{{item.name}}</text><text class="template-description">{{item.description}}</text>
+    </button>
+  </view>
+  <text class="page-note">A4 竖版 · 导出 PDF</text>
+</view>

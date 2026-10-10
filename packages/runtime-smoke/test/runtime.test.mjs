@@ -121,7 +121,10 @@ test('diagnostic summaries do not contain synthetic text or full layouts', () =>
 
 test('native app and declared page scripts register and rerun smoke through the actual output', () => {
   let appRegistered = false;
-  isolatedModule('dist/miniprogram/app.js', '', { App() { appRegistered = true; } });
+  isolatedModule('dist/miniprogram/app.js', '', { App() { appRegistered = true; }, require(specifier) {
+    assert.equal(specifier, './vendor/font-metrics.js');
+    return isolatedModule('dist/miniprogram/vendor/font-metrics.js');
+  } });
   assert.equal(appRegistered, true);
   const config = JSON.parse(read('dist/miniprogram/app.json'));
   for (const pagePath of config.pages) {
