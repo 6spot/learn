@@ -14,6 +14,12 @@
     "quotaTimeZone": "Asia/Shanghai",
     "identityKeyId": "identity-v1",
     "adminUserIds": [],
+    "stats": {
+      "coverageStartDate": "",
+      "pageSize": null,
+      "maxScanRecords": null,
+      "maxRunMs": null
+    },
     "registry": {
       "cloudEngineVersions": [
         "learn-engine-dev.4"

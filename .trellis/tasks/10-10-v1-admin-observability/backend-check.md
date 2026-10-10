@@ -16,8 +16,8 @@
 ## Findings (not fixed)
 
 - 本次后端代码范围内没有尚未修复的问题。
-- `.trellis/spec/backend/job-admission.md` 尚需明确受理同事务的 D-049 活动事实；统计扫描、预算、coverage revision/floors/gaps 也应进入后端 spec。已交主会话同步，未越权修改其规范文件。
-- 原生运营界面和 root 的 RPC/CloudClient/部署配置不在本次独立检查范围；它们仍须相应集成验证，T22 不得据此整体归档。
+- 后端规范同步和 RPC/CloudClient 接线随后由主会话完成，已补充独立检查，见下文。
+- 原生运营界面仍不在本次检查范围；T22 不得据此整体归档。
 - PDF 验证会输出已有第三方字体 bundle 的 `axisIndex` 重复键 warning；未触及其依赖或生成代码，构建及 13 项测试均完成。真实 CloudBase 索引/权限/预算/告警、真实组件配置和实机打印继续留 T24。
 
 ## Verification
@@ -29,3 +29,17 @@
 - generatedAt 仍是观察截止，非跨集合数据库快照；软预算在扫描页/记录边界检查，不取消已发出的 I/O。上述限制已在接口说明中披露。
 
 初次修复后回归出现的 2 个失败均为上述旧活动断言（实际 1、期望 0）；按已确认口径更新后全量通过。未将模拟事务/私有存储或真实字体 PDF 构建等同于正式平台验收。
+
+## RPC / 客户端 / 规范补查
+
+后端提交 `0871763` 后，独立补查主会话新增的 `getAdminStats` RPC allowlist、`CloudClient` 类型包装、部署示例显式 stats 字段、本地模拟组合与相应测试。未发现产品代码问题：
+
+- RPC 仅转发可选 date，拒绝客户端 userId/role/扫描预算；可信服务继续拥有管理员鉴权、日期验证、预算与 safe error。
+- 客户端直接走同一个 transport，未引入本地管理员判断或独立统计实现。
+- 部署示例的空日期/null 预算保持未完成配置，不能作为默认生产配置；模拟值仅在 Node 诊断组合中。
+- 实际字体 PDF、分块领取、同请求重试经过同一服务；集成断言验证普通用户 FORBIDDEN，管理员成功数/消费/DAU 均为 1，响应没有正文。
+- 新 `admin-statistics.md` 与 `job-admission.md` 已准确规定受理同事务事件、offset=0 下载、完整分页、null 覆盖、revision 检查和观察截止；没有把 RESERVED 统计事实当作可靠执行确认。
+
+主会话实际运行 `npm run test:composition` **17/17** 的完整结果已从 `/tmp/learn-composition-t22.log` 核对。本次独立补查另跑 root `tsc -p tsconfig.json --noEmit`、4 个改动 MJS 的 `node --check` 及范围 `git diff --check`，均通过；未重复全服务/字体套件或占用 DevTools。
+
+发现并由主会话修复一个测试稳定性项：client-flow 原先使用实时 SystemClock 和默认“当日”统计，若 PDF 完成后至统计查询间跨上海午夜，成功/消费正确归到前一天，新断言却要求当日仍为 1。现在该测试创建 local 后固定 clock.now 到捕获时刻；检查者已核对局部修复与语法/差异，主会话负责重跑该 client-flow。产品日期行为没有修改；此补查没有剩余问题。

@@ -1,4 +1,4 @@
-import type { AccountResponse, CompatibilityRequest, CompatibilityResponse, GenerationRequest,
+import type { AccountResponse, AdminStatsRequest, AdminStatsResponse, CompatibilityRequest, CompatibilityResponse, GenerationRequest,
   JobSummary, JobDetail, ListJobsRequest, ListJobsResponse, PdfInfo, PdfChunk, PdfChunkRequest,
   PublishedPreset, ReleaseAcceptance, SubmissionWindow, SubmitGenerationResponse } from '../../packages/cloud-service/dist/index.js';
 import type { LayoutVersionTuple, TrustedPaperPreset } from '../../packages/paper-core/src/index.js';
@@ -50,6 +50,7 @@ export class CloudClient {
     throw new CloudClientError('INVALID_RESPONSE');
   }
   getAccount(): Promise<AccountResponse> { return this.call('getAccount', {}); }
+  getAdminStats(params: AdminStatsRequest = {}): Promise<AdminStatsResponse> { return this.call('getAdminStats', params); }
   getCompatibility(params: CompatibilityRequest): Promise<CompatibilityResponse> { return this.call('getCompatibility', params); }
   getSubmissionWindow(): Promise<SubmissionWindow> { return this.call('getSubmissionWindow', {}); }
   submitGeneration(params: GenerationRequest): Promise<SubmitGenerationResponse> { return this.call('submitGeneration', params); }

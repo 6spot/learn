@@ -32,6 +32,7 @@ export async function createLocalService() {
   const day = 86400000;
   const config = {
     stage: 'development', monthlyFreeCredits: 20, quotaTimeZone: 'Asia/Shanghai', identityKeyId: 'identity', adminUserIds: [await userId(adminSubject)],
+    stats: { coverageStartDate: new Date(clock.now() + 8 * 3600000).toISOString().slice(0, 10), pageSize: 50, maxScanRecords: 10000, maxRunMs: 5000 },
     fileAccess: { maxFileBytes: 32 * 1024 * 1024, maxCacheBytes: 32 * 1024 * 1024, cacheTtlMs: 60000, maxListScanRecords: 100 },
     registry: { cloudEngineVersions: [DEVELOPMENT_ENGINE_VERSION], clientReadyEngineVersions: [DEVELOPMENT_ENGINE_VERSION] },
     generation: { windowKeyId: 'window', retainedWindowKeyIds: ['window'], fingerprintKeyId: 'fingerprint', retainedFingerprintKeyIds: ['fingerprint'],

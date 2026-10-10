@@ -23,3 +23,9 @@
 - `npm --prefix packages/cloud-service run test:pdf`：**13/13**，修复后重新构建并执行。
 - TypeScript 严格编译、两个修改 MJS 的语法检查、范围差异检查通过；包内未配置 lint 命令。
 - 改动前明确重现准备失败任务的 FAILED=1、DAU=0；改动后该已受理任务计 DAU=1，准备跨午夜仍只计原受理日，受理事务失败则各事实全部回滚。
+
+## RPC 与客户端补查
+
+主会话的 `npm run test:composition` **17/17** 已由检查者核对实际日志；新增统计 RPC 参数白名单测试及真实 PDF client-flow 的权限、成功/消费/DAU 和隐私断言。独立审阅相应 RPC、客户端、配置/模拟夹具及新增后端规范，没有产品代码问题。另跑 root 严格 tsc、4 个改动 MJS 语法与范围差异检查通过，未重复整套服务测试。
+
+client-flow 原实时钟跨上海午夜可能使“默认当日=1”断言波动；主会话已固定测试时钟，检查者核对该局部修复，主会话负责再次运行 client-flow，详见 [backend-check.md](backend-check.md)。此补查没有剩余问题；原生运营页面及实际 CloudBase 配置仍单独验收。

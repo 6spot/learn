@@ -16,6 +16,8 @@ Root commands: `npm run setup`, `npm test`, `npm run build`, `npm run smoke`. Se
 
 Release builds do not rewrite `dist/miniprogram` or `dist/runtime`, and exclude diagnostic pages, Node simulator bridges, raw fonts, PDFs and source maps. Do not run competing development builds or relaunch DevTools while another verification owns that simulator. The official automation bridge uses an in-memory transport to a Node diagnostic service; simulated identities and memory storage never enter release code. Build isolation/configuration checks alone do not establish a working end-to-end product or real platform authorization.
 
+Generated validation reports must be invalidated before loading optional fonts/tools/build dependencies that can fail, and rewritten as passing only after all checks complete. A failed rerun must not leave an earlier success report appearing current. Relative links copied into generated handoff files must be rebased for the output directory.
+
 `CloudClient` owns the JSON RPC boundary and maps safe error codes; initialize it once at App composition. Client arguments never provide trusted identity. PDF chunks are bounded canonical base64 and decoded without Node/host codecs. `createPdfDownloader` validates immutable metadata, offset/length sequence and complete SHA-256 before writing/opening a file, shares duplicate taps, and allows one active download. The App-owned temporary directory is cleaned at construction and before the next write; privacy clearing also invalidates in-flight work. Native viewer save/share is explicit user action. Do not persist partial downloads or use file identifiers as authorization.
 
 ## 4. Validation & Error Matrix

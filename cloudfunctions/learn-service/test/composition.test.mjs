@@ -102,6 +102,16 @@ test('RPC snapshots requests before awaiting and never invokes serialization hoo
   assert.equal((await handler({ method: 'getAccount', params })).ok, false); assert.equal(calls, 0);
 });
 
+test('statistics RPC forwards only the requested date and cannot assert administrator identity', async () => {
+  const seen = [];
+  const handler = createRpcHandler({ getAdminStats: async request => { seen.push(request); return { date: request.date }; } });
+  assert.deepEqual(await handler({ method: 'getAdminStats', params: { date: '2026-10-11' } }), { ok: true, data: { date: '2026-10-11' } });
+  for (const extra of [{ userId: 'admin' }, { role: 'admin' }, { maxScanRecords: 1 }]) {
+    assert.deepEqual(await handler({ method: 'getAdminStats', params: extra }), { ok: false, error: { code: 'INVALID_ARGUMENT' } });
+  }
+  assert.equal(seen.length, 1);
+});
+
 test('RPC projects only trusted safe error codes and null for void', async () => {
   for (const [error, code] of [[new Error('private content'), 'INTERNAL_ERROR'], [{ code: 'secret' }, 'INTERNAL_ERROR'],
     [new ServiceError('FORBIDDEN'), 'FORBIDDEN'], [new RuntimeError('DATABASE_UNAVAILABLE'), 'DATABASE_UNAVAILABLE']]) {

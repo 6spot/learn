@@ -12,6 +12,8 @@ const { CloudClient, createPdfDownloader } = await import(`data:text/javascript;
 
 test('actual shared layout -> RPC/PDF -> JSON base64 chunks -> native downloader round trip', async () => {
   const local = await createLocalService(), rpc = local.rpcFor('flow-user');
+  // Keep this multi-chunk flow on its captured Shanghai day even across midnight.
+  const observedAt = local.clock.now(); local.clock.now = () => observedAt;
   const client = new CloudClient(async (method, params) => JSON.parse(JSON.stringify(await rpc(JSON.parse(JSON.stringify({ method, params }))))));
   const before = await client.getAccount();
   const preset = getDevelopmentPreset('tian-grid');
@@ -37,6 +39,14 @@ test('actual shared layout -> RPC/PDF -> JSON base64 chunks -> native downloader
   const other = new CloudClient((method, params) => local.rpcFor('other-flow-user')({ method, params }));
   await assert.rejects(other.getPdfInfo(accepted.job.jobId), { code: 'NOT_FOUND' });
   await assert.rejects(other.readPdfChunk({ jobId: accepted.job.jobId, offset: 0 }), { code: 'NOT_FOUND' });
+  await assert.rejects(client.getAdminStats(), { code: 'FORBIDDEN' });
+  const admin = new CloudClient((method, params) => local.rpcFor('diagnostic-bootstrap')({ method, params }));
+  const stats = await admin.getAdminStats();
+  assert.equal(stats.coverage.complete, true);
+  assert.equal(stats.metrics.succeeded, 1);
+  assert.equal(stats.metrics.creditsConsumed, 1);
+  assert.equal(stats.metrics.dau, 1);
+  assert.ok(!JSON.stringify(stats).includes(input.body));
   // Only safe metadata is persisted; article text exists transiently and in the private PDF.
   for (const collection of ['generation_jobs', 'generation_requests', 'generation_history']) {
     const records = JSON.stringify(await local.store.list(collection)); assert.ok(!records.includes(input.body)); assert.ok(!records.includes(input.title));
