@@ -11,7 +11,7 @@
 - [产品范围与交互](docs/PRODUCT.md)
 - [系统架构与模块边界](docs/ARCHITECTURE.md)
 - [纸张模板与排版引擎](docs/PAPER_ENGINE.md)
-- [纸张规格调研与首轮试印候选](docs/PAPER_PRESETS.md)
+- [首版正式纸张规格（四种 A4 模板）](docs/PAPER_PRESETS.md)
 - [CloudBase 接入与部署](docs/CLOUDBASE.md)
 - [数据、生成任务与次数](docs/DATA_AND_CREDITS.md)
 - [测试与验收](docs/TESTING.md)
