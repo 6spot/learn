@@ -20,6 +20,18 @@ async function waitFor(check) {
 async function screenshot(name) { await new Promise(resolve => setTimeout(resolve, 400)); await miniProgram.screenshot({ path: fileURLToPath(new URL(`${name}.png`, output)) }); }
 async function status(expected) { await waitFor(() => miniProgram.evaluate(value => getApp().compatibility.view.status === value, expected)); }
 async function stateComponent(page) { return page.$('#application-status'); }
+async function assertPreservedDraft(before) {
+  const after = await miniProgram.evaluate(() => JSON.stringify(getApp().editor.draft));
+  if (after !== before) {
+    const expected = JSON.parse(before), actual = JSON.parse(after);
+    // Keep failing input diagnostics useful without logging the draft itself.
+    console.error(JSON.stringify({ diagnostic: 'draft-preservation',
+      equal: Object.fromEntries(Object.keys(expected).map(key => [key, JSON.stringify(expected[key]) === JSON.stringify(actual[key])])),
+      before: { titleLength: expected.title.length, bodyLength: expected.body.length },
+      after: { titleLength: actual.title.length, bodyLength: actual.body.length } }));
+  }
+  assert.ok(after === before, 'The complete draft must remain identical.');
+}
 async function restoreDiagnosticState() {
   if (!miniProgram || restored) return;
   await miniProgram.evaluate(() => {
@@ -102,16 +114,25 @@ try {
   }
   checkpoint('native editing and shared status');
   const page = await miniProgram.reLaunch('/pages/editor/index?template=essay-grid');
-  await (await page.$('#body-input')).input('春天来了\r\n小草发芽。');
-  await (await page.$('#title-input')).input('更新流程练习');
-  await waitFor(async () => await page.data('previewStatus') === 'ready');
+  const body = '春天来了\r\n小草发芽。', title = '更新流程练习';
+  await (await page.$('#body-input')).input(body);
+  await (await page.$('#title-input')).input(title);
+  // The SDK input command can resolve before native input events reach App.
+  // Initial blank-paper readiness is not readiness for the entered draft.
+  await waitFor(async () => await miniProgram.evaluate((expectedBody, expectedTitle) => {
+    const editor = getApp().editor, preview = editor.preview;
+    return editor.draft.body === expectedBody && editor.draft.title === expectedTitle &&
+      editor.status === 'ready' && preview && preview.revision === editor.revision &&
+      preview.input.body === expectedBody && preview.input.title === expectedTitle;
+  }, body, title) && await page.data('body') === body && await page.data('title') === title &&
+    await page.data('previewStatus') === 'ready');
   const draftBefore = await miniProgram.evaluate(() => JSON.stringify(getApp().editor.draft));
   const originalVersion = await miniProgram.evaluate(() => getApp().editor.preset.versions.templateVersion);
   assert.equal(calls, 1); mode = 'network';
   await miniProgram.evaluate(() => { void getApp().compatibility.retry(); }); await status('network-error');
   assert.equal(await (await stateComponent(page)).data('status'), 'network-error'); await screenshot('network-error-preserves-input');
   mode = 'normal'; await (await (await stateComponent(page)).$('#compatibility-retry')).tap(); await status('ready');
-  assert.equal(await miniProgram.evaluate(() => JSON.stringify(getApp().editor.draft)), draftBefore);
+  await assertPreservedDraft(draftBefore);
   checks.push('native-shared-network-retry-preserves-exact-draft');
   checkpoint('published preset lock and explicit refresh');
   const admin = local.serviceFor('diagnostic-bootstrap'), old = getDevelopmentPreset('essay-grid'), next = JSON.parse(JSON.stringify(old));
@@ -125,7 +146,7 @@ try {
   await (await (await stateComponent(page)).$('#compatibility-refresh')).tap(); await status('ready');
   await waitFor(async () => await page.data('previewStatus') === 'ready');
   assert.equal(await miniProgram.evaluate(() => getApp().editor.preview.layout.versions.templateVersion), next.versions.templateVersion);
-  assert.equal(await miniProgram.evaluate(() => JSON.stringify(getApp().editor.draft)), draftBefore);
+  await assertPreservedDraft(draftBefore);
   checks.push('real-service-old-lock-retirement-explicit-resource-refresh-and-repreview');
   checkpoint('code update unavailable and failed'); mode = 'update';
   await miniProgram.evaluate(() => { getApp().__t19.check({ hasUpdate: false }); void getApp().compatibility.retry(); }); await status('update-required');
@@ -145,7 +166,7 @@ try {
   await miniProgram.evaluate(() => getApp().__t19.modal.success({ confirm: false }));
   await waitFor(async () => await (await stateComponent(page)).data('canUpdate') === true);
   assert.equal(await miniProgram.evaluate(() => getApp().__t19.applied), 0);
-  assert.equal(await miniProgram.evaluate(() => JSON.stringify(getApp().editor.draft)), draftBefore);
+  await assertPreservedDraft(draftBefore);
   checks.push('native-button-and-simulated-modal-cancel-preserve-input-without-restart');
   checkpoint('native update confirmation accept');
   await (await (await stateComponent(page)).$('#application-update')).tap();
@@ -169,6 +190,7 @@ try {
   const system = await miniProgram.systemInfo(); assert.equal(system.platform, 'devtools'); assert.equal(exceptions, 0);
   const report = { platform: system.platform, baseLibraryVersion: system.SDKVersion, simulatedWechatVersion: system.version,
     checks, appExceptions: exceptions, compatibilityTransport: 'in-memory bridge to actual local CloudService',
+    inputSynchronization: 'exact App/page input values and matching preview revision before capturing the full draft baseline',
     updateManager: 'simulated events/applyUpdate and confirmation callbacks; native buttons and warning rendering are real',
     nativeModalAutomation: 'SDK Native.cancelModal/confirmModal do not deliver DevTools callbacks; actual interaction remains device acceptance',
     actualPublishedUpdateAndDeviceAcceptance: 'pending' };
