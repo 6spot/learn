@@ -1,0 +1,10 @@
+{
+  "pages": ["pages/runtime/index"],
+  "window": {
+    "navigationBarTitleText": "Learn 开发验证",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F6F8"
+  },
+  "style": "v2"
+}

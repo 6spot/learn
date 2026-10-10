@@ -1,0 +1,12 @@
+{
+  "description": "Learn native development host; real account configuration deferred",
+  "projectname": "learn",
+  "miniprogramRoot": "dist/miniprogram/",
+  "compileType": "miniprogram",
+  "appid": "touristappid",
+  "setting": {
+    "es6": false,
+    "minified": false,
+    "urlCheck": true
+  }
+}

@@ -1,0 +1,18 @@
+<view class="page">
+  <text class="title">开发验证宿主</text>
+  <text class="note">这里使用公开合成样例和模拟字宽。正式字体、Canvas、云环境及 PDF 尚未接入此诊断页。</text>
+  <view class="section">
+    <text class="heading">{{summary}}</text>
+    <view wx:for="{{capabilities}}" wx:key="name" class="row">
+      <text>{{item.name}}</text><text>{{item.supported ? '可用' : '缺失'}}</text>
+    </view>
+  </view>
+  <view class="section">
+    <text class="heading">同源内核合成检查</text>
+    <view wx:for="{{checks}}" wx:key="id" class="check">
+      <text>{{item.id}} · {{item.status}}</text><text class="note">{{item.detail}}</text>
+    </view>
+  </view>
+  <button bindtap="onRun">重新检查</button>
+  <text class="note">模拟通过不代表微信真机、CloudBase 或实体打印验收通过。</text>
+</view>

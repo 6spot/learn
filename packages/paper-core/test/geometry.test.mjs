@@ -2,19 +2,31 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { buildPageGeometry, getDefaultPreset, validatePreset } from '../dist/index.js';
 
-for (const [id, width, height, lineCount] of [
-  ['essay-grid', 190, 270, 48],
-  ['tian-grid', 180, 255, 439],
-  ['mi-grid', 180, 255, 847],
-  ['pinyin-lines', 180, 246, 56],
+// D-038: these are fixed centerline measurements, not rendered ink bounds.
+for (const [id, x, y, width, height, lineCount] of [
+  ['essay-grid', 10, 13.5, 190, 270, 48],
+  ['tian-grid', 15, 21, 180, 255, 439],
+  ['mi-grid', 15, 21, 180, 255, 847],
+  ['pinyin-lines', 15, 25.5, 180, 246, 56],
 ]) {
-  test(id + ': full fixed A4 geometry', () => {
+  test(id + ': full fixed A4 centerline geometry', () => {
     const p = getDefaultPreset(id);
     const result = buildPageGeometry(p);
     assert.deepEqual(result.page, { width: 210, height: 297 });
-    assert.deepEqual([result.bounds.width, result.bounds.height], [width, height]);
+    assert.deepEqual(result.bounds, { x, y, width, height });
+    assert.deepEqual(p.margin, { top: y, right: 210 - x - width, bottom: 297 - y - height, left: x });
     assert.equal(result.segments.length, lineCount);
     assert.equal(result.templateVersion, 'v1-design');
+    if (id !== 'pinyin-lines') {
+      const cell = id === 'essay-grid' ? 10 : 15;
+      const grid = result.segments.filter(line => line.role === 'grid');
+      const vertical = grid.filter(line => line.from.x === line.to.x);
+      const horizontal = grid.filter(line => line.from.y === line.to.y);
+      assert.deepEqual(vertical.map(line => [line.from.x, line.from.y, line.to.x, line.to.y]),
+        Array.from({ length: width / cell + 1 }, (_, col) => [x + col * cell, y, x + col * cell, y + height]));
+      assert.deepEqual(horizontal.map(line => [line.from.x, line.from.y, line.to.x, line.to.y]),
+        Array.from({ length: height / cell + 1 }, (_, row) => [x, y + row * cell, x + width, y + row * cell]));
+    }
     for (const line of result.segments) {
       for (const pt of [line.from, line.to]) {
         assert.ok(pt.x >= result.bounds.x && pt.x <= result.bounds.x + width, 'x bounds');
@@ -24,10 +36,17 @@ for (const [id, width, height, lineCount] of [
   });
 }
 
-test('pinyin: exactly fourteen 4-line groups with 4mm within and 6mm between', () => {
+test('pinyin: fourteen fixed groups with 4mm and 6mm centerline spacing', () => {
   const result = buildPageGeometry(getDefaultPreset('pinyin-lines'));
-  const starts = [0, 4, 8, 12, 18, 22, 26, 30];
-  assert.deepEqual(result.segments.slice(0, 8).map(x => x.from.y), starts.map(y => y + 25.5));
+  for (let group = 0; group < 14; group++) {
+    const lines = result.segments.slice(group * 4, group * 4 + 4);
+    const top = 25.5 + group * 18;
+    assert.deepEqual(lines.map(line => [line.from.x, line.from.y, line.to.x, line.to.y]),
+      [0, 4, 8, 12].map(offset => [15, top + offset, 195, top + offset]));
+    if (group > 0) {
+      assert.equal(lines[0].from.y - result.segments[group * 4 - 1].from.y, 6);
+    }
+  }
   assert.equal(result.segments.at(-1).from.y, 271.5);
 });
 

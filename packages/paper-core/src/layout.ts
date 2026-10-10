@@ -1,5 +1,6 @@
 import { buildPageGeometry } from './geometry.js';
 import type { PageGeometry, SquareGridPreset } from './types.js';
+import { graphemeSegments } from './unicode.js';
 
 /** Styles are resolved by renderers; this core only allocates logical positions. */
 export type TextKind = 'title' | 'body';
@@ -35,13 +36,12 @@ type MutablePlacement = {
 };
 type MutablePage = { geometry: PageGeometry; placements: MutablePlacement[] };
 const rounded = (n: number) => Math.round(n * 1e6) / 1e6;
-const segments = new Intl.Segmenter('zh', { granularity: 'grapheme' });
 const isLatinAlnum = (s: string) => /^(?:[A-Za-z]\p{M}*|[0-9])$/u.test(s);
 const isHan = (s: string) => /^\p{Script=Han}$/u.test(s);
 const chineseStop = new Set(['。', '，', '、', '；', '：', '！', '？']);
 
 function tokenize(line: string): string[] {
-  const units = Array.from(segments.segment(line), x => x.segment);
+  const units = Array.from(graphemeSegments(line), x => x.segment);
   const tokens: string[] = [];
   for (let i = 0; i < units.length;) {
     const c = units[i]!;
@@ -128,8 +128,8 @@ export function layoutSquareDocument(doc: SquareTextDocument, options: TextLayou
     if (latinOrSpace) {
       const width = measured(text);
       if (width > lineWidth + 1e-8) {
-        if (Array.from(segments.segment(text)).length === 1) throw new RangeError('one glyph exceeds the entire writing width');
-        for (const grapheme of segments.segment(text)) placeText(grapheme.segment);
+        if (Array.from(graphemeSegments(text)).length === 1) throw new RangeError('one glyph exceeds the entire writing width');
+        for (const grapheme of graphemeSegments(text)) placeText(grapheme.segment);
         return;
       }
       if (x + width > lineWidth + 1e-8) nextLine();
@@ -140,7 +140,8 @@ export function layoutSquareDocument(doc: SquareTextDocument, options: TextLayou
     if (/\p{Cc}/u.test(text)) throw new RangeError('unsupported control character in text');
     const position = rounded(Math.ceil((x - 1e-8) / cell) * cell);
     if (position + cell > lineWidth + 1e-8) {
-      const last = currentPage().placements.at(-1);
+      const placements = currentPage().placements;
+      const last = placements[placements.length - 1];
       if (chineseStop.has(text) && last && last.kind === currentKind && last.row === row &&
         isHan(last.text) && Math.abs(last.xMm + last.widthMm - (origin.x + lineWidth)) < 1e-6) {
         // Renderer fits this punctuation in the final cell's lower-right corner.

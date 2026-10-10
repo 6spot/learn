@@ -1,8 +1,8 @@
 {
-  "id": "v1-document-contract",
-  "name": "v1-document-contract",
-  "title": "T03 完善通用文档与布局契约",
-  "description": "用统一文档表达跨模板标题、正文和文字规则，使渲染器只消费布局。",
+  "id": "v1-baseline-runtime",
+  "name": "v1-baseline-runtime",
+  "title": "T01 建立开发与回归基线",
+  "description": "让现有几何与基础布局有可重现的验证入口，并明确微信运行环境兼容缺口。",
   "status": "in_progress",
   "dev_type": null,
   "scope": null,
@@ -23,6 +23,6 @@
   "relatedFiles": [],
   "notes": "",
   "meta": {
-    "plan_id": "T03"
+    "plan_id": "T01"
   }
 }

@@ -1,0 +1,9 @@
+.page { padding: 24px 20px calc(24px + env(safe-area-inset-bottom)); }
+.title, .heading, .note, .check text { display: block; }
+.title { font-size: 24px; font-weight: 600; margin-bottom: 12px; }
+.heading { font-weight: 600; margin-bottom: 12px; }
+.note { color: #626875; font-size: 14px; line-height: 1.6; margin: 8px 0; }
+.section { background: #FFFFFF; padding: 16px; margin: 20px 0; }
+.row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; }
+.check { padding: 8px 0; border-bottom: 1px solid #ECEEF1; overflow-wrap: anywhere; }
+button { margin: 20px 0; }
