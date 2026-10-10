@@ -3,3 +3,12 @@
 {"file": "docs/CLOUDBASE.md", "reason": "T09 的权威业务规则与验收依据"}
 {"file": "docs/TESTING.md", "reason": "T09 的权威业务规则与验收依据"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file":".trellis/spec/backend/paper-contracts.md","reason":"共享布局、坐标和样式边界"}
+{"file":".trellis/spec/backend/font-metrics.md","reason":"同版真实字体与原始字节契约"}
+{"file":"packages/pdf-renderer/README.md","reason":"实际接口、硬上限与许可/打印边界"}
+{"file":"packages/pdf-renderer/src/index.ts","reason":"坐标、完整原字体嵌入、字节快照和有界输出"}
+{"file":"packages/pdf-renderer/src/ttf.ts","reason":"只读sfnt解析与glyph宽度"}
+{"file":"packages/pdf-renderer/tools/build.mjs","reason":"许可证验证与双目标共享构建"}
+{"file":"packages/pdf-renderer/test/pdf.test.mjs","reason":"真实字体/附件hash、坐标和异步字节所有权回归"}
+{"file":"packages/pdf-renderer/test/portable.test.mjs","reason":"miniapp/cloud无宿主API执行"}
+{"file":".trellis/tasks/10-10-v1-pdf-renderer/evidence.md","reason":"实际模块/样张验证与最终验收边界"}

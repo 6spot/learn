@@ -1,0 +1,27 @@
+{
+  "name": "@learn/pdf-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "samples": "npm run build && node tools/samples.mjs"
+  },
+  "dependencies": {
+    "@noble/hashes": "1.8.0",
+    "pdf-lib": "1.17.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10",
+    "typescript": "5.9.3"
+  }
+}

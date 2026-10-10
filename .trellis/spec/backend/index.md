@@ -16,6 +16,7 @@ Learn uses provider-neutral TypeScript business services and CloudBase adapters.
 |-------|-------------|--------|
 | [Runtime Contracts](./runtime-contracts.md) | Metadata transactions, private storage, trusted identity and awaited execution | Implemented T11 ports; real CloudBase verification pending |
 | [Shared Paper Contracts](./paper-contracts.md) | User/preset boundary, source spans, font units and renderer contract | T03/T05/T06/T07 implemented and locally verified |
+| [PDF Rendering](./pdf-rendering.md) | Exact glyph operators, full original-font embedding and immutable byte snapshots | T09 locally verified; physical printing pending |
 | [Shared Font Metrics](./font-metrics.md) | Verified original bytes, deterministic shaping, source provenance and exact outlines | T04 locally verified; production fonts/devices/printing pending |
 | [Accounts and Presets](./account-presets.md) | Trusted identity, monthly credit ledger and immutable registry | T12/T13 locally verified; production integration pending |
 | [Job Recovery](./job-recovery.md) | Resumable maintenance scans, bounded work and safe existing-file recovery | T16 locally verified; platform scheduling pending |
