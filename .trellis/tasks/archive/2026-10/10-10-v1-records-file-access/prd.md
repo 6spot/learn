@@ -6,10 +6,10 @@
 
 ## 已确认背景与范围
 
-- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../10-10-learn-v1/prd.md)。
+- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../../../10-10-learn-v1/prd.md)。
 - 责任范围：云端生成记录 API、私有 PDF 授权领取。目录名称表示职责，尚未存在的模块不得描述为已实现。
 - 已有四模板几何与基础方格文字布局可复用；本任务不能以历史测试或占位字体样张代替验收。
-- 最终集成验收依赖：[T15 实现生成执行与事务结算](../archive/2026-10/10-10-v1-job-execution/prd.md)
+- 最终集成验收依赖：[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)
 
 ## 要求与验收
 
@@ -29,7 +29,7 @@ D-045/D-050 已确定显式文件/记录期限及请求删除保护；实际生�
 
 ## 权威依据
 
-- [PRODUCT](../../../docs/PRODUCT.md)
-- [DATA_AND_CREDITS](../../../docs/DATA_AND_CREDITS.md)
-- [CLOUDBASE](../../../docs/CLOUDBASE.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PRODUCT](../../../../../docs/PRODUCT.md)
+- [DATA_AND_CREDITS](../../../../../docs/DATA_AND_CREDITS.md)
+- [CLOUDBASE](../../../../../docs/CLOUDBASE.md)
+- [TESTING](../../../../../docs/TESTING.md)

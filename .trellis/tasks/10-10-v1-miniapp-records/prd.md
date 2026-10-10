@@ -9,7 +9,7 @@
 - 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../10-10-learn-v1/prd.md)。
 - 责任范围：miniprogram 我的、记录列表/详情和文件打开。目录名称表示职责，尚未存在的模块不得描述为已实现。
 - 已有四模板几何与基础方格文字布局可复用；本任务不能以历史测试或占位字体样张代替验收。
-- 最终集成验收依赖：[T13 身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)、[T17 记录与私有文件](../10-10-v1-records-file-access/prd.md)、[T19 应用兼容](../10-10-v1-miniapp-update/prd.md)；T25 界面基线已满足。
+- 最终集成验收依赖：[T13 身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)、[T17 记录与私有文件](../archive/2026-10/10-10-v1-records-file-access/prd.md)、[T19 应用兼容](../10-10-v1-miniapp-update/prd.md)；T25 界面基线已满足。
 
 ## 要求与验收
 

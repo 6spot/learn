@@ -14,4 +14,4 @@
 {"file": "packages/cloud-service/src/jobs.ts", "reason": "允许字段与枚举投影"}
 {"file": "packages/cloud-service/test/records.test.mjs", "reason": "23项权限/分页/缓存回归，含候选错键关联和跨用户交错加载"}
 {"file": "packages/cloud-service/integration/records-pdf.test.mjs", "reason": "真实大PDF和跨页完整领取"}
-{"file": ".trellis/tasks/10-10-v1-records-file-access/evidence.md", "reason": "本轮证据和最终平台界线"}
+{"file": ".trellis/tasks/archive/2026-10/10-10-v1-records-file-access/evidence.md", "reason": "本轮证据和最终平台界线"}

@@ -6,7 +6,7 @@
 
 miniprogram 我的、记录列表/详情和文件打开。
 
-前置交付：[T17 实现记录查询与私有文件领取](../10-10-v1-records-file-access/prd.md)、[T20 接通生成提交与结果流程](../10-10-v1-miniapp-generation/prd.md)
+前置交付：[T17 实现记录查询与私有文件领取](../archive/2026-10/10-10-v1-records-file-access/prd.md)、[T20 接通生成提交与结果流程](../10-10-v1-miniapp-generation/prd.md)
 
 ## 实现边界
 

@@ -15,7 +15,7 @@
 
 ## 23项行为覆盖
 
-[records.test.mjs](../../../packages/cloud-service/test/records.test.mjs) 验证：
+[records.test.mjs](../../../../../packages/cloud-service/test/records.test.mjs) 验证：
 
 - history索引与请求/额度在同一事务，失败全部回滚；时间倒序、同毫秒稳定排序、103条多页无重复/遗漏。
 - 过期/墓碑过滤后有界短页和nextCursor续查；旧记录缺索引须明确幂等回填，不隐藏在无界全表扫描里。
@@ -30,7 +30,7 @@
 
 ## 真实完整文件领取
 
-[records-pdf.test.mjs](../../../packages/cloud-service/integration/records-pdf.test.mjs)：
+[records-pdf.test.mjs](../../../../../packages/cloud-service/integration/records-pdf.test.mjs)：
 
 | 输入 | 完整字节 | 分块 | PDF解析 |
 |---|---:|---:|---|
