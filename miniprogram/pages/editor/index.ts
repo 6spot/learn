@@ -76,7 +76,10 @@ Page({
   },
   onShow() {
     const state = pages.get(this)!; state.visible = true;
-    state.unsubscribe?.(); state.unsubscribe = getLearnApp().editor.subscribe(() => sync(this));
+    state.unsubscribe?.();
+    const app = getLearnApp(), unsubscribeEditor = app.editor.subscribe(() => sync(this));
+    const unsubscribeCompatibility = app.compatibility.subscribe(() => sync(this));
+    state.unsubscribe = () => { unsubscribeEditor(); unsubscribeCompatibility(); };
     sync(this); prepare(this, 0);
   },
   onReady() { pages.get(this)!.ready = true; sync(this); prepare(this, 0); },

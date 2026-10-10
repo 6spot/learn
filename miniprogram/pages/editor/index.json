@@ -1,1 +1,7 @@
-{ "navigationBarTitleText": "编辑纸张", "usingComponents": { "paper-canvas": "/components/paper-canvas/index" } }
+{
+  "navigationBarTitleText": "编辑纸张",
+  "usingComponents": {
+    "paper-canvas": "/components/paper-canvas/index",
+    "application-status": "../../components/application-status/index"
+  }
+}

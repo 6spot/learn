@@ -1,0 +1,6 @@
+:host { display: block; }
+.application-status { padding: 12px 20px; color: #626B78; background: #F5F6F8; border-bottom: 1px solid #E9ECF0; font-size: 13px; line-height: 1.6; }
+.status-message { display: block; }
+.status-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+button { margin: 6px 0 0; color: #3578E5; background: #FFFFFF; font-size: 13px; }
+button::after { border-color: #E9ECF0; }

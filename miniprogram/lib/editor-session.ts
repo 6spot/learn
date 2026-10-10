@@ -73,6 +73,17 @@ export class EditorSession {
   reloadPreset(): void {
     this.presetValue = this.lockPreset(this.draftValue.templateId); this.changed();
   }
+  replacePreset(preset: TrustedPaperPreset): void {
+    if (preset.versions.templateId !== this.draftValue.templateId) throw new Error('EDITOR_TEMPLATE_MISMATCH');
+    this.presetValue = createPaperDocument({ templateId: this.draftValue.templateId }, preset).preset;
+    this.changed();
+  }
+  clear(): void {
+    this.bodyRevision++; this.cleanupValue = null; this.undoValue = null; this.pending = null;
+    this.draftValue = Object.freeze({ templateId: this.draftValue.templateId, title: '', body: '', tracing: false,
+      options: getDefaultTextOptions(this.presetValue) });
+    this.changed();
+  }
   blankLayout(templateId: TemplateId): PaperLayout { return createBlankLayout(this.dependencies.presetFor(templateId)); }
   setTitle(title: string): void {
     if (title === this.draftValue.title) return;

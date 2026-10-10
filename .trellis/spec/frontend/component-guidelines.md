@@ -2,7 +2,7 @@
 
 ## Status and authority
 
-D-039 in [DECISIONS](../../../docs/DECISIONS.md) is confirmed. [UI_DESIGN](../../../docs/UI_DESIGN.md) owns the UI component policy and page design; D-043 accepts the current navigation, page layout and visual tokens as the development baseline, subject to later refinement. T18 provides the native templates/editor/preview pages and a minimal My tab shell. Generation and account integration remain owned by T19–T21; local UI completion is not production acceptance.
+D-039 in [DECISIONS](../../../docs/DECISIONS.md) is confirmed. [UI_DESIGN](../../../docs/UI_DESIGN.md) owns the UI component policy and page design; D-043 accepts the current navigation, page layout and visual tokens as the development baseline, subject to later refinement. T18 provides the native templates/editor/preview pages and a minimal My tab shell. T19 owns the [shared application compatibility/status component](application-compatibility.md); generation and account integration remain owned by T20/T21; local UI completion is not production acceptance.
 
 ## Component selection
 

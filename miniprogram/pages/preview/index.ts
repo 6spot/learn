@@ -45,7 +45,12 @@ Page({
   onLoad() { pages.set(this, { ready: false, visible: false, unsubscribe: null, pageIndex: 0, zoom: 1, renderKey: '', revision: 0 }); },
   onShow() {
     const state = pages.get(this)!; state.visible = true;
-    state.unsubscribe?.(); state.unsubscribe = getLearnApp().editor.subscribe(() => { void render(this); });
+    state.unsubscribe?.();
+    const app = getLearnApp(), unsubscribeEditor = app.editor.subscribe(() => { void render(this); });
+    const unsubscribeCompatibility = app.compatibility.subscribe(() => {
+      this.setData({ generationMessage: app.generation.message });
+    });
+    state.unsubscribe = () => { unsubscribeEditor(); unsubscribeCompatibility(); };
     void getLearnApp().editor.preparePreview(); void render(this);
   },
   onReady() { pages.get(this)!.ready = true; void render(this); },

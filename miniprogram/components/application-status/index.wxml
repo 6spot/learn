@@ -1,0 +1,4 @@
+<view wx:if="{{message || updateMessage}}" class="application-status" role="status">
+  <view wx:if="{{message}}"><text class="status-message">{{message}}</text><view class="status-actions"><button wx:if="{{!checking}}" id="compatibility-retry" size="mini" bindtap="onRetry">重新检查</button><button wx:if="{{canRefresh}}" id="compatibility-refresh" size="mini" bindtap="onRefresh">刷新纸张配置</button></view></view>
+  <view wx:if="{{updateMessage}}"><text class="status-message">{{updateMessage}}</text><button wx:if="{{canUpdate}}" id="application-update" size="mini" bindtap="onUpdate">更新并重启</button></view>
+</view>

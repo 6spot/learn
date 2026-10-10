@@ -1,3 +1,4 @@
+<application-status id="application-status" />
 <view class="templates-page">
   <view class="page-intro"><text class="section-title">选一种纸张</text><text class="secondary">留空打印，也可以填入文字练习</text></view>
   <view class="template-grid">

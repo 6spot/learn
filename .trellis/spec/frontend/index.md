@@ -13,6 +13,7 @@ Read component and quality guidelines before frontend work. Unfilled entries bel
 | [Directory Structure](./directory-structure.md) | Actual page/component file organization | To fill after UI skeleton |
 | [Component Guidelines](./component-guidelines.md) | Confirmed native component policy, behavior and reuse boundaries | D-039/D-043 policy and T18 native page boundaries |
 | [Hook Guidelines](./hook-guidelines.md) | Platform lifecycle guidance when implemented | Generic scaffold; not a framework selection |
+| [Application Compatibility](./application-compatibility.md) | Shared client/session, trusted resource refresh, update confirmation and cleanup | T19 implementation; formal updates/devices pending |
 | [State Management](./state-management.md) | Local, app and cloud state organization | To fill from implementation |
 | [Quality Guidelines](./quality-guidelines.md) | UI design gates, privacy and true-device acceptance | Project requirements and T18 build/native verification commands |
 | [Type Safety](./type-safety.md) | Actual TypeScript conventions | To fill from implementation |

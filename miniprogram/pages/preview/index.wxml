@@ -1,3 +1,4 @@
+<application-status id="application-status" />
 <view class="preview-page">
   <scroll-view id="paper-reader" class="paper-reader" scroll-x scroll-y enhanced show-scrollbar scroll-top="{{scrollTop}}" scroll-left="{{scrollLeft}}" style="height:{{readerHeight}}px">
     <view class="reading-content" style="width:{{contentWidth}}px" bindtap="onZoom"><paper-canvas id="full-paper" /></view>

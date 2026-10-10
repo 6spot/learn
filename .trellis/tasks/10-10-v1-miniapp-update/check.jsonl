@@ -5,3 +5,30 @@
 {"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
 {"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/frontend/application-compatibility.md", "reason": "T19 shared App contracts and native update/cleanup invariants"}
+{"file": ".trellis/spec/frontend/runtime-tooling.md", "reason": "Source/build ownership and actual native simulator evidence"}
+{"file": ".trellis/spec/frontend/canvas-preview.md", "reason": "Cancellable preview and verified-font integration"}
+{"file": "miniprogram/lib/compatibility-presets.ts", "reason": "Atomic compatibility response validation and immutable resource/preset catalog"}
+{"file": "miniprogram/lib/compatibility-session.ts", "reason": "Shared check/cache/update/refresh/cancellation implementation"}
+{"file": "miniprogram/lib/editor-environment.ts", "reason": "Single App client/session and local cleanup owners"}
+{"file": "miniprogram/lib/editor-session.ts", "reason": "Draft-preserving preset replacement and complete local clear"}
+{"file": "miniprogram/lib/application.ts", "reason": "Cross-entry-point application surface"}
+{"file": "miniprogram/app.ts", "reason": "Launch/foreground/background lifecycle"}
+{"file": "miniprogram/components/application-status/index.ts", "reason": "Native safe status projection and shared actions"}
+{"file": "miniprogram/test/compatibility.test.mjs", "reason": "T19 state/resources/confirmation/cleanup regressions"}
+{"file": "miniprogram/test/compatibility-native.test.mjs", "reason": "Emitted App/component sharing and listener regression"}
+{"file": "scripts/test-compatibility-devtools.mjs", "reason": "Official native diagnostic flow; actual CloudService and simulated update events"}
+{"file": "miniprogram/components/application-status/index.wxml", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/components/application-status/index.wxss", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/components/application-status/index.json", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/editor/index.ts", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/preview/index.ts", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/templates/index.json", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/templates/index.wxml", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/editor/index.json", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/editor/index.wxml", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/preview/index.json", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/preview/index.wxml", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/me/index.json", "reason": "T19 native integration or actual validation evidence"}
+{"file": "miniprogram/pages/me/index.wxml", "reason": "T19 native integration or actual validation evidence"}
+{"file": ".trellis/tasks/10-10-v1-miniapp-update/evidence.md", "reason": "T19 native integration or actual validation evidence"}

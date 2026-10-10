@@ -1,1 +1,6 @@
-{ "navigationBarTitleText": "我的" }
+{
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "application-status": "../../components/application-status/index"
+  }
+}

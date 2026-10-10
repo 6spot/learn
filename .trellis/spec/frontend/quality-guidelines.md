@@ -16,7 +16,7 @@ UI policy is confirmed by D-039; D-043 accepts current navigation and styling in
 - Verify D-042 same-page editing: body remains the main editing area, tracing has a visible separate row, and advanced options/reset are hidden by default. Check section hierarchy as well as reachability at narrow and short viewport sizes; do not shrink body input to force every option above the fold. Expansion must not recreate the focused text controls.
 - Check screen-only grid contrast independently from paper geometry. In successful valid-file detail, put Open PDF before metadata; query-error and expired states must not inherit the success action.
 - Trace preview navigation through both crop and full-preview entry points: one preview page owns zoom/reset and paging. Verify all enlarged paper edges remain reachable inside its scrolling reader; a single back returns to the editor without an extra preview dialog.
-- Share application compatibility state and update listeners; protect current input from forced restart.
+- Share [application compatibility state and update listeners](application-compatibility.md); protect current input from forced restart. Local cleanup attempts every owner, reports failures safely and invalidates late callbacks; native update readiness alone never authorizes restart.
 - Treat hidden admin menus and known task/file IDs as UI only; cloud authorization remains mandatory.
 
 ## Verification

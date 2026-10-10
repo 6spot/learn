@@ -1,8 +1,13 @@
 import { createEditorEnvironment } from './lib/editor-environment.js';
 import type { FontPlatform } from './lib/font-loader.js';
+import type { CloudPlatform } from './lib/cloud-client.js';
+import type { UpdatePlatform } from './lib/compatibility-session.js';
 import type { LearnApplication } from './lib/application.js';
-declare const wx: FontPlatform;
-declare function App(options: { onLaunch(this: LearnApplication): void }): void;
-// A single owner is essential: native TS entry points are bundled separately.
-// T19 adds shared compatibility/update state here; T20 supplies real submission.
-App({ onLaunch() { Object.assign(this, createEditorEnvironment(wx)); } });
+declare const wx: FontPlatform & CloudPlatform & UpdatePlatform;
+declare function App(options: { onLaunch(this: LearnApplication): void;
+  onShow(this: LearnApplication): void; onHide(this: LearnApplication): void }): void;
+App({
+  onLaunch() { Object.assign(this, createEditorEnvironment(wx)); void this.compatibility.start(); },
+  onShow() { void this.compatibility.onShow(); },
+  onHide() { this.compatibility.onHide(); },
+});

@@ -1,3 +1,4 @@
+<application-status id="application-status" />
 <view class="editor-page">
   <view class="paper-crop" style="height:{{cropHeight}}px" bindtap="onPreview" role="button" aria-label="查看整页预览">
     <paper-canvas id="crop-paper" />
