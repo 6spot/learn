@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "acquiredOn": "2026-10-10",
+  "purpose": "Local development candidates; not a published fontBundleVersion or production weight selection.",
+  "candidateResourceSetId": "learn-fonts-2026-10-10-candidate.1",
+  "coverageReport": "verification/coverage.json",
+  "licenseReview": "licenses/review.md",
+  "officialPages": [
+    "https://hyperos.mi.com/font/download",
+    "https://hyperos.mi.com/font/zh/faq/",
+    "https://github.com/lxgw/LxgwWenkaiGB/releases/tag/v1.522"
+  ],
+  "fonts": [
+    {
+      "path": "files/LXGWWenKaiGB-Regular.ttf",
+      "id": "lxgw-wenkai-gb-regular",
+      "family": "LXGW WenKai GB",
+      "coverageProfile": "han",
+      "style": "Regular",
+      "fontVersion": "Version 1.522; March 17, 2026",
+      "bytes": 25819540,
+      "sha256": "295568c131648062107543aa159c97dd49564be791136c2abf74cad83eba3f7f",
+      "sourceUrl": "https://github.com/lxgw/LxgwWenkaiGB/releases/download/v1.522/LXGWWenKaiGB-Regular.ttf",
+      "sourceArchive": null,
+      "archiveMember": null,
+      "licensePath": "licenses/LXGWWenKaiGB-OFL.txt",
+      "validation": {
+        "sfntDirectoryBounds": "passed",
+        "requiredTables": "passed",
+        "unitsPerEm": 1000,
+        "os2FsType": 0,
+        "cmapSmokeSamples": {
+          "latin": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .",
+          "pinyin": "āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜüêńňǹḿ̄́̌̀̈",
+          "han_punctuation": "天地玄黄宇宙洪荒春夏秋冬学习语文数学人山水日月，。！？；：“”‘’（）《》、…—"
+        },
+        "missingFromSmokeSamples": {
+          "latin": [],
+          "pinyin": [],
+          "han_punctuation": []
+        },
+        "limits": "Sample cmap presence only; no glyph shape, shaping, metrics, full corpus, PDF embedding or printing acceptance."
+      },
+      "projectDeliveryReview": "pending",
+      "upstreamReleaseSha256Verified": true
+    },
+    {
+      "path": "files/MiSans-Regular.ttf",
+      "id": "misans-regular",
+      "family": "MiSans",
+      "coverageProfile": "han",
+      "style": "Regular",
+      "fontVersion": "Version 4.009",
+      "bytes": 8122324,
+      "sha256": "9c120f0a849bc0aa5048daae2a3c0f6eecd828b5b33fce682a9622833f5feea6",
+      "sourceUrl": "https://hyperos.mi.com/font-download/MiSans.zip",
+      "sourceArchive": "downloads/MiSans.zip",
+      "archiveMember": "MiSans/ttf/MiSans-Regular.ttf",
+      "licensePath": "licenses/MiSans-License.pdf",
+      "validation": {
+        "sfntDirectoryBounds": "passed",
+        "requiredTables": "passed",
+        "unitsPerEm": 1000,
+        "os2FsType": 8,
+        "cmapSmokeSamples": {
+          "latin": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .",
+          "pinyin": "āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜüêńňǹḿ̄́̌̀̈",
+          "han_punctuation": "天地玄黄宇宙洪荒春夏秋冬学习语文数学人山水日月，。！？；：“”‘’（）《》、…—"
+        },
+        "missingFromSmokeSamples": {
+          "latin": [],
+          "pinyin": [],
+          "han_punctuation": []
+        },
+        "limits": "Sample cmap presence only; no glyph shape, shaping, metrics, full corpus, PDF embedding or printing acceptance."
+      },
+      "projectDeliveryReview": "pending"
+    },
+    {
+      "path": "files/MiSansLatin-Regular.ttf",
+      "id": "misans-latin-regular",
+      "family": "MiSans Latin",
+      "coverageProfile": "latin",
+      "style": "Regular",
+      "fontVersion": "Version 4.007",
+      "bytes": 217756,
+      "sha256": "d6afa946f09bf876e58ec2f784988a68647af9edb77709643f00fa25f183135b",
+      "sourceUrl": "https://hyperos.mi.com/font-download/MiSans_Latin.zip",
+      "sourceArchive": "downloads/MiSans_Latin.zip",
+      "archiveMember": "MiSans Latin/ttf/MiSansLatin-Regular.ttf",
+      "licensePath": "licenses/MiSans-License.pdf",
+      "validation": {
+        "sfntDirectoryBounds": "passed",
+        "requiredTables": "passed",
+        "unitsPerEm": 1000,
+        "os2FsType": 8,
+        "cmapSmokeSamples": {
+          "latin": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .",
+          "pinyin": "āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜüêńňǹḿ̄́̌̀̈"
+        },
+        "missingFromSmokeSamples": {
+          "latin": [],
+          "pinyin": []
+        },
+        "limits": "Sample cmap presence only; no glyph shape, shaping, metrics, full corpus, PDF embedding or printing acceptance."
+      },
+      "projectDeliveryReview": "pending"
+    }
+  ],
+  "archives": [
+    {
+      "path": "downloads/MiSans.zip",
+      "sourceUrl": "https://hyperos.mi.com/font-download/MiSans.zip",
+      "bytes": 227880072,
+      "sha256": "b6aa1fc827035922612df8edf36e5609bca1c5441e25cd57572204569b7b81d9",
+      "zipCrcVerified": true
+    },
+    {
+      "path": "downloads/MiSans_Latin.zip",
+      "sourceUrl": "https://hyperos.mi.com/font-download/MiSans_Latin.zip",
+      "bytes": 3480193,
+      "sha256": "d24091ccd409a4152ffcc12cd659c16df9cdcdb4c702d8ae355b321e711f0004",
+      "zipCrcVerified": true
+    }
+  ],
+  "licenses": [
+    {
+      "path": "licenses/MiSans-License.pdf",
+      "sourceUrl": "https://hyperos.mi.com/font-download/MiSans%E5%AD%97%E4%BD%93%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE.pdf",
+      "bytes": 79535,
+      "sha256": "4a93a27cd2bd81b3b5ecfd0a853144a876fa26938a93a68443c67d74172fcb86"
+    },
+    {
+      "path": "licenses/LXGWWenKaiGB-OFL.txt",
+      "sourceUrl": "https://raw.githubusercontent.com/lxgw/LxgwWenkaiGB/v1.522/OFL.txt",
+      "bytes": 4450,
+      "sha256": "66e75815b1bb90bdaede3649abf5ea029d0dc7d5e61b0534d3245db61a510b93"
+    }
+  ]
+}

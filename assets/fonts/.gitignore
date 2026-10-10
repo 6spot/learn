@@ -1,0 +1,6 @@
+# Local upstream binaries and downloaded evidence; fetch from manifest sources.
+/downloads/
+/files/
+/upstream/
+/.venv/
+__pycache__/

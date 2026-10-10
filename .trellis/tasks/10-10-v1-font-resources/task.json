@@ -1,0 +1,30 @@
+{
+  "id": "v1-font-resources",
+  "name": "v1-font-resources",
+  "title": "T02 字体资源与授权验证",
+  "description": "取得 D-031 指定字体的可追溯资源，为真实度量与样张验证准备输入。",
+  "status": "in_progress",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P1",
+  "creator": "me",
+  "assignee": "me",
+  "createdAt": "2026-10-10",
+  "completedAt": null,
+  "branch": "feat/learn-v1",
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": "10-10-learn-v1",
+  "relatedFiles": [],
+  "notes": "本地开发及独立检查完成；真实环境/字体生产用途验收按 D-044 移交 T24，未宣称通过。",
+  "meta": {
+    "plan_id": "T02",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
+  }
+}

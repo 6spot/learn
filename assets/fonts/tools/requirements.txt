@@ -1,0 +1,2 @@
+# Local inspection only; not a runtime dependency of the shared paper core.
+fonttools==4.60.1

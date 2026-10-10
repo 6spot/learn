@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "resources": [
+    {
+      "path": "licenses/MiSans-License.pdf",
+      "bytes": 79535,
+      "sha256": "4a93a27cd2bd81b3b5ecfd0a853144a876fa26938a93a68443c67d74172fcb86"
+    },
+    {
+      "path": "licenses/LXGWWenKaiGB-OFL.txt",
+      "bytes": 4450,
+      "sha256": "66e75815b1bb90bdaede3649abf5ea029d0dc7d5e61b0534d3245db61a510b93"
+    },
+    {
+      "path": "files/LXGWWenKaiGB-Regular.ttf",
+      "bytes": 25819540,
+      "sha256": "295568c131648062107543aa159c97dd49564be791136c2abf74cad83eba3f7f"
+    },
+    {
+      "path": "files/MiSans-Regular.ttf",
+      "bytes": 8122324,
+      "sha256": "9c120f0a849bc0aa5048daae2a3c0f6eecd828b5b33fce682a9622833f5feea6"
+    },
+    {
+      "path": "files/MiSansLatin-Regular.ttf",
+      "bytes": 217756,
+      "sha256": "d6afa946f09bf876e58ec2f784988a68647af9edb77709643f00fa25f183135b"
+    },
+    {
+      "path": "downloads/MiSans.zip",
+      "bytes": 227880072,
+      "sha256": "b6aa1fc827035922612df8edf36e5609bca1c5441e25cd57572204569b7b81d9",
+      "zipCrcPassed": true
+    },
+    {
+      "path": "downloads/MiSans_Latin.zip",
+      "bytes": 3480193,
+      "sha256": "d24091ccd409a4152ffcc12cd659c16df9cdcdb4c702d8ae355b321e711f0004",
+      "zipCrcPassed": true
+    }
+  ],
+  "archivesChecked": true,
+  "fontToolsVersion": "4.60.1",
+  "corpora": {
+    "ascii_printable": {
+      "count": 95,
+      "sha256": "cb2a9233adc1225c5c495c46e62cf6308223c5e241ef33ad109f03141b57966a"
+    },
+    "gb2312_level1": {
+      "count": 3755,
+      "sha256": "8a2c560cd533c9698323870d4487dc879d49c2558f47a19b4166af6f1271194e"
+    },
+    "gb2312_level2": {
+      "count": 3008,
+      "sha256": "643cb7d404b42ce3d164e5e5c6609d525f4e9ee7de717eabb2fad0ea92eb3595"
+    },
+    "chinese_punctuation": {
+      "count": 35,
+      "sha256": "bec8a45bbedb4fe706e5d7ea403c0be11ae38ca1364342d0086765bf8e1f4977"
+    },
+    "fullwidth_ascii": {
+      "count": 95,
+      "sha256": "71b84068ee512739f4981c7f0304ce4289d00cee235c92c3626a81476985ca9d"
+    },
+    "pinyin_nfc_codepoints": {
+      "count": 81,
+      "sha256": "5e1596c3d74b05239b8253dba67402a8f94aba99e307455446f83fcc58dd95c0"
+    },
+    "pinyin_nfd_codepoints": {
+      "count": 20,
+      "sha256": "23dcee597dacd1eff9e15bc085d28928506beef23e37263556ed7f552fc54cfd"
+    },
+    "cjk_unified_basic": {
+      "count": 20992,
+      "sha256": "b8860669ad00a9a72d3fdfe75edc1da75fc210a7fd7ee96e2c2adf0807221764"
+    },
+    "capability_probes": {
+      "count": 8,
+      "sha256": "7fe53b06dbea71b7ea887e47a78abeceb6144a7033a1d19fe6770f5ce819a250"
+    }
+  },
+  "fonts": [
+    {
+      "path": "files/LXGWWenKaiGB-Regular.ttf",
+      "fontVersion": "Version 1.522; March 17, 2026",
+      "family": "LXGW WenKai GB",
+      "subfamily": "Regular",
+      "tables": [
+        "GPOS",
+        "GSUB",
+        "OS/2",
+        "cmap",
+        "gasp",
+        "glyf",
+        "head",
+        "hhea",
+        "hmtx",
+        "loca",
+        "maxp",
+        "name",
+        "post",
+        "prep",
+        "vhea",
+        "vmtx"
+      ],
+      "unitsPerEm": 1000,
+      "glyphCount": 46809,
+      "unicodeCmapCount": 46490,
+      "os2FsType": 0,
+      "metrics": {
+        "hheaAscender": 928,
+        "hheaDescender": -256,
+        "hheaLineGap": 0,
+        "typoAscender": 880,
+        "typoDescender": -120,
+        "typoLineGap": 0,
+        "winAscent": 1032,
+        "winDescent": 285,
+        "xHeight": 468,
+        "capHeight": 695
+      },
+      "advanceWidthProbesFontUnits": {
+        "U+0020": 350,
+        "U+0030": 600,
+        "U+004D": 855,
+        "U+0057": 880,
+        "U+0069": 263,
+        "U+00EA": 543,
+        "U+0101": 575,
+        "U+01D6": 590,
+        "U+0300": 0,
+        "U+0301": 0,
+        "U+0302": 0,
+        "U+0304": 0,
+        "U+0308": 0,
+        "U+030C": 0
+      },
+      "variationSequenceCounts": {
+        "U+FE00": 12,
+        "U+FE01": 12
+      },
+      "coverage": {
+        "ascii_printable": {
+          "required": true,
+          "requested": 95,
+          "present": 95,
+          "missing": []
+        },
+        "gb2312_level1": {
+          "required": true,
+          "requested": 3755,
+          "present": 3755,
+          "missing": []
+        },
+        "gb2312_level2": {
+          "required": true,
+          "requested": 3008,
+          "present": 3008,
+          "missing": []
+        },
+        "chinese_punctuation": {
+          "required": true,
+          "requested": 35,
+          "present": 35,
+          "missing": []
+        },
+        "fullwidth_ascii": {
+          "required": true,
+          "requested": 95,
+          "present": 95,
+          "missing": []
+        },
+        "pinyin_nfc_codepoints": {
+          "required": true,
+          "requested": 81,
+          "present": 81,
+          "missing": []
+        },
+        "pinyin_nfd_codepoints": {
+          "required": true,
+          "requested": 20,
+          "present": 20,
+          "missing": []
+        },
+        "cjk_unified_basic": {
+          "required": false,
+          "requested": 20992,
+          "present": 20992,
+          "missing": []
+        },
+        "capability_probes": {
+          "required": false,
+          "requested": 8,
+          "present": 1,
+          "missing": [
+            "U+200D",
+            "U+FE0F",
+            "U+1F469",
+            "U+1F4BB",
+            "U+1F600",
+            "U+20000",
+            "U+E0100"
+          ]
+        }
+      },
+      "requiredCoveragePassed": true
+    },
+    {
+      "path": "files/MiSans-Regular.ttf",
+      "fontVersion": "Version 4.009",
+      "family": "MiSans",
+      "subfamily": "Regular",
+      "tables": [
+        "DSIG",
+        "GDEF",
+        "GPOS",
+        "GSUB",
+        "OS/2",
+        "cmap",
+        "gasp",
+        "glyf",
+        "head",
+        "hhea",
+        "hmtx",
+        "loca",
+        "maxp",
+        "name",
+        "post",
+        "prep",
+        "vhea",
+        "vmtx"
+      ],
+      "unitsPerEm": 1000,
+      "glyphCount": 29758,
+      "unicodeCmapCount": 29571,
+      "os2FsType": 8,
+      "metrics": {
+        "hheaAscender": 1044,
+        "hheaDescender": -282,
+        "hheaLineGap": 0,
+        "typoAscender": 890,
+        "typoDescender": -110,
+        "typoLineGap": 326,
+        "winAscent": 1044,
+        "winDescent": 282,
+        "xHeight": 530,
+        "capHeight": 740
+      },
+      "advanceWidthProbesFontUnits": {
+        "U+0020": 290,
+        "U+0030": 634,
+        "U+004D": 880,
+        "U+0057": 968,
+        "U+0069": 245,
+        "U+00EA": 552,
+        "U+0101": 537,
+        "U+01D6": 580,
+        "U+0300": 0,
+        "U+0301": 0,
+        "U+0302": 0,
+        "U+0304": 0,
+        "U+0308": 0,
+        "U+030C": 0
+      },
+      "variationSequenceCounts": {},
+      "coverage": {
+        "ascii_printable": {
+          "required": true,
+          "requested": 95,
+          "present": 95,
+          "missing": []
+        },
+        "gb2312_level1": {
+          "required": true,
+          "requested": 3755,
+          "present": 3755,
+          "missing": []
+        },
+        "gb2312_level2": {
+          "required": true,
+          "requested": 3008,
+          "present": 3008,
+          "missing": []
+        },
+        "chinese_punctuation": {
+          "required": true,
+          "requested": 35,
+          "present": 35,
+          "missing": []
+        },
+        "fullwidth_ascii": {
+          "required": true,
+          "requested": 95,
+          "present": 95,
+          "missing": []
+        },
+        "pinyin_nfc_codepoints": {
+          "required": true,
+          "requested": 81,
+          "present": 80,
+          "missing": [
+            "U+01F8"
+          ]
+        },
+        "pinyin_nfd_codepoints": {
+          "required": true,
+          "requested": 20,
+          "present": 20,
+          "missing": []
+        },
+        "cjk_unified_basic": {
+          "required": false,
+          "requested": 20992,
+          "present": 20976,
+          "missing": [
+            "U+9FF0-U+9FFF"
+          ]
+        },
+        "capability_probes": {
+          "required": false,
+          "requested": 8,
+          "present": 0,
+          "missing": [
+            "U+200D",
+            "U+FE0F",
+            "U+1F469",
+            "U+1F4BB",
+            "U+1F600",
+            "U+20000",
+            "U+20BB7",
+            "U+E0100"
+          ]
+        }
+      },
+      "requiredCoveragePassed": false
+    },
+    {
+      "path": "files/MiSansLatin-Regular.ttf",
+      "fontVersion": "Version 4.007",
+      "family": "MiSans Latin",
+      "subfamily": "Regular",
+      "tables": [
+        "DSIG",
+        "GDEF",
+        "GPOS",
+        "GSUB",
+        "OS/2",
+        "cmap",
+        "gasp",
+        "glyf",
+        "head",
+        "hhea",
+        "hmtx",
+        "loca",
+        "maxp",
+        "name",
+        "post",
+        "prep"
+      ],
+      "unitsPerEm": 1000,
+      "glyphCount": 1498,
+      "unicodeCmapCount": 1336,
+      "os2FsType": 8,
+      "metrics": {
+        "hheaAscender": 1044,
+        "hheaDescender": -282,
+        "hheaLineGap": 0,
+        "typoAscender": 890,
+        "typoDescender": -110,
+        "typoLineGap": 326,
+        "winAscent": 1044,
+        "winDescent": 282,
+        "xHeight": 530,
+        "capHeight": 740
+      },
+      "advanceWidthProbesFontUnits": {
+        "U+0020": 290,
+        "U+0030": 634,
+        "U+004D": 880,
+        "U+0057": 968,
+        "U+0069": 245,
+        "U+00EA": 552,
+        "U+0101": 537,
+        "U+01D6": 580,
+        "U+0300": 0,
+        "U+0301": 0,
+        "U+0302": 0,
+        "U+0304": 0,
+        "U+0308": 0,
+        "U+030C": 0
+      },
+      "variationSequenceCounts": {},
+      "coverage": {
+        "ascii_printable": {
+          "required": true,
+          "requested": 95,
+          "present": 95,
+          "missing": []
+        },
+        "pinyin_nfc_codepoints": {
+          "required": true,
+          "requested": 81,
+          "present": 80,
+          "missing": [
+            "U+01F8"
+          ]
+        },
+        "pinyin_nfd_codepoints": {
+          "required": true,
+          "requested": 20,
+          "present": 20,
+          "missing": []
+        },
+        "cjk_unified_basic": {
+          "required": false,
+          "requested": 20992,
+          "present": 0,
+          "missing": [
+            "U+4E00-U+9FFF"
+          ]
+        },
+        "capability_probes": {
+          "required": false,
+          "requested": 8,
+          "present": 0,
+          "missing": [
+            "U+200D",
+            "U+FE0F",
+            "U+1F469",
+            "U+1F4BB",
+            "U+1F600",
+            "U+20000",
+            "U+20BB7",
+            "U+E0100"
+          ]
+        }
+      },
+      "requiredCoveragePassed": false
+    }
+  ],
+  "limits": "Synthetic cmap coverage and raw metadata only; not shaping, glyph design, production permission, device loading or printing acceptance."
+}

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "harfBuzzVersion": "hb-shape (HarfBuzz) 14.6.0",
+  "fonts": [
+    {
+      "path": "files/LXGWWenKaiGB-Regular.ttf",
+      "sha256": "295568c131648062107543aa159c97dd49564be791136c2abf74cad83eba3f7f",
+      "clustersChecked": 90,
+      "failures": [],
+      "capitalNGrave": [
+        {
+          "g": 441,
+          "dx": 0,
+          "dy": 0,
+          "ax": 738,
+          "ay": 0
+        }
+      ]
+    },
+    {
+      "path": "files/MiSans-Regular.ttf",
+      "sha256": "9c120f0a849bc0aa5048daae2a3c0f6eecd828b5b33fce682a9622833f5feea6",
+      "clustersChecked": 90,
+      "failures": [],
+      "capitalNGrave": [
+        {
+          "g": 105,
+          "dx": 0,
+          "dy": 0,
+          "ax": 736,
+          "ay": 0
+        },
+        {
+          "g": 29614,
+          "dx": 0,
+          "dy": 0,
+          "ax": 0,
+          "ay": 0
+        }
+      ]
+    },
+    {
+      "path": "files/MiSansLatin-Regular.ttf",
+      "sha256": "d6afa946f09bf876e58ec2f784988a68647af9edb77709643f00fa25f183135b",
+      "clustersChecked": 90,
+      "failures": [],
+      "capitalNGrave": [
+        {
+          "g": 106,
+          "dx": 0,
+          "dy": 0,
+          "ax": 736,
+          "ay": 0
+        },
+        {
+          "g": 1370,
+          "dx": 0,
+          "dy": 0,
+          "ax": 0,
+          "ay": 0
+        }
+      ]
+    }
+  ],
+  "limits": "Local synthetic HarfBuzz canonical-equivalence/no-.notdef probe only; not shared TS, Canvas, PDF, placement bounds, device or printing acceptance."
+}
