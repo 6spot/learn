@@ -6,3 +6,11 @@
 {"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
 {"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/backend/account-presets.md", "reason": "Trusted identity, admin authorization and immutable ledger contracts"}
+{"file": ".trellis/spec/backend/file-delivery.md", "reason": "D-049 first PDF chunk activity and final authorization"}
+{"file": "packages/cloud-service/README.md", "reason": "Implemented T22 stats API/config/coverage protocol"}
+{"file": "packages/cloud-service/src/stats.ts", "reason": "D-049 aggregation, bounded pagination and safe audit"}
+{"file": "packages/cloud-service/src/stats-coverage.ts", "reason": "T23 coverage markers and concurrent deletion fence"}
+{"file": "packages/cloud-service/test/stats.test.mjs", "reason": "Current backend regression evidence"}
+{"file": "packages/cloud-service/src/admission.ts", "reason": "D-049 generation activity is atomic with first durable admission, including preparation failure and midnight"}
+{"file": "packages/cloud-service/test/admission.test.mjs", "reason": "Updated accepted-activity and transaction rollback assertions after independent check"}

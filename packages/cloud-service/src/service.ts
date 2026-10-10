@@ -3,13 +3,14 @@ import type { LayoutVersionTuple } from '@learn/paper-core';
 import { ServiceError, type AccountResponse, type ServiceConfig, type ServiceDependencies,
   type CompatibilityRequest, type CompatibilityResponse, type PublishedPreset, type ReleaseAcceptance,
   type JobSummary, type SubmissionWindow, type SubmitGenerationResponse, type JobDetail,
-  type ListJobsResponse, type PdfInfo, type PdfChunk } from './contracts.js';
+  type ListJobsResponse, type PdfInfo, type PdfChunk, type AdminStatsResponse } from './contracts.js';
 import { validateConfig } from './config.js';
 import { ensureAccountInTransaction } from './credits.js';
 import { PresetRegistry } from './presets.js';
 import { JobAdmission } from './admission.js';
 import { snapshotGenerationRequest } from './requests.js';
 import { RecordAccess, snapshotListJobs, snapshotPdfChunk, validateJobId } from './records.js';
+import { aggregateAdminStats, snapshotStatsRequest } from './stats.js';
 
 export class CloudService {
   readonly config: ServiceConfig;
@@ -47,6 +48,14 @@ export class CloudService {
     const account = await this.getAccount();
     if (!account.isAdmin) throw new ServiceError('FORBIDDEN');
     return account.userId;
+  }
+
+  async getAdminStats(request?: unknown): Promise<AdminStatsResponse> {
+    return this.safe(async () => {
+      const input = snapshotStatsRequest(request);
+      const userId = await this.adminId();
+      return aggregateAdminStats(this.dependencies, this.config, userId, input);
+    });
   }
 
   async getCompatibility(request: CompatibilityRequest): Promise<CompatibilityResponse> {

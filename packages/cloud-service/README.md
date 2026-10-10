@@ -43,7 +43,7 @@ npm test
 
 同号同参按原密钥、规范化版本、默认选项和输入限制校验，命中原任务后不再复算/执行，不受后来窗口到期、默认预设切换或限制收紧影响。异参返回 `IDEMPOTENCY_CONFLICT`；已清理且原签名窗口到期的号返回 `REQUEST_EXPIRED`。仍有去重墓碑但可见记录已删除/到期时返回 `RECORD_EXPIRED`，缺旧密钥或未知指纹版本明确拒绝，绝不重新消费。标题/正文空格、换行及 Unicode 原始形式均纳入带密钥指纹，不保存原文或裸布局摘要。
 
-新任务在同一事务绑定请求、任务 RESERVED、额度预留/流水、预设引用和速率计数。仅创建者执行 preparer；共享 `validateLayoutVersions/assertLayoutVersionsMatch/assertLayoutDigestMatches` 校验完整组合及实际布局摘要，随后转 GENERATING 并记录上海日活跃事实。prepare 失败原子释放；executor 不确定失败保留预留和状态供恢复处理。
+新任务在同一事务绑定请求、任务 RESERVED、额度预留/流水、预设引用、速率计数和上海日活跃事实。仅创建者执行 preparer；共享 `validateLayoutVersions/assertLayoutVersionsMatch/assertLayoutDigestMatches` 校验完整组合及实际布局摘要，随后转 GENERATING，不再新记活跃事件。已受理任务即使 prepare 失败或跨午夜才开始执行，DAU 仍归属原受理日；受理事务回滚不留下活跃事实。prepare 失败原子释放；executor 不确定失败保留预留和状态供恢复处理。
 
 启用 `generation` 后以下字段必须全部显式提供；没有生产默认值：
 
@@ -91,7 +91,7 @@ const executor = createGenerationExecutor({
 候选清理先在事务 claim deleting：同批未终态和成功引用受到保护，只有失败/旧批/缺任务可删；删除后保留 deleted 墓碑。迟到上传完成会再次安全删除，删除失败留下可重试状态。T16 恢复会重扫 deleting/deleted 候选，避免删除后仍有迟到上传的窗口；不能立即丢掉墓碑，也不能调用 renderer 自动重排。内部 `verifyCandidate/settleCandidate/cleanupCandidate` 供可信恢复服务组合，不是客户端命令。
 
 ```sh
-npm test       # 119 项服务行为测试，含 T15 22、T16 21、T17 23 项
+npm test       # 139 项服务行为测试，含 T15 22、T16 21、T17 23、T22 20 项
 npm run test:pdf # 构建共享原字体/PDF，13 项真实 PDF 与内存存储/事务集成
 ```
 
@@ -138,8 +138,38 @@ CloudService 在每次调用获取可信身份，历史查询不依赖当前生�
 
 PDF 只从 SUCCEEDED 的正式引用领取，并检查 committed 候选的主键/jobId/batchId/归属以及路径/文件号/hash/大小/页数绑定；从正确数据库键读取并不替代对记录内容的关联校验。每块读取之前和 await 字节/hash之后都在事务复查active账户、任务归属、请求删除墓碑、记录/文件有效期以及原正式引用。候选、跨用户、已删除/失效记录均拒绝；文件过期、丢失或读取失败不改变成功终态、不退款、不自动重排。接口从不返回 fileId、URL、参数指纹、正文或输入标题。
 
-offset 必须是从0开始的256KiB倍数且小于总长；固定块上限 `PDF_CHUNK_BYTES=262144`，末块 nextOffset=null。客户端按offset组装并核对总bytes/SHA-256再打开；云函数RPC层将Uint8Array转base64，小程序不能假设wx.cloud JSON支持原生二进制。有效块读取才记录D-049活跃事实，metadata/轮询/失败请求不记；同用户同日与生成事实去重，任何重复下载不消费额度。
+offset 必须是从0开始的256KiB倍数且小于总长；固定块上限 `PDF_CHUNK_BYTES=262144`，末块 nextOffset=null。客户端按offset组装并核对总bytes/SHA-256再打开；云函数RPC层将Uint8Array转base64，小程序不能假设wx.cloud JSON支持原生二进制。有效首块（offset=0）读取才记录D-049活跃事实，metadata/轮询/失败请求和后续块不记；同用户同日与生成事实去重，任何重复下载不消费额度。
 
 当前存储端口仅支持整文件读。冷请求完整核对长度、SHA-256及PDF信封后，实例内缓存至多一个文件，key绑定userId/job/batch/fileId/bytes/hash，容量不超过maxCacheBytes。同文件并发冷读取合并；仅在加载期间按key保留promise，即使不同文件交错也不覆盖其他在途加载，完成/失败后以同一promise检查并移除。缓存仍只有一份TTL副本，不形成永久多文件缓存；并发不同文件的临时内存还须受最终平台并发/内存配置约束。缓存只在cacheTtlMs和fileExpiresAt内复用（到期在下次访问惰性丢弃），返回块为防御复制。每块重新授权，缓存不延长访问；T23先逻辑撤销再物理清理可立即拒绝缓存读取。冷实例仍会整读，未声称CloudBase Range能力或真机性能已验证。
 
 常见安全错误：FILE_ACCESS_UNAVAILABLE（未配置）、FILE_NOT_READY、FILE_EXPIRED、FILE_UNAVAILABLE、FILE_LIMIT_EXCEEDED；记录不存在/过期仍用NOT_FOUND/RECORD_EXPIRED。新任务索引/额度绑定的原子性、103条历史分页、跨用户/恶意offset/读后撤销、缓存/完整哈希均有测试。真实18,411,605字节田字描红PDF以71块重组、三页拼音PDF领取通过；暖实例均只整读一次。真实存储直连规则、云函数响应大小、缓存内存和微信打开留T24。
+
+## T22 最小管理员统计
+
+`getAdminStats({date?})` 仅允许当前可信 active 管理员调用；默认取服务器上海当日，日期严格为 `YYYY-MM-DD`，拒绝未来日期与额外权限字段。每次先鉴权，扫描结束事务再次检查用户仍 active、管理员授权与覆盖 revision，再写只含 actor/action/date/createdAt 的 `STATS_READ` 审计。客户端隐藏入口不能代替此鉴权；原有预设敏感操作继续同事务写审计，没有开放任意余额编辑。
+
+服务端显式配置 `stats: {coverageStartDate,pageSize,maxScanRecords,maxRunMs}`，不提供生产默认。coverageStartDate 是有效的 2000–9999 年上海日期，pageSize 为 1–100，maxScanRecords 为 1–1,000,000，maxRunMs 为正安全整数且不超过 10,000,000,000。未配置返回 `STATS_UNAVAILABLE`。
+
+响应结构：
+
+```ts
+{
+  date, timeZone: 'Asia/Shanghai', period: { startsAt, endsAt }, generatedAt,
+  coverage: {
+    complete,
+    sourceStarts: { users, activity, jobs, credits }, // YYYY-MM-DD
+    gaps: [{ source, reason }], // before-coverage-start / account-deletion / retention
+  },
+  metrics: { newUsers, dau, succeeded, failed, failureRate, creditsConsumed },
+  templates: [{ templateId, succeeded }], // 固定四模板，含零值
+  scan: { recordsRead, pagesRead },
+}
+```
+
+指标以 [D-049](../../docs/DATA_AND_CREDITS.md#6-统计口径) 为准：用户 createdAt、新生成持久化受理为 RESERVED 或 PDF 首块有效领取的日活跃事实、按 finishedAt 的成功/失败唯一任务、成功任务模板数与不可变 CONSUME 流水。准备失败仍保留已受理日的活跃事实；准备跨午夜、重试及后续文件块不新建活跃事实；轮询、预览与管理员读取不计 DAU。失败率为失败终态 / 全部终态（0–1），无分母返回 null。某来源超出覆盖范围时只将受影响指标置 null；不把不可用数据当成 0。支付未启用，无收入指标。
+
+generatedAt 是本次聚合开始时间，也是事件筛选上限；period.endsAt 是自然日排他结束时间。读取多个集合/分页**不是原子数据库快照**：并发写入可能下一次刷新才出现，不能声称该时间点精确一致；页面进入和手动刷新重算。每次按稳定 ID 分页扫描 users/jobs、当日 activity 与 CONSUME ledger，不依赖数据库默认最多一页。maxScanRecords 约束被聚合的原始记录数，必要时最多读取一条额外探测记录；coverage/auth 定点读取另计。pagesRead 只计原始来源 list 调用。软时间预算在页/记录边界检查，已发出的 I/O 完整等待；超限 `STATS_LIMIT_EXCEEDED`，不返回局部结果。坏机器字段/主键、乱序页和 provider 错误均安全失败，不回显原始记录。
+
+内部 `stats-coverage.ts` 供 T23 维护事务调用，不导出为用户 RPC。`markStatsCoverageGapInTransaction(tx,source,date,reason,now)` 必须与相关原始记录删除在同一事务；`advanceStatsCoverageFloorInTransaction(tx,source,date)` 在保留清理前单调推进来源起点。`stats_coverage/state` 仅存 revision/floors，`stats_coverage_gaps/<source>_<YYYYMMDD>` 仅存 source/date/reason/markedAt，无用户标识、正文或永久个人事实。floor 以下 gap 可清除；查询期间 revision 变化返回 `STATS_CHANGED`，刷新后按新覆盖返回。删除不得绕开此机制，否则不能声称统计完整。
+
+本轮独立检查后 `npm test` 139 项通过，其中 T22 20 项；覆盖实际服务生成/消费/文件领取、550 条记录分页、权限、扫描限制、缺口与删除并发，以及准备跨午夜/失败、受理回滚和重试的 DAU 归属。原生页面由 T22 前端接入；真实 CloudBase 扫描成本、索引、运行预算、权限、告警和生产保留配置仍需 T24 验收。

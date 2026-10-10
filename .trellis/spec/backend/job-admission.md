@@ -21,6 +21,8 @@ Snapshot the input before the first await through runtime `cloneDocument`. Rejec
 
 Atomically create request binding, job, credit reservation/ledger and preset reference. Only the creating request prepares once, checks the shared layout digest/page limit and invokes the awaited executor. Known preparation failure atomically fails/releases; unknown executor outcome remains queryable pending until trusted reconciliation. A RESERVED record alone is not a reliable accepted-execution acknowledgment.
 
+D-049 activity belongs to that new-job transaction, using its admission timestamp. Preparation may fail or finish after Shanghai midnight; neither moves the unique activity to a different day. Existing-request retries do not create activity, and a rolled-back admission leaves none. This statistical fact does not change the execution acknowledgment contract above.
+
 `JobSummary` exposes IDs/template/state/timestamps/page count/safe failure/file expiry, not file IDs, HMACs, title/body or layout. Metadata stores fingerprint algorithm/key ID and safe task/version facts, never replayable content. Generation configuration is explicit: retained keys, window/record/PDF/request periods, job deadline, input/page/byte/concurrency/rate limits. Retention validates D-050 ordering.
 
 ## 4. Validation & Error Matrix

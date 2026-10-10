@@ -71,6 +71,21 @@ export type PdfInfo = Readonly<{ jobId: string; bytes: number; sha256: string; p
 export type PdfChunkRequest = Readonly<{ jobId: string; offset: number }>;
 export type PdfChunk = Readonly<{ jobId: string; offset: number; nextOffset: number | null; totalBytes: number;
   sha256: string; expiresAt: number; bytes: Uint8Array }>;
+export type StatsSource = 'users' | 'activity' | 'jobs' | 'credits';
+export type StatsGapReason = 'account-deletion' | 'retention';
+export type StatsConfig = Readonly<{ coverageStartDate: string; pageSize: number; maxScanRecords: number; maxRunMs: number }>;
+export type AdminStatsRequest = Readonly<{ date?: string }>;
+export type AdminStatsResponse = Readonly<{
+  date: string; timeZone: 'Asia/Shanghai'; period: Readonly<{ startsAt: number; endsAt: number }>;
+  /** Aggregation start/cutoff, not a cross-query database snapshot guarantee. */
+  generatedAt: number;
+  coverage: Readonly<{ complete: boolean; sourceStarts: Readonly<Record<StatsSource, string>>;
+    gaps: readonly Readonly<{ source: StatsSource; reason: StatsGapReason | 'before-coverage-start' }>[] }>;
+  metrics: Readonly<{ newUsers: number | null; dau: number | null; succeeded: number | null;
+    failed: number | null; failureRate: number | null; creditsConsumed: number | null }>;
+  templates: readonly Readonly<{ templateId: LayoutVersionTuple['templateId']; succeeded: number | null }>[];
+  scan: Readonly<{ recordsRead: number; pagesRead: number }>;
+}>;
 export interface GenerationPreparer {
   prepare(input: ValidatedPaperInput, preset: TrustedPaperPreset): Promise<{ layout: PaperLayout; digest: string }>;
 }
@@ -125,6 +140,7 @@ export type ServiceConfig = Readonly<{
   registry?: RegistryConfig;
   generation?: GenerationConfig;
   fileAccess?: FileAccessConfig;
+  stats?: StatsConfig;
 }>;
 
 export type ServiceDependencies = Readonly<{
@@ -159,7 +175,8 @@ export type ServiceErrorCode = 'UNAUTHENTICATED' | 'ACCOUNT_DISABLED' | 'FORBIDD
   'INVALID_INPUT' | 'INPUT_LIMIT_EXCEEDED' | 'REQUEST_INVALID' | 'REQUEST_EXPIRED' | 'RECORD_EXPIRED' |
   'IDEMPOTENCY_CONFLICT' | 'KEY_UNAVAILABLE' | 'FINGERPRINT_UNSUPPORTED' | 'RATE_LIMITED' |
   'CONCURRENCY_LIMITED' | 'EXECUTION_UNAVAILABLE' | 'EXECUTION_OUTCOME_UNKNOWN' |
-  'FILE_ACCESS_UNAVAILABLE' | 'FILE_NOT_READY' | 'FILE_EXPIRED' | 'FILE_UNAVAILABLE' | 'FILE_LIMIT_EXCEEDED';
+  'FILE_ACCESS_UNAVAILABLE' | 'FILE_NOT_READY' | 'FILE_EXPIRED' | 'FILE_UNAVAILABLE' | 'FILE_LIMIT_EXCEEDED' |
+  'STATS_UNAVAILABLE' | 'STATS_LIMIT_EXCEEDED' | 'STATS_CHANGED';
 
 export class ServiceError extends Error {
   constructor(readonly code: ServiceErrorCode) {

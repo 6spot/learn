@@ -1,4 +1,15 @@
-import { ServiceError, type FileAccessConfig, type GenerationConfig, type RecoveryConfig, type ServiceConfig } from './contracts.js';
+import { ServiceError, type FileAccessConfig, type GenerationConfig, type RecoveryConfig, type ServiceConfig, type StatsConfig } from './contracts.js';
+import { isStatsDate } from './stats-date.js';
+
+function validateStats(config: StatsConfig): StatsConfig {
+  if (!config || !isStatsDate(config.coverageStartDate) ||
+      !['pageSize', 'maxScanRecords', 'maxRunMs'].every(field => {
+        const value = config[field as 'pageSize' | 'maxScanRecords' | 'maxRunMs'];
+        return Number.isSafeInteger(value) && value > 0 && value <= 10_000_000_000;
+      }) || config.pageSize > 100 || config.maxScanRecords > 1_000_000) throw new ServiceError('INVALID_CONFIG');
+  return Object.freeze({ coverageStartDate: config.coverageStartDate, pageSize: config.pageSize,
+    maxScanRecords: config.maxScanRecords, maxRunMs: config.maxRunMs });
+}
 
 function validateFileAccess(config: FileAccessConfig): FileAccessConfig {
   if (!config || !['maxFileBytes', 'cacheTtlMs', 'maxListScanRecords'].every(field => {
@@ -60,7 +71,8 @@ export function validateConfig(config: ServiceConfig): ServiceConfig {
       cloudEngineVersions: Object.freeze([...new Set(config.registry.cloudEngineVersions)]),
       clientReadyEngineVersions: Object.freeze([...new Set(config.registry.clientReadyEngineVersions)]),
     }) } : {}), ...(config.generation ? { generation: validateGeneration(config.generation) } : {}),
-    ...(config.fileAccess ? { fileAccess: validateFileAccess(config.fileAccess) } : {}) });
+    ...(config.fileAccess ? { fileAccess: validateFileAccess(config.fileAccess) } : {}),
+    ...(config.stats ? { stats: validateStats(config.stats) } : {}) });
 }
 
 /** China standard time has no DST; fixed +08:00 avoids depending on Intl in WeChat. */

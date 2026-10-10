@@ -177,7 +177,7 @@ export class RecordAccess {
       await this.active(tx, userId);
       const current = await this.visible(tx, userId, request.jobId), latest = await this.fileInfo(tx, current);
       if (this.cacheKey(current) !== this.cacheKey(start.job)) throw new ServiceError('FILE_UNAVAILABLE');
-      await recordDailyActivity(tx, userId, this.deps.clock.now(), 'pdf-download');
+      if (request.offset === 0) await recordDailyActivity(tx, userId, this.deps.clock.now(), 'pdf-download');
       return latest;
     });
     const end = Math.min(request.offset + PDF_CHUNK_BYTES, info.bytes);

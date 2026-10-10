@@ -199,7 +199,7 @@ test('pending creator never returns before awaited work; duplicate only reads pe
   assert.equal(duplicate.submission, 'pending');
   assert.equal(duplicate.job.status, 'RESERVED');
   assert.equal(returned, false);
-  assert.equal((await f.store.list('daily_activity')).length, 0);
+  assert.equal((await f.store.list('daily_activity')).length, 1);
   release.resolve();
   assert.equal((await first).submission, 'settled');
   assert.deepEqual(f.counts(), { prepares: 1, executions: 1 });
@@ -332,7 +332,7 @@ test('reservation commit failure rolls back job/request/credit/reference/rate to
   const request = await f.request();
   f.setResourceHook(() => f.store.failNextCommit());
   await assert.rejects(f.service.submitGeneration(request), { code: 'INTERNAL_ERROR' });
-  for (const name of ['generation_jobs', 'generation_requests', 'credit_reservations', 'preset_uses', 'generation_rate']) {
+  for (const name of ['generation_jobs', 'generation_requests', 'credit_reservations', 'preset_uses', 'generation_rate', 'daily_activity']) {
     assert.equal((await f.store.list(name)).length, 0, name);
   }
   assert.equal((await f.service.getAccount()).available, 20);
@@ -350,7 +350,7 @@ test('preparation exceptions are safe failed tasks, released atomically, and nev
   assert.equal(result.job.errorCode, 'PREPARATION_FAILED');
   assert.equal((await f.service.getAccount()).available, 20);
   assert.equal((await f.store.get('preset_states', f.published.registryId)).references, 0);
-  assert.equal((await f.store.list('daily_activity')).length, 0);
+  assert.equal((await f.store.list('daily_activity')).length, 1);
   await f.service.submitGeneration(request);
   assert.deepEqual(f.counts(), { prepares: 1, executions: 0 });
   assert.equal(JSON.stringify(f.store.snapshot()).includes('private-original'), false);

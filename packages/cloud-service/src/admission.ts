@@ -121,6 +121,7 @@ export class JobAdmission {
       await indexJobInTransaction(tx, job);
       await tx.create('generation_requests', found.key, record);
       await tx.set('generation_rate', userId, { windowStart, count: starts + 1 });
+      await recordDailyActivity(tx, userId, now, 'generation');
       return { created: true as const, record, job };
     });
     if (!result.created) return this.replay(userId, raw, result.record);
@@ -155,7 +156,6 @@ export class JobAdmission {
       if (now >= current.deadline) return failJobInTransaction(tx, job.jobId, job.batchId, now, 'EXECUTION_TIMEOUT', 'RESERVED');
       const generating: GenerationJob = { ...current, status: 'GENERATING', startedAt: now, pageCount: layout.pages.length };
       await tx.set('generation_jobs', job.jobId, generating);
-      await recordDailyActivity(tx, job.userId, now, 'generation');
       return generating;
     });
     if (isTerminal(started)) return submissionResponse(started);

@@ -3,7 +3,7 @@ import { ServiceError, type GenerationFailureCode, type JobSummary, type SubmitG
 import type { GenerationJob } from './model.js';
 import { settleCreditInTransaction } from './credits.js';
 import { releasePresetInTransaction } from './presets.js';
-import { quotaPeriod } from './config.js';
+import { shanghaiDate } from './stats-date.js';
 import { validateLayoutVersions } from '@learn/paper-core';
 import { parseRequestId } from './requests.js';
 
@@ -47,8 +47,7 @@ export async function failJobInTransaction(tx: MetadataTransaction, jobId: strin
 /** D-049: one safe fact per trusted user per Shanghai day, never article events. */
 export async function recordDailyActivity(tx: MetadataTransaction, userId: string, now: number,
   event: 'generation' | 'pdf-download'): Promise<void> {
-  quotaPeriod(now);
-  const date = new Date(now + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const date = shanghaiDate(now);
   const id = `${userId}_${date.replace(/-/g, '')}`;
   if (!await tx.get('daily_activity', id)) await tx.create('daily_activity', id, { userId, date, firstEventAt: now, firstEvent: event });
 }

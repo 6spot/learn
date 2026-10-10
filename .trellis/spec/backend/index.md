@@ -19,6 +19,7 @@ Learn uses provider-neutral TypeScript business services and CloudBase adapters.
 | [PDF Rendering](./pdf-rendering.md) | Exact glyph operators, full original-font embedding and immutable byte snapshots | T09 locally verified; physical printing pending |
 | [Shared Font Metrics](./font-metrics.md) | Verified original bytes, deterministic shaping, source provenance and exact outlines | T04 locally verified; production fonts/devices/printing pending |
 | [Accounts and Presets](./account-presets.md) | Trusted identity, monthly credit ledger and immutable registry | T12/T13 locally verified; production integration pending |
+| [Administrator Statistics](./admin-statistics.md) | Shanghai daily facts, bounded complete scans and honest deletion coverage | T22 backend; native UI and platform acceptance tracked separately |
 | [Private File Delivery](./file-delivery.md) | Authorized reverse-time history, bounded chunks and verified cache | T17 locally verified; actual storage/phone delivery pending |
 | [Job Recovery](./job-recovery.md) | Resumable maintenance scans, bounded work and safe existing-file recovery | T16 locally verified; platform scheduling pending |
 | [Job Execution](./job-execution.md) | Awaited PDF rendering, candidate verification, atomic settlement and cleanup fencing | T15 locally verified; T16 recovery and T17 private access verified |
