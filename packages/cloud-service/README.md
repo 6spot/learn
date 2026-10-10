@@ -91,8 +91,8 @@ const executor = createGenerationExecutor({
 候选清理先在事务 claim deleting：同批未终态和成功引用受到保护，只有失败/旧批/缺任务可删；删除后保留 deleted 墓碑。迟到上传完成会再次安全删除，删除失败留下可重试状态。T16 恢复会重扫 deleting/deleted 候选，避免删除后仍有迟到上传的窗口；不能立即丢掉墓碑，也不能调用 renderer 自动重排。内部 `verifyCandidate/settleCandidate/cleanupCandidate` 供可信恢复服务组合，不是客户端命令。
 
 ```sh
-npm test       # 96 项服务行为测试，包括 22 项 T15 与 21 项 T16 测试
-npm run test:pdf # 构建共享原字体/PDF，11 项真实 PDF 与内存存储/事务集成
+npm test       # 119 项服务行为测试，含 T15 22、T16 21、T17 23 项
+npm run test:pdf # 构建共享原字体/PDF，13 项真实 PDF 与内存存储/事务集成
 ```
 
 真实四模板 blank/text、三页拼音和超限不保存 partial bytes 均通过。当前测试文字 PDF：作文约 5.5 MB，含标题和中文描红的田/米约 18.4 MB，拼音约 162 KB；完整原 TTF 嵌入会显著影响资源上限。64 MiB 为集成测试上限，1 MB 为故障 fixture，均不作为生产配置承诺。正式存储、函数内存/超时、私有权限和断连生命周期由 T24 最终实测。
@@ -119,3 +119,27 @@ await recovery.runSweep();
 返回 `visitedJobs,visitedCandidates,reconciledJobs,pendingJobs,cleanedCandidates,protectedCandidates,retryableRecords,recordErrors,expectedReadBytes,startedAt,finishedAt,cycleComplete,checkpointSaved,nextCursor`。计数仅代表本轮观察/尝试，不能当去重运营统计。候选相会反复处理 deleting/deleted 墓碑，删除失败保留重试状态；成功引用/同批在途文件受保护，损坏路径关联不能用于删除其他私有对象。T16 不删除请求指纹、可见记录、候选墓碑或成功 PDF；期限 GC 由 T23 实现。
 
 21 项 T16 测试包含 107 个任务跨轮分页、后插 ID、读/时间/记录预算、并发检查点、提交/响应丢失、存储瞬态错误、迟到 put 和损坏状态的安全投影。真实三页拼音 PDF 的结算中断恢复也通过，未增加 prepare/render/upload 调用。真实调度频率、函数权限、触发可靠性和 CloudBase 生命周期仍需 T24 配置验收。
+
+
+## T17 记录与私有 PDF 分块领取
+
+CloudService 在每次调用获取可信身份，历史查询不依赖当前生成内核兼容、字体资源或执行器。注入 `storage` 并显式配置 `fileAccess: {maxFileBytes,maxCacheBytes,cacheTtlMs,maxListScanRecords}`；字段为受控非负/正安全整数且不超过 10,000,000,000，maxCacheBytes 可为0禁用缓存，其余必须正数，maxListScanRecords 不超过1,000。生产上限与缓存内存由最终配置确定，没有隐藏默认值。
+
+| 方法 | 返回 |
+|---|---|
+| `listJobs({cursor?,limit?})` | `{items:JobDetail[],nextCursor:string|null,serverTime}` |
+| `getJob(jobId)` | JobSummary 原字段加 `delivery: not-ready/ready/expired/unavailable` |
+| `getPdfInfo(jobId)` | `{jobId,bytes,sha256,pageCount,expiresAt,chunkBytes:262144}` |
+| `readPdfChunk({jobId,offset})` | `{jobId,offset,nextOffset,totalBytes,sha256,expiresAt,bytes:Uint8Array}` |
+
+列表默认20项、单页最多50项，按提交时间倒序，同毫秒以jobId稳定排序。HMAC游标绑定可信user和索引位置，不能跨用户使用。过滤过期/逻辑删除记录最多扫描 maxListScanRecords 项，可能返回空/短页且 nextCursor 非空；客户端继续该游标，不把短页当成完整历史。JobDetail 的 ready 表示成功正式引用满足领取条件；实际存储错误仍在读块时明确报告。
+
+新受理在同一事务写 `generation_history` 逆时间索引，仅含 userId/jobId/createdAt；索引不授权，列表重新读实际任务和请求binding。**T17之前创建的数据必须先回填索引才能宣称列表完整**：可信迁移可遍历旧任务并在事务调用内部 `indexJobInTransaction`，该原语幂等。首次部署尚无旧数据；已有开发环境或升级部署由维护流程回填并记录证据。T23 的记录GC同时处理history索引，不能删除仍需查询的在途任务。
+
+PDF 只从 SUCCEEDED 的正式引用领取，并检查 committed 候选的主键/jobId/batchId/归属以及路径/文件号/hash/大小/页数绑定；从正确数据库键读取并不替代对记录内容的关联校验。每块读取之前和 await 字节/hash之后都在事务复查active账户、任务归属、请求删除墓碑、记录/文件有效期以及原正式引用。候选、跨用户、已删除/失效记录均拒绝；文件过期、丢失或读取失败不改变成功终态、不退款、不自动重排。接口从不返回 fileId、URL、参数指纹、正文或输入标题。
+
+offset 必须是从0开始的256KiB倍数且小于总长；固定块上限 `PDF_CHUNK_BYTES=262144`，末块 nextOffset=null。客户端按offset组装并核对总bytes/SHA-256再打开；云函数RPC层将Uint8Array转base64，小程序不能假设wx.cloud JSON支持原生二进制。有效块读取才记录D-049活跃事实，metadata/轮询/失败请求不记；同用户同日与生成事实去重，任何重复下载不消费额度。
+
+当前存储端口仅支持整文件读。冷请求完整核对长度、SHA-256及PDF信封后，实例内缓存至多一个文件，key绑定userId/job/batch/fileId/bytes/hash，容量不超过maxCacheBytes。同文件并发冷读取合并；仅在加载期间按key保留promise，即使不同文件交错也不覆盖其他在途加载，完成/失败后以同一promise检查并移除。缓存仍只有一份TTL副本，不形成永久多文件缓存；并发不同文件的临时内存还须受最终平台并发/内存配置约束。缓存只在cacheTtlMs和fileExpiresAt内复用（到期在下次访问惰性丢弃），返回块为防御复制。每块重新授权，缓存不延长访问；T23先逻辑撤销再物理清理可立即拒绝缓存读取。冷实例仍会整读，未声称CloudBase Range能力或真机性能已验证。
+
+常见安全错误：FILE_ACCESS_UNAVAILABLE（未配置）、FILE_NOT_READY、FILE_EXPIRED、FILE_UNAVAILABLE、FILE_LIMIT_EXCEEDED；记录不存在/过期仍用NOT_FOUND/RECORD_EXPIRED。新任务索引/额度绑定的原子性、103条历史分页、跨用户/恶意offset/读后撤销、缓存/完整哈希均有测试。真实18,411,605字节田字描红PDF以71块重组、三页拼音PDF领取通过；暖实例均只整读一次。真实存储直连规则、云函数响应大小、缓存内存和微信打开留T24。

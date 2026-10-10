@@ -2,15 +2,18 @@ import { RuntimeError } from '@learn/cloud-runtime';
 import type { LayoutVersionTuple } from '@learn/paper-core';
 import { ServiceError, type AccountResponse, type ServiceConfig, type ServiceDependencies,
   type CompatibilityRequest, type CompatibilityResponse, type PublishedPreset, type ReleaseAcceptance,
-  type JobSummary, type SubmissionWindow, type SubmitGenerationResponse } from './contracts.js';
+  type JobSummary, type SubmissionWindow, type SubmitGenerationResponse, type JobDetail,
+  type ListJobsResponse, type PdfInfo, type PdfChunk } from './contracts.js';
 import { validateConfig } from './config.js';
 import { ensureAccountInTransaction } from './credits.js';
 import { PresetRegistry } from './presets.js';
 import { JobAdmission } from './admission.js';
 import { snapshotGenerationRequest } from './requests.js';
+import { RecordAccess, snapshotListJobs, snapshotPdfChunk, validateJobId } from './records.js';
 
 export class CloudService {
   readonly config: ServiceConfig;
+  private recordAccess: RecordAccess | undefined;
 
   constructor(private readonly dependencies: ServiceDependencies, config: ServiceConfig) {
     this.config = validateConfig(config);
@@ -100,6 +103,43 @@ export class CloudService {
     return this.safe(async () => {
       const account = await this.getAccount();
       return new JobAdmission(this.dependencies, this.config).find(account.userId, requestId);
+    });
+  }
+
+  private records(): RecordAccess {
+    if (!this.config.fileAccess) throw new ServiceError('FILE_ACCESS_UNAVAILABLE');
+    return this.recordAccess ??= new RecordAccess(this.dependencies, this.config.fileAccess, this.config.identityKeyId);
+  }
+
+  async listJobs(request?: unknown): Promise<ListJobsResponse> {
+    return this.safe(async () => {
+      const input = snapshotListJobs(request);
+      const account = await this.getAccount();
+      return this.records().list(account.userId, input);
+    });
+  }
+
+  async getJob(jobId: string): Promise<JobDetail> {
+    return this.safe(async () => {
+      validateJobId(jobId);
+      const account = await this.getAccount();
+      return this.records().get(account.userId, jobId);
+    });
+  }
+
+  async getPdfInfo(jobId: string): Promise<PdfInfo> {
+    return this.safe(async () => {
+      validateJobId(jobId);
+      const account = await this.getAccount();
+      return this.records().info(account.userId, jobId);
+    });
+  }
+
+  async readPdfChunk(request: unknown): Promise<PdfChunk> {
+    return this.safe(async () => {
+      const input = snapshotPdfChunk(request);
+      const account = await this.getAccount();
+      return this.records().chunk(account.userId, input);
     });
   }
 

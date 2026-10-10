@@ -41,6 +41,7 @@ export async function executionFixture(options = {}) {
   const day = 86400000;
   const config = { stage: 'development', monthlyFreeCredits: options.monthlyFreeCredits ?? 20, quotaTimeZone: 'Asia/Shanghai', identityKeyId: 'identity', adminUserIds: [],
     registry: { cloudEngineVersions: [preset.versions.engineVersion], clientReadyEngineVersions: [preset.versions.engineVersion] },
+    fileAccess: { maxFileBytes: 64 * 1024 * 1024, maxCacheBytes: 64 * 1024 * 1024, cacheTtlMs: 60000, maxListScanRecords: 1000, ...options.fileAccess },
     generation: { windowKeyId: 'window', retainedWindowKeyIds: ['window'], fingerprintKeyId: 'fingerprint', retainedFingerprintKeyIds: ['fingerprint'],
       fingerprintVersion: 'learn-request-v1', windowTtlMs: 3600000, requestRetentionMs: 90 * day, recordRetentionMs: 30 * day,
       pdfRetentionMs: 7 * day, jobTimeoutMs: 60000, maxInputCodeUnits: 10000, maxGraphemes: 10000, maxPages: 5,
@@ -52,7 +53,7 @@ export async function executionFixture(options = {}) {
     renderer: { async render(value, limits) { counts.render++; execution = value;
       return hooks.render ? hooks.render(value, limits) : options.render ? options.render(value, limits) : pdfFixture(); } } };
   const runner = createGenerationExecutor(runnerDeps, config);
-  const dependencies = { store, clock, crypto, identity: { current: () => ({ subject: 'trusted-test-user', appId: 'trusted-app' }) }, resources,
+  const dependencies = { store, storage, clock, crypto, identity: { current: () => ({ subject: 'trusted-test-user', appId: 'trusted-app' }) }, resources,
     preparer: { prepare: async (...args) => { counts.prepare++; return shared.prepare(...args); } }, executor: runner };
   const userId = (await new CloudService(dependencies, config).getAccount()).userId;
   const service = new CloudService(dependencies, { ...config, adminUserIds: [userId] });
@@ -62,7 +63,7 @@ export async function executionFixture(options = {}) {
     return { requestId: createRequestId((await service.getSubmissionWindow()).windowId, randomUUID()), input: value,
       versions: preset.versions, layoutDigest: (await shared.prepare(value, preset)).digest };
   };
-  return { base, backend, store, storage, clock, crypto, config, hooks, counts, runner, runnerDeps, service, userId, request,
+  return { base, backend, store, storage, clock, crypto, config, hooks, counts, runner, runnerDeps, dependencies, service, userId, request,
     execution: () => execution, job: async () => (await store.list('generation_jobs'))[0]?.value,
     candidate: async () => (await store.list('pdf_candidates'))[0]?.value };
 }

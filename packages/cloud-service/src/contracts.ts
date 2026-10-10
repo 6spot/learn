@@ -62,6 +62,15 @@ export type JobSummary = Readonly<{
   pageCount: number | null; errorCode: GenerationFailureCode | null; fileExpiresAt: number | null;
 }>;
 export type SubmitGenerationResponse = Readonly<{ job: JobSummary; submission: 'pending' | 'settled' }>;
+export const PDF_CHUNK_BYTES = 256 * 1024;
+export type FileAccessConfig = Readonly<{ maxFileBytes: number; maxCacheBytes: number; cacheTtlMs: number; maxListScanRecords: number }>;
+export type JobDetail = JobSummary & Readonly<{ delivery: 'not-ready' | 'ready' | 'expired' | 'unavailable' }>;
+export type ListJobsRequest = Readonly<{ cursor?: string; limit?: number }>;
+export type ListJobsResponse = Readonly<{ items: readonly JobDetail[]; nextCursor: string | null; serverTime: number }>;
+export type PdfInfo = Readonly<{ jobId: string; bytes: number; sha256: string; pageCount: number; expiresAt: number; chunkBytes: number }>;
+export type PdfChunkRequest = Readonly<{ jobId: string; offset: number }>;
+export type PdfChunk = Readonly<{ jobId: string; offset: number; nextOffset: number | null; totalBytes: number;
+  sha256: string; expiresAt: number; bytes: Uint8Array }>;
 export interface GenerationPreparer {
   prepare(input: ValidatedPaperInput, preset: TrustedPaperPreset): Promise<{ layout: PaperLayout; digest: string }>;
 }
@@ -115,6 +124,7 @@ export type ServiceConfig = Readonly<{
   adminUserIds: readonly string[];
   registry?: RegistryConfig;
   generation?: GenerationConfig;
+  fileAccess?: FileAccessConfig;
 }>;
 
 export type ServiceDependencies = Readonly<{
@@ -125,6 +135,7 @@ export type ServiceDependencies = Readonly<{
   resources?: ResourceProvider;
   preparer?: GenerationPreparer;
   executor?: GenerationExecutor;
+  storage?: PrivateStorage;
 }>;
 
 export type AccountResponse = Readonly<{
@@ -147,7 +158,8 @@ export type ServiceErrorCode = 'UNAUTHENTICATED' | 'ACCOUNT_DISABLED' | 'FORBIDD
   'RELEASE_NOT_ACCEPTED' | 'CLIENT_NOT_READY' | 'VERSION_RETIRED' | 'VERSION_IN_USE' |
   'INVALID_INPUT' | 'INPUT_LIMIT_EXCEEDED' | 'REQUEST_INVALID' | 'REQUEST_EXPIRED' | 'RECORD_EXPIRED' |
   'IDEMPOTENCY_CONFLICT' | 'KEY_UNAVAILABLE' | 'FINGERPRINT_UNSUPPORTED' | 'RATE_LIMITED' |
-  'CONCURRENCY_LIMITED' | 'EXECUTION_UNAVAILABLE' | 'EXECUTION_OUTCOME_UNKNOWN';
+  'CONCURRENCY_LIMITED' | 'EXECUTION_UNAVAILABLE' | 'EXECUTION_OUTCOME_UNKNOWN' |
+  'FILE_ACCESS_UNAVAILABLE' | 'FILE_NOT_READY' | 'FILE_EXPIRED' | 'FILE_UNAVAILABLE' | 'FILE_LIMIT_EXCEEDED';
 
 export class ServiceError extends Error {
   constructor(readonly code: ServiceErrorCode) {

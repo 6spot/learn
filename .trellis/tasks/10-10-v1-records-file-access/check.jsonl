@@ -3,3 +3,15 @@
 {"file": "docs/CLOUDBASE.md", "reason": "T17 的权威业务规则与验收依据"}
 {"file": "docs/TESTING.md", "reason": "T17 的权威业务规则与验收依据"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/backend/runtime-contracts.md", "reason": "私有存储/事务与可信身份"}
+{"file": ".trellis/spec/backend/job-admission.md", "reason": "任务可见期与删除绑定"}
+{"file": ".trellis/spec/backend/job-execution.md", "reason": "正式候选与文件绑定"}
+{"file": ".trellis/spec/backend/job-recovery.md", "reason": "安全metadata投影与终态边界"}
+{"file": "docs/UI_DESIGN.md", "reason": "P05倒序分页与P06详情主操作"}
+{"file": "packages/cloud-service/README.md", "reason": "实际API/缓存限制/索引迁移"}
+{"file": "packages/cloud-service/src/records.ts", "reason": "逐次授权/列表/缓存/私有分块"}
+{"file": "packages/cloud-service/src/history.ts", "reason": "逆时间索引与幂等回填"}
+{"file": "packages/cloud-service/src/jobs.ts", "reason": "允许字段与枚举投影"}
+{"file": "packages/cloud-service/test/records.test.mjs", "reason": "23项权限/分页/缓存回归，含候选错键关联和跨用户交错加载"}
+{"file": "packages/cloud-service/integration/records-pdf.test.mjs", "reason": "真实大PDF和跨页完整领取"}
+{"file": ".trellis/tasks/10-10-v1-records-file-access/evidence.md", "reason": "本轮证据和最终平台界线"}

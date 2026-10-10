@@ -3,7 +3,7 @@
   "name": "v1-records-file-access",
   "title": "T17 实现记录查询与私有文件领取",
   "description": "让用户离页后仍能查询本人任务并重复领取有效 PDF。",
-  "status": "planning",
+  "status": "in_progress",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -12,7 +12,7 @@
   "assignee": "me",
   "createdAt": "2026-10-10",
   "completedAt": null,
-  "branch": null,
+  "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
   "commit": null,
@@ -24,5 +24,7 @@
   "notes": "",
   "meta": {
     "plan_id": "T17"
-  }
+  },
+  "development_complete": true,
+  "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
 }

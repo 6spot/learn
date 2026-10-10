@@ -7,6 +7,7 @@ import { PresetRegistry, retainPresetInTransaction } from './presets.js';
 import { assertSameRequest, assertWindowCurrent, generationFingerprint, issueWindow, parseRequestId,
   requestIdFromEnvelope, requestRecordId, validateGenerationRequest, verifyWindowSignature, type ValidatedGenerationRequest } from './requests.js';
 import { failJobInTransaction, isTerminal, jobSummary, recordDailyActivity, submissionResponse } from './jobs.js';
+import { indexJobInTransaction } from './history.js';
 
 type RateRecord = { windowStart: number; count: number };
 
@@ -117,6 +118,7 @@ export class JobAdmission {
         createdAt: now, retainUntil: Math.max(parsed.expiresAt, job.deadline) + this.policy.requestRetentionMs, deleted: false,
         inputLimits: { maxInputCodeUnits: this.policy.maxInputCodeUnits, maxGraphemes: this.policy.maxGraphemes, maxPages: this.policy.maxPages } };
       await tx.create('generation_jobs', jobId, job);
+      await indexJobInTransaction(tx, job);
       await tx.create('generation_requests', found.key, record);
       await tx.set('generation_rate', userId, { windowStart, count: starts + 1 });
       return { created: true as const, record, job };
