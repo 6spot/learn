@@ -8,12 +8,15 @@ Read before implementing cloud business services or changing infrastructure adap
 
 `MetadataStore.get/list/transaction` reads JSON metadata and opens a callback transaction. `MetadataTransaction.get/create/set/delete` operates on single records; no transaction query support is assumed. `PrivateStorage.resolve(path)` computes a provider reference; `put(path, Uint8Array)`, `read(fileId)`, `remove(fileId)` are backend-only capabilities. `TrustedIdentityProvider.current()` returns `{subject, appId}` from trusted context. `ExecutionBridge.invoke(input, work)` awaits work inside the invocation.
 
+`cloneDocument(value: JsonObject): JsonObject` supplies synchronous safe JSON snapshots for metadata and RPC boundaries before asynchronous work begins.
+
 ## 3. Contracts
 
 - List uses equality filters, ascending ID cursor, default 50 and maximum 100 records. Consumers must paginate.
 - Transaction callbacks may retry. Generate stable operation IDs before the callback; perform rendering, uploading and notifications outside it.
 - Persist candidate job/batch/path metadata **before** upload. Production must inject a verified path-to-fileID resolver; an opaque upload response alone cannot recover a process crash immediately after storage success.
 - Project persisted records through explicit field allowlists. JSON-serializability does not enforce article privacy. No raw input, title, body, layout, secret or parameter fingerprint in logs.
+- Snapshot validation uses property descriptors, rejects own hooks/accessors/hidden fields, and checks both object and array prototypes. `Array.isArray` alone is insufficient: a custom array prototype can inherit `toJSON` and rewrite a request during serialization. Do not execute it to discover whether the result looks valid.
 - `StaticIdentityProvider` and `MemoryMetadataStore` are local test adapters. Never construct trusted identity from client event fields.
 - CloudBase missing-document exception classification is injected after verifying SDK error codes; unknown errors fail closed.
 

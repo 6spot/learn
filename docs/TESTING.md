@@ -8,6 +8,8 @@
 
 开发环境首次执行根 `npm run setup`，按字体资源说明恢复忽略的原始文件，再执行 `npm test`。真实字体度量、布局和 Canvas 的专项入口分别为 `npm run test:fonts`、`npm run test:layout`、`npm run test:canvas`；官方模拟器入口为 `npm run test:devtools`、`npm run test:canvas:devtools`。不同自动化脚本串行占用同一 DevTools 项目，避免互相重启页面。阶段证据记录在各任务及 [当前检查点](ROADMAP.md#当前开发检查点2026-10-11)，历史计数不能代替改动后的验证。
 
+2026-10-11：提交 `65221ca` 在独立临时目录从 Git 源文件/锁文件重建，逐包 `npm ci` 与根 `npm test` **153/153** 通过（core 80、runtime 20、cloud-runtime 25、service 28）；字体原文件从本机已校验资源只读链接，未把它们提交到 Git，也未把开发中未提交源码混入此次复现。此记录仅证明该提交可安装/构建/回归，后续服务和页面变更仍需各自验证。
+
 ## 2. 纸张排版
 
 - 以 [首版正式规格](PAPER_PRESETS.md) 为不可擅改的基准，按 [D-038](PAPER_PRESETS.md#21-中心线墨迹与打印安全区域d-038) 检查四种模板的中心线坐标、格宽/线距、完整行列/拼音线组数量、原点、几何留白与多页一致性。几何基准须锁定绝对位置及各中心线间距，不能只断言宽高和端点落在自身范围内。
