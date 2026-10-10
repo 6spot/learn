@@ -1,6 +1,6 @@
 # 纸张模板与统一排版引擎
 
-> 状态：排版引擎技术草案，尚未实现；**首版四套固定 A4 规格已经确定**，详见 [PAPER_PRESETS.md](PAPER_PRESETS.md)。文字占格、字体、PDF 打印测试仍待验证。
+> 状态：**规格与基本排版规则已确认，开发进行中**；`packages/paper-core` 已实现四种固定 A4 格线、三种方格模板的基础文字占位及自动分页。拼音字形布局、跨端字体度量、复杂标点、Canvas/PDF 和实体打印仍待实现或验证。固定规格以 [PAPER_PRESETS.md](PAPER_PRESETS.md) 为准，阶段进度以 [ROADMAP.md](ROADMAP.md) 为准。
 
 ## 1. 目标
 
