@@ -3,7 +3,7 @@
 ## 启动条件
 
 - [ ] 核对 [PRD](prd.md)、[设计](design.md)、权威文档及本次工作区变更。
-- [ ] 核对最终集成验收依赖（不等同于全部启动条件，分阶段输入见下文及父任务总表）：[T10 完成正式字体与打印验收](../10-10-v1-print-acceptance/prd.md)、[T12 实现可信预设发布与兼容查询](../10-10-v1-preset-publishing/prd.md)、[T13 实现身份与免费额度](../10-10-v1-identity-credits/prd.md)、[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)、[T16 实现超时对账与恢复](../10-10-v1-job-recovery/prd.md)、[T17 实现记录查询与私有文件领取](../10-10-v1-records-file-access/prd.md)、[T18 实现模板、编辑与预览页面](../10-10-v1-miniapp-editor/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T20 接通生成提交与结果流程](../10-10-v1-miniapp-generation/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)、[T22 实现最小运营中心](../10-10-v1-admin-observability/prd.md)、[T23 实现隐私、保留与清理机制](../10-10-v1-privacy-retention/prd.md)
+- [ ] 核对最终集成验收依赖（不等同于全部启动条件，分阶段输入见下文及父任务总表）：[T10 完成正式字体与打印验收](../10-10-v1-print-acceptance/prd.md)、[T12 实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md)、[T13 实现身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)、[T14 实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)、[T16 实现超时对账与恢复](../10-10-v1-job-recovery/prd.md)、[T17 实现记录查询与私有文件领取](../10-10-v1-records-file-access/prd.md)、[T18 实现模板、编辑与预览页面](../10-10-v1-miniapp-editor/prd.md)、[T19 实现应用级兼容与更新流程](../10-10-v1-miniapp-update/prd.md)、[T20 接通生成提交与结果流程](../10-10-v1-miniapp-generation/prd.md)、[T21 实现我的与生成记录页面](../10-10-v1-miniapp-records/prd.md)、[T22 实现最小运营中心](../10-10-v1-admin-observability/prd.md)、[T23 实现隐私、保留与清理机制](../10-10-v1-privacy-retention/prd.md)
 - [ ] 将技术未知项落实为可验证方案；涉及新产品取舍先按 DECISIONS 流程确认。
 - [ ] 细化设计后完成执行前评审；按 Trellis 流程启动本子任务，不以父任务代替实现任务。
 

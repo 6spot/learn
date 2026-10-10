@@ -17,8 +17,8 @@
 | T09 | [实现 PDF 渲染](../10-10-v1-pdf-renderer/prd.md) | T07 | renderers/pdf（职责目录待落地）、PDF 样张 |
 | T10 | [完成正式字体与打印验收](../10-10-v1-print-acceptance/prd.md) | T08、T09 | 正式样张、量测记录、docs/TESTING.md 与可信样式预设 |
 | T11 | [CloudBase 环境与可靠执行验证](../archive/2026-10/10-10-v1-cloudbase-feasibility/prd.md) | — | 关联云开发环境、部署配置与能力验证记录 |
-| T12 | [实现可信预设发布与兼容查询](../10-10-v1-preset-publishing/prd.md) | T07、T11 | CloudBase 预设配置、兼容查询及最小发布工具 |
-| T13 | [实现身份与免费额度](../10-10-v1-identity-credits/prd.md) | T11 | 云端用户、额度账户与不可变流水 |
+| T12 | [实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md) | T07、T11 | CloudBase 预设配置、兼容查询及最小发布工具 |
+| T13 | [实现身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md) | T11 | 云端用户、额度账户与不可变流水 |
 | T14 | [实现请求幂等与任务受理](../10-10-v1-job-admission/prd.md) | T12、T13 | 云端请求校验、参数指纹、任务与额度预留 |
 | T15 | [实现生成执行与事务结算](../10-10-v1-job-execution/prd.md) | T09、T11、T14 | 云端生成执行、上传、任务终态与账本结算 |
 | T16 | [实现超时对账与恢复](../10-10-v1-job-recovery/prd.md) | T15 | 云端恢复器、超时结算、候选产物清理 |

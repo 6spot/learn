@@ -6,7 +6,7 @@
 
 云端请求校验、参数指纹、任务与额度预留。
 
-前置交付：[T12 实现可信预设发布与兼容查询](../10-10-v1-preset-publishing/prd.md)、[T13 实现身份与免费额度](../10-10-v1-identity-credits/prd.md)
+前置交付：[T12 实现可信预设发布与兼容查询](../archive/2026-10/10-10-v1-preset-publishing/prd.md)、[T13 实现身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)
 
 ## 实现边界
 

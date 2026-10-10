@@ -6,7 +6,7 @@
 
 小程序管理员页面、云端聚合统计与审计。
 
-前置交付：[T13 实现身份与免费额度](../10-10-v1-identity-credits/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)
+前置交付：[T13 实现身份与免费额度](../archive/2026-10/10-10-v1-identity-credits/prd.md)、[T15 实现生成执行与事务结算](../10-10-v1-job-execution/prd.md)
 
 ## 实现边界
 

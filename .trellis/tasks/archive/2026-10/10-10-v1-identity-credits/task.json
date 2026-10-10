@@ -1,9 +1,9 @@
 {
-  "id": "v1-preset-publishing",
-  "name": "v1-preset-publishing",
-  "title": "T12 实现可信预设发布与兼容查询",
-  "description": "让用户始终使用唯一当前规格，同时保护已锁定的受支持旧组合。",
-  "status": "in_progress",
+  "id": "v1-identity-credits",
+  "name": "v1-identity-credits",
+  "title": "T13 实现身份与免费额度",
+  "description": "为首版用户提供可信身份与可审计的免费次数。",
+  "status": "completed",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -11,7 +11,7 @@
   "creator": "me",
   "assignee": "me",
   "createdAt": "2026-10-10",
-  "completedAt": null,
+  "completedAt": "2026-10-11",
   "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
@@ -23,7 +23,7 @@
   "relatedFiles": [],
   "notes": "本地开发及独立检查完成，合计 28 项服务测试通过；真实 CloudBase、生产配置及资源验收按 D-044 转交 T24。",
   "meta": {
-    "plan_id": "T12",
+    "plan_id": "T13",
     "development_complete": true,
     "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
