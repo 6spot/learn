@@ -3,7 +3,7 @@
   "name": "v1-identity-credits",
   "title": "T13 实现身份与免费额度",
   "description": "为首版用户提供可信身份与可审计的免费次数。",
-  "status": "planning",
+  "status": "in_progress",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -12,7 +12,7 @@
   "assignee": "me",
   "createdAt": "2026-10-10",
   "completedAt": null,
-  "branch": null,
+  "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
   "commit": null,
@@ -21,8 +21,10 @@
   "children": [],
   "parent": "10-10-learn-v1",
   "relatedFiles": [],
-  "notes": "",
+  "notes": "本地开发及独立检查完成，合计 28 项服务测试通过；真实 CloudBase、生产配置及资源验收按 D-044 转交 T24。",
   "meta": {
-    "plan_id": "T13"
+    "plan_id": "T13",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
 }

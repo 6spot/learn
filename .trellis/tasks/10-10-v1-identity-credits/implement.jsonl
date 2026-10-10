@@ -2,3 +2,5 @@
 {"file": "docs/CLOUDBASE.md", "reason": "T13 的权威业务规则与验收依据"}
 {"file": "docs/TESTING.md", "reason": "T13 的权威业务规则与验收依据"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/backend/runtime-contracts.md", "reason": "已实现的 T11 端口与事务/隐私边界"}
+{"file": "packages/cloud-service/README.md", "reason": "T13 实际服务与受控配置"}
