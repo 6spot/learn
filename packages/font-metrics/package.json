@@ -1,0 +1,29 @@
+{
+  "name": "@learn/font-metrics",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "description": "Verified original-font shaping shared by preview and cloud layout",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@noble/hashes": "1.8.0",
+    "fontkit": "2.0.4",
+    "unicode-properties": "1.4.1",
+    "unicode-segmenter": "0.17.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10",
+    "typescript": "5.9.3"
+  }
+}

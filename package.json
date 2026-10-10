@@ -14,7 +14,8 @@
     "test:runtime": "npm run build && node --test packages/runtime-smoke/test/*.test.mjs",
     "test": "npm run typecheck && npm run test:core && npm run test:runtime && npm run test:cloud",
     "smoke": "npm run build && node scripts/runtime-report.mjs",
-    "test:devtools": "npm run build && node scripts/test-devtools.mjs --diagnostics"
+    "test:devtools": "npm run build && node scripts/test-devtools.mjs --diagnostics",
+    "test:fonts": "npm --prefix packages/font-metrics test"
   },
   "devDependencies": {
     "esbuild": "0.25.10",

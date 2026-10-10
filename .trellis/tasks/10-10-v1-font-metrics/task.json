@@ -21,8 +21,10 @@
   "children": [],
   "parent": "10-10-learn-v1",
   "relatedFiles": [],
-  "notes": "",
+  "notes": "T04 本地开发及独立检查完成；17 项真实字体检查通过。真实设备、许可及打印按 D-044 转交 T24。",
   "meta": {
-    "plan_id": "T04"
+    "plan_id": "T04",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
 }
