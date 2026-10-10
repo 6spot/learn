@@ -6,7 +6,7 @@
 
 共享字体度量模块、版本固定的度量数据。
 
-前置交付：[T02 字体资源与授权验证](../archive/2026-10/10-10-v1-font-resources/prd.md)、[T03 完善通用文档与布局契约](../archive/2026-10/10-10-v1-document-contract/prd.md)
+前置交付：[T02 字体资源与授权验证](../10-10-v1-font-resources/prd.md)、[T03 完善通用文档与布局契约](../10-10-v1-document-contract/prd.md)
 
 ## 实现边界
 
@@ -46,6 +46,6 @@
 
 ## 依据
 
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [ARCHITECTURE](../../../docs/ARCHITECTURE.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [ARCHITECTURE](../../../../../docs/ARCHITECTURE.md)
+- [TESTING](../../../../../docs/TESTING.md)

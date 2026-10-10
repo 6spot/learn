@@ -1,6 +1,6 @@
 # T04 本地实施与验证 — 2026-10-10
 
-新增 [packages/font-metrics](../../../../packages/font-metrics/README.md)，同一固定浏览器实现供本地预览和云端复算。对齐 T03 `FontMetricsProvider`，不修改接口/核心源码；无字体二进制、子集、云端加载配置或宿主页面改动。
+新增 [packages/font-metrics](../../../../../../packages/font-metrics/README.md)，同一固定浏览器实现供本地预览和云端复算。对齐 T03 `FontMetricsProvider`，不修改接口/核心源码；无字体二进制、子集、云端加载配置或宿主页面改动。
 
 接口为 `createFontMetricsProvider`、`shape`、`glyphOutline`、`originalFontBytes`、`createMeasureTextMm`。ID/散列从 T02 清单生成，候选组合 `learn-fonts-2026-10-10-candidate.1`，算法 `fontkit-2.0.4-nfc-grapheme-map-v1`。未来更改资源/度量须更新受支持组合，不作为远端 JS 热更新资源。
 

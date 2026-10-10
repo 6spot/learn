@@ -6,7 +6,7 @@
 
 云端用户、额度账户与不可变流水。
 
-前置交付：[T11 CloudBase 环境与可靠执行验证](../10-10-v1-cloudbase-feasibility/prd.md)
+前置交付：[T11 CloudBase 环境与可靠执行验证](../archive/2026-10/10-10-v1-cloudbase-feasibility/prd.md)
 
 ## 实现边界
 

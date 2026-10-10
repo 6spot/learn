@@ -6,7 +6,7 @@
 
 共享版本组合、布局序列化及摘要协议。
 
-前置交付：[T04 接入共享字体度量](../10-10-v1-font-metrics/prd.md)、[T05 补齐方格文字排版](../10-10-v1-square-layout/prd.md)、[T06 实现拼音行带排版](../10-10-v1-pinyin-layout/prd.md)
+前置交付：[T04 接入共享字体度量](../archive/2026-10/10-10-v1-font-metrics/prd.md)、[T05 补齐方格文字排版](../10-10-v1-square-layout/prd.md)、[T06 实现拼音行带排版](../10-10-v1-pinyin-layout/prd.md)
 
 ## 实现边界
 

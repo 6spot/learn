@@ -6,10 +6,10 @@
 
 ## 已确认背景与范围
 
-- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../10-10-learn-v1/prd.md)。
+- 本任务来自用户于 2026-10-10 同意的 [V1 总计划](../../../10-10-learn-v1/prd.md)。
 - 责任范围：共享字体度量模块、版本固定的度量数据。目录名称表示职责，尚未存在的模块不得描述为已实现。
 - 已有四模板几何与基础方格文字布局可复用；本任务不能以历史测试或占位字体样张代替验收。
-- 最终集成验收依赖：[T02 字体资源与授权验证](../archive/2026-10/10-10-v1-font-resources/prd.md)、[T03 完善通用文档与布局契约](../archive/2026-10/10-10-v1-document-contract/prd.md)
+- 最终集成验收依赖：[T02 字体资源与授权验证](../10-10-v1-font-resources/prd.md)、[T03 完善通用文档与布局契约](../10-10-v1-document-contract/prd.md)
 
 ## 要求与验收
 
@@ -29,6 +29,6 @@
 
 ## 权威依据
 
-- [PAPER_ENGINE](../../../docs/PAPER_ENGINE.md)
-- [ARCHITECTURE](../../../docs/ARCHITECTURE.md)
-- [TESTING](../../../docs/TESTING.md)
+- [PAPER_ENGINE](../../../../../docs/PAPER_ENGINE.md)
+- [ARCHITECTURE](../../../../../docs/ARCHITECTURE.md)
+- [TESTING](../../../../../docs/TESTING.md)
