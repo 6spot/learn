@@ -14,6 +14,8 @@ Read component and quality guidelines before frontend work. Unfilled entries bel
 | [Component Guidelines](./component-guidelines.md) | Confirmed native component policy, behavior and reuse boundaries | D-039/D-043 policy and T18 native page boundaries |
 | [Hook Guidelines](./hook-guidelines.md) | Platform lifecycle guidance when implemented | Generic scaffold; not a framework selection |
 | [Application Compatibility](./application-compatibility.md) | Shared client/session, trusted resource refresh, update confirmation and cleanup | T19 implementation; formal updates/devices pending |
+| [Generation Submission](./generation-session.md) | Immutable requests, current Canvas gating, recovery and visible-page result navigation | T20 implementation; real platform acceptance pending |
+| [Account and Records](./records-account.md) | P04/P05/P06 state, bounded polling/pagination, private file actions and central cleanup | T21 implementation; real platform/device acceptance pending |
 | [State Management](./state-management.md) | Local, app and cloud state organization | To fill from implementation |
 | [Quality Guidelines](./quality-guidelines.md) | UI design gates, privacy and true-device acceptance | Project requirements and T18 build/native verification commands |
 | [Type Safety](./type-safety.md) | Actual TypeScript conventions | To fill from implementation |

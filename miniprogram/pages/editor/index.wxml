@@ -22,7 +22,14 @@
         <button id="settings-reset" class="button-plain text-action reset-settings" bindtap="onResetSettings">恢复默认设置</button>
       </view>
     </view>
-    <view class="page-actions"><button id="generate-pdf" class="button-primary" disabled="{{!canGenerate}}" bindtap="onGenerate">生成 PDF</button><text class="action-note">成功生成才扣次</text><text wx:if="{{generationMessage}}" class="action-note">{{generationMessage}}</text></view>
+    <view class="page-actions">
+      <button id="generate-pdf" class="button-primary" loading="{{generationBusy}}" disabled="{{!canGenerate}}" bindtap="onGenerate">{{generationLabel}}</button>
+      <text class="action-note">成功生成才扣次</text>
+      <text wx:if="{{generationMessage}}" id="generation-status" class="action-note">{{generationMessage}}</text>
+      <text wx:if="{{generationHint}}" class="action-note">{{generationHint}}</text>
+      <button wx:if="{{generationCanQuery}}" id="generation-query" class="button-secondary" disabled="{{generationBusy}}" bindtap="onGenerationQuery">查询上次提交结果</button>
+      <button wx:if="{{generationCanRetry}}" id="generation-retry" class="button-plain text-action" disabled="{{generationBusy}}" bindtap="onGenerationRetry">重试上次内容</button>
+    </view>
   </view>
 </view>
 <view wx:if="{{cleanup}}" class="cleanup-overlay" catchtouchmove="onBlockTouch">

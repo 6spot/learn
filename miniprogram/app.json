@@ -1,5 +1,5 @@
 {
-  "pages": ["pages/templates/index", "pages/editor/index", "pages/preview/index", "pages/me/index", "pages/runtime/index", "pages/canvas-diagnostics/index"],
+  "pages": ["pages/templates/index", "pages/editor/index", "pages/preview/index", "pages/me/index", "pages/records/index", "pages/records/detail", "pages/privacy/index", "pages/admin/index", "pages/runtime/index", "pages/canvas-diagnostics/index"],
   "window": {
     "navigationBarTitleText": "学习纸张",
     "navigationBarBackgroundColor": "#FFFFFF",

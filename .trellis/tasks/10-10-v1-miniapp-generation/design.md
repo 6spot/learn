@@ -1,6 +1,8 @@
-# T20.A 生成会话设计（2026-10-11）
+# T20 生成会话与原生集成设计（2026-10-11）
 
-root 已确认本阶段只新增 portable `generation-session.ts`、`secure-random.ts` 与测试；App/编辑/预览页面、T21 详情、root 传输及主文档另由协调集成。行为缺口是从当前真实预览生成一次不可变的内存请求，并安全处理双击、响应丢失与清空。
+阶段 A portable 会话与安全随机适配已通过独立检查。root 于 T19 归档后授权阶段 B：本实现者接 editor-environment、application 的 generation 类型、编辑/预览 TS/WXML/必要样式与测试；T21 所有者负责 app.ts、records 类型/页面和路由，DevTools 由 baseline 串行操作。保留并行任务修改，不改后端、纸张布局或新建结果页。
+
+当前缺口是原生生成按钮仍为占位；将其连接到唯一 App.client/editor/compatibility/generation。编辑和预览只有成功绘制当前 revision 后启用当前内容的生成按钮；等待中禁用，known 后下一次明确点击 startNew。错误/未知结果显示上次操作及其查询/重试，不将新编辑混入旧请求。
 
 ## 接口
 
@@ -24,4 +26,10 @@ clear 增加 epoch、取消本地等待并释放自有快照；晚到结果不�
 
 ## 验证
 
-隔离编译/测试两个新模块，不占用共享 DevTools 或改 App/build。验证安全随机API不可用/坏返回/版本位/跨realm ArrayBuffer；双击、编辑在prepare/random/window等待期间变化、同号重试、未知响应先查、pending不假称开始、超时晚到、clear期间/之后结果、坏响应/导航失败和明确再次生成。至少一条实际 CloudClient + CloudService 路径核对一次消费；T19/T21页面与真实设备/CloudBase由后续整项验收。
+阶段 A 隔离编译/测试模块已完成。阶段 B 按根 typecheck/build 和实际 emitted 原生页面测试验证接口与按钮，不自行占用 DevTools。验证安全随机API不可用/坏返回/版本位/跨realm ArrayBuffer；双击、编辑在prepare/random/window等待期间变化、同号重试、未知响应先查、pending不假称开始、超时晚到、clear期间/之后结果、坏响应/导航失败和明确再次生成。至少一条实际 CloudClient + CloudService 路径核对一次消费；官方模拟器由 baseline 集成，设备/CloudBase留最终 Owner 验收。
+
+## 阶段 B 原生接口
+
+createEditorEnvironment 注入安全随机与原生 navigateTo，清理时先 generation.clear，再处理共享兼容/编辑/字体及外部清理所有者。generationNavigation 接 App onShow/onHide 与编辑/预览页面的可见 token；仅 App 在前台、可见 token 有效且顶层路由与该 token 一致时自动导航至 P06。旧页面清理只释放自己的 token；App 进入后台立即失效当前 token。用户已离页或切后台时保留 known，可从生成记录查看；回前台不补跳。页面 onHide/onUnload 取消自身订阅、可见 token 与绘制，不取消云端任务或清空生成快照。
+
+两页使用相同安全字段投影，控件 ID 为 generate-pdf、generation-status、generation-query、generation-retry。查询只查原号；重试保留原快照，修改后明确文案说明。新生成是当前内容的新请求；原结果未知时不可启用新生成。只传 jobId 的 navigateTo 保留原生返回来源，不附带原文或完整请求号。

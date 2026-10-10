@@ -10,6 +10,7 @@ UI policy is confirmed by D-039; D-043 accepts current navigation and styling in
 - Match approved menus, entry points, primary actions and shared visual values. New UI scope or library choices require the documented design process.
 - Verify both hierarchy and nesting: the home uses four quadrants; editor preview/text/settings and result state/info/actions are distinguishable through headings, background and spacing. No redundant inner paper backdrop or per-field cards. A flat list redesign does not satisfy the Owner’s latest feedback.
 - Use native input/button/switch semantics; pending and disabled behavior must be functional, not merely visual.
+- Follow [generation submission](generation-session.md): current Canvas completion gates new generation; unknown requests retain their original snapshot; result navigation requires foreground and a live page registration as well as the top route.
 - Cover loading, empty, success and error/retry states relevant to each page. Network timeout is not a cloud task failure.
 - Keep input out of logs, analytics, route query strings and default persistent storage. History must not become a draft archive.
 - Verify D-040 collapsed settings, summary/reset, and D-046 cleanup preview/apply/undo. Cancel leaves input intact; test real input, stale previews and undo invalidation rather than fixed mock-only transformations.

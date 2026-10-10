@@ -3,10 +3,14 @@ import { assertLayoutDigestMatches, validateLayoutVersions } from '../../package
 import type { PaperInput, LayoutVersionTuple } from '../../packages/paper-core/src/contracts.js';
 import type { EditorPreview, EditorSession } from './editor-session.js';
 import { CloudClientError, type CloudClient } from './cloud-client.js';
+import type { SecureRandomPlatform } from './secure-random.js';
 
 declare function setTimeout(callback: () => void, delay: number): number;
 declare function clearTimeout(handle: number): void;
 export interface GenerationTimers { set(callback: () => void, delay: number): unknown; clear(handle: unknown): void }
+export interface GenerationPlatform extends SecureRandomPlatform {
+  navigateTo(options: { url: string; success(): void; fail(): void }): void;
+}
 export interface GenerationDependencies {
   client: Pick<CloudClient, 'getSubmissionWindow' | 'submitGeneration' | 'findJobByRequest'>;
   editor: Pick<EditorSession, 'revision' | 'preparePreview'>;
@@ -20,7 +24,7 @@ export interface GenerationDependencies {
 export type GenerationResult = Readonly<{ kind: 'known'; jobId: string } | { kind: 'blocked' | 'unresolved' | 'cancelled' }>;
 export type GenerationView = Readonly<{
   status: 'idle' | 'preparing' | 'submitting' | 'querying' | 'uncertain' | 'known' | 'error';
-  busy: boolean; message: string; jobId: string | null; canRetry: boolean; canStartNew: boolean; hasRequest: boolean;
+  busy: boolean; message: string; jobId: string | null; canRetry: boolean; canStartNew: boolean; hasRequest: boolean; inputChanged: boolean;
 }>;
 type Snapshot = Readonly<{ input: PaperInput; versions: LayoutVersionTuple; layoutDigest: string }>;
 type Attempt = { revision: number; snapshot: Snapshot | null; request: GenerationRequest | null;
@@ -86,7 +90,8 @@ export class GenerationSession {
   get view(): GenerationView {
     return Object.freeze({ status: this.status, busy: this.pending !== null, message: this.message, jobId: this.attempt?.jobId ?? null,
       canRetry: this.pending === null && !!this.attempt && !this.attempt.jobId && this.attempt.retryable,
-      canStartNew: this.pending === null && (!this.attempt?.mayExist || !!this.attempt.jobId), hasRequest: !!this.attempt?.request });
+      canStartNew: this.pending === null && (!this.attempt?.mayExist || !!this.attempt.jobId), hasRequest: !!this.attempt?.request,
+      inputChanged: !!this.attempt && this.attempt.revision !== this.deps.editor.revision });
   }
   subscribe(listener: () => void): () => void { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; }
   private emit(): void { for (const listener of this.listeners) listener(); }
@@ -256,4 +261,19 @@ export class GenerationSession {
     for (const cancel of [...this.cancelWaits]) cancel();
     this.show('idle', '');
   }
+}
+
+/** Shared safe button projection for the two native generation entry points. */
+export function generationPageState(session: GenerationSession, compatible: boolean, previewReady: boolean) {
+  const view = session.view;
+  return {
+    canGenerate: compatible && previewReady && view.canStartNew,
+    generationStatus: view.status, generationBusy: view.busy, generationMessage: view.message,
+    generationCanRetry: view.canRetry,
+    generationCanQuery: !view.busy && view.hasRequest && !view.jobId && !view.canStartNew,
+    generationLabel: view.jobId ? '再次生成 PDF' : '生成 PDF',
+    generationHint: view.jobId ? '再次生成会使用当前内容，成功后计次' : view.inputChanged && (view.canRetry || view.busy)
+      ? '内容已修改；查询或重试仍对应上次提交的内容'
+      : !view.canStartNew && !view.busy ? '请先确认上次提交结果，再生成当前内容' : '',
+  };
 }

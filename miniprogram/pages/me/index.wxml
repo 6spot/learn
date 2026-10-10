@@ -1,3 +1,15 @@
 <application-status id="application-status" />
-<view class="account-section"><text class="section-title">可用生成次数</text><text class="balance">—</text><text class="secondary">账户服务暂不可用</text><text class="secondary account-note">预览不扣次，成功生成才扣次</text></view>
-<view class="account-section"><button class="button-secondary" bindtap="onChoosePaper">去选纸张</button></view>
+<view class="account-section">
+  <view class="account-heading"><text class="section-title">可用生成次数</text><button id="me-refresh" class="button-plain text-action" loading="{{phase === 'loading'}}" disabled="{{phase === 'loading'}}" bindtap="onRefresh">刷新</button></view>
+  <text id="me-balance" class="balance">{{account ? account.available : '—'}}<text wx:if="{{account}}" class="balance-unit">次</text></text>
+  <text wx:if="{{phase === 'idle' || phase === 'loading'}}" class="secondary account-note">正在查询账户…</text>
+  <text wx:if="{{phase === 'error'}}" class="account-error">{{message}}{{account ? '；暂显示上次查询的额度。' : ''}}</text>
+  <text wx:if="{{account && account.reserved}}" class="secondary account-note">另有 {{account.reserved}} 次已预留，等待任务完成</text>
+  <text class="secondary account-note">预览不扣次，成功生成才扣次</text>
+</view>
+<view class="menu-section">
+  <button id="me-records" class="button-plain menu-row" bindtap="onRecords"><text>生成记录</text><text class="menu-arrow">›</text></button>
+  <button id="me-feedback" class="button-plain menu-row" open-type="feedback"><text>使用反馈</text><text class="menu-arrow">›</text></button>
+  <button id="me-privacy" class="button-plain menu-row" bindtap="onPrivacy"><text>隐私与数据</text><text class="menu-arrow">›</text></button>
+</view>
+<view wx:if="{{isAdmin}}" class="menu-section"><button id="me-admin" class="button-plain menu-row" bindtap="onAdmin"><text>运营中心</text><text class="menu-arrow">›</text></button></view>

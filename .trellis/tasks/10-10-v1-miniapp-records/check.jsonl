@@ -5,3 +5,7 @@
 {"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
 {"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "D-039 component policy and O-015 design review status"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/frontend/records-account.md", "reason": "T21账户/记录/文件/可见轮询与集中清理合同"}
+{"file": "miniprogram/lib/record-sessions.ts", "reason": "读取状态、分页、轮询和领取失效实际代码"}
+{"file": "miniprogram/lib/record-environment.ts", "reason": "App单下载器和全部会话清理"}
+{"file": "miniprogram/test/records.test.mjs", "reason": "原生App/Page、迟到回包/写入和领取失效回归"}

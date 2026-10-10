@@ -1,0 +1,21 @@
+<application-status id="application-status" />
+<view class="records-page">
+  <view class="records-toolbar"><text class="secondary">按提交时间倒序 · 上海时间</text><button class="button-plain text-action" loading="{{phase === 'loading' && !loadingMore}}" disabled="{{phase === 'loading'}}" bindtap="onRefresh">刷新</button></view>
+  <view wx:if="{{phase === 'error'}}" class="records-notice"><text>{{message}}</text><text wx:if="{{items.length}}" class="secondary">以下保留上次查询的记录状态。</text><button class="button-secondary" bindtap="onRefresh">重试查询</button></view>
+  <view wx:if="{{!items.length && phase !== 'error'}}" class="records-empty">
+    <text class="section-title">{{phase === 'idle' || phase === 'loading' ? '正在查询记录…' : hasMore ? '暂未找到可显示的记录' : '还没有生成记录'}}</text>
+    <text wx:if="{{hasMore}}" class="secondary">还有历史记录待查询，可继续加载。</text>
+    <button wx:if="{{phase === 'ready' && !hasMore}}" class="button-secondary" bindtap="onChoosePaper">去选纸张</button>
+  </view>
+  <button wx:for="{{items}}" wx:key="jobId" class="button-plain record-row" data-job-id="{{item.jobId}}" bindtap="onOpen">
+    <view class="record-heading"><text class="record-template">{{item.template}}</text><text class="record-state">{{item.heading}}</text></view>
+    <text class="secondary">{{item.created}}</text>
+    <text wx:if="{{item.status === 'SUCCEEDED'}}" class="secondary">{{item.pages}}{{item.expires ? ' · 到期：' + item.expires : ''}}</text>
+  </button>
+  <view class="records-footer">
+    <button wx:if="{{hasMore}}" class="button-secondary" loading="{{loadingMore}}" disabled="{{phase === 'loading'}}" bindtap="onMore">继续加载</button>
+    <text wx:elif="{{items.length && phase === 'ready'}}" class="secondary">已显示当前可查看的全部记录</text>
+    <text wx:if="{{checkedAt}}" class="secondary query-time">列表查询：{{checkedAt}}</text>
+    <text class="secondary records-note">记录不保存文章原文，文件在有效期内可重复领取。</text>
+  </view>
+</view>

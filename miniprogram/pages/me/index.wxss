@@ -1,3 +1,10 @@
 .account-section { padding: 24px 20px; margin-bottom: 12px; background: #FFFFFF; }
-.balance { display: block; font-size: 32px; margin: 12px 0; }
+.account-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.balance { display: block; font-size: 32px; margin: 12px 0; overflow-wrap: anywhere; }
+.balance-unit { font-size: 14px; color: var(--secondary); margin-left: 8px; }
 .account-note { display: block; margin-top: 8px; }
+.account-error { display: block; font-size: 14px; line-height: 1.6; margin-top: 10px; }
+.menu-section { background: #FFFFFF; padding: 0 20px; margin-bottom: 12px; }
+button.menu-row { width: 100%; min-height: 56px; line-height: 1.5; padding: 16px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; text-align: left; border-bottom: 1px solid var(--divider); }
+.menu-row:last-child { border-bottom: 0; }
+.menu-arrow { color: var(--secondary); font-size: 22px; }

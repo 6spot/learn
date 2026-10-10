@@ -1,0 +1,26 @@
+<application-status id="application-status" />
+<view class="detail-page">
+  <view class="detail-status">
+    <text class="status-symbol">{{phase === 'error' ? '!' : record && record.state === 'ready' ? '✓' : record && record.state === 'failed' ? '!' : '·'}}</text>
+    <text class="section-title">{{phase === 'error' ? '暂时无法确认' : phase === 'loading' || phase === 'idle' ? '正在查询记录…' : record.heading}}</text>
+    <text wx:if="{{phase === 'error'}}" class="status-description">{{message}}</text>
+    <text wx:if="{{record && phase === 'error'}}" class="secondary last-state">最后已知：{{record.heading}}。查询失败不代表任务失败。</text>
+    <text wx:if="{{record && phase === 'ready'}}" class="status-description">{{record.description}}</text>
+    <button wx:if="{{phase === 'ready' && record.state === 'ready'}}" id="record-open-pdf" class="button-primary" disabled="{{!canOpen}}" loading="{{downloading}}" bindtap="onOpenPdf">打开 PDF</button>
+    <button wx:if="{{phase === 'ready' && record.state === 'ready'}}" class="button-plain text-action save-share" disabled="{{!canOpen}}" bindtap="onSaveShare">保存 / 分享</button>
+    <text wx:if="{{phase === 'ready' && record.state === 'ready'}}" class="secondary viewer-note">打开后使用微信 PDF 阅读器菜单保存或分享。</text>
+    <text wx:if="{{downloadProgress}}" class="secondary download-note">{{downloadProgress}}</text><text wx:if="{{downloadMessage}}" class="secondary download-note">{{downloadMessage}}</text>
+    <button wx:if="{{phase === 'error' || record && record.pending || record && record.state === 'unavailable'}}" class="button-secondary" loading="{{phase === 'loading'}}" disabled="{{phase === 'loading'}}" bindtap="onRefresh">刷新查询</button>
+    <button wx:if="{{phase === 'ready' && record.state === 'failed' && hasEditorInput}}" class="button-secondary" bindtap="onReturnEditor">返回当前编辑</button>
+    <button wx:if="{{phase === 'ready' && (record.state === 'failed' && !hasEditorInput || record.state === 'expired')}}" class="button-secondary" bindtap="onChoosePaper">去选纸张</button>
+  </view>
+  <view wx:if="{{record}}" class="detail-info">
+    <text class="section-title">文件信息</text>
+    <view class="info-row"><text class="secondary">模板</text><text>{{record.template}}</text></view>
+    <view class="info-row"><text class="secondary">提交时间（上海）</text><text>{{record.created}}</text></view>
+    <view wx:if="{{record.finished}}" class="info-row"><text class="secondary">完成时间（上海）</text><text>{{record.finished}}</text></view>
+    <view class="info-row"><text class="secondary">页数</text><text>{{record.pages}}</text></view>
+    <view wx:if="{{record.expires}}" class="info-row"><text class="secondary">文件到期（上海）</text><text>{{record.expires}}</text></view>
+  </view>
+  <view class="detail-navigation"><button class="button-plain text-action" bindtap="onRecords">查看生成记录</button><text class="secondary">历史记录不保存文章原文，重新生成需使用当前编辑内容或重新粘贴。</text></view>
+</view>

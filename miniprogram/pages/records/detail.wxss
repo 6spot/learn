@@ -1,0 +1,11 @@
+.detail-status, .detail-info, .detail-navigation { padding: 26px 20px; background: #FFFFFF; margin-bottom: 12px; }
+.detail-status { text-align: center; }
+.status-symbol { display: block; font-size: 34px; line-height: 1.4; margin-bottom: 8px; }
+.detail-status > .section-title { display: block; }
+.status-description { display: block; font-size: 14px; line-height: 1.7; margin-top: 12px; }
+.last-state, .viewer-note, .download-note { display: block; margin-top: 10px; }
+.detail-status .button-primary, .detail-status .button-secondary { margin-top: 22px; }
+.detail-status button.save-share { margin: 8px auto 0; }
+.info-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 16px; padding-top: 18px; font-size: 14px; line-height: 1.5; }
+.detail-navigation { padding-bottom: calc(24px + env(safe-area-inset-bottom)); margin-bottom: 0; }
+.detail-navigation > .secondary { display: block; margin-top: 12px; }

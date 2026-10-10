@@ -252,18 +252,21 @@ test('missing update APIs, failed download and absent update stay recoverable wi
   assert.equal(h.session.view.canUpdate, true);
 });
 
-test('application composition owns one initialized client, keeps generation unavailable, and centrally clears all local owners', async () => {
+test('application composition owns one initialized client and generation session, and centrally clears all local owners', async () => {
   const calls = [], platform = { env: { USER_DATA_PATH: '/private' }, getFileSystemManager: () => ({ readFile({ fail }) { fail(); } }),
     cloud: { init(options) { calls.push(options); }, callFunction() {} } };
   const env = createEditorEnvironment(platform, { environmentId: 'env-test', functionName: 'learn-service' });
   assert.equal(calls.length, 1); assert.equal(calls[0].traceUser, false);
   env.client.transport = async (method, request) => ({ ok: true, data: response(request) });
-  await env.compatibility.start(); assert.equal(env.compatibility.view.canGenerate, true); assert.equal(env.generation.available, false);
+  await env.compatibility.start(); assert.equal(env.compatibility.view.canGenerate, true);
+  assert.equal(env.generation.view.status, 'idle'); assert.equal(env.generation.view.hasRequest, false);
   env.editor.setBody('hello\nworld'); env.editor.prepareCleanup(); env.editor.applyCleanup(); env.editor.setTitle('标题'); env.editor.setTracing(true);
   env.editor.setOptions({ titleAlign: 'right', bodyIndent: 'none' }); env.editor.prepareCleanup();
-  const cleaned = []; env.registerUserDataCleanup(() => { cleaned.push('one'); throw new Error('ignored cleanup'); });
+  const cleaned = [], clearGeneration = env.generation.clear.bind(env.generation);
+  env.generation.clear = () => { cleaned.push('generation'); clearGeneration(); };
+  env.registerUserDataCleanup(() => { cleaned.push('one'); throw new Error('ignored cleanup'); });
   env.registerUserDataCleanup(() => cleaned.push('two')); const unregister = env.registerUserDataCleanup(() => cleaned.push('removed')); unregister();
   assert.throws(() => env.clearUserData(), /^Error: LOCAL_DATA_CLEAR_FAILED$/);
-  assert.deepEqual(cleaned, ['one', 'two']); assert.equal(env.editor.hasInput, false); assert.equal(env.editor.draft.tracing, false);
+  assert.deepEqual(cleaned, ['generation', 'one', 'two']); assert.equal(env.editor.hasInput, false); assert.equal(env.editor.draft.tracing, false);
   assert.equal(env.editor.cleanup, null); assert.equal(env.editor.canUndo, false); assert.equal(env.editor.preview, null); assert.equal(env.compatibility.view.status, 'idle');
 });
