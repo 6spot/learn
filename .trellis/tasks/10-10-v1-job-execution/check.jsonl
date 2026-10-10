@@ -3,3 +3,14 @@
 {"file": "docs/CLOUDBASE.md", "reason": "T15 的权威业务规则与验收依据"}
 {"file": "docs/TESTING.md", "reason": "T15 的权威业务规则与验收依据"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/backend/runtime-contracts.md", "reason": "运行端口、上传前登记与awaited执行"}
+{"file": ".trellis/spec/backend/account-presets.md", "reason": "账户/不可变预设事务"}
+{"file": ".trellis/spec/backend/job-admission.md", "reason": "T14真实执行交接与隐私边界"}
+{"file": ".trellis/spec/backend/font-metrics.md", "reason": "原始字体资源与同版度量"}
+{"file": "packages/cloud-service/README.md", "reason": "实际执行器配置/API与验收边界"}
+{"file": "packages/cloud-service/src/execution.ts", "reason": "真实执行和故障边界"}
+{"file": "packages/cloud-service/src/artifacts.ts", "reason": "候选核验/成功事务/清理互斥"}
+{"file": "packages/cloud-service/src/model.ts", "reason": "持久任务与候选安全元数据"}
+{"file": "packages/cloud-service/test/execution.test.mjs", "reason": "22项故障/结算验证，含独立检查新增的执行claim响应丢失回归"}
+{"file": "packages/cloud-service/integration/execution-pdf.test.mjs", "reason": "10项真实PDF/字体集成"}
+{"file": ".trellis/tasks/10-10-v1-job-execution/evidence.md", "reason": "本轮验证记录与外部验收界线"}

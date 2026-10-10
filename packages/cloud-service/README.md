@@ -17,7 +17,7 @@ npm test
 
 每月一个免费桶。首次访问本月时赠送一次，未访问月份不累积。跨月时旧桶可用余额过期，原预留留在旧桶；旧任务释放进入旧桶的过期余额，不增加新月份 available。返回的 reserved 汇总所有月份仍未结算的预留。
 
-`credits.ts` 的事务原语只供后续任务服务内部组合，不从包入口导出为客户端操作。T14 已把任务创建和 reserve 原语放在同一事务；T15/T16 必须在同一事务校验任务终态、执行批次与期限后才 settle。余额与确定操作号的不可变 ledger 同事务写入。
+`credits.ts` 的事务原语只供后续任务服务内部组合，不从包入口导出为客户端操作。T14 已把任务创建和 reserve 原语放在同一事务；T15 已在同一事务校验任务终态、执行批次、期限及预留 pending 后才 settle；T16 恢复复用同一原语。余额与确定操作号的不可变 ledger 同事务写入。
 
 实际 CloudBase 权限、事务并发、时钟与生产配置仍需最终 T24 验证。运行层配置清单见 [cloudfunctions](../../cloudfunctions/README.md)。
 
@@ -63,4 +63,36 @@ npm test
 
 依赖注入 `preparer` 与 `executor` 才能创建新任务。`createPaperPreparer(loadVerifiedMetrics)` 直接复用 `createPaperDocument → layoutPaperDocument → createLayoutDigest`，度量加载器负责读取同版已验证字体。执行器接收只存本次内存的 `{jobId,batchId,userId,published,layout}`，必须等待全部执行并提交终态，不保留正文供后台自动重试。
 
-当前测试覆盖 25 项受理行为，并用真实共享核心验证四模板空白复算；执行器为明确标注的合成 fixture。实际 PDF 执行、`maxPdfBytes` 约束与成功结算由 T15 接入，期限恢复由 T16、清理与密钥保护由 T23 接入；真实 CloudBase 调用生命周期、隔离性和组件参数仍在 T24 验收。
+T14 的 25 项受理测试用明确标注的合成执行器隔离验证；T15 已另接实际 PDF 执行、`maxPdfBytes` 与事务结算并通过真实四模板集成。期限恢复由 T16、保留与密钥保护由 T23 接入；真实 CloudBase 调用生命周期、隔离性和组件参数仍在 T24 验收。
+
+
+## T15 私有 PDF 执行与结算
+
+`createGenerationExecutor(dependencies,serviceConfig)` 创建供 `CloudService` 注入的真实执行器。dependencies 包含 `store,clock,crypto,storage,bridge,renderer`；前五项复用运行端口，renderer 为可信服务端能力：
+
+```ts
+const executor = createGenerationExecutor({
+  store, clock, crypto, storage, bridge,
+  renderer: {
+    async render(execution, { maxOutputBytes }) {
+      const provider = await loadVerifiedMetrics(execution.published.preset);
+      return renderPdf(execution.layout, provider, { maxBytes: maxOutputBytes });
+    },
+  },
+}, serviceConfig);
+```
+
+`bridge.invoke` 全程 await；只允许一个调用持久 claim 当前任务后渲染。同批重复 callback 不重新渲染/上传；一个没有开始的重复 bridge 调用也不能取消另一个正在执行的调用。配置沿用 `generation`，没有新增生产默认值。
+
+渲染后先计算完整 bytes/hash，并事务登记 `pdf_candidates` 的确定路径/文件号、job/batch/user、预期 bytes/hash/pages 和原 PDF 保留期，同时写 job.candidatePath；登记确认前不上传。上传后通过登记 fileId 回读并核对完整字节。服务只作 PDF 头尾信封检查；实际结构由可信 T09 编码器保证，测试另解析 PDF 核对页数/A4。上传响应丢失仍可回读；读失败/暂时不存在/未知提交结果保留预留，不擅自退款或重渲染。
+
+核验通过后，事务再次读取任务、候选与预留，检查当前 batch、GENERATING、deadline、pending reservation 及候选绑定，同时提交 SUCCEEDED、正式私有引用与有效期、消费流水、预设引用释放和 candidate.committed。已知渲染/无效 PDF/超限/损坏失败原子释放；失败/超时与成功竞争只选一个终态。客户端只能在成功事务后领取，文件标识本身不构成授权。
+
+候选清理先在事务 claim deleting：同批未终态和成功引用受到保护，只有失败/旧批/缺任务可删；删除后保留 deleted 墓碑。迟到上传完成会再次安全删除，删除失败留下可重试状态。T16 恢复必须重扫 deleting/deleted 候选，避免删除后仍有迟到上传的窗口；不能立即丢掉墓碑，也不能调用 renderer 自动重排。内部 `verifyCandidate/settleCandidate/cleanupCandidate` 供后续可信恢复服务组合，不是客户端命令。
+
+```sh
+npm test       # 75 项服务行为测试，包括 22 项 T15 故障/结算测试
+npm run test:pdf # 构建共享原字体/PDF，10 项真实 PDF 与内存存储/事务集成
+```
+
+真实四模板 blank/text、三页拼音和超限不保存 partial bytes 均通过。当前测试文字 PDF：作文约 5.5 MB，含标题和中文描红的田/米约 18.4 MB，拼音约 162 KB；完整原 TTF 嵌入会显著影响资源上限。64 MiB 为集成测试上限，1 MB 为故障 fixture，均不作为生产配置承诺。正式存储、函数内存/超时、私有权限和断连生命周期由 T24 最终实测。

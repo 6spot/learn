@@ -3,7 +3,7 @@
   "name": "v1-job-execution",
   "title": "T15 实现生成执行与事务结算",
   "description": "可靠生成并在文件可交付时扣次，失败释放且终态不反转。",
-  "status": "planning",
+  "status": "in_progress",
   "dev_type": null,
   "scope": null,
   "package": null,
@@ -12,7 +12,7 @@
   "assignee": "me",
   "createdAt": "2026-10-10",
   "completedAt": null,
-  "branch": null,
+  "branch": "feat/learn-v1",
   "base_branch": "main",
   "worktree_path": null,
   "commit": null,
@@ -24,5 +24,7 @@
   "notes": "",
   "meta": {
     "plan_id": "T15"
-  }
+  },
+  "development_complete": true,
+  "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
 }

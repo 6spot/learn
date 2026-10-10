@@ -18,7 +18,8 @@ Learn uses provider-neutral TypeScript business services and CloudBase adapters.
 | [Shared Paper Contracts](./paper-contracts.md) | User/preset boundary, source spans, font units and renderer contract | T03/T05/T06/T07 implemented and locally verified |
 | [Shared Font Metrics](./font-metrics.md) | Verified original bytes, deterministic shaping, source provenance and exact outlines | T04 locally verified; production fonts/devices/printing pending |
 | [Accounts and Presets](./account-presets.md) | Trusted identity, monthly credit ledger and immutable registry | T12/T13 locally verified; production integration pending |
-| [Job Admission](./job-admission.md) | Signed request windows, atomic dedup/reservation and awaited execution contract | T14 locally verified; PDF/recovery integration follows |
+| [Job Execution](./job-execution.md) | Awaited PDF rendering, candidate verification, atomic settlement and cleanup fencing | T15 locally verified; recovery/private access follows |
+| [Job Admission](./job-admission.md) | Signed request windows, atomic dedup/reservation and awaited execution contract | T14 locally verified; T15 actual PDF integration verified |
 | [Directory Structure](./directory-structure.md) | Module organization and file layout | To fill |
 | [Database Guidelines](./database-guidelines.md) | ORM patterns, queries, migrations | To fill |
 | [Error Handling](./error-handling.md) | Error types, handling strategies | To fill |

@@ -1,4 +1,4 @@
-import type { Clock, MetadataStore, TrustedIdentityProvider } from '@learn/cloud-runtime';
+import type { Clock, ExecutionBridge, MetadataStore, PrivateStorage, TrustedIdentityProvider } from '@learn/cloud-runtime';
 import type { LayoutVersionTuple, PaperInput, PaperLayout, TrustedPaperPreset, ValidatedPaperInput } from '@learn/paper-core';
 
 /** These operations are supplied by trusted server composition, never a request. */
@@ -55,7 +55,7 @@ export type GenerationRequest = Readonly<{
 }>;
 export type JobStatus = 'RESERVED' | 'GENERATING' | 'SUCCEEDED' | 'FAILED';
 export type GenerationFailureCode = 'PREPARATION_FAILED' | 'LAYOUT_MISMATCH' | 'PAGE_LIMIT_EXCEEDED' |
-  'EXECUTION_FAILED' | 'EXECUTION_TIMEOUT' | 'PDF_INVALID' | 'RESOURCE_UNAVAILABLE';
+  'EXECUTION_FAILED' | 'EXECUTION_TIMEOUT' | 'PDF_INVALID' | 'PDF_RESOURCE_LIMIT' | 'RESOURCE_UNAVAILABLE';
 export type JobSummary = Readonly<{
   jobId: string; requestId: string; templateId: LayoutVersionTuple['templateId']; status: JobStatus;
   createdAt: number; startedAt: number | null; finishedAt: number | null;
@@ -72,6 +72,15 @@ export interface GenerationExecutor {
   /** Must await all work and commit a terminal job state; never retain/replay the input. */
   execute(execution: GenerationExecution): Promise<void>;
 }
+
+/** Trusted composition adapts T09 renderPdf to this port; callers cannot supply a renderer. */
+export interface GenerationPdfRenderer {
+  render(execution: GenerationExecution, options: { maxOutputBytes: number }): Promise<Uint8Array>;
+}
+export type GenerationExecutorDependencies = Readonly<{
+  store: MetadataStore; clock: Clock; crypto: CryptoPort; storage: PrivateStorage;
+  bridge: ExecutionBridge; renderer: GenerationPdfRenderer;
+}>;
 
 export type ServiceConfig = Readonly<{
   stage: 'development' | 'production';

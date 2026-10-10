@@ -59,6 +59,12 @@ export type GenerationJob = {
   errorCode: GenerationFailureCode | null; candidatePath: string | null; fileId: string | null;
   fileExpiresAt: number | null; fileBytes: number | null; fileSha256: string | null;
   recordExpiresAt: number;
+  executionClaimed: boolean;
+};
+export type PdfCandidate = {
+  candidateId: string; jobId: string; userId: string; batchId: string;
+  path: string; fileId: string; bytes: number; sha256: string; pageCount: number;
+  createdAt: number; pdfRetentionMs: number; state: 'pending' | 'committed' | 'deleting' | 'deleted';
 };
 export type GenerationRequestRecord = {
   userId: string; requestId: string; jobId: string; fingerprint: string;

@@ -22,7 +22,7 @@ export async function failJobInTransaction(tx: MetadataTransaction, jobId: strin
   if (!job) throw new ServiceError('NOT_FOUND');
   if (isTerminal(job) || job.batchId !== batchId || (expectedStatus && job.status !== expectedStatus)) return job;
   const codes: GenerationFailureCode[] = ['PREPARATION_FAILED', 'LAYOUT_MISMATCH', 'PAGE_LIMIT_EXCEEDED', 'EXECUTION_FAILED',
-    'EXECUTION_TIMEOUT', 'PDF_INVALID', 'RESOURCE_UNAVAILABLE'];
+    'EXECUTION_TIMEOUT', 'PDF_INVALID', 'PDF_RESOURCE_LIMIT', 'RESOURCE_UNAVAILABLE'];
   if (!codes.includes(errorCode)) throw new ServiceError('INVALID_ARGUMENT');
   if (errorCode === 'EXECUTION_TIMEOUT' && now < job.deadline) throw new ServiceError('INVALID_ARGUMENT');
   const settled = await settleCreditInTransaction(tx, job.userId, job.jobId, 'released', now);

@@ -110,7 +110,7 @@ export class JobAdmission {
         registryId: published.registryId, versions: { ...request.versions }, batchId, status: 'RESERVED', createdAt: now,
         deadline: now + this.policy.jobTimeoutMs, startedAt: null, finishedAt: null, pageCount: null, errorCode: null,
         candidatePath: null, fileId: null, fileExpiresAt: null, fileBytes: null, fileSha256: null,
-        recordExpiresAt: now + this.policy.recordRetentionMs };
+        recordExpiresAt: now + this.policy.recordRetentionMs, executionClaimed: false };
       const record: GenerationRequestRecord = { userId, requestId, jobId, fingerprint,
         fingerprintKeyId: this.policy.fingerprintKeyId, fingerprintVersion: this.policy.fingerprintVersion,
         defaultTitleAlign: published.preset.defaults.titleAlign, windowExpiresAt: parsed.expiresAt,

@@ -8,7 +8,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "npm --prefix ../cloud-runtime run build && npm --prefix ../paper-core run build && tsc -p tsconfig.json",
-    "test": "npm run build && node --test test/*.test.mjs"
+    "test": "npm run build && node --test test/*.test.mjs",
+    "test:pdf": "npm run build && npm --prefix ../font-metrics run build && npm --prefix ../pdf-renderer run build && node --test integration/*.test.mjs"
   },
   "dependencies": { "@learn/cloud-runtime": "file:../cloud-runtime", "@learn/paper-core": "file:../paper-core" },
   "devDependencies": { "typescript": "^5.9.3" }
