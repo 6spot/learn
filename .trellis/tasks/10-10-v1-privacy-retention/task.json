@@ -23,6 +23,8 @@
   "relatedFiles": [],
   "notes": "",
   "meta": {
-    "plan_id": "T23"
+    "plan_id": "T23",
+    "development_complete": true,
+    "external_acceptance": "docs/FINAL_ACCEPTANCE.md"
   }
 }

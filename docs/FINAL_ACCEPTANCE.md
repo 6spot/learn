@@ -21,10 +21,17 @@
 
 ## 配置与构建入口
 
+- 完整操作顺序与版本回退见 [CloudBase 发布步骤](CLOUDBASE.md#6-最终配置与发布顺序)。先完成开发环境能力验证，再填写对应验证标志；本地自动化不会替代这些步骤。
 - 公开小程序配置填写 [public.example.json](../config/public.example.json)，使用 `npm run build:release -- --config <配置文件路径>`。产物位于 `dist/release`，最终可用微信开发者工具导入该目录；日常模拟开发仍导入仓库根目录。公开配置不接受密钥，示例空值不能发布。
 - 业务和维护函数通过 `npm run build:cloud` 生成于 `dist/cloudfunctions`；配置说明分别见 [业务函数](../cloudfunctions/learn-service/README.md) 和 [维护函数](../cloudfunctions/learn-maintenance/README.md)。密钥只放部署环境，权限规则、字体 HTTPS 源、实际保留数值和调度周期由最终配置提供。
 - 当前官方云 SDK 的遗留 lodash advisories及限制见业务函数说明；上线前须重新核对官方依赖。实际调用路径未使用实时 watcher，不将未修复依赖宣称为已消除。
 
 ## 本地交付证据
 
-已归档基础交付见 [当前开发检查点](ROADMAP.md#当前开发检查点2026-10-11)。根目录 `npm test` 执行本地编译/回归，`npm run test:devtools` 使用官方自动化 SDK 验证实际模拟器诊断及原生按钮；最近一次基线为基础库 3.17.3、模拟微信 8.0.5、11 项诊断通过、应用异常 0。后续功能和故障集成证据继续补充，不把该诊断结果当作全部产品验收。
+首版功能及本地开发交付均已完成，详见 [当前检查点](ROADMAP.md#当前开发检查点2026-10-11)。最终证据分为：
+
+- [干净检出与独立检查](../.trellis/tasks/10-10-v1-release-acceptance/final-check.md)：按锁文件安装，直接构建成功；`npm run test:all` 的 519 项 Node、20 项 Python 全通过。正式包恰好 8 个产品页面、1,152,265 字节，排除诊断代码、字体原文件、PDF 和敏感配置。
+- [官方完整产品流程](../.trellis/tasks/10-10-v1-release-acceptance/product-integration-evidence.md)：基础库 3.17.3、模拟微信 8.0.5，14 组检查和 12 份四模板矩阵 PDF 通过，应用异常 0；原生文件系统读回散列及 `openDocument` 成功。命令为 `npm run test:product:devtools`。
+- 应用兼容最终 7 组检查通过，命令为 `npm run test:compatibility:devtools`。更新事件/确认回调与显式前后台生命周期为模拟；完整产品检查复用真实业务/PDF代码，但身份、事务和存储使用内存端口。
+
+这些结果不能勾选上方 Owner 项目。真实 CloudBase 配置/权限/生命周期、字体许可、手机更新/打开/分享、实体打印及发布资质仍须最终验收。所有官方套件串行运行；命令在构建前失效旧报告，失败结果不能沿用上一次通过证据。

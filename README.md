@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-**产品设计基线已经确认，开发持续进行中。** 已有四模板真实字体排版、Canvas 和完整字体 PDF 渲染、可信账户/预设、幂等生成与中断恢复；原生页面及完整交付流程按 [当前检查点](docs/ROADMAP.md#当前开发检查点2026-10-11) 推进。已有模块测试与模拟器结果不等于完整产品、真实 CloudBase 或打印验收通过。
+**首版功能代码及本地独立检查已完成。** 四模板真实字体排版、Canvas/PDF、可信生成与恢复、八个原生页面、记录下载、运营统计及隐私删除均已接入，验证证据见 [当前检查点](docs/ROADMAP.md#当前开发检查点2026-10-11)。真实 CloudBase 配置、字体用途许可、真机和实体打印最后由 Owner 按 [最终清单](docs/FINAL_ACCEPTANCE.md) 验收。
 
 **交给开发者时，先阅读 [开发交接说明](docs/DEVELOPMENT_HANDOFF.md) 与 [AGENTS.md](AGENTS.md)**，再进入下列权威文档：
 
@@ -23,7 +23,7 @@
 
 ## 技术方向
 
-本地开发使用 Node.js 20 或更新版本。首次运行 `npm run setup`（逐包按锁文件安装）；`npm run build` 可直接构建。完整 `npm test` 包含真实字体两端验证，运行前按 [字体资源说明](assets/fonts/README.md) 恢复本地原始文件；字体二进制不在 Git 中。微信开发者工具导入仓库根目录，`project.config.json` 会选择构建后的 `dist/miniprogram`。
+本地开发使用 Node.js 20 或更新版本。首次运行 `npm run setup`（逐包按锁文件安装）；`npm run build` 可直接构建。完整本地检查使用 `npm run test:all`，运行前按 [字体资源说明](assets/fonts/README.md) 恢复原始文件，并按 [测试说明](docs/TESTING.md) 安装 Python 工具依赖；字体二进制不在 Git 中。微信开发者工具导入仓库根目录，`project.config.json` 会选择构建后的 `dist/miniprogram`。官方完整模拟流程使用 `npm run test:product:devtools`，真实配置与发布入口见最终清单。
 
 微信原生小程序（TypeScript）＋与小程序关联的腾讯云开发 CloudBase；无自建服务器、无 EdgeOne。小程序本地预览，可信云函数处理生成任务、额度及文件交付。设计上把**通用账户/权益/统计**与**纸张工具**分开，以便将来增加其他工具，但不提前建设插件平台。
 
