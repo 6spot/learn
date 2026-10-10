@@ -5,7 +5,7 @@ import { ServiceError, type GenerationExecution, type GenerationExecutor, type G
 import { validateConfig } from './config.js';
 import type { GenerationJob, PdfCandidate } from './model.js';
 import { failJobInTransaction, isTerminal } from './jobs.js';
-import { candidateId, cleanupCandidate, isPdfEnvelope, settleCandidate, verifyCandidate } from './artifacts.js';
+import { candidateId, candidatePath, cleanupCandidate, isPdfEnvelope, settleCandidate, verifyCandidate } from './artifacts.js';
 
 /** Composes the actual business runner with a trusted PDF encoder and private storage. */
 export function createGenerationExecutor(deps: GenerationExecutorDependencies, rawConfig: ServiceConfig): GenerationExecutor {
@@ -54,7 +54,7 @@ export function createGenerationExecutor(deps: GenerationExecutorDependencies, r
     const sha256 = await deps.crypto.sha256(bytes);
     if (!/^[a-f0-9]{64}$/.test(sha256)) throw new ServiceError('INTERNAL_ERROR');
     const id = candidateId(execution.jobId, execution.batchId);
-    const path = `candidates/${execution.jobId}/${execution.batchId}.pdf`;
+    const path = candidatePath(execution.jobId, execution.batchId);
     const candidate: PdfCandidate = { candidateId: id, jobId: execution.jobId, userId: execution.userId,
       batchId: execution.batchId, path, fileId: deps.storage.resolve(path), bytes: bytes.length, sha256,
       pageCount: execution.layout.pages.length, createdAt: deps.clock.now(), state: 'pending', pdfRetentionMs: policy!.pdfRetentionMs };

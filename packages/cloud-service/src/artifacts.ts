@@ -20,8 +20,22 @@ export function candidateId(jobId: string, batchId: string): string {
   return `${jobId}_${batchId}`;
 }
 
+export function candidatePath(jobId: string, batchId: string): string {
+  candidateId(jobId, batchId);
+  return `candidates/${jobId}/${batchId}.pdf`;
+}
+
+/** Corrupt metadata must never turn cleanup into deletion of an unrelated private object. */
+export function assertCandidateLocation(storage: PrivateStorage, candidate: PdfCandidate): void {
+  if (candidate.candidateId !== candidateId(candidate.jobId, candidate.batchId) ||
+      candidate.path !== candidatePath(candidate.jobId, candidate.batchId) || storage.resolve(candidate.path) !== candidate.fileId) {
+    throw new ServiceError('INVARIANT_VIOLATION');
+  }
+}
+
 /** A read failure, including a temporarily missing object, is not a failure/refund basis. */
 export async function verifyCandidate(deps: ArtifactDependencies, candidate: PdfCandidate): Promise<'valid' | 'invalid' | 'unavailable'> {
+  assertCandidateLocation(deps.storage, candidate);
   let bytes: Uint8Array;
   try { bytes = await deps.storage.read(candidate.fileId); } catch { return 'unavailable'; }
   if (!(bytes instanceof Uint8Array) || bytes.length !== candidate.bytes || !isPdfEnvelope(bytes)) return 'invalid';
@@ -69,6 +83,8 @@ export async function cleanupCandidate(deps: Pick<ArtifactDependencies, 'store' 
   const candidate = await deps.store.transaction(async tx => {
     const current = await tx.get<PdfCandidate>('pdf_candidates', id);
     if (!current) return null;
+    if (current.candidateId !== id) throw new ServiceError('INVARIANT_VIOLATION');
+    assertCandidateLocation(deps.storage, current);
     const job = await tx.get<GenerationJob>('generation_jobs', current.jobId);
     if (job?.status === 'SUCCEEDED' && job.fileId === current.fileId) return null;
     if (job && !isTerminal(job) && job.batchId === current.batchId) return null;

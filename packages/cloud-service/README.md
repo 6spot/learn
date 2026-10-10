@@ -63,7 +63,7 @@ npm test
 
 依赖注入 `preparer` 与 `executor` 才能创建新任务。`createPaperPreparer(loadVerifiedMetrics)` 直接复用 `createPaperDocument → layoutPaperDocument → createLayoutDigest`，度量加载器负责读取同版已验证字体。执行器接收只存本次内存的 `{jobId,batchId,userId,published,layout}`，必须等待全部执行并提交终态，不保留正文供后台自动重试。
 
-T14 的 25 项受理测试用明确标注的合成执行器隔离验证；T15 已另接实际 PDF 执行、`maxPdfBytes` 与事务结算并通过真实四模板集成。期限恢复由 T16、保留与密钥保护由 T23 接入；真实 CloudBase 调用生命周期、隔离性和组件参数仍在 T24 验收。
+T14 的 25 项受理测试用明确标注的合成执行器隔离验证；T15 已另接实际 PDF 执行、`maxPdfBytes` 与事务结算并通过真实四模板集成。T16 已接期限恢复与可续接扫描，保留与密钥保护由 T23 接入；真实 CloudBase 调用生命周期、隔离性和组件参数仍在 T24 验收。
 
 
 ## T15 私有 PDF 执行与结算
@@ -88,11 +88,34 @@ const executor = createGenerationExecutor({
 
 核验通过后，事务再次读取任务、候选与预留，检查当前 batch、GENERATING、deadline、pending reservation 及候选绑定，同时提交 SUCCEEDED、正式私有引用与有效期、消费流水、预设引用释放和 candidate.committed。已知渲染/无效 PDF/超限/损坏失败原子释放；失败/超时与成功竞争只选一个终态。客户端只能在成功事务后领取，文件标识本身不构成授权。
 
-候选清理先在事务 claim deleting：同批未终态和成功引用受到保护，只有失败/旧批/缺任务可删；删除后保留 deleted 墓碑。迟到上传完成会再次安全删除，删除失败留下可重试状态。T16 恢复必须重扫 deleting/deleted 候选，避免删除后仍有迟到上传的窗口；不能立即丢掉墓碑，也不能调用 renderer 自动重排。内部 `verifyCandidate/settleCandidate/cleanupCandidate` 供后续可信恢复服务组合，不是客户端命令。
+候选清理先在事务 claim deleting：同批未终态和成功引用受到保护，只有失败/旧批/缺任务可删；删除后保留 deleted 墓碑。迟到上传完成会再次安全删除，删除失败留下可重试状态。T16 恢复会重扫 deleting/deleted 候选，避免删除后仍有迟到上传的窗口；不能立即丢掉墓碑，也不能调用 renderer 自动重排。内部 `verifyCandidate/settleCandidate/cleanupCandidate` 供可信恢复服务组合，不是客户端命令。
 
 ```sh
-npm test       # 75 项服务行为测试，包括 22 项 T15 故障/结算测试
-npm run test:pdf # 构建共享原字体/PDF，10 项真实 PDF 与内存存储/事务集成
+npm test       # 96 项服务行为测试，包括 22 项 T15 与 21 项 T16 测试
+npm run test:pdf # 构建共享原字体/PDF，11 项真实 PDF 与内存存储/事务集成
 ```
 
 真实四模板 blank/text、三页拼音和超限不保存 partial bytes 均通过。当前测试文字 PDF：作文约 5.5 MB，含标题和中文描红的田/米约 18.4 MB，拼音约 162 KB；完整原 TTF 嵌入会显著影响资源上限。64 MiB 为集成测试上限，1 MB 为故障 fixture，均不作为生产配置承诺。正式存储、函数内存/超时、私有权限和断连生命周期由 T24 最终实测。
+
+
+## T16 可信恢复与持续分页
+
+维护组合使用 `createRecoveryService({store,storage,clock,crypto}, recoveryConfig)`；依赖没有正文、布局、字体、preparer 或 renderer。这个接口只供受控维护函数持有，不接普通客户端 RPC，也不以请求事件中的角色/触发类型作为授权。
+
+```ts
+const recovery = createRecoveryService({ store, storage, clock, crypto }, {
+  pageSize, maxRecordsPerRun, maxRunMs, maxCandidateBytes, maxReadBytesPerRun,
+});
+await recovery.runSweep();
+// 后端诊断需要时：await recovery.recoverJob(jobId)
+```
+
+五项配置全部显式提供：pageSize 为 1–100，maxRecordsPerRun 为 1–1,000，其他为正安全整数；各值不超过 10,000,000,000，单轮读取预算至少等于单候选上限。读取预算不足返回 READ_LIMIT 并保留任务，不把配置变小当作失败依据。`maxRunMs` 是记录边界的软预算：控制是否开始下一条记录，已开始的单条处理继续完整 await，再保存检查点，不取消半截结算。实际 I/O 可超过软预算，部署函数期限须保留单条处理和检查点余量，未知超时由下轮幂等恢复。读取预算按登记的预期字节累计，不声称可限制损坏存储对象返回前的实际内存分配。
+
+`recoverJob(jobId)` 返回 `{jobId,status,outcome,reason}` 安全投影。未到期任务只核验当前 pending 候选，完整且关联/期限有效才复用 T15 事务补成功。无候选、暂时不可读或不完整文件保持 pending；没有外部可信中断证明时等到 job.deadline，再事务重新核对当前 batch/期限并失败释放。过期或失败任务不能凭后来找到的 PDF 复活，成功任务不退款。
+
+`runSweep()` 顺序扫描 RESERVED、GENERATING 和全部候选；每次保存 `maintenance_cursors/recovery_v1` 中的 schemaVersion/revision/phase/afterId。记录数、时间或读取预算耗尽即续接下一调用，完成一轮才回到起点；随机新 ID 落在已过游标之前时由下一轮处理。检查点事务比较 revision，竞争失败的调用不会回退已保存进度；崩溃后允许幂等重扫。单记录异常计数后继续，下一完整周期再试；列表或检查点故障返回安全 INTERNAL_ERROR，不声称扫描完整。
+
+返回 `visitedJobs,visitedCandidates,reconciledJobs,pendingJobs,cleanedCandidates,protectedCandidates,retryableRecords,recordErrors,expectedReadBytes,startedAt,finishedAt,cycleComplete,checkpointSaved,nextCursor`。计数仅代表本轮观察/尝试，不能当去重运营统计。候选相会反复处理 deleting/deleted 墓碑，删除失败保留重试状态；成功引用/同批在途文件受保护，损坏路径关联不能用于删除其他私有对象。T16 不删除请求指纹、可见记录、候选墓碑或成功 PDF；期限 GC 由 T23 实现。
+
+21 项 T16 测试包含 107 个任务跨轮分页、后插 ID、读/时间/记录预算、并发检查点、提交/响应丢失、存储瞬态错误、迟到 put 和损坏状态的安全投影。真实三页拼音 PDF 的结算中断恢复也通过，未增加 prepare/render/upload 调用。真实调度频率、函数权限、触发可靠性和 CloudBase 生命周期仍需 T24 配置验收。

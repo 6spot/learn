@@ -1,4 +1,14 @@
-import { ServiceError, type GenerationConfig, type ServiceConfig } from './contracts.js';
+import { ServiceError, type GenerationConfig, type RecoveryConfig, type ServiceConfig } from './contracts.js';
+
+export function validateRecoveryConfig(config: RecoveryConfig): RecoveryConfig {
+  const fields = ['pageSize', 'maxRecordsPerRun', 'maxRunMs', 'maxCandidateBytes', 'maxReadBytesPerRun'] as const;
+  if (!config || !fields.every(field => Number.isSafeInteger(config[field]) && config[field] > 0 && config[field] <= 10_000_000_000) ||
+      config.pageSize > 100 || config.maxRecordsPerRun > 1000 || config.maxReadBytesPerRun < config.maxCandidateBytes) {
+    throw new ServiceError('INVALID_CONFIG');
+  }
+  return Object.freeze({ pageSize: config.pageSize, maxRecordsPerRun: config.maxRecordsPerRun, maxRunMs: config.maxRunMs,
+    maxCandidateBytes: config.maxCandidateBytes, maxReadBytesPerRun: config.maxReadBytesPerRun });
+}
 
 function validateGeneration(config: GenerationConfig): GenerationConfig {
   const integerFields = ['windowTtlMs', 'requestRetentionMs', 'recordRetentionMs', 'pdfRetentionMs', 'jobTimeoutMs',

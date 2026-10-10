@@ -82,6 +82,30 @@ export type GenerationExecutorDependencies = Readonly<{
   bridge: ExecutionBridge; renderer: GenerationPdfRenderer;
 }>;
 
+/** Maintenance-only capabilities; intentionally exclude any renderer or user RPC authority. */
+export type RecoveryDependencies = Readonly<{ store: MetadataStore; storage: PrivateStorage; clock: Clock; crypto: CryptoPort }>;
+export type RecoveryConfig = Readonly<{
+  pageSize: number; maxRecordsPerRun: number;
+  /** Soft sweep budget checked before starting a record; an in-flight record is fully awaited. */
+  maxRunMs: number;
+  maxCandidateBytes: number; maxReadBytesPerRun: number;
+}>;
+export type RecoveryCursor = Readonly<{ phase: 'reserved' | 'generating' | 'candidates'; afterId: string | null }>;
+export type RecoveryJobResult = Readonly<{
+  jobId: string; status: JobStatus | null; outcome: 'missing' | 'terminal' | 'pending' | 'reconciled' | 'retryable';
+  reason: 'AWAITING_EXECUTION' | 'STORAGE_UNAVAILABLE' | 'CANDIDATE_UNVERIFIED' | 'READ_LIMIT' | 'OPERATION_FAILED' | null;
+}>;
+export type RecoverySweepResult = Readonly<{
+  visitedJobs: number; visitedCandidates: number; reconciledJobs: number; pendingJobs: number;
+  cleanedCandidates: number; protectedCandidates: number; retryableRecords: number; recordErrors: number;
+  expectedReadBytes: number; startedAt: number; finishedAt: number;
+  cycleComplete: boolean; checkpointSaved: boolean; nextCursor: RecoveryCursor;
+}>;
+export interface RecoveryService {
+  recoverJob(jobId: string): Promise<RecoveryJobResult>;
+  runSweep(): Promise<RecoverySweepResult>;
+}
+
 export type ServiceConfig = Readonly<{
   stage: 'development' | 'production';
   monthlyFreeCredits: number;

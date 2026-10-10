@@ -2,3 +2,13 @@
 {"file": "docs/CLOUDBASE.md", "reason": "T16 的权威业务规则与验收依据"}
 {"file": "docs/TESTING.md", "reason": "T16 的权威业务规则与验收依据"}
 {"file": ".trellis/tasks/10-10-learn-v1/task-map.md", "reason": "阶段启动输入、最终集成/发布依赖及跨任务唯一职责；不将全量验收依赖误作启动阻塞"}
+{"file": ".trellis/spec/backend/runtime-contracts.md", "reason": "可信事务/私有存储端口"}
+{"file": ".trellis/spec/backend/account-presets.md", "reason": "账户/预设原子结算"}
+{"file": ".trellis/spec/backend/job-admission.md", "reason": "原任务/请求/期限边界"}
+{"file": ".trellis/spec/backend/job-execution.md", "reason": "候选登记与终态/清理互斥"}
+{"file": "packages/cloud-service/README.md", "reason": "真实维护API与显式预算配置"}
+{"file": "packages/cloud-service/src/recovery.ts", "reason": "分页/续接/无正文恢复实现"}
+{"file": "packages/cloud-service/src/artifacts.ts", "reason": "共享候选关联/核验/清理原语"}
+{"file": "packages/cloud-service/test/recovery.test.mjs", "reason": "21项恢复故障矩阵，含损坏状态的安全投影和记录边界软预算"}
+{"file": "packages/cloud-service/integration/recovery-pdf.test.mjs", "reason": "真实3页PDF补结算"}
+{"file": ".trellis/tasks/10-10-v1-job-recovery/evidence.md", "reason": "本轮证据与平台边界"}

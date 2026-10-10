@@ -39,7 +39,7 @@ export async function executionFixture(options = {}) {
     fonts: [{ id: 'misans-regular', bytes: font.length, sha256: await crypto.sha256(font), fontVersion: 'test.1', location: 'local://fixture' }] }),
     readFontBytes: async () => font };
   const day = 86400000;
-  const config = { stage: 'development', monthlyFreeCredits: 20, quotaTimeZone: 'Asia/Shanghai', identityKeyId: 'identity', adminUserIds: [],
+  const config = { stage: 'development', monthlyFreeCredits: options.monthlyFreeCredits ?? 20, quotaTimeZone: 'Asia/Shanghai', identityKeyId: 'identity', adminUserIds: [],
     registry: { cloudEngineVersions: [preset.versions.engineVersion], clientReadyEngineVersions: [preset.versions.engineVersion] },
     generation: { windowKeyId: 'window', retainedWindowKeyIds: ['window'], fingerprintKeyId: 'fingerprint', retainedFingerprintKeyIds: ['fingerprint'],
       fingerprintVersion: 'learn-request-v1', windowTtlMs: 3600000, requestRetentionMs: 90 * day, recordRetentionMs: 30 * day,
